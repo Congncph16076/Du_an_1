@@ -22,11 +22,31 @@ import java.util.logging.Logger;
  */
 public class QuanLyGiangVienDAO implements EntityDAO<GiangVien, String> {
 
+    public GiangVien text(int ID,Connection conn){
+        try {
+            CallableStatement call = conn.prepareCall("{call text_giang_vien(?)}");
+            call.setInt(1, ID);
+            ResultSet rs = call.executeQuery();
+            while (rs.next()) {
+                GiangVien GV = new GiangVien();
+                GV.setTenGiangVien(rs.getString("TENGIANGVIEN"));
+                GV.setGioiTinh(rs.getInt("GIOITINH"));
+                GV.setNgaySinh(rs.getString("ngaysinh"));
+                GV.setDiaChi(rs.getString("DIACHI"));
+                GV.setSDT(rs.getString("SDT"));
+                GV.setEmail(rs.getString("EMAIl"));
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     @Override
     public boolean insert(GiangVien GV, Connection conn) {
         String themGV = "INSERT INTO dbo.GIANGVIEN(TENGIANGVIEN,GIOITINH,NGAYSINH,DIACHI,SDT,EMAIL)\n"
                 + "VALUES(?,?,?,?,?,?)";
-
         try {
             PreparedStatement ptmt = conn.prepareStatement(themGV);
             ptmt.setString(1, GV.getTenGiangVien());
@@ -60,7 +80,7 @@ public class QuanLyGiangVienDAO implements EntityDAO<GiangVien, String> {
             ptmt.setString(6, GV.getEmail());
             ptmt.setInt(7, GV.getMaGiangVien());
             int kq = ptmt.executeUpdate();
-
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -68,14 +88,14 @@ public class QuanLyGiangVienDAO implements EntityDAO<GiangVien, String> {
 
     @Override
     public GiangVien delete(String ID, Connection conn) {
-        String deleteGV = "DELETE FROM dbo.GIANGVIEN\n"
-                + "WHERE MAGIANGVIEN = ?";
+//        String deleteGV = "DELETE FROM dbo.GIANGVIEN\n"
+//                + "WHERE MAGIANGVIEN = ?";
         try {
             //Connection conn = TienIchHoTro.ConnectToSQL.getConnect();
-            PreparedStatement ptmt = conn.prepareStatement(deleteGV);
-            ptmt.setString(1, ID);
-            ptmt.executeUpdate();
-
+            CallableStatement call = conn.prepareCall("{call xoa_update_giang_vien(?)}");
+            call.setString(1, ID);
+            call.executeUpdate();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -120,6 +140,7 @@ public class QuanLyGiangVienDAO implements EntityDAO<GiangVien, String> {
                 GV.setDiaChi(rs.getString("DIACHI"));
                 GV.setSDT(rs.getString("SDT"));
                 GV.setEmail(rs.getString("EMAIl"));
+                return  GV;
             }
         } catch (Exception e) {
             e.printStackTrace();

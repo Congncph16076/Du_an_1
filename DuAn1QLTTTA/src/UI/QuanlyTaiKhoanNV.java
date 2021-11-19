@@ -44,14 +44,23 @@ public class QuanlyTaiKhoanNV extends javax.swing.JFrame {
         ButtonGroup btnGrp = new ButtonGroup();
         btnGrp.add(rbn_GiangVien);
         btnGrp.add(rbn_KeToan);
-        rbn_GiangVien.isSelected();
+
     }
 
     private void fillTable() {
         dtm = (DefaultTableModel) tbl_TKNhanVien.getModel();
         dtm.setRowCount(0);
         listND = qlTKNV.selectAll(conn);
+
         for (NguoiDung nd : listND) {
+//            String vaiTro;
+//            if (nd.getVaiTro() == 2) {
+//                vaiTro ="Giảng viên";
+//            }else if ( nd.getVaiTro() == 1) {
+//                vaiTro ="Kế toán";
+//            }else{
+//                vaiTro ="Quản lý";
+//            }
             Object[] row = new Object[]{
                 nd.getMaNhanVien(),
                 nd.getTenDangNhap(),
@@ -118,7 +127,7 @@ public class QuanlyTaiKhoanNV extends javax.swing.JFrame {
     private void clear() {
         txt_TenDangNhap.setText("");
         txt_MatKhau.setText("");
-        rbn_GiangVien.isSelected();
+        //rbn_GiangVien.isSelected();
     }
 
     /**
@@ -408,7 +417,7 @@ public class QuanlyTaiKhoanNV extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            Dialog.alert(this, "Mã nhân viên không tồn tại"+e.getMessage());
+            Dialog.alert(this, "Mã nhân viên không tồn tại" + e.getMessage());
             e.printStackTrace();
         }
 
@@ -438,26 +447,30 @@ public class QuanlyTaiKhoanNV extends javax.swing.JFrame {
 
         try {
             if (nullTK()) {
-                if (checkTrung()) {
-                    NguoiDung nd = new NguoiDung();
-                    txt_TenDangNhap.setText(nd.getTenDangNhap());
-                    txt_MatKhau.setText(nd.getMatKhau());
-                    int vaitro = 0;
-                    if (nd.getVaiTro() == 2) {
-                        rbn_GiangVien.isSelected();
-                    }
-                    if (nd.getVaiTro() == 1) {
-                        rbn_KeToan.isSelected();
-                    }
-                    qlTKNV.update(nd, conn);
-                    fillTable();
-                    clear();
-                    Dialog.alert(this, "Sửa thành công");
+                NguoiDung nd = new NguoiDung();
+                nd.setTenDangNhap(txt_TenDangNhap.getText());
+                nd.setMatKhau(txt_MatKhau.getText());
+                int vaitroNV = -1;
+                if (rbn_GiangVien.isSelected()) {
+                    vaitroNV = 2;
                 }
+                if (rbn_KeToan.isSelected()) {
+                    vaitroNV = 1;
+                }
+                nd.setVaiTro(vaitroNV);
+                int vitri =  tbl_TKNhanVien.getSelectedRow();
+                int row = (int) tbl_TKNhanVien.getValueAt(vitri, 0);
+                nd.setMaNhanVien(row);
+                qlTKNV.update(nd, conn);
+                fillTable();
+                clear();
+                Dialog.alert(this, "Sửa thành công");
+                return;
             }
+
         } catch (Exception e) {
             e.printStackTrace();
-            Dialog.alert(this, "Sửa không thành công"+ " "+e.getMessage());
+            Dialog.alert(this, "Sửa không thành công" + " " + e.getMessage());
         }
 
     }//GEN-LAST:event_btn_SuaTaiKhoanActionPerformed
@@ -473,7 +486,7 @@ public class QuanlyTaiKhoanNV extends javax.swing.JFrame {
                     NguoiDung nd = new NguoiDung();
                     nd.setTenDangNhap(txt_TenDangNhap.getText());
                     nd.setMatKhau(txt_MatKhau.getText());
-                    int vaitroNV = 0;
+                    int vaitroNV = -1;
                     if (rbn_GiangVien.isSelected()) {
                         vaitroNV = 2;
                     }
@@ -489,7 +502,7 @@ public class QuanlyTaiKhoanNV extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            Dialog.alert(this, "Thêm thất bại !"+ " "+e.getMessage());
+            Dialog.alert(this, "Thêm thất bại !" + " " + e.getMessage());
             e.printStackTrace();
             return;
         }
@@ -515,7 +528,7 @@ public class QuanlyTaiKhoanNV extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Dialog.alert(this, "xóa không thành công" + " "+e.getMessage());
+            Dialog.alert(this, "xóa không thành công" + " " + e.getMessage());
         }
 
 

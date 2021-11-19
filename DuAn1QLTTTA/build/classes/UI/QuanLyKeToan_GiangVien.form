@@ -424,6 +424,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="S&#x1eed;a t&#xe0;i kho&#x1ea3;n"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SuaGVActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_XoaGV">
                       <Properties>
@@ -432,6 +435,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="X&#xf3;a t&#xe0;i kho&#x1ea3;n"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_XoaGVActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_ClearGV">
                       <Properties>
@@ -453,6 +459,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_TimKiemGVActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
