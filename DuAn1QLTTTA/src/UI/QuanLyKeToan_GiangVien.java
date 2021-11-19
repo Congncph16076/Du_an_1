@@ -10,13 +10,18 @@ import DAO.QuanLyGiangVienDAO;
 import DAO.QuanLyKeToanDAO;
 import Entity.GiangVien;
 import Entity.KeToan;
+import Entity.NguoiDung;
+import TienIchHoTro.Dialog;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -48,12 +53,12 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
         for (GiangVien gv : listGV) {
             Object[] obj = new Object[]{
                 gv.getMaGiangVien(),
-                 gv.getTenGiangVien(),
-                 gv.getGioiTinh() == 0 ? "Nữ" : "Nam",
-                 gv.getNgaySinh(),
-                 gv.getDiaChi(),
-                 gv.getSDT(),
-                 gv.getEmail()
+                gv.getTenGiangVien(),
+                gv.getGioiTinh() == 0 ? "Nữ" : "Nam",
+                gv.getNgaySinh(),
+                gv.getDiaChi(),
+                gv.getSDT(),
+                gv.getEmail()
             };
             dtm.addRow(obj);
         }
@@ -266,9 +271,19 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
 
         btn_SuaGV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Edit.png"))); // NOI18N
         btn_SuaGV.setText("Sửa tài khoản");
+        btn_SuaGV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SuaGVActionPerformed(evt);
+            }
+        });
 
         btn_XoaGV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Delete.png"))); // NOI18N
         btn_XoaGV.setText("Xóa tài khoản");
+        btn_XoaGV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoaGVActionPerformed(evt);
+            }
+        });
 
         btn_ClearGV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Refresh.png"))); // NOI18N
         btn_ClearGV.setText("Clear ");
@@ -277,6 +292,11 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
 
         btn_TimKiemGV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Search.png"))); // NOI18N
         btn_TimKiemGV.setText("Tìm kiếm");
+        btn_TimKiemGV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TimKiemGVActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -615,30 +635,33 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
 
     private void tbl_tableGVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_tableGVMouseClicked
         int vitri = tbl_tableGV.getSelectedRow();
-        if (vitri>=0) {
-            String row =  (String) tbl_tableGV.getValueAt(vitri,1);
+        if (vitri >= 0) {
+            String row = (String) tbl_tableGV.getValueAt(vitri, 1);
+            tbl_tableGV.getValueAt(vitri, 0);
             GiangVien gv = gvDAO.fromTableToText(row, conn);
             if (gv != null) {
                 txt_TenGiangVien.setText(gv.getTenGiangVien());
-                if (gv.getGioiTinh()==1) {
-                    rbn_NamGV.isSelected();
+                int gioiTinh = -1;
+                if (gv.getGioiTinh() == 1) {
+                    rbn_NamGV.setSelected(true);
                 }
-                if (gv.getGioiTinh()==0) {
-                    rbn_NuGV.isSelected();
+                if (gv.getGioiTinh() == 0) {
+                    rbn_NuGV.setSelected(true);
                 }
-//                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//                try {
-//                    sdf.parse(gv.getNgaySinh());
-//                } catch (ParseException ex) {
-//                   ex.printStackTrace();
-//                }
-                dateChooser_birthGV.setDateFormatString(gv.getNgaySinh());
+                gv.setGioiTinh(gioiTinh);
+                try {
+                    Date date = new SimpleDateFormat("dd/MM/yyyy").parse((String) dtm.getValueAt(vitri, 3));
+                    dateChooser_birthGV.setDate(date);
+                } catch (ParseException ex) {
+                    Logger.getLogger(QuanLyKeToan_GiangVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 txt_diaChiGV.setText(gv.getDiaChi());
                 txt_sdtGV.setText(gv.getSDT());
                 txt_EmailGV.setText(gv.getEmail());
-                
             }
         }
+
     }//GEN-LAST:event_tbl_tableGVMouseClicked
 
     private void btn_ThemGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemGVActionPerformed
@@ -646,10 +669,10 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
         int gioiTinh = 0;
         gv.setTenGiangVien(txt_TenGiangVien.getText());
         if (rbn_NamGV.isSelected()) {
-            gioiTinh=1;
+            gioiTinh = 1;
         }
         if (rbn_NuGV.isSelected()) {
-            gioiTinh=0;
+            gioiTinh = 0;
         }
         gv.setGioiTinh(gioiTinh);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -661,6 +684,66 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
         boolean themGV = gvDAO.insert(gv, conn);
         fillTableGV();
     }//GEN-LAST:event_btn_ThemGVActionPerformed
+
+    private void btn_SuaGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaGVActionPerformed
+        GiangVien gv = new GiangVien();
+        gv.setTenGiangVien(txt_TenGiangVien.getText());
+        int gioiTinh = -1;
+        if (rbn_NamGV.isSelected()) {
+            gioiTinh = 1;
+        }
+        if (rbn_NuGV.isSelected()) {
+            gioiTinh = 0;
+        }
+        gv.setGioiTinh(gioiTinh);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String date = sdf.format(dateChooser_birthGV.getDate());
+        gv.setNgaySinh(date);
+        gv.setDiaChi(txt_diaChiGV.getText());
+        gv.setSDT(txt_sdtGV.getText());
+        gv.setEmail(txt_EmailGV.getText());
+        int vitri = tbl_tableGV.getSelectedRow();
+        int row = (int) tbl_tableGV.getValueAt(vitri, 0);
+        gv.setMaGiangVien(row);
+        gvDAO.update(gv, conn);
+        fillTableGV();
+    }//GEN-LAST:event_btn_SuaGVActionPerformed
+
+    private void btn_XoaGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaGVActionPerformed
+         try {
+            int hoi = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa tài khoản này", "Xóa tài khoản nhân viên", JOptionPane.YES_NO_OPTION);
+            if (hoi == JOptionPane.YES_OPTION) {
+                int vitri = tbl_tableGV.getSelectedRow();
+                if (vitri >= 0) {
+                    Integer row = (Integer) tbl_tableGV.getValueAt(vitri, 0);
+                    GiangVien gv = gvDAO.delete(String.valueOf(row), conn);
+                    fillTableGV();
+                }
+                Dialog.alert(this, "xóa thành công");
+            } else {
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Dialog.alert(this, "xóa không thành công" + " " + e.getMessage());
+        }
+    }//GEN-LAST:event_btn_XoaGVActionPerformed
+
+    private void btn_TimKiemGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemGVActionPerformed
+        List<GiangVien> list =  gvDAO.search(txt_TimKiemGV.getText(), conn);
+        dtm.setRowCount(0);
+        for (GiangVien gv : list) {
+            Vector<Object> vec =  new Vector<>();
+            vec.add(gv.getMaGiangVien());
+            vec.add(gv.getTenGiangVien());
+            vec.add(gv.getGioiTinh());
+            vec.add(gv.getNgaySinh());
+            vec.add(gv.getDiaChi());
+            vec.add(gv.getSDT());
+            vec.add(gv.getEmail());
+            dtm.addRow(vec);
+        }
+    }//GEN-LAST:event_btn_TimKiemGVActionPerformed
 
     /**
      * @param args the command line arguments
