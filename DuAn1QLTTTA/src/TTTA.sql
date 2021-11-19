@@ -676,6 +676,8 @@ VALUES(?,?,?)
 UPDATE dbo.DIEMTHI SET DIEMTHI= ?
 WHERE MAHOCVIEN=?,MADOTTHI=?
 GO
+--xóa điểm thi
+
 --tìm kiếm điểm thi
 CREATE PROCEDURE tim_kiem_diem_thi(@tenhocvien NVARCHAR(100))
 AS
@@ -727,13 +729,15 @@ GO
 ---------------------------------------------------------------------------------------
 -------------------------------------------------------------------bắt đầu truy vấn  giảng viên--------------------------------
 --thông tin giảng viên
-CREATE PROCEDURE thong_tin_giang_vien
+alter PROCEDURE thong_tin_giang_vien
 AS
 BEGIN
     SELECT MAGIANGVIEN,TENGIANGVIEN,GIOITINH,CONVERT(NVARCHAR(20),NGAYSINH,103) [ngaysinh],DIACHI,sdt,EMAIL FROM dbo.GIANGVIEN
+	order by MAGIANGVIEN desc
 END
 
 GO
+exec thong_tin_giang_vien
 --thêm giảng viên
 INSERT INTO dbo.GIANGVIEN(TENGIANGVIEN,GIOITINH,NGAYSINH,DIACHI,SDT,EMAIL)
 VALUES(?,?,?,?,?,?)
@@ -746,31 +750,60 @@ WHERE MAGIANGVIEN = ?
 
 GO
 --tìm kiếm giảng viên
-CREATE PROCEDURE tim_kiem_giang_vien(@tengiangvien NVARCHAR(100))
+alter PROCEDURE tim_kiem_giang_vien(@tengiangvien NVARCHAR(100))
 AS
 BEGIN
     SELECT MAGIANGVIEN,TENGIANGVIEN,GIOITINH,CONVERT(NVARCHAR(20),NGAYSINH,103) [ngaysinh],DIACHI,sdt,EMAIL FROM dbo.GIANGVIEN
 	WHERE TENGIANGVIEN LIKE LTRIM(RTRIM(@tengiangvien))
+	order by MAGIANGVIEN desc
 END
 
 EXEC dbo.tim_kiem_giang_vien @tengiangvien = N'%đức%' -- nvarchar(100)
 GO
+alter PROCEDURE xoa_update_giang_vien(@MAGIANGVIEN int)
+AS
+BEGIN
+    DELETE FROM dbo.GIANGVIEN 
+	WHERE MAGIANGVIEN = @MAGIANGVIEN
+	declare @max int
+	select @max=max(MAGIANGVIEN)from dbo.GIANGVIEN
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (GIANGVIEN, RESEED,@max)
+END
+ 
+ 
+go
+
+ALTER PROCEDURE text_giang_vien(@magiangvien int)
+AS
+BEGIN
+    SELECT MAGIANGVIEN,TENGIANGVIEN,GIOITINH,CONVERT(NVARCHAR(20),NGAYSINH,103) [ngaysinh],DIACHI,sdt,EMAIL FROM dbo.GIANGVIEN
+	WHERE MAGIANGVIEN LIKE LTRIM(RTRIM(@magiangvien))
+	
+END
+
+
 
 -------------------------------------------------------------------kết thúc truy vấn giảng viên-----------------------------
 ------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------
 -------------------------------------------------------------------bắt đầu truy vấn quản lý tài khoản nhân viên --------------------------------
 --thông tin tài khoản
-CREATE PROCEDURE thong_tin_tai_khoan
+alter PROCEDURE thong_tin_tai_khoan
 AS
 BEGIN
     SELECT MANHANVIEN,TENDANGNHAP,MATKHAU,TENVAITRO FROM dbo.NGUOIDUNG
+	order by MANHANVIEN desc
 END
 SELECT * FROM dbo.NGUOIDUNG
 --thêm tài khoản kế toán
 INSERT INTO dbo.NGUOIDUNG(TENDANGNHAP,MATKHAU,TENVAITRO)
 VALUES(?,?,1)
 GO
+INSERT INTO dbo.NGUOIDUNG(TENDANGNHAP,MATKHAU,TENVAITRO)
+VALUES(N'hahah',N'123',2)
+
 --thêm tài khoản giảng viên
 INSERT INTO dbo.NGUOIDUNG(TENDANGNHAP,MATKHAU,TENVAITRO)
 VALUES(?,?,2)
@@ -781,9 +814,17 @@ WHERE MANHANVIEN = ?
 GO
 --xóa tài khoản
 
-DELETE FROM dbo.NGUOIDUNG
-WHERE MANHANVIEN = ?
-
+CREATE PROCEDURE xoa_update_nguoi_dung(@manhanvien int)
+AS
+BEGIN
+    DELETE FROM dbo.NGUOIDUNG 
+	WHERE MANHANVIEN = @manhanvien
+	declare @max int
+	select @max=max(MANHANVIEN)from dbo.NGUOIDUNG
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (NGUOIDUNG, RESEED,@max)
+END
 go
 --tìm kiếm tài khoản nhân viên theo mã nhân viên
 
@@ -793,7 +834,40 @@ BEGIN
     SELECT MANHANVIEN,TENDANGNHAP,MATKHAU,TENVAITRO FROM dbo.NGUOIDUNG
 	WHERE MANHANVIEN LIKE LTRIM(RTRIM(@MATKNV))
 END
-DROP PROCEDURE tim_kiem_tk_nhan_vien
-EXEC dbo.tim_kiem_tk_nhan_vien @MATKNV = 1 -- nvarchar(40)
 
+EXEC dbo.tim_kiem_tk_nhan_vien @MATKNV = 1 -- nvarchar(40)
+go
 -------------------------------------------------------------------kế thúc truy vấn tài khoản nhân viên---------------------------------
+SELECT * FROM dbo.NGUOIDUNG
+INSERT INTO dbo.GIANGVIEN
+(
+    TENGIANGVIEN,
+    GIOITINH,
+    NGAYSINH,
+    DIACHI,
+    SDT,
+    EMAIL
+)
+VALUES
+(   N'abc',       -- TENGIANGVIEN - nvarchar(80)
+    0,         -- GIOITINH - int
+    '2001/1/1', -- NGAYSINH - date
+    N'hà nội',       -- DIACHI - nvarchar(80)
+    N'02345666455',       -- SDT - nchar(11)
+    N'abc@gmail.com'        -- EMAIL - nvarchar(80)
+    )
+SELECT * from dbo.GIANGVIEN
+SELECT * from dbo.NGUOIDUNG
+DBCC CHECKIDENT(NGUOIDUNG,RESEED,14)
+DBCC CHECKIDENT(GIANGVIEN,RESEED,9)
+DELETE FROM dbo.GIANGVIEN
+WHERE MAGIANGVIEN = 10
+DELETE FROM dbo.NGUOIDUNG 
+WHERE MANHANVIEN = 15
+declare @max int
+select @max=max(MANHANVIEN)from dbo.NGUOIDUNG
+if @max IS NULL   
+  SET @max = 0
+DBCC CHECKIDENT (NGUOIDUNG, RESEED,@max)
+go
+
