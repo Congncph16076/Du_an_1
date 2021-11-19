@@ -12,6 +12,7 @@ import Entity.GiangVien;
 import Entity.KeToan;
 import Entity.NguoiDung;
 import TienIchHoTro.Dialog;
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,8 +21,11 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -64,6 +68,120 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
         }
     }
 
+    boolean checkNullGV() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        Border border = BorderFactory.createLineBorder(Color.red);
+        if (txt_TenGiangVien.getText().equals("") && txt_TenGiangVien.getText().isEmpty() && txt_diaChiGV.getText().isEmpty() 
+                && txt_diaChiGV.getText().equals("") && txt_sdtGV.getText().equals("") && txt_sdtGV.getText().isEmpty() && txt_EmailGV.getText().equals("")) {
+            lbl_LoiTenGiangVien.setText("Thiếu tên giảng viên rồi nhập lại bạn nhé!");
+            lbl_loiBirthGV.setText("Thiếu ngày sinh rồi chọn lại bạn nhé!");
+            lbl_loiDiaChiGV.setText("Thiếu địa chỉ giảng viên rồi nhập lại bạn nhé!");
+            lbl_loiSDTGV.setText("thiếu số điện thoại giảng viên rồi nhập lại bạn nhé!");
+            lbl_loiEmailGV.setText("Thiếu email giảng viên rồi nhập lại bạn nhé!");
+            txt_TenGiangVien.setBorder(border);
+            dateChooser_birthGV.setBorder(border);
+            txt_diaChiGV.setBorder(border);
+            txt_sdtGV.setBorder(border);
+            txt_EmailGV.setBorder(border);
+            lbl_LoiTenGiangVien.setForeground(Color.red);
+            lbl_loiBirthGV.setForeground(Color.red);
+            lbl_loiDiaChiGV.setForeground(Color.red);
+            lbl_loiSDTGV.setForeground(Color.red);
+            lbl_loiEmailGV.setForeground(Color.red);
+            txt_TenGiangVien.requestFocus();
+            return false;
+        }
+
+        if (txt_TenGiangVien.getText().equals("")) {
+            lbl_LoiTenGiangVien.setText("Thiếu tên giảng viên rồi nhập lại bạn nhé!");
+            txt_TenGiangVien.setBorder(border);
+            lbl_LoiTenGiangVien.setForeground(Color.red);
+            txt_TenGiangVien.requestFocus();
+            return false;
+        }
+//        if (dateChooser_birthGV.getDate().equals("")) {
+//            lbl_loiBirthGV.setText("Thiếu ngày sinh rồi chọn lại bạn nhé!");
+//            dateChooser_birthGV.setBorder(border);
+//            lbl_loiBirthGV.setForeground(Color.red);
+//            dateChooser_birthGV.requestFocus();
+//            return false;
+//        }
+        if (txt_diaChiGV.getText().equals("")) {
+            lbl_loiDiaChiGV.setText("Thiếu địa chỉ giảng viên rồi nhập lại bạn nhé!");
+            txt_diaChiGV.setBorder(border);
+            lbl_loiDiaChiGV.setForeground(Color.red);
+            txt_diaChiGV.requestFocus();
+            return false;
+        }
+        if (txt_sdtGV.getText().equals("")) {
+            lbl_loiSDTGV.setText("thiếu số điện thoại giảng viên rồi nhập lại bạn nhé!");
+            txt_sdtGV.setBorder(border);
+            lbl_loiSDTGV.setForeground(Color.red);
+            txt_sdtGV.requestFocus();
+            return false;
+        } else {
+
+            Pattern p = Pattern.compile("^(84|0[3|5|7|8|9])+([0-9]{8})$");
+            if (!p.matcher(txt_sdtGV.getText()).find()) {
+                lbl_loiSDTGV.setText("Số điện thoại không đúng định dạng của Việt Nam vui lòng nhập lại VD:0914506901");
+                txt_sdtGV.setBorder(border);
+                txt_sdtGV.requestFocus();
+                return false;
+            }
+
+        }
+
+        if (txt_EmailGV.equals("")) {
+            lbl_loiEmailGV.setText("Thiếu email giảng viên rồi nhập lại bạn nhé!");
+            txt_EmailGV.setBorder(border);
+            lbl_loiEmailGV.setForeground(Color.red);
+            txt_EmailGV.requestFocus();
+            return false;
+        } else {
+
+            Pattern p = Pattern.compile("^[a-zA-Z.%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
+            if (!p.matcher(txt_EmailGV.getText()).find()) {
+                lbl_loiEmailGV.setText("Email không đúng định dạng vui lòng nhập đúng định dạng VD:abc@gmail.com");
+                txt_EmailGV.setBorder(border);
+                txt_EmailGV.requestFocus();
+                return false;
+            }
+
+        }
+
+        return true;
+    }
+
+    boolean checkTrung() {
+        Border border = BorderFactory.createLineBorder(Color.red);
+        for (GiangVien gv : listGV) {
+//            if (txt_TenGiangVien.getText().equals(gv.getTenGiangVien())) {
+//                lbl_LoiTenGiangVien.setText("Trùng tên rồi nhập lại bạn nhé!");
+//                txt_TenGiangVien.setBorder(border);
+//                lbl_LoiTenGiangVien.setForeground(Color.red);
+//                txt_TenGiangVien.requestFocus();
+//                return false;
+//            }
+
+            if (txt_EmailGV.getText().equals(gv.getEmail())) {
+                lbl_loiEmailGV.setText("Email bị trùng rồi chọn email khác bạn nhé");
+                lbl_loiEmailGV.setForeground(Color.red);
+                txt_EmailGV.requestFocus();
+                return false;
+            }
+
+            if (txt_sdtGV.getText().equals(gv.getSDT())) {
+                lbl_loiSDTGV.setText("Số điện thoại bị trùng rồi nhập lại bạn nhé!");
+                txt_sdtGV.setBorder(border);
+                lbl_loiSDTGV.setForeground(Color.red);
+                txt_sdtGV.requestFocus();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,7 +196,7 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
         tab_NV = new javax.swing.JTabbedPane();
         tab_GV = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        lbl_loiDiaChi = new javax.swing.JLabel();
+        lbl_loiDiaChiGV = new javax.swing.JLabel();
         txt_TenGiangVien = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -86,14 +204,14 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
         rbn_NuGV = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
         dateChooser_birthGV = new com.toedter.calendar.JDateChooser();
-        lbl_loiBirth = new javax.swing.JLabel();
+        lbl_loiBirthGV = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txt_diaChiGV = new javax.swing.JTextField();
         lbl_LoiTenGiangVien = new javax.swing.JLabel();
-        lbl_loiSDT = new javax.swing.JLabel();
+        lbl_loiSDTGV = new javax.swing.JLabel();
         txt_sdtGV = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        lbl_loiEmail = new javax.swing.JLabel();
+        lbl_loiEmailGV = new javax.swing.JLabel();
         txt_EmailGV = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -145,7 +263,7 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lbl_loiDiaChi.setForeground(new java.awt.Color(255, 51, 51));
+        lbl_loiDiaChiGV.setForeground(new java.awt.Color(255, 51, 51));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Tên giảng viên");
@@ -162,19 +280,19 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Ngày sinh");
 
-        lbl_loiBirth.setForeground(new java.awt.Color(255, 51, 51));
+        lbl_loiBirthGV.setForeground(new java.awt.Color(255, 51, 51));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Địa chỉ");
 
         lbl_LoiTenGiangVien.setForeground(new java.awt.Color(255, 51, 51));
 
-        lbl_loiSDT.setForeground(new java.awt.Color(255, 51, 51));
+        lbl_loiSDTGV.setForeground(new java.awt.Color(255, 51, 51));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Số điện thoại");
 
-        lbl_loiEmail.setForeground(new java.awt.Color(255, 51, 51));
+        lbl_loiEmailGV.setForeground(new java.awt.Color(255, 51, 51));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Email");
@@ -186,18 +304,18 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_loiBirth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_loiBirthGV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_loiEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_loiEmailGV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_EmailGV)
                             .addComponent(txt_diaChiGV)
                             .addComponent(dateChooser_birthGV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbl_loiDiaChi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_loiDiaChiGV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_TenGiangVien)
                             .addComponent(lbl_LoiTenGiangVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_sdtGV)
-                            .addComponent(lbl_loiSDT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_loiSDTGV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
@@ -215,7 +333,7 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
                                     .addComponent(jLabel7))
                                 .addGap(18, 18, 18)
                                 .addComponent(rbn_NuGV, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 82, Short.MAX_VALUE))))
+                        .addGap(0, 125, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,25 +355,25 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dateChooser_birthGV, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_loiBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbl_loiBirthGV, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_diaChiGV, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_loiDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbl_loiDiaChiGV, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_sdtGV, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_loiSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbl_loiSDTGV, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_EmailGV, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_loiEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbl_loiEmailGV, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99))
         );
 
@@ -317,7 +435,7 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
                         .addComponent(btn_XoaGV)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_ClearGV, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,13 +474,11 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
             tab_GVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tab_GVLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tab_GVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tab_GVLayout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3))
+                .addGroup(tab_GVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tab_GVLayout.setVerticalGroup(
@@ -426,7 +542,7 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbl_loibirthKT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt_diaChiKT, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateChooser_birthKT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                    .addComponent(dateChooser_birthKT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbl_loiDiaChiKT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt_TenKeToan, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_loiTenKT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -447,7 +563,7 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
                                 .addComponent(rbn_NuKT, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel15)
                             .addComponent(jLabel22))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 138, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -564,12 +680,12 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
             tab_KTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tab_KTLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(tab_KTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tab_KTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         tab_KTLayout.setVerticalGroup(
             tab_KTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -594,16 +710,15 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(btn_TrangChu)
-                        .addGap(248, 248, 248)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(tab_NV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21)
+                .addComponent(btn_TrangChu)
+                .addGap(248, 248, 248)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tab_NV)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -621,13 +736,11 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -665,53 +778,82 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
     }//GEN-LAST:event_tbl_tableGVMouseClicked
 
     private void btn_ThemGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemGVActionPerformed
-        GiangVien gv = new GiangVien();
-        int gioiTinh = 0;
-        gv.setTenGiangVien(txt_TenGiangVien.getText());
-        if (rbn_NamGV.isSelected()) {
-            gioiTinh = 1;
+        try {
+            if (checkNullGV()) {
+                if (checkTrung()) {
+                    Border border = BorderFactory.createLineBorder(Color.black);
+                    txt_TenGiangVien.setBorder(border);
+                    dateChooser_birthGV.setBorder(border);
+                    txt_diaChiGV.setBorder(border);
+                    txt_sdtGV.setBorder(border);
+                    txt_EmailGV.setBorder(border);
+                    lbl_LoiTenGiangVien.setText("");
+                    lbl_loiBirthGV.setText("");
+                    lbl_loiDiaChiGV.setText("");
+                    lbl_loiSDTGV.setText("");
+                    lbl_loiEmailGV.setText("");
+                    GiangVien gv = new GiangVien();
+                    int gioiTinh = 0;
+                    gv.setTenGiangVien(txt_TenGiangVien.getText());
+                    if (rbn_NamGV.isSelected()) {
+                        gioiTinh = 1;
+                    }
+                    if (rbn_NuGV.isSelected()) {
+                        gioiTinh = 0;
+                    }
+                    gv.setGioiTinh(gioiTinh);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                    String date = sdf.format(dateChooser_birthGV.getDate());
+                    gv.setNgaySinh(date);
+                    gv.setDiaChi(txt_diaChiGV.getText());
+                    gv.setSDT(txt_sdtGV.getText());
+                    gv.setEmail(txt_EmailGV.getText());
+                    boolean themGV = gvDAO.insert(gv, conn);
+                    fillTableGV();
+                    Dialog.alert(this, "Thêm thành công");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Dialog.alert(this, "Thêm không thành công"+""+e.getMessage());
         }
-        if (rbn_NuGV.isSelected()) {
-            gioiTinh = 0;
-        }
-        gv.setGioiTinh(gioiTinh);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        String date = sdf.format(dateChooser_birthGV.getDate());
-        gv.setNgaySinh(date);
-        gv.setDiaChi(txt_diaChiGV.getText());
-        gv.setSDT(txt_sdtGV.getText());
-        gv.setEmail(txt_EmailGV.getText());
-        boolean themGV = gvDAO.insert(gv, conn);
-        fillTableGV();
     }//GEN-LAST:event_btn_ThemGVActionPerformed
 
     private void btn_SuaGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaGVActionPerformed
-        GiangVien gv = new GiangVien();
-        gv.setTenGiangVien(txt_TenGiangVien.getText());
-        int gioiTinh = -1;
-        if (rbn_NamGV.isSelected()) {
-            gioiTinh = 1;
+        try {
+            if (checkNullGV()) {
+                GiangVien gv = new GiangVien();
+                gv.setTenGiangVien(txt_TenGiangVien.getText());
+                int gioiTinh = -1;
+                if (rbn_NamGV.isSelected()) {
+                    gioiTinh = 1;
+                }
+                if (rbn_NuGV.isSelected()) {
+                    gioiTinh = 0;
+                }
+                gv.setGioiTinh(gioiTinh);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                String date = sdf.format(dateChooser_birthGV.getDate());
+                gv.setNgaySinh(date);
+                gv.setDiaChi(txt_diaChiGV.getText());
+                gv.setSDT(txt_sdtGV.getText());
+                gv.setEmail(txt_EmailGV.getText());
+                int vitri = tbl_tableGV.getSelectedRow();
+                int row = (int) tbl_tableGV.getValueAt(vitri, 0);
+                gv.setMaGiangVien(row);
+                gvDAO.update(gv, conn);
+                fillTableGV();
+                Dialog.alert(this, "Sửa không thành công");
+            }
+        } catch (Exception e) {
+            Dialog.alert(this, "Sửa không thành công"+""+e.getMessage());
+            e.printStackTrace();
         }
-        if (rbn_NuGV.isSelected()) {
-            gioiTinh = 0;
-        }
-        gv.setGioiTinh(gioiTinh);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        String date = sdf.format(dateChooser_birthGV.getDate());
-        gv.setNgaySinh(date);
-        gv.setDiaChi(txt_diaChiGV.getText());
-        gv.setSDT(txt_sdtGV.getText());
-        gv.setEmail(txt_EmailGV.getText());
-        int vitri = tbl_tableGV.getSelectedRow();
-        int row = (int) tbl_tableGV.getValueAt(vitri, 0);
-        gv.setMaGiangVien(row);
-        gvDAO.update(gv, conn);
-        fillTableGV();
     }//GEN-LAST:event_btn_SuaGVActionPerformed
 
     private void btn_XoaGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaGVActionPerformed
-         try {
-            int hoi = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa tài khoản này", "Xóa tài khoản nhân viên", JOptionPane.YES_NO_OPTION);
+        try {
+            int hoi = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn nhân viên này", "Xóa tài khoản nhân viên", JOptionPane.YES_NO_OPTION);
             if (hoi == JOptionPane.YES_OPTION) {
                 int vitri = tbl_tableGV.getSelectedRow();
                 if (vitri >= 0) {
@@ -730,10 +872,10 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_XoaGVActionPerformed
 
     private void btn_TimKiemGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemGVActionPerformed
-        List<GiangVien> list =  gvDAO.search(txt_TimKiemGV.getText(), conn);
+        List<GiangVien> list = gvDAO.search(txt_TimKiemGV.getText(), conn);
         dtm.setRowCount(0);
         for (GiangVien gv : list) {
-            Vector<Object> vec =  new Vector<>();
+            Vector<Object> vec = new Vector<>();
             vec.add(gv.getMaGiangVien());
             vec.add(gv.getTenGiangVien());
             vec.add(gv.getGioiTinh());
@@ -815,12 +957,12 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lbl_LoiTenGiangVien;
-    private javax.swing.JLabel lbl_loiBirth;
-    private javax.swing.JLabel lbl_loiDiaChi;
+    private javax.swing.JLabel lbl_loiBirthGV;
+    private javax.swing.JLabel lbl_loiDiaChiGV;
     private javax.swing.JLabel lbl_loiDiaChiKT;
-    private javax.swing.JLabel lbl_loiEmail;
+    private javax.swing.JLabel lbl_loiEmailGV;
     private javax.swing.JLabel lbl_loiEmailKT;
-    private javax.swing.JLabel lbl_loiSDT;
+    private javax.swing.JLabel lbl_loiSDTGV;
     private javax.swing.JLabel lbl_loiSDTKT;
     private javax.swing.JLabel lbl_loiTenKT;
     private javax.swing.JLabel lbl_loibirthKT;

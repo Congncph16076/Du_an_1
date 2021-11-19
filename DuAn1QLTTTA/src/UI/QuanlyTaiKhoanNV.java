@@ -119,7 +119,10 @@ public class QuanlyTaiKhoanNV extends javax.swing.JFrame {
                 txt_TenDangNhap.requestFocus();
                 return false;
             }
-
+            
+            
+                
+            
         }
         return true;
     }

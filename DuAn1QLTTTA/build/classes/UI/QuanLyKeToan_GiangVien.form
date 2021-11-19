@@ -23,15 +23,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="1" min="-2" max="-2" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -47,19 +44,16 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                          <Component id="btn_TrangChu" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="309" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="tab_NV" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  <Component id="btn_TrangChu" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="309" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="tab_NV" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -105,14 +99,11 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                          <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanel5" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jScrollPane3" max="32767" attributes="0"/>
+                              <Component id="jPanel2" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -152,18 +143,18 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_loiBirth" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lbl_loiBirthGV" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lbl_loiEmail" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lbl_loiEmailGV" alignment="0" max="32767" attributes="0"/>
                                           <Component id="txt_EmailGV" alignment="0" max="32767" attributes="0"/>
                                           <Component id="txt_diaChiGV" alignment="0" max="32767" attributes="0"/>
                                           <Component id="dateChooser_birthGV" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lbl_loiDiaChi" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="lbl_loiDiaChiGV" alignment="1" max="32767" attributes="0"/>
                                           <Component id="txt_TenGiangVien" alignment="0" max="32767" attributes="0"/>
                                           <Component id="lbl_LoiTenGiangVien" alignment="1" max="32767" attributes="0"/>
                                           <Component id="txt_sdtGV" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lbl_loiSDT" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="lbl_loiSDTGV" alignment="1" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -188,7 +179,7 @@
                                               <Component id="rbn_NuGV" min="-2" pref="93" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="0" pref="82" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="125" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -215,32 +206,32 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="dateChooser_birthGV" min="-2" pref="31" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbl_loiBirth" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="lbl_loiBirthGV" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel9" min="-2" pref="15" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txt_diaChiGV" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbl_loiDiaChi" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="lbl_loiDiaChiGV" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txt_sdtGV" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbl_loiSDT" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="lbl_loiSDTGV" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txt_EmailGV" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbl_loiEmail" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="lbl_loiEmailGV" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="lbl_loiDiaChi">
+                    <Component class="javax.swing.JLabel" name="lbl_loiDiaChiGV">
                       <Properties>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="33" green="33" red="ff" type="rgb"/>
@@ -291,7 +282,7 @@
                     </Component>
                     <Component class="com.toedter.calendar.JDateChooser" name="dateChooser_birthGV">
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lbl_loiBirth">
+                    <Component class="javax.swing.JLabel" name="lbl_loiBirthGV">
                       <Properties>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="33" green="33" red="ff" type="rgb"/>
@@ -315,7 +306,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lbl_loiSDT">
+                    <Component class="javax.swing.JLabel" name="lbl_loiSDTGV">
                       <Properties>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="33" green="33" red="ff" type="rgb"/>
@@ -332,7 +323,7 @@
                         <Property name="text" type="java.lang.String" value="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lbl_loiEmail">
+                    <Component class="javax.swing.JLabel" name="lbl_loiEmailGV">
                       <Properties>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="33" green="33" red="ff" type="rgb"/>
@@ -381,7 +372,7 @@
                                       <Component id="btn_ClearGV" min="-2" pref="104" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="194" max="32767" attributes="0"/>
+                              <EmptySpace pref="213" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -550,13 +541,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jPanel7" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jPanel6" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane2" alignment="1" min="-2" pref="737" max="-2" attributes="0"/>
+                              <Component id="jPanel7" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -595,7 +586,7 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="lbl_loibirthKT" max="32767" attributes="0"/>
                                   <Component id="txt_diaChiKT" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="dateChooser_birthKT" alignment="0" pref="276" max="32767" attributes="0"/>
+                                  <Component id="dateChooser_birthKT" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lbl_loiDiaChiKT" alignment="1" max="32767" attributes="0"/>
                                   <Component id="txt_TenKeToan" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lbl_loiTenKT" alignment="1" max="32767" attributes="0"/>
@@ -619,7 +610,7 @@
                                           <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="138" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
