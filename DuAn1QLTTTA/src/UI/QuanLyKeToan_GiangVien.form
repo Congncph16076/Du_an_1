@@ -437,10 +437,13 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Clear "/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ClearGVActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txt_TimKiemGV">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Nh&#x1ead;p m&#xe3; nh&#xe2;n vi&#xea;n"/>
+                        <Property name="text" type="java.lang.String" value="Nh&#x1ead;p t&#xea;n gi&#x1ea3;ng vi&#xea;n"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_TimKiemGV">
@@ -837,6 +840,9 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_tableKTMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -902,6 +908,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Th&#xea;m t&#xe0;i kho&#x1ea3;n"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ThemKTActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_SuaKT">
                       <Properties>
@@ -910,6 +919,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="S&#x1eed;a t&#xe0;i kho&#x1ea3;n"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SuaKTActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_XoaKT">
                       <Properties>
@@ -918,6 +930,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="X&#xf3;a t&#xe0;i kho&#x1ea3;n"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_XoaKTActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_ClearKT">
                       <Properties>
@@ -939,6 +954,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_TimKiemKTActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

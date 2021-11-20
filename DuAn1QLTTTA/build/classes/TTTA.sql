@@ -429,10 +429,6 @@ VALUES
 INSERT INTO dbo.BIENLAI(THANHTIEN,MAHOCVIEN,MALOP,MAKETOAN)
 VALUES(1000000,1,1,1)
 	
-
-
-
-
 SELECT * FROM dbo.DANGKI
 DELETE FROM dbo.DANGKI
 SELECT * FROM dbo.HOCVIEN
@@ -471,9 +467,21 @@ UPDATE dbo.HOCVIEN SET TENHOCVIEN = ?,MALOP = ?,GIOITINH = ?,NGAYSINH = ?,SDT =?
 WHERE MAHOCVIEN = ? AND  MALOP = ?
 GO
 --xóa thông tin học viên
-DELETE from dbo.HOCVIEN 
-WHERE MAHOCVIEN = ? AND MALOP = ?
+
 GO
+CREATE PROCEDURE xoa_update_sinh_vien(@mahocvien INT,@malop INT)
+AS
+BEGIN
+    DELETE from dbo.HOCVIEN 
+	WHERE MAHOCVIEN = @mahocvien AND MALOP = @malop
+	declare @max int
+	select @max=max(MAHOCVIEN)from dbo.HOCVIEN
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (HOCVIEN, RESEED,@max)
+END
+go
+
 --tìm kiếm học viên theo tên và lớp
 CREATE PROCEDURE tim_kiem_hoc_vien_theo_ten_va_ten_lop(@tensinhvien nvarchar(100),@tenlop nvarchar(50))
 AS
@@ -510,7 +518,7 @@ where mahocvien = 115
 ---------------------------------------------------------- bắt đầu truy vấn bảng lớp-------------------------------------------------------
 
 -- lấy thông tin lớp
-ALTER PROCEDURE thong_tin_lop
+CREATE PROCEDURE thong_tin_lop
 AS
 BEGIN
     SELECT MALOP,TENLOP,dbo.GIANGVIEN.MAGIANGVIEN,TENGIANGVIEN,dbo.KHOAHOC.MAKHOAHOC,dbo.KHOAHOC.TENKHOAHOC,HOCPHI,CAHOC,SISO,dbo.CAPLOP.MACAPLOP,TENCAPLOP,dbo.LOAILOP.MALOAILOP,TENLOAILOP FROM dbo.LOP
@@ -532,9 +540,22 @@ GO
 --xóa lớp
 DELETE FROM dbo.LOP
 WHERE MALOP = ?
+GO
+CREATE PROCEDURE xoa_update_lop(@malop INT)
+AS
+BEGIN
+    DELETE FROM dbo.LOP
+	WHERE MALOP = @malop
+	declare @max int
+	select @max=max(MALOP)from dbo.LOP
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (LOP, RESEED,@max)
+END
 go
+
 -- tìm lớp
-ALTER PROCEDURE tim_kiem_lop_theo_ma_lop(@tenlop NVARCHAR(50))
+CREATE PROCEDURE tim_kiem_lop_theo_ma_lop(@tenlop NVARCHAR(50))
 AS
 BEGIN
     SELECT MALOP,TENLOP,dbo.GIANGVIEN.MAGIANGVIEN,TENGIANGVIEN,dbo.KHOAHOC.MAKHOAHOC,dbo.KHOAHOC.TENKHOAHOC,HOCPHI,CAHOC,SISO,dbo.CAPLOP.MACAPLOP,TENCAPLOP,dbo.LOAILOP.MALOAILOP,TENLOAILOP FROM dbo.LOP 
@@ -569,8 +590,21 @@ GO
 DELETE FROM dbo.KHOAHOC
 WHERE MAKHOAHOC =?
 GO
+
+CREATE PROCEDURE xoa_update_khoa_hoc(@makh INT)
+AS
+BEGIN
+	DELETE FROM dbo.KHOAHOC
+	WHERE MAKHOAHOC =@makh
+	declare @max int
+	select @max=max(MAKHOAHOC)from dbo.KHOAHOC
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (KHOAHOC, RESEED,@max)
+END
+go
 --tìm kiếm khóa học
-ALTER PROCEDURE tim_kiem_khoa_hoc(@tenkh NVARCHAR(50))
+CREATE PROCEDURE tim_kiem_khoa_hoc(@tenkh NVARCHAR(50))
 AS
 BEGIN
     SELECT MAKHOAHOC,TENKHOAHOC,CONVERT(NVARCHAR(20),NGAYNHAPHOC,103) [ngaybatdau],CONVERT(NVARCHAR(20),NGAYKETTHUC,103) [ngayketthuc] FROM dbo.KHOAHOC
@@ -601,11 +635,23 @@ UPDATE dbo.DOTTHI SET NGAYTHI=?,GIOTHI=?,MAKHOAHOC=?,SISO=?,VANG=?
 WHERE MADOTTHI = ?
 GO
 --xóa đợt thi
-DELETE  FROM dbo.DOTTHI
-WHERE MADOTTHI =?
+
 GO
+CREATE PROCEDURE xoa_update_dot_thi(@madotthi INT)
+AS
+BEGIN
+	DELETE  FROM dbo.DOTTHI
+	WHERE MADOTTHI =@madotthi
+	declare @max int
+	select @max=max(MADOTTHI)from dbo.DOTTHI
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (DOTTHI, RESEED,@max)
+END
+go
+
 --tìm kiếm đợt thi
-ALTER PROCEDURE tim_kiem_dot_thi(@tenlop NVARCHAR(50),@tenkhoahoc NVARCHAR(20))
+CREATE PROCEDURE tim_kiem_dot_thi(@tenlop NVARCHAR(50),@tenkhoahoc NVARCHAR(20))
 AS
 BEGIN
     SELECT MADOTTHI,DOTTHI.MAKHOAHOC,dbo.KHOAHOC.TENKHOAHOC,MALOP,TENLOP,CONVERT(NVARCHAR(20),NGAYTHI,103) [ngaythi],CONVERT(NVARCHAR(40),GIOTHI,114) [giothi],dbo.LOP.SISO,VANG FROM dbo.DOTTHI
@@ -642,7 +688,8 @@ GO
 --xóa biên lai
 DELETE FROM dbo.BIENLAI
 WHERE MADANGKI =?
-go
+GO
+
 --tìm kiếm biên lai
 CREATE PROCEDURE tim_kiem_bien_lai(@mabienlai INT)
 AS
@@ -661,7 +708,7 @@ GO
 -------------------------------------------------------------------------
 -----------------------------------------------------------------------
 --thông tin điểm thi
-ALTER PROCEDURE thong_tin_diem_thi
+CREATE PROCEDURE thong_tin_diem_thi
 AS
 BEGIN
     SELECT DIEMTHI.MAHOCVIEN,TENHOCVIEN,DIEMTHI.MADOTTHI,DIEMTHI,CONVERT(NVARCHAR(20),NGAYTHI,103) [NGAYTHI],CONVERT(NVARCHAR(30),GIOTHI,114)[GIOTHI] FROM dbo.DIEMTHI
@@ -676,6 +723,21 @@ VALUES(?,?,?)
 UPDATE dbo.DIEMTHI SET DIEMTHI= ?
 WHERE MAHOCVIEN=?,MADOTTHI=?
 GO
+
+CREATE PROCEDURE xoa_update_diem_thi(@mahocvien INT,@madotthi INT )
+AS
+BEGIN
+	DELETE  FROM dbo.DIEMTHI
+	WHERE MADOTTHI =@madotthi AND MAHOCVIEN =@mahocvien
+	declare @max int
+	select @max=max(MADOTTHI)from dbo.DOTTHI
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (DOTTHI, RESEED,@max)
+END
+go
+--xóa điểm thi
+
 --tìm kiếm điểm thi
 CREATE PROCEDURE tim_kiem_diem_thi(@tenhocvien NVARCHAR(100))
 AS
@@ -697,6 +759,7 @@ CREATE PROCEDURE thong_tin_ke_toan
 AS
 BEGIN
     SELECT MAKETOAN,TENKETOAN,GIOITINH,CONVERT(NVARCHAR(20),NGAYSINH,103) [ngaysinh],DIACHI,SDT,EMAIL FROM dbo.KETOAN
+	ORDER BY MAKETOAN DESC
 END
 --thêm kế toán
 INSERT INTO dbo.KETOAN(TENKETOAN,GIOITINH,NGAYSINH,DIACHI,SDT,EMAIL)
@@ -707,10 +770,18 @@ UPDATE dbo.KETOAN SET TENKETOAN=?,GIOITINH=?,NGAYSINH=?,DIACHI=?,SDT=?,EMAIL=?
 WHERE MAKETOAN = ?
 GO
 --xóa kế toán 
-DELETE FROM dbo.KETOAN 
-WHERE MAKETOAN = ?
-
-GO
+CREATE PROCEDURE xoa_update_Ke_Toan(@maketoan int)
+AS
+BEGIN
+    DELETE FROM dbo.KETOAN
+	WHERE MAKETOAN = @maketoan
+	declare @max int
+	select @max=max(MAKETOAN)from dbo.KETOAN
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (KETOAN, RESEED,@max)
+END
+go
 -- tìm kiếm nhân viên kế toán
 
 CREATE PROCEDURE tim_kiem_nhan_vien_ke_toan(@tenketoan NVARCHAR(100))
@@ -727,13 +798,15 @@ GO
 ---------------------------------------------------------------------------------------
 -------------------------------------------------------------------bắt đầu truy vấn  giảng viên--------------------------------
 --thông tin giảng viên
-CREATE PROCEDURE thong_tin_giang_vien
+alter PROCEDURE thong_tin_giang_vien
 AS
 BEGIN
     SELECT MAGIANGVIEN,TENGIANGVIEN,GIOITINH,CONVERT(NVARCHAR(20),NGAYSINH,103) [ngaysinh],DIACHI,sdt,EMAIL FROM dbo.GIANGVIEN
+	order by MAGIANGVIEN desc
 END
 
 GO
+exec thong_tin_giang_vien
 --thêm giảng viên
 INSERT INTO dbo.GIANGVIEN(TENGIANGVIEN,GIOITINH,NGAYSINH,DIACHI,SDT,EMAIL)
 VALUES(?,?,?,?,?,?)
@@ -751,10 +824,27 @@ AS
 BEGIN
     SELECT MAGIANGVIEN,TENGIANGVIEN,GIOITINH,CONVERT(NVARCHAR(20),NGAYSINH,103) [ngaysinh],DIACHI,sdt,EMAIL FROM dbo.GIANGVIEN
 	WHERE TENGIANGVIEN LIKE LTRIM(RTRIM(@tengiangvien))
+	order by MAGIANGVIEN desc
 END
 
 EXEC dbo.tim_kiem_giang_vien @tengiangvien = N'%đức%' -- nvarchar(100)
 GO
+CREATE PROCEDURE xoa_update_giang_vien(@MAGIANGVIEN int)
+AS
+BEGIN
+    DELETE FROM dbo.GIANGVIEN 
+	WHERE MAGIANGVIEN = @MAGIANGVIEN
+	declare @max int
+	select @max=max(MAGIANGVIEN)from dbo.GIANGVIEN
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (GIANGVIEN, RESEED,@max)
+END
+go
+
+
+
+
 
 -------------------------------------------------------------------kết thúc truy vấn giảng viên-----------------------------
 ------------------------------------------------------------------------------------------
@@ -765,12 +855,16 @@ CREATE PROCEDURE thong_tin_tai_khoan
 AS
 BEGIN
     SELECT MANHANVIEN,TENDANGNHAP,MATKHAU,TENVAITRO FROM dbo.NGUOIDUNG
+	order by MANHANVIEN desc
 END
 SELECT * FROM dbo.NGUOIDUNG
 --thêm tài khoản kế toán
 INSERT INTO dbo.NGUOIDUNG(TENDANGNHAP,MATKHAU,TENVAITRO)
 VALUES(?,?,1)
 GO
+INSERT INTO dbo.NGUOIDUNG(TENDANGNHAP,MATKHAU,TENVAITRO)
+VALUES(N'hahah',N'123',2)
+
 --thêm tài khoản giảng viên
 INSERT INTO dbo.NGUOIDUNG(TENDANGNHAP,MATKHAU,TENVAITRO)
 VALUES(?,?,2)
@@ -781,9 +875,17 @@ WHERE MANHANVIEN = ?
 GO
 --xóa tài khoản
 
-DELETE FROM dbo.NGUOIDUNG
-WHERE MANHANVIEN = ?
-
+CREATE PROCEDURE xoa_update_nguoi_dung(@manhanvien int)
+AS
+BEGIN
+    DELETE FROM dbo.NGUOIDUNG 
+	WHERE MANHANVIEN = @manhanvien
+	declare @max int
+	select @max=max(MANHANVIEN)from dbo.NGUOIDUNG
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (NGUOIDUNG, RESEED,@max)
+END
 go
 --tìm kiếm tài khoản nhân viên theo mã nhân viên
 
@@ -793,7 +895,40 @@ BEGIN
     SELECT MANHANVIEN,TENDANGNHAP,MATKHAU,TENVAITRO FROM dbo.NGUOIDUNG
 	WHERE MANHANVIEN LIKE LTRIM(RTRIM(@MATKNV))
 END
-DROP PROCEDURE tim_kiem_tk_nhan_vien
-EXEC dbo.tim_kiem_tk_nhan_vien @MATKNV = 1 -- nvarchar(40)
 
+EXEC dbo.tim_kiem_tk_nhan_vien @MATKNV = 1 -- nvarchar(40)
+go
 -------------------------------------------------------------------kế thúc truy vấn tài khoản nhân viên---------------------------------
+SELECT * FROM dbo.NGUOIDUNG
+INSERT INTO dbo.GIANGVIEN
+(
+    TENGIANGVIEN,
+    GIOITINH,
+    NGAYSINH,
+    DIACHI,
+    SDT,
+    EMAIL
+)
+VALUES
+(   N'abc',       -- TENGIANGVIEN - nvarchar(80)
+    0,         -- GIOITINH - int
+    '2001/1/1', -- NGAYSINH - date
+    N'hà nội',       -- DIACHI - nvarchar(80)
+    N'02345666455',       -- SDT - nchar(11)
+    N'abc@gmail.com'        -- EMAIL - nvarchar(80)
+    )
+SELECT * from dbo.GIANGVIEN
+SELECT * from dbo.NGUOIDUNG
+DBCC CHECKIDENT(NGUOIDUNG,RESEED,14)
+DBCC CHECKIDENT(GIANGVIEN,RESEED,9)
+DELETE FROM dbo.GIANGVIEN
+WHERE MAGIANGVIEN = 10
+DELETE FROM dbo.NGUOIDUNG 
+WHERE MANHANVIEN = 15
+declare @max int
+select @max=max(MANHANVIEN)from dbo.NGUOIDUNG
+if @max IS NULL   
+  SET @max = 0
+DBCC CHECKIDENT (NGUOIDUNG, RESEED,@max)
+go
+
