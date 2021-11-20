@@ -13,6 +13,7 @@ import Entity.KeToan;
 import Entity.NguoiDung;
 import TienIchHoTro.Dialog;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,9 +46,12 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
         initComponents();
         conn = TienIchHoTro.ConnectToSQL.getConnect();
         fillTableGV();
+        fillTableKT();
         ButtonGroup bg = new ButtonGroup();
         bg.add(rbn_NuGV);
         bg.add(rbn_NamGV);
+        bg.add(rbn_NuKT);
+        bg.add(rbn_namKT);
     }
 
     private void fillTableGV() {
@@ -68,10 +72,28 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
         }
     }
 
+    private void fillTableKT() {
+        dtm = (DefaultTableModel) tbl_tableKT.getModel();
+        dtm.setRowCount(0);
+        listKT = ktDAO.selectAll(conn);
+        for (KeToan kt : listKT) {
+            Object[] obj = new Object[]{
+                kt.getMaKeToan(),
+                kt.getTenKeToan(),
+                kt.getGioiTinh() == 0 ? "Nữ" : "Nam",
+                kt.getNgaySinh(),
+                kt.getDiaChi(),
+                kt.getSDT(),
+                kt.getEmail()
+            };
+            dtm.addRow(obj);
+        }
+    }
+
     boolean checkNullGV() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Border border = BorderFactory.createLineBorder(Color.red);
-        if (txt_TenGiangVien.getText().equals("") && txt_TenGiangVien.getText().isEmpty() && txt_diaChiGV.getText().isEmpty() 
+        if (txt_TenGiangVien.getText().equals("") && txt_TenGiangVien.getText().isEmpty() && txt_diaChiGV.getText().isEmpty() && dateChooser_birthGV.getDateFormatString().equals("")
                 && txt_diaChiGV.getText().equals("") && txt_sdtGV.getText().equals("") && txt_sdtGV.getText().isEmpty() && txt_EmailGV.getText().equals("")) {
             lbl_LoiTenGiangVien.setText("Thiếu tên giảng viên rồi nhập lại bạn nhé!");
             lbl_loiBirthGV.setText("Thiếu ngày sinh rồi chọn lại bạn nhé!");
@@ -138,8 +160,7 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
             txt_EmailGV.requestFocus();
             return false;
         } else {
-
-            Pattern p = Pattern.compile("^[a-zA-Z.%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
+            Pattern p = Pattern.compile("^[a-zA-Z.%+-]+[0-9]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
             if (!p.matcher(txt_EmailGV.getText()).find()) {
                 lbl_loiEmailGV.setText("Email không đúng định dạng vui lòng nhập đúng định dạng VD:abc@gmail.com");
                 txt_EmailGV.setBorder(border);
@@ -179,6 +200,139 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
             }
         }
 
+        return true;
+    }
+
+    boolean checknullTKGV() {
+        Border border = BorderFactory.createLineBorder(Color.red);
+        if (txt_TimKiemGV.getText().equals("")) {
+            txt_TimKiemGV.setBorder(border);
+            txt_TimKiemGV.setForeground(Color.red);
+            txt_TimKiemGV.setText("Bạn chưa nhập tên giảng viên bạn cần tìm vui lòng thử lại");
+            txt_TimKiemGV.requestFocus();
+            return false;
+        } else {
+            Border border1 = BorderFactory.createLineBorder(Color.black);
+            txt_TimKiemGV.setBorder(border1);
+            txt_TimKiemGV.setForeground(Color.black);
+        }
+        return true;
+    }
+
+    boolean checknullKT() {
+        Border border = BorderFactory.createLineBorder(Color.red);
+
+        if (txt_TenKeToan.getText().equals("") && txt_diaChiKT.getText().equals("")
+                && txt_SDTKT.getText().equals("") && txt_EmaiilKT.getText().equals("")) {
+            lbl_loiTenKT.setText("thiếu tên kế toán rồi nhập lại bạn nhé!");
+            lbl_loibirthKT.setText("thiếu ngày sinh rồi chọn lại bạn nhé! ");
+            lbl_loiDiaChiKT.setText("thiếu địa chỉ rồi nhập lại bạn nhé!");
+            lbl_loiSDTKT.setText("thiếu số điện thoại rồi nhập lại bạn nhé!");
+            lbl_loiEmailKT.setText("thiếu email rồi nhập lại bạn nhé!");
+            txt_TenKeToan.setBorder(border);
+            txt_diaChiKT.setBorder(border);
+            txt_SDTKT.setBorder(border);
+            dateChooser_birthKT.setBorder(border);
+            txt_EmaiilKT.setBorder(border);
+            lbl_loiTenKT.setForeground(Color.red);
+            lbl_loibirthKT.setForeground(Color.red);
+            lbl_loiDiaChiKT.setForeground(Color.red);
+            lbl_loiSDTKT.setForeground(Color.red);
+            lbl_loiEmailKT.setForeground(Color.red);
+            txt_TenKeToan.requestFocus();
+            return false;
+        }
+
+        if (txt_TenKeToan.getText().equals("")) {
+            lbl_loiTenKT.setText("thiếu tên kế toán rồi nhập lại bạn nhé!");
+            txt_TenKeToan.setBorder(border);
+            lbl_loiTenKT.setForeground(Color.red);
+            txt_TenKeToan.requestFocus();
+            return false;
+        }
+
+        if (txt_diaChiKT.getText().equals("")) {
+            lbl_loiDiaChiKT.setText("thiếu địa chỉ rồi nhập lại bạn nhé!");
+            txt_diaChiKT.setBorder(border);
+            lbl_loiDiaChiKT.setForeground(Color.red);
+            txt_diaChiKT.requestFocus();
+            return false;
+        }
+
+        if (txt_SDTKT.getText().equals("")) {
+            lbl_loiSDTKT.setText("thiếu số điện thoại rồi nhập lại bạn nhé!");
+            txt_SDTKT.setBorder(border);
+            lbl_loiSDTKT.setForeground(Color.red);
+            txt_SDTKT.requestFocus();
+            return false;
+        } else {
+            Pattern p = Pattern.compile("^(84|0[3|5|7|8|9])+([0-9]{8})$");
+            if (!p.matcher(txt_SDTKT.getText()).find()) {
+                lbl_loiSDTKT.setText("số điện thoại không đúng với định dạng của Việt Nam VD: 0312345678");
+                txt_SDTKT.setBorder(border);
+                lbl_loiSDTKT.setForeground(Color.red);
+                txt_SDTKT.requestFocus();
+                return false;
+            }
+        }
+
+        if (txt_EmaiilKT.getText().equals("")) {
+            lbl_loiEmailKT.setText("thiếu email rồi nhập lại bạn nhé!");
+            txt_EmaiilKT.setBorder(border);
+            lbl_loiEmailKT.setForeground(Color.red);
+            txt_EmaiilKT.requestFocus();
+            return false;
+        } else {
+            Pattern p = Pattern.compile("^[a-zA-Z.%+-]+[0-9]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
+            if (!p.matcher(txt_EmaiilKT.getText()).find()) {
+                lbl_loiEmailKT.setText("Email chưa đúng định dạng VD: abc@gmail.com");
+                txt_EmaiilKT.setBorder(border);
+                lbl_loiEmailKT.setForeground(Color.red);
+                txt_EmaiilKT.requestFocus();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    boolean checkTrungKT() {
+        Border border = BorderFactory.createLineBorder(Color.red);
+        for (KeToan kt : listKT) {
+            if (txt_SDTKT.getText().equals(kt.getSDT())) {
+                lbl_loiSDTKT.setText(" số điện thoại bị trùng rồi nhập lại bạn nhé!");
+                txt_SDTKT.setBorder(border);
+                lbl_loiSDTKT.setForeground(Color.red);
+                txt_SDTKT.requestFocus();
+                return false;
+            }
+            if (txt_EmaiilKT.getText().equals(kt.getEmail())) {
+                lbl_loiEmailKT.setText(" email bị trùng rồi rồi nhập lại bạn nhé!");
+                txt_EmaiilKT.setBorder(border);
+                lbl_loiEmailKT.setForeground(Color.red);
+                txt_EmaiilKT.requestFocus();
+                return false;
+            }
+
+        }
+
+        return true;
+    }
+
+    boolean checknullTKKT() {
+        Border border = BorderFactory.createLineBorder(Color.red);
+
+        if (txt_TimKiemKT.getText().equals("")) {
+            txt_TimKiemKT.setText("Bạn chưa nhập tên nhân viên kế toán vui lòng nhập lại");
+            txt_TimKiemKT.setForeground(Color.red);
+            txt_TimKiemKT.setBorder(border);
+            txt_TimKiemGV.requestFocus();
+            return false;
+        } else {
+            Border border1 = BorderFactory.createLineBorder(Color.black);
+            txt_TimKiemKT.setForeground(Color.black);
+            txt_TimKiemKT.setBorder(border);
+        }
         return true;
     }
 
@@ -405,8 +559,13 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
 
         btn_ClearGV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Refresh.png"))); // NOI18N
         btn_ClearGV.setText("Clear ");
+        btn_ClearGV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ClearGVActionPerformed(evt);
+            }
+        });
 
-        txt_TimKiemGV.setText("Nhập mã nhân viên");
+        txt_TimKiemGV.setText("Nhập tên giảng viên");
 
         btn_TimKiemGV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Search.png"))); // NOI18N
         btn_TimKiemGV.setText("Tìm kiếm");
@@ -616,18 +775,38 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
                 "Mã kế toán", "Tên kế toán", "Giới tính", "Ngày sinh", "Địa chỉ", "Số điện thoại", "Email"
             }
         ));
+        tbl_tableKT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_tableKTMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl_tableKT);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức năng"));
 
         btn_ThemKT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Add.png"))); // NOI18N
         btn_ThemKT.setText("Thêm tài khoản");
+        btn_ThemKT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThemKTActionPerformed(evt);
+            }
+        });
 
         btn_SuaKT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Edit.png"))); // NOI18N
         btn_SuaKT.setText("Sửa tài khoản");
+        btn_SuaKT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SuaKTActionPerformed(evt);
+            }
+        });
 
         btn_XoaKT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Delete.png"))); // NOI18N
         btn_XoaKT.setText("Xóa tài khoản");
+        btn_XoaKT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoaKTActionPerformed(evt);
+            }
+        });
 
         btn_ClearKT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Refresh.png"))); // NOI18N
         btn_ClearKT.setText("Clear ");
@@ -636,6 +815,11 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
 
         btn_TimKiemKT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Search.png"))); // NOI18N
         btn_TimKiemKT.setText("Tìm kiếm");
+        btn_TimKiemKT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TimKiemKTActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -750,20 +934,20 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
         int vitri = tbl_tableGV.getSelectedRow();
         if (vitri >= 0) {
             String row = (String) tbl_tableGV.getValueAt(vitri, 1);
-            tbl_tableGV.getValueAt(vitri, 0);
+            //tbl_tableGV.getValueAt(vitri, 0);
             GiangVien gv = gvDAO.fromTableToText(row, conn);
             if (gv != null) {
                 txt_TenGiangVien.setText(gv.getTenGiangVien());
-                int gioiTinh = -1;
+                //int gioiTinh = -1;
                 if (gv.getGioiTinh() == 1) {
                     rbn_NamGV.setSelected(true);
                 }
                 if (gv.getGioiTinh() == 0) {
                     rbn_NuGV.setSelected(true);
                 }
-                gv.setGioiTinh(gioiTinh);
+                //gv.setGioiTinh(gioiTinh);
                 try {
-                    Date date = new SimpleDateFormat("dd/MM/yyyy").parse((String) dtm.getValueAt(vitri, 3));
+                    Date date = new SimpleDateFormat("dd/MM/yyyy").parse((String) tbl_tableGV.getValueAt(vitri, 3));
                     dateChooser_birthGV.setDate(date);
                 } catch (ParseException ex) {
                     Logger.getLogger(QuanLyKeToan_GiangVien.class.getName()).log(Level.SEVERE, null, ex);
@@ -815,7 +999,7 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Dialog.alert(this, "Thêm không thành công"+""+e.getMessage());
+            Dialog.alert(this, "Thêm không thành công" + "" + e.getMessage());
         }
     }//GEN-LAST:event_btn_ThemGVActionPerformed
 
@@ -846,7 +1030,7 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
                 Dialog.alert(this, "Sửa không thành công");
             }
         } catch (Exception e) {
-            Dialog.alert(this, "Sửa không thành công"+""+e.getMessage());
+            Dialog.alert(this, "Sửa không thành công" + "" + e.getMessage());
             e.printStackTrace();
         }
     }//GEN-LAST:event_btn_SuaGVActionPerformed
@@ -872,20 +1056,181 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_XoaGVActionPerformed
 
     private void btn_TimKiemGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemGVActionPerformed
-        List<GiangVien> list = gvDAO.search(txt_TimKiemGV.getText(), conn);
-        dtm.setRowCount(0);
-        for (GiangVien gv : list) {
-            Vector<Object> vec = new Vector<>();
-            vec.add(gv.getMaGiangVien());
-            vec.add(gv.getTenGiangVien());
-            vec.add(gv.getGioiTinh());
-            vec.add(gv.getNgaySinh());
-            vec.add(gv.getDiaChi());
-            vec.add(gv.getSDT());
-            vec.add(gv.getEmail());
-            dtm.addRow(vec);
+        try {
+            fillTableGV();
+            if (checknullTKGV()) {
+                if (checkTrung()) {
+                    List<GiangVien> list = gvDAO.search(txt_TimKiemGV.getText(), conn);
+                    dtm.setRowCount(0);
+                    dtm = (DefaultTableModel) tbl_tableGV.getModel();
+                    for (GiangVien gv : list) {
+                        Vector<Object> vec = new Vector<>();
+                        vec.add(gv.getMaGiangVien());
+                        vec.add(gv.getTenGiangVien());
+                        String gioiTinh = gv.getGioiTinh() == 0 ? "nữ" : "nam";
+                        vec.add(gioiTinh);
+                        vec.add(gv.getNgaySinh());
+                        vec.add(gv.getDiaChi());
+                        vec.add(gv.getSDT());
+                        vec.add(gv.getEmail());
+                        dtm.addRow(vec);
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Dialog.alert(this, "Mã giảng viên không tồn tại" + "" + e.getMessage());
         }
     }//GEN-LAST:event_btn_TimKiemGVActionPerformed
+
+    private void btn_ClearGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClearGVActionPerformed
+        txt_EmailGV.setText("");
+        txt_TenGiangVien.setText("");
+        txt_sdtGV.setText("");
+        txt_diaChiGV.setText("");
+        dateChooser_birthGV.setDateFormatString("");
+        fillTableGV();
+    }//GEN-LAST:event_btn_ClearGVActionPerformed
+
+    private void tbl_tableKTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_tableKTMouseClicked
+        int vitri = tbl_tableKT.getSelectedRow();
+        if (vitri >= 0) {
+            String row = (String) tbl_tableKT.getValueAt(vitri, 1);
+            KeToan kt = ktDAO.fromTableToText(row, conn);
+            if (kt != null) {
+                txt_TenKeToan.setText(kt.getTenKeToan());
+                if (kt.getGioiTinh() == 1) {
+                    rbn_namKT.setSelected(true);
+                }
+                if (kt.getGioiTinh() == 0) {
+                    rbn_NuKT.setSelected(true);
+                }
+                try {
+                    Date date = new SimpleDateFormat("dd/MM/yyyy").parse((String) tbl_tableKT.getValueAt(vitri, 3));
+                    dateChooser_birthKT.setDate(date);
+                } catch (ParseException ex) {
+                    Logger.getLogger(QuanLyKeToan_GiangVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                txt_diaChiKT.setText(kt.getDiaChi());
+                txt_SDTKT.setText(kt.getSDT());
+                txt_EmaiilKT.setText(kt.getEmail());
+            }
+        }
+    }//GEN-LAST:event_tbl_tableKTMouseClicked
+
+    private void btn_XoaKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaKTActionPerformed
+        try {
+            int chon = JOptionPane.showConfirmDialog(this, "Bạn muốn xóa nhân viên kế toán này chứ?", "Xóa nhân viên kế toán", JOptionPane.YES_NO_OPTION);
+            if (chon == JOptionPane.YES_NO_OPTION) {
+                int vitri = tbl_tableKT.getSelectedRow();
+                if (vitri >= 0) {
+                    int row = (int) tbl_tableKT.getValueAt(vitri, 0);
+                    KeToan kt = ktDAO.delete(String.valueOf(row), conn);
+                    fillTableKT();
+                }
+                Dialog.alert(this, "Xóa thành công");
+            } else {
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Dialog.alert(this, "Xóa không thành công" + "" + e.getMessage());
+        }
+    }//GEN-LAST:event_btn_XoaKTActionPerformed
+
+    private void btn_ThemKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemKTActionPerformed
+        try {
+            if (checkTrungKT()) {
+                if (checknullKT()) {
+                    Border border1 = BorderFactory.createLineBorder(Color.black);
+                    lbl_loiTenKT.setText("");
+                    lbl_loibirthKT.setText("");
+                    lbl_loiDiaChiKT.setText("");
+                    lbl_loiSDTKT.setText("");
+                    lbl_loiEmailKT.setText("");
+                    txt_TenKeToan.setBorder(border1);
+                    txt_diaChiKT.setBorder(border1);
+                    txt_SDTKT.setBorder(border1);
+                    dateChooser_birthKT.setBorder(border1);
+                    txt_EmaiilKT.setBorder(border1);
+                    KeToan kt = new KeToan();
+                    kt.setTenKeToan(txt_TenKeToan.getText());
+                    int gioiTinh = -1;
+                    if (rbn_namKT.isSelected()) {
+                        gioiTinh = 1;
+                    }
+                    if (rbn_NuKT.isSelected()) {
+                        gioiTinh = 0;
+                    }
+                    kt.setGioiTinh(gioiTinh);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                    String date = sdf.format(dateChooser_birthKT.getDate());
+                    kt.setNgaySinh(date);
+                    kt.setDiaChi(txt_diaChiKT.getText());
+                    kt.setSDT(txt_SDTKT.getText());
+                    kt.setEmail(txt_EmaiilKT.getText());
+                    boolean themKT = ktDAO.insert(kt, conn);
+                    fillTableKT();
+                    Dialog.alert(this, "Thêm thành công");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Dialog.alert(this, "Thêm không thành công" + "" + e.getMessage());
+        }
+    }//GEN-LAST:event_btn_ThemKTActionPerformed
+
+    private void btn_SuaKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaKTActionPerformed
+        KeToan kt = new KeToan();
+        kt.setTenKeToan(txt_TenKeToan.getText());
+        int gioiTinh = -1;
+        if (rbn_namKT.isSelected()) {
+            gioiTinh = 1;
+        }
+        if (rbn_NuKT.isSelected()) {
+            gioiTinh = 0;
+        }
+        kt.setGioiTinh(gioiTinh);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String date = sdf.format(dateChooser_birthKT.getDate());
+        kt.setNgaySinh(date);
+        kt.setDiaChi(txt_diaChiKT.getText());
+        kt.setSDT(txt_SDTKT.getText());
+        kt.setEmail(txt_EmaiilKT.getText());
+        int vitri = tbl_tableKT.getSelectedRow();
+        int row = (int) tbl_tableKT.getValueAt(vitri, 0);
+        kt.setMaKeToan(row);
+        ktDAO.update(kt, conn);
+        fillTableKT();
+    }//GEN-LAST:event_btn_SuaKTActionPerformed
+
+    private void btn_TimKiemKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemKTActionPerformed
+        try {
+
+            if (checknullTKKT()) {
+
+                List<KeToan> list = ktDAO.search(txt_TimKiemKT.getText(), conn);
+                dtm.setRowCount(0);
+                dtm = (DefaultTableModel) tbl_tableKT.getModel();
+                for (KeToan kt : list) {
+                    Vector<Object> vec = new Vector<>();
+                    vec.add(kt.getMaKeToan());
+                    vec.add(kt.getTenKeToan());
+                    String gioiTinh = kt.getGioiTinh() == 0 ? "nữ" : "nam";
+                    vec.add(gioiTinh);
+                    vec.add(kt.getNgaySinh());
+                    vec.add(kt.getDiaChi());
+                    vec.add(kt.getSDT());
+                    vec.add(kt.getEmail());
+                    dtm.addRow(vec);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Dialog.alert(this, " Nhân viên không tồn tại" + "" + e.getMessage());
+        }
+    }//GEN-LAST:event_btn_TimKiemKTActionPerformed
 
     /**
      * @param args the command line arguments

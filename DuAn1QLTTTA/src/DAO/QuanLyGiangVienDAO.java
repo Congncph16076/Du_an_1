@@ -22,26 +22,26 @@ import java.util.logging.Logger;
  */
 public class QuanLyGiangVienDAO implements EntityDAO<GiangVien, String> {
 
-    public GiangVien text(int ID,Connection conn){
-        try {
-            CallableStatement call = conn.prepareCall("{call text_giang_vien(?)}");
-            call.setInt(1, ID);
-            ResultSet rs = call.executeQuery();
-            while (rs.next()) {
-                GiangVien GV = new GiangVien();
-                GV.setTenGiangVien(rs.getString("TENGIANGVIEN"));
-                GV.setGioiTinh(rs.getInt("GIOITINH"));
-                GV.setNgaySinh(rs.getString("ngaysinh"));
-                GV.setDiaChi(rs.getString("DIACHI"));
-                GV.setSDT(rs.getString("SDT"));
-                GV.setEmail(rs.getString("EMAIl"));
-                
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+//    public GiangVien text(int ID,Connection conn){
+//        try {
+//            CallableStatement call = conn.prepareCall("{call text_giang_vien(?)}");
+//            call.setInt(1, ID);
+//            ResultSet rs = call.executeQuery();
+//            while (rs.next()) {
+//                GiangVien GV = new GiangVien();
+//                GV.setTenGiangVien(rs.getString("TENGIANGVIEN"));
+//                GV.setGioiTinh(rs.getInt("GIOITINH"));
+//                GV.setNgaySinh(rs.getString("ngaysinh"));
+//                GV.setDiaChi(rs.getString("DIACHI"));
+//                GV.setSDT(rs.getString("SDT"));
+//                GV.setEmail(rs.getString("EMAIl"));
+//                
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
     
     @Override
     public boolean insert(GiangVien GV, Connection conn) {
@@ -95,7 +95,6 @@ public class QuanLyGiangVienDAO implements EntityDAO<GiangVien, String> {
             CallableStatement call = conn.prepareCall("{call xoa_update_giang_vien(?)}");
             call.setString(1, ID);
             call.executeUpdate();
-            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -117,7 +116,7 @@ public class QuanLyGiangVienDAO implements EntityDAO<GiangVien, String> {
                 GV.setNgaySinh(rs.getString("ngaysinh"));
                 GV.setDiaChi(rs.getString("DIACHI"));
                 GV.setSDT(rs.getString("SDT"));
-                GV.setEmail(rs.getString("EMAIl"));
+                GV.setEmail(rs.getString("EMAIL"));
                 listGV.add(GV);
             }
         } catch (Exception e) {
@@ -134,12 +133,13 @@ public class QuanLyGiangVienDAO implements EntityDAO<GiangVien, String> {
             ResultSet rs = call.executeQuery();
             while (rs.next()) {
                 GiangVien GV = new GiangVien();
+                GV.setMaGiangVien(rs.getInt("MAGIANGVIEN"));
                 GV.setTenGiangVien(rs.getString("TENGIANGVIEN"));
                 GV.setGioiTinh(rs.getInt("GIOITINH"));
                 GV.setNgaySinh(rs.getString("ngaysinh"));
                 GV.setDiaChi(rs.getString("DIACHI"));
                 GV.setSDT(rs.getString("SDT"));
-                GV.setEmail(rs.getString("EMAIl"));
+                GV.setEmail(rs.getString("EMAIL"));
                 return  GV;
             }
         } catch (Exception e) {
@@ -153,7 +153,7 @@ public class QuanLyGiangVienDAO implements EntityDAO<GiangVien, String> {
         List<GiangVien> listGV = new ArrayList<>();
         try {
             CallableStatement call = conn.prepareCall("{call tim_kiem_giang_vien(?)}");
-            call.setString(1, ID);
+            call.setString(1, "%"+ID+"%");
             ResultSet rs = call.executeQuery();
 
             while (rs.next()) {
@@ -164,7 +164,7 @@ public class QuanLyGiangVienDAO implements EntityDAO<GiangVien, String> {
                 GV.setNgaySinh(rs.getString("ngaysinh"));
                 GV.setDiaChi(rs.getString("DIACHI"));
                 GV.setSDT(rs.getString("SDT"));
-                GV.setEmail(rs.getString("EMAIl"));
+                GV.setEmail(rs.getString("EMAIL"));
                 listGV.add(GV);
             }
         } catch (Exception e) {
