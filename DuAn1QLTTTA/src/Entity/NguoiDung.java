@@ -13,17 +13,29 @@ public class NguoiDung {
     private  int maNhanVien;
     private  String tenDangNhap;
     private  String matKhau;
+    private  String matKhauCu;
     private int vaiTro;
 
     public NguoiDung() {
     }
 
-    public NguoiDung(int maNhanVien, String tenDangNhap, String matKhau, int vaiTro) {
+    public String getMatKhauCu() {
+        return matKhauCu;
+    }
+
+    public void setMatKhauCu(String matKhauCu) {
+        this.matKhauCu = matKhauCu;
+    }
+
+    public NguoiDung(int maNhanVien, String tenDangNhap, String matKhau, String matKhauCu, int vaiTro) {
         this.maNhanVien = maNhanVien;
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
+        this.matKhauCu = matKhauCu;
         this.vaiTro = vaiTro;
     }
+
+    
 
     public int getMaNhanVien() {
         return maNhanVien;
@@ -40,6 +52,7 @@ public class NguoiDung {
     public void setTenDangNhap(String tenDangNhap) {
         this.tenDangNhap = tenDangNhap;
     }
+
 
     public String getMatKhau() {
         return matKhau;
