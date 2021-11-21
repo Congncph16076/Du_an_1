@@ -52,6 +52,8 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
         bg.add(rbn_NamGV);
         bg.add(rbn_NuKT);
         bg.add(rbn_namKT);
+        this.setTitle("Quản lý nhân viên");
+        this.setLocationRelativeTo(null);
     }
 
     private void fillTableGV() {
@@ -888,6 +890,11 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
 
         btn_TrangChu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Home.png"))); // NOI18N
         btn_TrangChu.setText("Trang chủ");
+        btn_TrangChu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TrangChuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1231,6 +1238,12 @@ public class QuanLyKeToan_GiangVien extends javax.swing.JFrame {
             Dialog.alert(this, " Nhân viên không tồn tại" + "" + e.getMessage());
         }
     }//GEN-LAST:event_btn_TimKiemKTActionPerformed
+
+    private void btn_TrangChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TrangChuActionPerformed
+       ManHinhLamViecNVQL manHinh = new ManHinhLamViecNVQL();
+        manHinh.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_TrangChuActionPerformed
 
     /**
      * @param args the command line arguments

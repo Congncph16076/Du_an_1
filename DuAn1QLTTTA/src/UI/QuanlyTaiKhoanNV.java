@@ -44,6 +44,8 @@ public class QuanlyTaiKhoanNV extends javax.swing.JFrame {
         ButtonGroup btnGrp = new ButtonGroup();
         btnGrp.add(rbn_GiangVien);
         btnGrp.add(rbn_KeToan);
+        this.setTitle("Quản lý tài khoản nhân viên");
+        this.setLocationRelativeTo(null);
 
     }
 
@@ -171,6 +173,11 @@ public class QuanlyTaiKhoanNV extends javax.swing.JFrame {
 
         btn_TrangChu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Home.png"))); // NOI18N
         btn_TrangChu.setText("Trang chủ");
+        btn_TrangChu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TrangChuActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Quản lý tài khoản nhân viên");
@@ -453,7 +460,7 @@ public class QuanlyTaiKhoanNV extends javax.swing.JFrame {
                 NguoiDung nd = new NguoiDung();
                 nd.setTenDangNhap(txt_TenDangNhap.getText());
                 nd.setMatKhau(txt_MatKhau.getText());
-                int vaitroNV = -1;
+                int vaitroNV = 0;
                 if (rbn_GiangVien.isSelected()) {
                     vaitroNV = 2;
                 }
@@ -549,6 +556,12 @@ public class QuanlyTaiKhoanNV extends javax.swing.JFrame {
         txt_TimKiem.setText("Nhập mã nhân viên");
         txt_TimKiem.setForeground(Color.black);
     }//GEN-LAST:event_btn_ClearActionPerformed
+
+    private void btn_TrangChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TrangChuActionPerformed
+        ManHinhLamViecNVQL manHinh = new ManHinhLamViecNVQL();
+        manHinh.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_TrangChuActionPerformed
 
     /**
      * @param args the command line arguments

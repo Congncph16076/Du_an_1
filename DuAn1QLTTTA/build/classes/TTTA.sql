@@ -899,36 +899,8 @@ END
 EXEC dbo.tim_kiem_tk_nhan_vien @MATKNV = 1 -- nvarchar(40)
 go
 -------------------------------------------------------------------kế thúc truy vấn tài khoản nhân viên---------------------------------
-SELECT * FROM dbo.NGUOIDUNG
-INSERT INTO dbo.GIANGVIEN
-(
-    TENGIANGVIEN,
-    GIOITINH,
-    NGAYSINH,
-    DIACHI,
-    SDT,
-    EMAIL
-)
-VALUES
-(   N'abc',       -- TENGIANGVIEN - nvarchar(80)
-    0,         -- GIOITINH - int
-    '2001/1/1', -- NGAYSINH - date
-    N'hà nội',       -- DIACHI - nvarchar(80)
-    N'02345666455',       -- SDT - nchar(11)
-    N'abc@gmail.com'        -- EMAIL - nvarchar(80)
-    )
-SELECT * from dbo.GIANGVIEN
 SELECT * from dbo.NGUOIDUNG
-DBCC CHECKIDENT(NGUOIDUNG,RESEED,14)
-DBCC CHECKIDENT(GIANGVIEN,RESEED,9)
-DELETE FROM dbo.GIANGVIEN
-WHERE MAGIANGVIEN = 10
-DELETE FROM dbo.NGUOIDUNG 
-WHERE MANHANVIEN = 15
-declare @max int
-select @max=max(MANHANVIEN)from dbo.NGUOIDUNG
-if @max IS NULL   
-  SET @max = 0
-DBCC CHECKIDENT (NGUOIDUNG, RESEED,@max)
-go
+WHERE TENDANGNHAP =? AND MATKHAU = ? AND TENVAITRO = 0
 
+UPDATE dbo.NGUOIDUNG SET MATKHAU='1234567'
+WHERE TENVAITRO = 2 AND TENDANGNHAP='no01' AND MATKHAU='1234567'
