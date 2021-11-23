@@ -14,7 +14,7 @@ CREATE TABLE NGUOIDUNG
 	GIOITINH bit,
 	NGAYSINH DATE,
 	DIACHI NVARCHAR(80),
-	SDT NCHAR(20),
+	SDT NCHAR(13),
 	EMAIL NVARCHAR(80),
 	TENVAITRO INT NOT NULL,
 	TENDANGNHAP NVARCHAR(20),
@@ -90,7 +90,7 @@ CREATE TABLE HOCVIEN(
 	GIOITINH INT,
 	NGAYSINH DATE,
 	DIACHI NVARCHAR(80),
-	SDT NCHAR(20),
+	SDT NCHAR(13),
 	HOCPHINO FLOAT,
 	EMAIL NVARCHAR(80),
 	SOBUOINGHI INT,
@@ -128,7 +128,7 @@ CREATE TABLE DANGKI(
 	TENHOCVIEN NVARCHAR(80),
 	NGAYSINH DATE,
 	GIOITINH INT,
-	SDT NCHAR(20),
+	SDT NCHAR(13),
 	EMAIL NVARCHAR(80),
 	DIACHI NVARCHAR(80),
 	TENCAPLOP NVARCHAR(80),
@@ -491,8 +491,7 @@ GO
 EXEC dbo.lay_thong_tin_hoc_vien_tu_bang_dang_ki @sdt = N'0324513946' -- nchar(10)
 SELECT * ,CONVERT(nvarchar(50),ngaysinh,103) from hocvien
 where sdt = N'0324513946'
-delete from hocvien
-where mahocvien = 115
+
 -----------------------------------------------------------hết  truy vấn bảng học viên-----------------------------------------------------
 --------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------
@@ -711,6 +710,8 @@ END
 EXEC dbo.thong_tin_tai_khoan
 
 SELECT * FROM dbo.NGUOIDUNG
+WHERE TENVAITRO =1
+
 --thêm tài khoản kế toán
 INSERT INTO dbo.NGUOIDUNG(TENDANGNHAP,MATKHAU,TENVAITRO)
 VALUES(?,?,1)

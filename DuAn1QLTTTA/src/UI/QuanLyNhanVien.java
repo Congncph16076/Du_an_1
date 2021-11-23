@@ -166,7 +166,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             txt_EmailNV.requestFocus();
             return false;
         } else {
-            Pattern p = Pattern.compile("^[a-zA-Z.%+-]+[0-9]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
+            Pattern p = Pattern.compile("^[a-zA-Z0-9.%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
             if (!p.matcher(txt_EmailNV.getText()).find()) {
                 lbl_loiEmailNV.setText("Email không đúng định dạng vui lòng nhập đúng định dạng VD:abc@gmail.com");
                 txt_EmailNV.setBorder(border);

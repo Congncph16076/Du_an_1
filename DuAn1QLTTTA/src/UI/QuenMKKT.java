@@ -78,7 +78,7 @@ public class QuenMKKT extends javax.swing.JFrame {
     boolean checkKhop() {
         NguoiDung nd = new NguoiDung();
         listnguoiDung = dnDAO.listKeToan(nd, conn);
-        if (!(txt_quenMKKT.getText().equals(nd.getTenDangNhap()) || txt_MKCuKT.getText().equals(nd.getMatKhauCu()))) {
+        if (!txt_quenMKKT.getText().equals(nd.getTenDangNhap())) {
             lbl_loi.setText("Tên đăng nhập hoặc mật khẩu cũ không đúng");
             lbl_loi.setForeground(Color.red);
             txt_quenMKKT.setBorder(border);
@@ -88,7 +88,17 @@ public class QuenMKKT extends javax.swing.JFrame {
             lbl_loiMKMoiKT.setText("");
             lbl_loiTK.setText("");
             return false;
-
+        }
+        if (!txt_MKCuKT.getText().equals(nd.getMatKhauCu())) {
+            lbl_loi.setText("Tên đăng nhập hoặc mật khẩu cũ không đúng");
+            lbl_loi.setForeground(Color.red);
+            txt_quenMKKT.setBorder(border);
+            txt_MKCuKT.setBorder(border);
+            txt_MKMoiKT.setBorder(border);
+            lbl_loiMKCuKT.setText("");
+            lbl_loiMKMoiKT.setText("");
+            lbl_loiTK.setText("");
+            return false;
         }
         return true;
     }
@@ -257,39 +267,33 @@ public class QuenMKKT extends javax.swing.JFrame {
 
     private void btn_doiMKKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doiMKKTActionPerformed
 
-        System.out.println(txt_quenMKKT.getText()+"\n"+txt_MKCuKT.getText()+"\n"+txt_MKMoiKT.getText());
-        try {
+        System.out.println(txt_quenMKKT.getText() + "\n" + txt_MKCuKT.getText() + "\n" + txt_MKMoiKT.getText());
             NguoiDung nd = new NguoiDung();
-            
-            if (checknull()) {
 
+            if (checknull()) {
                 if (checkKhop()) {
                     txt_quenMKKT.setBorder(border1);
                     txt_MKCuKT.setBorder(border1);
                     txt_MKMoiKT.setBorder(border1);
-
+                    
+                    lbl_loi.setText("");
                     lbl_loiMKCuKT.setText("");
                     lbl_loiMKMoiKT.setText("");
                     lbl_loiTK.setText("");
                     
-                    nd.setMatKhauCu(txt_MKCuKT.getText());
                     nd.setTenDangNhap(txt_quenMKKT.getText());
+                    nd.setMatKhauCu(txt_MKCuKT.getText());
                     nd.setMatKhau(txt_MKMoiKT.getText());
-                    
                     dnDAO.updateMKKT(nd, conn);
 
                     Dialog.alert(null, "Đổi mật khẩu thành công vui lòng đăng nhập lại");
                     KeToanLogin kt = new KeToanLogin();
                     kt.setVisible(true);
-
                     this.dispose();
                 }
-                System.out.println("Tk:" + nd.getTenDangNhap() + "\n" + "MK: " + nd.getMatKhau() + "\n" + "MK cũ: " + nd.getMatKhauCu() + nd.getVaiTro());
+                System.out.println("Tk:" + nd.getTenDangNhap() + "\n" + "MK: " + nd.getMatKhau() + "\n" + "MK cũ: " + nd.getMatKhauCu());
             }
 
-        } catch (Exception e) {
-            Dialog.alert(null, "sai");
-        }
     }//GEN-LAST:event_btn_doiMKKTActionPerformed
 
     private void btn_thoatKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thoatKTActionPerformed
