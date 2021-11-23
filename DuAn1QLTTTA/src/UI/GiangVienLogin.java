@@ -266,7 +266,8 @@ public class GiangVienLogin extends javax.swing.JFrame {
                 nd.setMatKhau(txt_PassGiangVien.getText());
                 listND = dnDAO.dangNhapGiangVien(nd, conn);
                 if (listND.size() > 0) {
-                    ManHinhLamViecGV manHinh = new ManHinhLamViecGV(txt_Tai_Khoan_Giang_Vien.getText());
+                    int vaitro =2;
+                    ManHinhLamViecNVQL manHinh = new ManHinhLamViecNVQL(txt_Tai_Khoan_Giang_Vien.getText(), vaitro);
                     manHinh.setVisible(true);
                     this.dispose();
                     

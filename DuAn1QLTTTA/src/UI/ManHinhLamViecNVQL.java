@@ -29,11 +29,17 @@ public class ManHinhLamViecNVQL extends javax.swing.JFrame {
 
         }
         if (vaiTro == 1) {
-            btn_dotThi.disable();
+            btn_dotThi.setEnabled(false);
             btn_QLNV.setEnabled(false);
+            btn_DD.setEnabled(false);
+           // btn_DangKiHocVien.setEnabled(false);
+            
+            
         }
         if (vaiTro == 2) {
-            
+            btn_DangKiHocVien.setEnabled(false);
+            btn_bienLai.setEnabled(false);
+            btn_QLNV.setEnabled(false);
         }
     }
 
@@ -60,8 +66,7 @@ public class ManHinhLamViecNVQL extends javax.swing.JFrame {
         btn_Lop = new javax.swing.JButton();
         btn_hocVien = new javax.swing.JButton();
         btn_dotThi = new javax.swing.JButton();
-        btn_HocVien = new javax.swing.JButton();
-        btn_khoaHoc = new javax.swing.JButton();
+        btn_DangKiHocVien = new javax.swing.JButton();
         btn_bienLai = new javax.swing.JButton();
         btn_QLNV = new javax.swing.JButton();
         btn_DD = new javax.swing.JButton();
@@ -104,11 +109,8 @@ public class ManHinhLamViecNVQL extends javax.swing.JFrame {
         btn_dotThi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/lịch thi.png"))); // NOI18N
         btn_dotThi.setText("Quản lý đợt thi");
 
-        btn_HocVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/diemthi.png"))); // NOI18N
-        btn_HocVien.setText("Quản lý điểm thi");
-
-        btn_khoaHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/khóa học.png"))); // NOI18N
-        btn_khoaHoc.setText("Quản lý khóa học");
+        btn_DangKiHocVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/diemthi.png"))); // NOI18N
+        btn_DangKiHocVien.setText("Quản lý đăng kí học viên");
 
         btn_bienLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/biên lai.png"))); // NOI18N
         btn_bienLai.setText("Quản lý biên lai");
@@ -142,23 +144,25 @@ public class ManHinhLamViecNVQL extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btn_hocVien, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_HocVien, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btn_DangKiHocVien, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btn_Lop, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(btn_dotThi, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btn_bienLai, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btn_QLNV, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btn_bienLai, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btn_DD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btn_khoaHoc, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))))
+                                .addComponent(btn_DD, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btn_Lop, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(btn_dotThi, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(132, 132, 132)
+                                        .addComponent(btn_QLNV, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton1)))
@@ -180,15 +184,13 @@ public class ManHinhLamViecNVQL extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_hocVien, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_HocVien, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_DangKiHocVien, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_khoaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_bienLai, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_QLNV, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_bienLai, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_DD, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_QLNV, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
 
@@ -289,13 +291,12 @@ public class ManHinhLamViecNVQL extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Mnu_Thoat;
     private javax.swing.JButton btn_DD;
-    private javax.swing.JButton btn_HocVien;
+    private javax.swing.JButton btn_DangKiHocVien;
     private javax.swing.JButton btn_Lop;
     private javax.swing.JButton btn_QLNV;
     private javax.swing.JButton btn_bienLai;
     private javax.swing.JButton btn_dotThi;
     private javax.swing.JButton btn_hocVien;
-    private javax.swing.JButton btn_khoaHoc;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;

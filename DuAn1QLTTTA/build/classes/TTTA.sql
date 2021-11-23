@@ -498,16 +498,18 @@ where sdt = N'0324513946'
 ---------------------------------------------------------- bắt đầu truy vấn bảng lớp-------------------------------------------------------
 
 -- lấy thông tin lớp
-CREATE PROCEDURE thong_tin_lop
+ALTER PROCEDURE thong_tin_lop
 AS
 BEGIN
-    SELECT MALOP,TENLOP,LOP.MANHANVIEN,TENNHANVIEN,HOCPHI,CAHOC,SISO,TENCAPLOP,TENLOAILOP,NGAYNHAPHOC,NGAYKETTHUC FROM dbo.LOP
+    SELECT MALOP,TENLOP,LOP.MANHANVIEN,TENNHANVIEN,HOCPHI,CAHOC,SISO,TENLOAILOP,TENCAPLOP,CONVERT(NVARCHAR(10),NGAYNHAPHOC,103) [ngaynhaphoc],CONVERT(NVARCHAR(10),NGAYKETTHUC,103) [ngayketthuc] FROM dbo.LOP
 	JOIN dbo.CAPLOP ON CAPLOP.MACAPLOP = LOP.MACAPLOP
 	JOIN dbo.LOAILOP ON LOAILOP.MALOAILOP = LOP.MALOAILOP
 	JOIN dbo.NGUOIDUNG ON NGUOIDUNG.MANHANVIEN = LOP.MANHANVIEN
 	ORDER BY MALOP DESC
 	
 END
+EXEC dbo.thong_tin_lop
+DROP PROC dbo.thong_tin_lop
 -- thêm lớp
 INSERT INTO dbo.LOP(TENLOP,SISO,CAHOC,HOCPHI,NGAYNHAPHOC,NGAYKETTHUC,MACAPLOP,MALOAILOP,MANHANVIEN)
 VALUES(?,?,?,?,?,?,?,?,?)
@@ -552,7 +554,7 @@ END
 
 EXEC dbo.tim_kiem_lop_theo_ma_lop @tenlop = N'%toeic%' -- nvarchar(50)
 GO
-SELECT * FROM dbo.NGUOIDUNG
+SELECT TENCAPLOP FROM dbo.CAPLOP
 
 ------------------------------------------------------------------------ kết thúc truy vấn lớp----------------------------------------------------
 --------------------------------------------------------------------------------------------
