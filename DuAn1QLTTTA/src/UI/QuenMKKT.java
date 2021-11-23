@@ -256,9 +256,13 @@ public class QuenMKKT extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_doiMKKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doiMKKTActionPerformed
+
+        System.out.println(txt_quenMKKT.getText()+"\n"+txt_MKCuKT.getText()+"\n"+txt_MKMoiKT.getText());
         try {
+            NguoiDung nd = new NguoiDung();
+            
             if (checknull()) {
-                NguoiDung nd = new NguoiDung();
+
                 if (checkKhop()) {
                     txt_quenMKKT.setBorder(border1);
                     txt_MKCuKT.setBorder(border1);
@@ -267,19 +271,22 @@ public class QuenMKKT extends javax.swing.JFrame {
                     lbl_loiMKCuKT.setText("");
                     lbl_loiMKMoiKT.setText("");
                     lbl_loiTK.setText("");
-
-                    nd.setTenDangNhap(txt_quenMKKT.getText());
+                    
                     nd.setMatKhauCu(txt_MKCuKT.getText());
+                    nd.setTenDangNhap(txt_quenMKKT.getText());
                     nd.setMatKhau(txt_MKMoiKT.getText());
+                    
                     dnDAO.updateMKKT(nd, conn);
+
                     Dialog.alert(null, "Đổi mật khẩu thành công vui lòng đăng nhập lại");
                     KeToanLogin kt = new KeToanLogin();
                     kt.setVisible(true);
-                    this.dispose();
 
+                    this.dispose();
                 }
-                System.out.println("Tk:" + nd.getTenDangNhap() + "\n" + "MK: " + nd.getMatKhau() + "\n" + "MK cũ: " + nd.getMatKhauCu());
+                System.out.println("Tk:" + nd.getTenDangNhap() + "\n" + "MK: " + nd.getMatKhau() + "\n" + "MK cũ: " + nd.getMatKhauCu() + nd.getVaiTro());
             }
+
         } catch (Exception e) {
             Dialog.alert(null, "sai");
         }

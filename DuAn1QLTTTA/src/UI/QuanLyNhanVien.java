@@ -43,8 +43,9 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         fillTableGV();
 
         ButtonGroup bg = new ButtonGroup();
-        bg.add(rbn_nVGV);
-        bg.add(rbn_nVKeToan);
+        bg.add(chk_giangVien);
+        bg.add(chk_keToan);
+        bg.add(chk_quanLy);
         ButtonGroup bg1 = new ButtonGroup();
         bg1.add(rbn_NuNV);
         bg1.add(rbn_namNV);
@@ -60,7 +61,8 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             Object[] obj = new Object[]{
                 nd.getMaNhanVien(), nd.getTenNhanVien(), nd.isGioiTinh() == true ? "Nam" : "Nữ",
                 nd.getNgaySinh(),
-                nd.getDiaChi(), nd.getSDT().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3"), nd.getEmail(), nd.getTenDangNhap(), nd.getMatKhau(), nd.getVaiTro() == 1 ? "Kế toán" : nd.getVaiTro() == 2 ? "Giảng viên" : "Quản lý"
+                nd.getDiaChi(), nd.getSDT().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3"), nd.getEmail()
+                    , nd.getTenDangNhap(), nd.getMatKhau(), nd.getVaiTro() == 1 ? "Kế toán" : nd.getVaiTro() == 2 ? "Giảng viên" : "Quản lý"
             };
             dtm.addRow(obj);
         }
@@ -147,9 +149,9 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             return false;
         } else {
 
-            Pattern p = Pattern.compile("^(84|0[3|5|7|8|9])+([0-9]{8})$");
+            Pattern p = Pattern.compile("^(84|0[3|5|7|8|9][0-9]{1}) ([0-9]{3}) ([0-9]{4})$");
             if (!p.matcher(txt_SDTNV.getText()).find()) {
-                lbl_loiSDTNV.setText("Số điện thoại không đúng định dạng của Việt Nam vui lòng nhập lại VD:0914506901");
+                lbl_loiSDTNV.setText("Số điện thoại không đúng định dạng của Việt Nam vui lòng nhập lại VD:091 450 6901");
                 txt_SDTNV.setBorder(border);
                 txt_SDTNV.requestFocus();
                 return false;
@@ -259,12 +261,13 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         txt_matKhauNV = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
-        rbn_nVKeToan = new javax.swing.JRadioButton();
-        rbn_nVGV = new javax.swing.JRadioButton();
         pan_gioiTinh = new javax.swing.JPanel();
         rbn_namNV = new javax.swing.JRadioButton();
         rbn_NuNV = new javax.swing.JRadioButton();
         lbl_loiGioiTinh = new javax.swing.JLabel();
+        chk_giangVien = new javax.swing.JCheckBox();
+        chk_keToan = new javax.swing.JCheckBox();
+        chk_quanLy = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_tableNV = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
@@ -342,12 +345,6 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         jLabel42.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel42.setText("Vai trò");
 
-        rbn_nVKeToan.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        rbn_nVKeToan.setText("Kế toán");
-
-        rbn_nVGV.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        rbn_nVGV.setText("Giảng viên");
-
         rbn_namNV.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         rbn_namNV.setText("Nam");
         rbn_namNV.addActionListener(new java.awt.event.ActionListener() {
@@ -369,7 +366,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rbn_NuNV, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_loiGioiTinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_loiGioiTinh, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pan_gioiTinhLayout.setVerticalGroup(
@@ -382,6 +379,12 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(lbl_loiGioiTinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        chk_giangVien.setText("Giảng viên");
+
+        chk_keToan.setText("Kế toán");
+
+        chk_quanLy.setText("Quản lý");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -409,18 +412,20 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel33)
                             .addComponent(jLabel42)
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(rbn_nVKeToan, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(rbn_nVGV, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel34)
                             .addComponent(jLabel35)
                             .addComponent(jLabel39)
                             .addComponent(jLabel40)
                             .addComponent(jLabel36)
                             .addComponent(jLabel37)
-                            .addComponent(jLabel38))
-                        .addGap(0, 195, Short.MAX_VALUE)))
+                            .addComponent(jLabel38)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(chk_giangVien, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chk_keToan, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chk_quanLy, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -457,9 +462,10 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel42)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbn_nVGV)
-                    .addComponent(rbn_nVKeToan))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chk_giangVien)
+                    .addComponent(chk_keToan)
+                    .addComponent(chk_quanLy))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel36)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -658,7 +664,6 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     private void btn_SuaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaNVActionPerformed
 
         if (checkNullNV()) {
-            if (checkTrung()) {
                 NguoiDung nd = new NguoiDung();
                 nd.setTenNhanVien(txt_tenNhanVien.getText());
                 boolean gioiTinh = false;
@@ -678,11 +683,14 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                 nd.setTenDangNhap(txt_dangNhapNV.getText());
                 nd.setMatKhau(txt_matKhauNV.getText());
                 int vaiTro = 0;
-                if (rbn_nVKeToan.isSelected()) {
+                if (chk_keToan.isSelected()) {
                     vaiTro = 1;
                 }
-                if (rbn_nVGV.isSelected()) {
+                if (chk_giangVien.isSelected()) {
                     vaiTro = 2;
+                }
+                if(chk_quanLy.isSelected()) {
+                    vaiTro=0;
                 }
                 nd.setVaiTro(vaiTro);
                 int vitri = tbl_tableNV.getSelectedRow();
@@ -692,7 +700,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                 String s = txt_SDTNV.getText().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3");
                 txt_SDTNV.setText(s);
                 fillTableGV();
-            }
+            
         }
 
     }//GEN-LAST:event_btn_SuaNVActionPerformed
@@ -722,10 +730,10 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                 nd.setTenDangNhap(txt_dangNhapNV.getText());
                 nd.setMatKhau(txt_matKhauNV.getText());
                 int vaiTro = 0;
-                if (rbn_nVKeToan.isSelected()) {
+                if (chk_keToan.isSelected()) {
                     vaiTro = 1;
                 }
-                if (rbn_nVGV.isSelected()) {
+                if (chk_giangVien.isSelected()) {
                     vaiTro = 2;
                 }
                 nd.setVaiTro(vaiTro);
@@ -767,15 +775,15 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                 txt_EmailNV.setText(nd.getEmail());
                 txt_dangNhapNV.setText(nd.getTenDangNhap());
                 txt_matKhauNV.setText(nd.getMatKhau());
-                if (nd.getVaiTro() == 2) {
-                    rbn_nVGV.setSelected(true);
-                }
                 if (nd.getVaiTro() == 1) {
-                    rbn_nVKeToan.setSelected(true);
-                } else {
-                    rbn_nVGV.setSelected(false);
-                    rbn_nVKeToan.setSelected(false);
+                    chk_keToan.setSelected(true);
                 }
+                if (nd.getVaiTro() == 2) {
+                    chk_giangVien.setSelected(true);
+                } 
+                if (nd.getVaiTro() == 0) {
+                    chk_quanLy.setSelected(true);
+                } 
 
             }
         }
@@ -841,6 +849,9 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btn_TimKiemNV;
     private javax.swing.JButton btn_TrangChu;
     private javax.swing.JButton btn_XoaKT;
+    private javax.swing.JCheckBox chk_giangVien;
+    private javax.swing.JCheckBox chk_keToan;
+    private javax.swing.JCheckBox chk_quanLy;
     private com.toedter.calendar.JDateChooser dateChooser_birthNV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel33;
@@ -866,8 +877,6 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_loibirthNV;
     private javax.swing.JPanel pan_gioiTinh;
     private javax.swing.JRadioButton rbn_NuNV;
-    private javax.swing.JRadioButton rbn_nVGV;
-    private javax.swing.JRadioButton rbn_nVKeToan;
     private javax.swing.JRadioButton rbn_namNV;
     private javax.swing.JTable tbl_tableNV;
     private javax.swing.JTextField txt_EmailNV;

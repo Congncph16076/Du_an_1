@@ -250,29 +250,29 @@ public class QuenMKGV extends javax.swing.JFrame {
 
     private void btn_doiMKGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doiMKGVActionPerformed
         try {
-            if (checknull()) { 
-                
+            if (checknull()) {
+NguoiDung nd = new NguoiDung();
                 if (checkKhop()) {
                     txt_quenMKGV.setBorder(border1);
                     txt_MKCuGV.setBorder(border1);
                     txt_MKMoiGV.setBorder(border1);
-                    
+
                     lbl_loiMKCuGV.setText("");
                     lbl_loiMKMoi.setText("");
                     lbl_loiTK.setText("");
+
                     
-                    NguoiDung nd = new NguoiDung();
-                    nd.setMatKhau(txt_MKMoiGV.getText());
-                    nd.setTenDangNhap(txt_quenMKGV.getText());
                     nd.setMatKhauCu(txt_MKCuGV.getText());
+                    nd.setTenDangNhap(txt_quenMKGV.getText());
+                    nd.setMatKhau(txt_MKMoiGV.getText());
                     dnDAO.updateMKGV(nd, conn);
                     Dialog.alert(null, "Đổi mật khẩu thành công vui lòng đăng nhập lại");
                     GiangVienLogin gv = new GiangVienLogin();
                     gv.setVisible(true);
                     this.dispose();
-                     System.out.println("Tk:" + nd.getTenDangNhap() + "\n" + "MK: " + nd.getMatKhau() + "\n" + "MK cũ: " + nd.getMatKhauCu());
+                    
                 }
-               
+System.out.println("Tk:" + nd.getTenDangNhap() + "\n" + "MK: " + nd.getMatKhau() + "\n" + "MK cũ: " + nd.getMatKhauCu());
             }
         } catch (Exception e) {
             Dialog.alert(null, "sai");

@@ -266,21 +266,25 @@ public class QuenMkQuanLy extends javax.swing.JFrame {
     private void btn_doiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doiMKActionPerformed
         try {
             if (checknull()) {
+                NguoiDung nd = new NguoiDung();
                 if (checkKhop()) {
                     txt_quenMKQL.setBorder(border1);
                     txt_MKCu.setBorder(border1);
                     txt_MKMoi.setBorder(border1);
+                    
                     lbl_loiMKCu.setText("");
                     lbl_loiMKMoi.setText("");
                     lbl_loiTK.setText("");
-                    NguoiDung nd = new NguoiDung();
+                    
+                    
                     nd.setMatKhauCu(txt_MKCu.getText());
                     nd.setTenDangNhap(txt_quenMKQL.getText());
                     nd.setMatKhau(txt_MKMoi.getText());
                     dnDAO.updateMK(nd, conn);
-
-                    System.out.println("Tk:" + nd.getTenDangNhap() + "\n" + "MK: " + nd.getMatKhau() + "\n" + "MK cũ: " + nd.getMatKhauCu());
+                    
+                    
                 }
+                System.out.println("Tk:" + nd.getTenDangNhap() + "\n" + "MK: " + nd.getMatKhau() + "\n" + "MK cũ: " + nd.getMatKhauCu());
             }
         } catch (Exception e) {
         }
