@@ -251,7 +251,10 @@ public class GiangVienLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ExitGiangVienActionPerformed
 
     private void btn_LoginGiangVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginGiangVienActionPerformed
-       
+        System.out.println("abc:" + this.txt_Tai_Khoan_Giang_Vien.getText());
+        
+     
+        
             if (checkNull()) {
                 txt_Tai_Khoan_Giang_Vien.setBorder(border1);
                 txt_PassGiangVien.setBorder(border1);
@@ -274,8 +277,8 @@ public class GiangVienLogin extends javax.swing.JFrame {
                 txt_Tai_Khoan_Giang_Vien.setBorder(border);
                 txt_PassGiangVien.setBorder(border);
                 lbl_loiGV.setForeground(Color.red);
-                txt_Tai_Khoan_Giang_Vien.setText("");
-                txt_PassGiangVien.setText("");
+                lbl_loiTKGV.setText("");
+//                .setText("");
                 txt_Tai_Khoan_Giang_Vien.requestFocus();
                 }
             }
