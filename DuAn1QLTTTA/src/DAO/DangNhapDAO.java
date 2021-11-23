@@ -177,22 +177,15 @@ public class DangNhapDAO {
             ptmt.setString(2, nd.getTenDangNhap());
             ptmt.setString(3, nd.getMatKhauCu());
             int kq = ptmt.executeUpdate();
-//            if (kq > 0) {
-//                nd.setMatKhau("MATKHAU");
-//                nd.setTenDangNhap("TENDANGNHAP");
-//                nd.setMatKhau("MATKHAU");
-//            }
-            //return nd;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        //return  null;
     }
 
     public void updateMKKT(NguoiDung nd, Connection conn) {
         String update_MK = "UPDATE dbo.NGUOIDUNG SET MATKHAU = ? \n"
-                + "WHERE TENDANGNHAP = ?  AND TENVAITRO = 1 AND MATKHAU = ?";
+                + "WHERE TENDANGNHAP = ? AND TENVAITRO = 1 AND MATKHAU = ? ";
         try {
             PreparedStatement ptmt = conn.prepareStatement(update_MK);
 
@@ -200,16 +193,8 @@ public class DangNhapDAO {
             ptmt.setString(2, nd.getTenDangNhap());
             ptmt.setString(3, nd.getMatKhauCu());
             int kq = ptmt.executeUpdate();
-//            if (kq > 0) {
-//                nd.setMatKhau("MATKHAU");
-//                nd.setTenDangNhap("TENDANGNHAP");
-//                nd.setMatKhau("MATKHAU");
-//            }
-            //return nd;
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        //return  null;
     }
 }

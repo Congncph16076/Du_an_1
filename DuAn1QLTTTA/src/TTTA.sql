@@ -502,7 +502,7 @@ where mahocvien = 115
 CREATE PROCEDURE thong_tin_lop
 AS
 BEGIN
-    SELECT MALOP,TENLOP,LOP.MANHANVIEN,TENNHANVIEN,HOCPHI,CAHOC,SISO,dbo.CAPLOP.MACAPLOP,TENCAPLOP,dbo.LOAILOP.MALOAILOP,TENLOAILOP,NGAYNHAPHOC,NGAYKETTHUC FROM dbo.LOP
+    SELECT MALOP,TENLOP,LOP.MANHANVIEN,TENNHANVIEN,HOCPHI,CAHOC,SISO,TENCAPLOP,TENLOAILOP,NGAYNHAPHOC,NGAYKETTHUC FROM dbo.LOP
 	JOIN dbo.CAPLOP ON CAPLOP.MACAPLOP = LOP.MACAPLOP
 	JOIN dbo.LOAILOP ON LOAILOP.MALOAILOP = LOP.MALOAILOP
 	JOIN dbo.NGUOIDUNG ON NGUOIDUNG.MANHANVIEN = LOP.MANHANVIEN
@@ -532,8 +532,13 @@ BEGIN
 	  SET @max = 0
 	DBCC CHECKIDENT (LOP, RESEED,@max)
 END
-go
+GO
+EXEC dbo.xoa_update_nguoi_dung @manhanvien = 17 -- int
+-- int
 
+SELECT * FROM dbo.LOAILOP
+SELECT* FROM dbo.CAPLOP
+SELECT * FROM dbo.LOP
 -- tìm lớp
 CREATE PROCEDURE tim_kiem_lop_theo_ma_lop(@tenlop NVARCHAR(50))
 AS
@@ -547,7 +552,9 @@ BEGIN
 END
 
 EXEC dbo.tim_kiem_lop_theo_ma_lop @tenlop = N'%toeic%' -- nvarchar(50)
-go
+GO
+SELECT * FROM dbo.NGUOIDUNG
+
 ------------------------------------------------------------------------ kết thúc truy vấn lớp----------------------------------------------------
 --------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------

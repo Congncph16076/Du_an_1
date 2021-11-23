@@ -236,7 +236,7 @@ public class QuanLyLogin extends javax.swing.JFrame {
         if (checknull() == true) {
             
             txt_PassQuanLy.setBorder(border1);
-            txt_TaiKhoanQuanLy.setBorder(border1);
+            txt_TaiKhoanQuanLy.setBorder(border1); 
             lbl_loiPassQuanLy.setText("");
             lbl_notTrung.setText("");
             lbl_loiTKQL.setText("");

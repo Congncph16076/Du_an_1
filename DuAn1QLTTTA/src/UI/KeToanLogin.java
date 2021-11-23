@@ -243,7 +243,6 @@ public class KeToanLogin extends javax.swing.JFrame {
             NguoiDung nd = new NguoiDung();
             nd.setTenDangNhap(txt_LoginKeToan.getText());
             nd.setMatKhau(txt_PassKeToan.getText());
-            nd.setVaiTro(2);
             listND = dnDAO.dangNhapKeToan(nd, conn);
             if (listND.size() >0) {
                 ManHinhLamViecKeToan manHinh = new ManHinhLamViecKeToan(txt_LoginKeToan.getText());
