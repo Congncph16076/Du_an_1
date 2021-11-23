@@ -245,7 +245,8 @@ public class KeToanLogin extends javax.swing.JFrame {
             nd.setMatKhau(txt_PassKeToan.getText());
             listND = dnDAO.dangNhapKeToan(nd, conn);
             if (listND.size() >0) {
-                ManHinhLamViecKeToan manHinh = new ManHinhLamViecKeToan(txt_LoginKeToan.getText());
+                int vaiTro =1;
+                ManHinhLamViecNVQL manHinh = new ManHinhLamViecNVQL(txt_LoginKeToan.getText(), vaiTro);
                 manHinh.setVisible(true);
                 this.dispose();
                 System.out.println("tài khoản: " + nd.getTenDangNhap() + "\n" + "mật khẩu: " + nd.getMatKhau());
@@ -260,7 +261,7 @@ public class KeToanLogin extends javax.swing.JFrame {
                 txt_LoginKeToan.requestFocus();
             }
             
-            
+            System.out.println("Tk:" + nd.getTenDangNhap() + "\n" + "MK: " + nd.getMatKhau() + "\n" + "vai trò " + nd.getVaiTro());
         }
 
     }//GEN-LAST:event_btn_DangNhapKeToanActionPerformed

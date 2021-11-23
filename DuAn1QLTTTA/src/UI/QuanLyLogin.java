@@ -244,9 +244,10 @@ public class QuanLyLogin extends javax.swing.JFrame {
             nd.setTenDangNhap(txt_TaiKhoanQuanLy.getText());
             nd.setMatKhau(txt_PassQuanLy.getText());
             String tk = txt_TaiKhoanQuanLy.getText();
+            int vaiTro =0;
             listND = dnDAO.dangNhapQuanLy(nd, conn);
             if (listND.size() > 0) {
-                ManHinhLamViecNVQL manHinh = new ManHinhLamViecNVQL(tk);
+                ManHinhLamViecNVQL manHinh = new ManHinhLamViecNVQL(tk,0);
                 manHinh.setVisible(true);
                 this.dispose();
                 
@@ -262,6 +263,7 @@ public class QuanLyLogin extends javax.swing.JFrame {
                 txt_PassQuanLy.setText("");
                 txt_TaiKhoanQuanLy.requestFocus();
             }
+             System.out.println("Tk:" + nd.getTenDangNhap() + "\n" + "MK: " + nd.getMatKhau() + "\n" + "vai trò "+nd.getVaiTro());
         }
         
 

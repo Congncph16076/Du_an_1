@@ -92,7 +92,6 @@ public class QuenMkQuanLy extends javax.swing.JFrame {
             lbl_loiMKMoi.setText("");
             lbl_loiTK.setText("");
             return false;
-
         }
         return true;
     }

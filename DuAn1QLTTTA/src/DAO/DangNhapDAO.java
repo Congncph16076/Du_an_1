@@ -20,7 +20,7 @@ public class DangNhapDAO {
 
     public List<NguoiDung> dangNhapQuanLy(NguoiDung nd, Connection conn) {
         List<NguoiDung> listND = new ArrayList<>();
-        String dangNhapQuanLy = "SELECT TENDANGNHAP,MATKHAU,TENVAITRO from dbo.NGUOIDUNG\n"
+        String dangNhapQuanLy = "SELECT TENDANGNHAP,MATKHAU from dbo.NGUOIDUNG\n"
                 + "WHERE TENDANGNHAP =? AND MATKHAU = ? AND TENVAITRO = 0";
         try {
             PreparedStatement ptmt = conn.prepareStatement(dangNhapQuanLy);
@@ -42,13 +42,13 @@ public class DangNhapDAO {
 
     public List<NguoiDung> listQuanLy(NguoiDung nd, Connection conn) {
         List<NguoiDung> listND = new ArrayList<>();
-        String dangNhapQuanLy = "SELECT TENDANGNHAP,MATKHAU,TENVAITRO from dbo.NGUOIDUNG\n"
+        String dangNhapQuanLy = "SELECT TENDANGNHAP,MATKHAU from dbo.NGUOIDUNG\n"
                 + "WHERE TENVAITRO  = 0";
         try {
             PreparedStatement ptmt = conn.prepareStatement(dangNhapQuanLy);
 
             ResultSet rs = ptmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 //NguoiDung nd = new NguoiDung();
                 nd.setTenDangNhap(rs.getString("TENDANGNHAP"));
                 nd.setMatKhauCu(rs.getString("MATKHAU"));
@@ -63,7 +63,7 @@ public class DangNhapDAO {
 
     public List<NguoiDung> dangNhapKeToan(NguoiDung nd, Connection conn) {
         List<NguoiDung> listND = new ArrayList<>();
-        String dangNhapQuanLy = "SELECT TENDANGNHAP,MATKHAU,TENVAITRO from dbo.NGUOIDUNG\n"
+        String dangNhapQuanLy = "SELECT TENDANGNHAP,MATKHAU from dbo.NGUOIDUNG\n"
                 + "WHERE TENDANGNHAP =? AND MATKHAU = ? AND TENVAITRO = 1";
         try {
             PreparedStatement ptmt = conn.prepareStatement(dangNhapQuanLy);
@@ -85,16 +85,14 @@ public class DangNhapDAO {
 
     public List<NguoiDung> listKeToan(NguoiDung nd, Connection conn) {
         List<NguoiDung> listND = new ArrayList<>();
-        String dangNhapQuanLy = "SELECT TENDANGNHAP,MATKHAU,TENVAITRO from dbo.NGUOIDUNG\n"
+        String dangNhapQuanLy = "SELECT TENDANGNHAP,MATKHAU from dbo.NGUOIDUNG\n"
                 + "WHERE TENVAITRO = 1";
         try {
             PreparedStatement ptmt = conn.prepareStatement(dangNhapQuanLy);
             ResultSet rs = ptmt.executeQuery();
-            if (rs.next()) {
-                //NguoiDung nd = new NguoiDung();
+            while (rs.next()) {
                 nd.setTenDangNhap(rs.getString("TENDANGNHAP"));
-                nd.setMatKhau(rs.getString("MATKHAU"));
-                //nd.setVaiTro(rs.getInt(1));
+                nd.setMatKhauCu(rs.getString("MATKHAU"));
                 listND.add(nd);
             }
         } catch (SQLException ex) {
@@ -105,7 +103,7 @@ public class DangNhapDAO {
 
     public List<NguoiDung> dangNhapGiangVien(NguoiDung nd, Connection conn) {
         List<NguoiDung> listND = new ArrayList<>();
-        String dangNhapQuanLy = "SELECT TENDANGNHAP,MATKHAU,TENVAITRO from dbo.NGUOIDUNG\n"
+        String dangNhapQuanLy = "SELECT TENDANGNHAP,MATKHAU from dbo.NGUOIDUNG\n"
                 + "WHERE TENDANGNHAP =? AND MATKHAU = ? AND TENVAITRO = 2";
         try {
             PreparedStatement ptmt = conn.prepareStatement(dangNhapQuanLy);
@@ -127,15 +125,15 @@ public class DangNhapDAO {
 
     public List<NguoiDung> listGiangVien(NguoiDung nd, Connection conn) {
         List<NguoiDung> listND = new ArrayList<>();
-        String dangNhapQuanLy = "SELECT TENDANGNHAP,MATKHAU,TENVAITRO from dbo.NGUOIDUNG\n"
+        String dangNhapQuanLy = "SELECT TENDANGNHAP,MATKHAU from dbo.NGUOIDUNG\n"
                 + "WHERE TENVAITRO = 2";
         try {
             PreparedStatement ptmt = conn.prepareStatement(dangNhapQuanLy);
             ResultSet rs = ptmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 //NguoiDung nd = new NguoiDung();
                 nd.setTenDangNhap(rs.getString("TENDANGNHAP"));
-                nd.setMatKhau(rs.getString("MATKHAU"));
+                nd.setMatKhauCu(rs.getString("MATKHAU"));
                 //nd.setVaiTro(rs.getInt("TENVAITRO"));
                 listND.add(nd);
             }
@@ -185,10 +183,9 @@ public class DangNhapDAO {
 
     public void updateMKKT(NguoiDung nd, Connection conn) {
         String update_MK = "UPDATE dbo.NGUOIDUNG SET MATKHAU = ? \n"
-                + "WHERE TENDANGNHAP = ? AND TENVAITRO = 1 AND MATKHAU = ? ";
+                + "WHERE TENDANGNHAP = ?  AND MATKHAU = ?  AND TENVAITRO = 1";
         try {
             PreparedStatement ptmt = conn.prepareStatement(update_MK);
-
             ptmt.setString(1, nd.getMatKhau());
             ptmt.setString(2, nd.getTenDangNhap());
             ptmt.setString(3, nd.getMatKhauCu());
