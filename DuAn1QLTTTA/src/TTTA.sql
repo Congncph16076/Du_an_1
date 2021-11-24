@@ -445,14 +445,14 @@ VALUES(1,N'Đủ',1,4),
 
 -----------------------------------------------------------------------bắt đầu truy vấn  học viên ----------------------------------------------
 --Thủ tục lưu quản lý học viên
-ALTER PROC thong_tin_sv
+CREATE PROC thong_tin_sv
 AS
 BEGIN
     SELECT MAHOCVIEN,TENHOCVIEN,lop.MALOP,dbo.LOP.TENLOP,GIOITINH,NGAYSINH,SDT,EMAIL,DIACHI,HOCPHINO FROM  dbo.HOCVIEN
 	JOIN dbo.LOP ON LOP.MALOP = HOCVIEN.MALOP
 	ORDER BY MAHOCVIEN DESC
 END
-
+DROP PROC dbo.thong_tin_sv
 --thêm học viên
 INSERT dbo.HOCVIEN(TENHOCVIEN,MALOP,GIOITINH,NGAYSINH,SDT,DIACHI,EMAIL,HOCPHINO,SOBUOINGHI)
 VALUES(?,?,?,?,?,?,?,?,?)
@@ -464,17 +464,17 @@ GO
 --xóa thông tin học viên
 
 --tìm kiếm học viên theo tên và lớp
-CREATE PROCEDURE tim_kiem_hoc_vien_theo_ten_va_ten_lop(@tensinhvien nvarchar(100),@tenlop nvarchar(50))
+CREATE PROCEDURE tim_kiem_hoc_vien_theo_ten(@tensinhvien nvarchar(100))
 AS
 BEGIN
     SELECT MAHOCVIEN,TENHOCVIEN,dbo.LOP.malop,dbo.LOP.TENLOP,GIOITINH,CONVERT(nvarchar(50),ngaysinh,103) [ngaysinh],SDT,EMAIL,DIACHI,HOCPHINO,SOBUOINGHI FROM  dbo.HOCVIEN
 	JOIN dbo.LOP ON LOP.MALOP = HOCVIEN.MALOP
-	WHERE TENHOCVIEN like LTRIM(RTRIM(@tensinhvien)) AND TENLOP LIKE LTRIM(RTRIM(@tenlop))
+	WHERE TENHOCVIEN like LTRIM(RTRIM(@tensinhvien))
 	ORDER BY MAHOCVIEN DESC
 END
+drop proc tim_kiem_hoc_vien_theo_ten_va_ten_lop
+EXEC dbo.tim_kiem_hoc_vien_theo_ten @tensinhvien = N'    %văn%      '
 
-EXEC dbo.tim_kiem_hoc_vien_theo_ten_va_ten_lop @tensinhvien = N'    %văn%      ', -- nvarchar(100)
-                                               @tenlop = N' %anh văn%   '       -- nvarchar(50)
 
 
 --lấy thông tin sinh viên từ bảng đăng kí
@@ -538,20 +538,23 @@ EXEC dbo.xoa_update_nguoi_dung @manhanvien = 17 -- int
 -- int
 
 SELECT * FROM dbo.LOAILOP
+WHERE MALOAILOP = ?
 SELECT* FROM dbo.CAPLOP
+WHERE MACAPLOP = ?
 SELECT * FROM dbo.LOP
 -- tìm lớp
 CREATE PROCEDURE tim_kiem_lop_theo_ma_lop(@tenlop NVARCHAR(50))
 AS
 BEGIN
-    SELECT MALOP,TENLOP,LOP.MANHANVIEN,TENNHANVIEN,HOCPHI,CAHOC,SISO,dbo.CAPLOP.MACAPLOP,TENCAPLOP,dbo.LOAILOP.MALOAILOP,TENLOAILOP,NGAYNHAPHOC,NGAYKETTHUC FROM dbo.LOP
+    SELECT MALOP,TENLOP,LOP.MANHANVIEN,TENNHANVIEN,HOCPHI,CAHOC
+	,SISO,LOAILOP.MALOAILOP,TENLOAILOP,CAPLOP.MACAPLOP,TENCAPLOP,CONVERT(NVARCHAR(10),NGAYNHAPHOC,103) [ngaynhaphoc],CONVERT(NVARCHAR(10),NGAYKETTHUC,103) [ngayketthuc] FROM dbo.LOP
 	JOIN dbo.CAPLOP ON CAPLOP.MACAPLOP = LOP.MACAPLOP
 	JOIN dbo.LOAILOP ON LOAILOP.MALOAILOP = LOP.MALOAILOP
 	JOIN dbo.NGUOIDUNG ON NGUOIDUNG.MANHANVIEN = LOP.MANHANVIEN
 	WHERE TENLOP LIKE LTRIM(RTRIM(@tenlop))
 	ORDER BY MALOP DESC
 END
-
+DROP PROC dbo.tim_kiem_lop_theo_ma_lop
 EXEC dbo.tim_kiem_lop_theo_ma_lop @tenlop = N'%toeic%' -- nvarchar(50)
 GO
 SELECT TENCAPLOP FROM dbo.CAPLOP
@@ -690,9 +693,8 @@ go
 CREATE PROCEDURE tim_kiem_diem_thi(@tenhocvien NVARCHAR(100))
 AS
 BEGIN
-    SELECT DIEMTHI.MAHOCVIEN,TENHOCVIEN,DIEMTHI.MADOTTHI,DIEMTHI,CONVERT(NVARCHAR(20),NGAYTHI,103) [NGAYTHI],CONVERT(NVARCHAR(30),GIOTHI,114)[GIOTHI] FROM dbo.DIEMTHI
-	JOIN dbo.DOTTHI ON DOTTHI.MADOTTHI = DIEMTHI.MADOTTHI
-	JOIN dbo.HOCVIEN ON HOCVIEN.MAHOCVIEN = DIEMTHI.MAHOCVIEN
+    SELECT MAHOCVIEN,TENHOCVIEN,TENLOP,GIOITINH,NGAYSINH,DIACHI,SDT,HOCPHINO  FROM dbo.HOCVIEN
+	JOIN dbo.LOP ON LOP.MALOP = HOCVIEN.MALOP
 	WHERE TENHOCVIEN LIKE LTRIM(RTRIM(@tenhocvien))
 END
 
