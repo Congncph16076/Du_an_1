@@ -165,7 +165,8 @@ public class QuanLyNVDAO implements EntityDAO<NguoiDung, String> {
         List<NguoiDung> listND = new ArrayList<>();
         try {
             CallableStatement call = conn.prepareCall("{call tim_kiem_tk_nhan_vien(?)}");
-            call.setString(1, ID );
+            call.setString(1, ID);
+            
             ResultSet rs = call.executeQuery();
 
             while (rs.next()) {
