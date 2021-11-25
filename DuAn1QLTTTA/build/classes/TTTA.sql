@@ -448,7 +448,7 @@ VALUES(1,N'Đủ',1,4),
 CREATE PROC thong_tin_sv
 AS
 BEGIN
-    SELECT MAHOCVIEN,TENHOCVIEN,lop.MALOP,dbo.LOP.TENLOP,GIOITINH,NGAYSINH,SDT,EMAIL,DIACHI,HOCPHINO FROM  dbo.HOCVIEN
+    SELECT MAHOCVIEN,TENHOCVIEN,lop.MALOP,dbo.LOP.TENLOP,GIOITINH,CONVERT(nvarchar(30),NGAYSINH,103) [ngaysinh],SDT,EMAIL,DIACHI,HOCPHINO FROM  dbo.HOCVIEN
 	JOIN dbo.LOP ON LOP.MALOP = HOCVIEN.MALOP
 	ORDER BY MAHOCVIEN DESC
 END
@@ -474,7 +474,7 @@ BEGIN
 END
 drop proc tim_kiem_hoc_vien_theo_ten_va_ten_lop
 EXEC dbo.tim_kiem_hoc_vien_theo_ten @tensinhvien = N'    %văn%      '
-
+go
 
 
 --lấy thông tin sinh viên từ bảng đăng kí
@@ -534,30 +534,64 @@ BEGIN
 	DBCC CHECKIDENT (LOP, RESEED,@max)
 END
 GO
-EXEC dbo.xoa_update_nguoi_dung @manhanvien = 17 -- int
--- int
+DROP PROC dbo.xoa_update_lop
+EXEC dbo.xoa_update_lop  @malop = 11 -- int
+GO
+
+CREATE PROC xoa_update_loai_lop(@maloailop int)
+AS
+BEGIN
+    DELETE FROM dbo.LOAILOP
+	WHERE MALOAILOP = @maloailop
+	declare @max int
+	select @max=max(MALOAILOP)from dbo.LOAILOP
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (LOAILOP, RESEED,@max)
+END
+EXEC dbo.xoa_update_loai_lop @maloailop = 4 -- int
+GO
+
+CREATE PROC xoa_update_cap_lop(@macaplop INT)
+AS
+BEGIN
+    DELETE FROM dbo.CAPLOP
+	WHERE MACAPLOP = @macaplop
+	declare @max int
+	select @max=max(MACAPLOP)from dbo.CAPLOP
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (CAPLOP, RESEED,@max)
+END
+
+EXEC dbo.xoa_update_cap_lop @macaplop = 4 -- int
+
+
+
 
 SELECT * FROM dbo.LOAILOP
 WHERE MALOAILOP = ?
 SELECT* FROM dbo.CAPLOP
 WHERE MACAPLOP = ?
 SELECT * FROM dbo.LOP
+
 -- tìm lớp
-CREATE PROCEDURE tim_kiem_lop_theo_ma_lop(@tenlop NVARCHAR(50))
+CREATE PROCEDURE tim_kiem_lop_theo_ten_lop(@tenlop NVARCHAR(50))
 AS
 BEGIN
     SELECT MALOP,TENLOP,LOP.MANHANVIEN,TENNHANVIEN,HOCPHI,CAHOC
-	,SISO,LOAILOP.MALOAILOP,TENLOAILOP,CAPLOP.MACAPLOP,TENCAPLOP,CONVERT(NVARCHAR(10),NGAYNHAPHOC,103) [ngaynhaphoc],CONVERT(NVARCHAR(10),NGAYKETTHUC,103) [ngayketthuc] FROM dbo.LOP
+	,SISO,TENLOAILOP,TENCAPLOP,CONVERT(NVARCHAR(10),NGAYNHAPHOC,103) [ngaynhaphoc],CONVERT(NVARCHAR(10),NGAYKETTHUC,103) [ngayketthuc] FROM dbo.LOP
 	JOIN dbo.CAPLOP ON CAPLOP.MACAPLOP = LOP.MACAPLOP
 	JOIN dbo.LOAILOP ON LOAILOP.MALOAILOP = LOP.MALOAILOP
 	JOIN dbo.NGUOIDUNG ON NGUOIDUNG.MANHANVIEN = LOP.MANHANVIEN
 	WHERE TENLOP LIKE LTRIM(RTRIM(@tenlop))
 	ORDER BY MALOP DESC
 END
-DROP PROC dbo.tim_kiem_lop_theo_ma_lop
-EXEC dbo.tim_kiem_lop_theo_ma_lop @tenlop = N'%toeic%' -- nvarchar(50)
+DROP PROC dbo.tim_kiem_lop_theo_ten_lop
+EXEC dbo.tim_kiem_lop_theo_ten_lop @tenlop = N'  %toeic%   '
 GO
-SELECT TENCAPLOP FROM dbo.CAPLOP
+
+
 
 ------------------------------------------------------------------------ kết thúc truy vấn lớp----------------------------------------------------
 --------------------------------------------------------------------------------------------
@@ -747,7 +781,7 @@ END
 go
 --tìm kiếm tài khoản nhân viên theo mã nhân viên
 
-ALTER  PROCEDURE tim_kiem_tk_nhan_vien(@MATKNV INT)
+CREATE  PROCEDURE tim_kiem_tk_nhan_vien(@MATKNV INT)
 AS
 BEGIN
     SELECT MANHANVIEN,TENNHANVIEN,GIOITINH,CONVERT(NVARCHAR(30),NGAYSINH,103) [ngaysinh],DIACHI,SDT,EMAIL,TENVAITRO,TENDANGNHAP,MATKHAU FROM dbo.NGUOIDUNG
@@ -768,4 +802,33 @@ VALUES(?,?,?,?,?,?,?,?,?,?)
 
 UPDATE dbo.NGUOIDUNG SET TENNHANVIEN = ?,GIOITINH = ?,NGAYSINH = ?,DIACHI = ?,SDT = ?,EMAIL = ?,TENVAITRO = ?,TENDANGNHAP = ?,MATKHAU = ?
 WHERE MANHANVIEN = ?
+
+GO
+SELECT TENLOP,COUNT(dbo.LOP.MALOP),CAHOC FROM dbo.HOCVIEN
+JOIN lop ON LOP.MALOP = HOCVIEN.MALOP
+GROUP BY LOP.MALOP,HOCVIEN.MALOP,TENLOP,CAHOC
+HAVING LOP.MALOP = HOCVIEN.MALOP
+GO
+---- truy vấn đăng kí
+CREATE PROC hoc_vien_moi
+AS
+BEGIN
+    SELECT madangki,TENHOCVIEN,CONVERT(NVARCHAR(20),GIOITINH,103) [ngaysinh],GIOITINH,sdt,EMAIL,DIACHI,
+	TENLOAILOP,TENCAPLOP,HOCPHI,CAHOC,CONVERT(NVARCHAR(20),NGAYNHAPHOC,103)[ngaynhaphoc]
+	,CONVERT(NVARCHAR(20),NGAYDANGKI,103) [ngaydangki],MAHOCVIEN FROM dbo.DANGKI
+	WHERE MAHOCVIEN is NULL
+END
+go
+
+CREATE PROCEDURE hoc_vien_cu
+AS
+BEGIN
+    SELECT madangki,TENHOCVIEN,CONVERT(NVARCHAR(20),GIOITINH,103) [ngaysinh],GIOITINH,sdt,EMAIL,DIACHI,
+	TENLOAILOP,TENCAPLOP,HOCPHI,CAHOC,CONVERT(NVARCHAR(20),NGAYNHAPHOC,103)[ngaynhaphoc]
+	,CONVERT(NVARCHAR(20),NGAYDANGKI,103) [ngaydangki],MAHOCVIEN FROM dbo.DANGKI
+	WHERE MAHOCVIEN IS NOT NULL
+	SELECT MAHOCVIEN,TENHOCVIEN,SDT,MALOP FROM dbo.HOCVIEN
+	WHERE TENHOCVIEN = N'nguyễn văn C'
+END
+SELECT * FROM dbo.NGUOIDUNG
 
