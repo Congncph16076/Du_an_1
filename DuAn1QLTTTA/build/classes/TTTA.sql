@@ -609,6 +609,7 @@ SELECT * FROM dbo.DOTTHI
 --thêm đợt thi
 INSERT INTO dbo.DOTTHI(NGAYTHI,cathi,SISO,VANG,MALOP)
 VALUES(?,?,?,?,?)
+
 GO
 -- sửa thông tin đợt thi
 UPDATE dbo.DOTTHI SET NGAYTHI=?,cathi= ?,SISO=?,VANG=?,MALOP=?
@@ -628,19 +629,38 @@ BEGIN
 	  SET @max = 0
 	DBCC CHECKIDENT (DOTTHI, RESEED,@max)
 END
-go
+GO
+SELECT * FROM dbo.DOTTHI
+EXEC dbo.xoa_update_dot_thi @madotthi = 21 -- int
+
 
 --tìm kiếm đợt thi
-CREATE PROCEDURE tim_kiem_dot_thi(@malop int)
+CREATE PROCEDURE tim_kiem_dot_thi(@ngaythi NVARCHAR(20))
 AS
 BEGIN
    SELECT MADOTTHI,LOP.MALOP,TENLOP,CONVERT(NVARCHAR(20),NGAYTHI,103) [ngaythi],cathi,dbo.LOP.SISO,VANG FROM dbo.DOTTHI
 	join dbo.LOP on LOP.MALOP = DOTTHI.MALOP
-	WHERE LOP.MALOP LIKE LTRIM(RTRIM(@malop)) 
+	WHERE CONVERT(NVARCHAR(20),NGAYTHI,103) LIKE LTRIM(RTRIM(@ngaythi)) 
 	ORDER BY MADOTTHI desc
 END
+go
+DROP PROC dbo.tim_kiem_dot_thi
+EXEC dbo.tim_kiem_dot_thi @ngaythi ='10/01/2011'
+GO
+SELECT * FROM dbo.DOTTHI
+GO
 
-EXEC dbo.tim_kiem_dot_thi @malop =  1 
+
+CREATE PROCEDURE click_ngay(@madothi int)
+AS
+BEGIN
+     SELECT MADOTTHI,LOP.MALOP,TENLOP,CONVERT(NVARCHAR(20),NGAYTHI,103) [ngaythi],cathi,dbo.LOP.SISO,VANG FROM dbo.DOTTHI
+	join dbo.LOP on LOP.MALOP = DOTTHI.MALOP
+	WHERE MADOTTHI = @madothi
+	ORDER BY MADOTTHI desc
+END
+EXEC dbo.click_ngay @madothi = 1 -- int
+
 go
 ------------------------------------------------------------ kết thúc truy vấn đợt thi----------------------------------------------------
 ------------------------------------------------------------------------------------

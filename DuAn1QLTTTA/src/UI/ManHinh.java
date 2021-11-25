@@ -100,6 +100,11 @@ public class ManHinh extends javax.swing.JFrame {
 
         btn_dotThi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/lịch thi.png"))); // NOI18N
         btn_dotThi.setText("Quản lý đợt thi");
+        btn_dotThi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_dotThiActionPerformed(evt);
+            }
+        });
 
         btn_hocVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/hocVien.png"))); // NOI18N
         btn_hocVien.setText("Quản lý học viên");
@@ -222,6 +227,15 @@ public class ManHinh extends javax.swing.JFrame {
                 (desktopMain.getHeight() - ql.getHeight()) / 2);
         ql.setVisible(true);
     }//GEN-LAST:event_btn_QLNVActionPerformed
+
+    private void btn_dotThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dotThiActionPerformed
+        close();
+        QuanLiDotThi ql = new QuanLiDotThi();
+        desktopMain.add(ql);
+        ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
+                (desktopMain.getHeight() - ql.getHeight()) / 2);
+        ql.setVisible(true);
+    }//GEN-LAST:event_btn_dotThiActionPerformed
 
     /**
      * @param args the command line arguments

@@ -151,6 +151,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; &#x111;&#x1ee3;t thi"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dotThiActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_hocVien">
           <Properties>
