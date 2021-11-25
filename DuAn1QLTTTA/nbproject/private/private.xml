@@ -12,13 +12,13 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/Entity/DotThi.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QuanLiDotThi.java</file>
             <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QLLop.java</file>
             <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/ManHinh.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/QuanLyNVDAO.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/DotThiDAO.java</file>
             <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QLNV.java</file>
-            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QuanLyLogin.java</file>
-            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/GiangVienLogin.java</file>
-            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/KeToanLogin.java</file>
-            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/Man_Hinh_Chao.java</file>
         </group>
     </open-files>
 </project-private>
