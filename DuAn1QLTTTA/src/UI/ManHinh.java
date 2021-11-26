@@ -7,6 +7,7 @@ package UI;
 
 import java.awt.Dimension;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,6 +32,9 @@ public class ManHinh extends javax.swing.JFrame {
             btn_dotThi.setEnabled(false);
             btn_QLNV.setEnabled(false);
             btn_DD.setEnabled(false);
+            Mnu_dotThi.setEnabled(false);
+            Mnu_diemDanh.setEnabled(false);
+            Mnu_dotThi.setEnabled(false);
             // btn_DangKiHocVien.setEnabled(false);
 
         }
@@ -38,6 +42,10 @@ public class ManHinh extends javax.swing.JFrame {
             btn_DangKiHocVien.setEnabled(false);
             btn_bienLai.setEnabled(false);
             btn_QLNV.setEnabled(false);
+            Mnu_dangKi.setEnabled(false);
+            Mnu_bienLai.setEnabled(false);
+            Mnu_nhanVien.setEnabled(false);
+            Mnu_thongKe.setEnabled(false);
 
         }
     }
@@ -78,7 +86,18 @@ public class ManHinh extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        Mnu_dangXuat = new javax.swing.JMenuItem();
+        Mnu_Thoat = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        Mnu_lop = new javax.swing.JMenuItem();
+        Mnu_dotThi = new javax.swing.JMenuItem();
+        Mnu_dangKi = new javax.swing.JMenuItem();
+        Mnu_bienLai = new javax.swing.JMenuItem();
+        Mnu_hocVien = new javax.swing.JMenuItem();
+        Mnu_diemDanh = new javax.swing.JMenuItem();
+        Mnu_nhanVien = new javax.swing.JMenuItem();
+        Mnu_thongKe = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,6 +133,11 @@ public class ManHinh extends javax.swing.JFrame {
 
         btn_bienLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/biên lai.png"))); // NOI18N
         btn_bienLai.setText("Quản lý biên lai");
+        btn_bienLai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_bienLaiActionPerformed(evt);
+            }
+        });
 
         btn_DD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/lịch thi.png"))); // NOI18N
         btn_DD.setText("Quản lý điểm danh");
@@ -184,10 +208,65 @@ public class ManHinh extends javax.swing.JFrame {
         );
 
         jMenu1.setText("File");
+
+        Mnu_dangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Exit.png"))); // NOI18N
+        Mnu_dangXuat.setText("Đăng Xuất");
+        Mnu_dangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mnu_dangXuatActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Mnu_dangXuat);
+
+        Mnu_Thoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/exitot.png"))); // NOI18N
+        Mnu_Thoat.setText("Thoát");
+        Mnu_Thoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mnu_ThoatActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Mnu_Thoat);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Quản lý");
+
+        Mnu_lop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/giaoduccongdan.png"))); // NOI18N
+        Mnu_lop.setText("Quản lý  lớp");
+        jMenu2.add(Mnu_lop);
+
+        Mnu_dotThi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/tk_dethi.png"))); // NOI18N
+        Mnu_dotThi.setText("Quản lý đợt thi");
+        jMenu2.add(Mnu_dotThi);
+
+        Mnu_dangKi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/dangKy.png"))); // NOI18N
+        Mnu_dangKi.setText("Quản lý đăng kí ");
+        jMenu2.add(Mnu_dangKi);
+
+        Mnu_bienLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/List.png"))); // NOI18N
+        Mnu_bienLai.setText("Quản lý biên lai");
+        jMenu2.add(Mnu_bienLai);
+
+        Mnu_hocVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Users.png"))); // NOI18N
+        Mnu_hocVien.setText("Quản lý học viên");
+        jMenu2.add(Mnu_hocVien);
+
+        Mnu_diemDanh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Notes.png"))); // NOI18N
+        Mnu_diemDanh.setText("Quản lý điểm danh");
+        jMenu2.add(Mnu_diemDanh);
+
+        Mnu_nhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/User.png"))); // NOI18N
+        Mnu_nhanVien.setText("Quản lý nhân viên");
+        jMenu2.add(Mnu_nhanVien);
+
         jMenuBar1.add(jMenu2);
+
+        Mnu_thongKe.setText("Thống kê");
+
+        jMenuItem1.setText("jMenuItem1");
+        Mnu_thongKe.add(jMenuItem1);
+
+        jMenuBar1.add(Mnu_thongKe);
 
         setJMenuBar(jMenuBar1);
 
@@ -237,6 +316,33 @@ public class ManHinh extends javax.swing.JFrame {
         ql.setVisible(true);
     }//GEN-LAST:event_btn_dotThiActionPerformed
 
+    private void Mnu_ThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mnu_ThoatActionPerformed
+        int a = JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát?");
+        if (a != JOptionPane.YES_OPTION) {
+            return;
+        }
+        this.dispose();
+    }//GEN-LAST:event_Mnu_ThoatActionPerformed
+
+    private void Mnu_dangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mnu_dangXuatActionPerformed
+        int a = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất?");
+        if (a != JOptionPane.YES_OPTION) {
+            return;
+        }
+        Man_Hinh_Chao manHinh = new Man_Hinh_Chao();
+        manHinh.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_Mnu_dangXuatActionPerformed
+
+    private void btn_bienLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bienLaiActionPerformed
+        close();
+        QuanLy_BienLai ql = new QuanLy_BienLai();
+        desktopMain.add(ql);
+        ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
+                (desktopMain.getHeight() - ql.getHeight()) / 2);
+        ql.setVisible(true);
+    }//GEN-LAST:event_btn_bienLaiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -273,6 +379,16 @@ public class ManHinh extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Mnu_Thoat;
+    private javax.swing.JMenuItem Mnu_bienLai;
+    private javax.swing.JMenuItem Mnu_dangKi;
+    private javax.swing.JMenuItem Mnu_dangXuat;
+    private javax.swing.JMenuItem Mnu_diemDanh;
+    private javax.swing.JMenuItem Mnu_dotThi;
+    private javax.swing.JMenuItem Mnu_hocVien;
+    private javax.swing.JMenuItem Mnu_lop;
+    private javax.swing.JMenuItem Mnu_nhanVien;
+    private javax.swing.JMenu Mnu_thongKe;
     private javax.swing.JButton btn_DD;
     private javax.swing.JButton btn_DangKiHocVien;
     private javax.swing.JButton btn_Lop;
@@ -285,6 +401,7 @@ public class ManHinh extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_tenDangNhap;
