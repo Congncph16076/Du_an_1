@@ -722,16 +722,25 @@ WHERE MADANGKI =?
 GO
 
 --tìm kiếm biên lai
-CREATE PROCEDURE tim_kiem_bien_lai(@mabienlai INT)
+CREATE PROCEDURE tim_kiem_bien_laiCu(@mabienlai INT)
 AS
 BEGIN
-    SELECT MABIENLAI,TENHOCVIEN,TENLOP,HOCPHI,HOCPHINO,THANHTIEN = (HOCPHI-HOCPHINO),TENNHANVIEN FROM dbo.BIENLAI
+    SELECT MABIENLAI,BIENLAI.MAHOCVIEN,HOCVIEN.TENHOCVIEN
+	,DANGKI.HOCPHI,DANGKI.HOCPHINO,THANHTIEN= (DANGKI.HOCPHI-DANGKI.HOCPHINO) 
+	,dbo.HOCVIEN.MALOP,dbo.lop.TENLOP
+	,dbo.NGUOIDUNG.MANHANVIEN,dbo.NGUOIDUNG.TENNHANVIEN
+	,CONVERT(NVARCHAR(20),NGAYTHUTIEN,103) [ngaythutien]
+	FROM dbo.BIENLAI
 	JOIN dbo.HOCVIEN ON HOCVIEN.MAHOCVIEN = BIENLAI.MAHOCVIEN
 	JOIN dbo.LOP ON LOP.MALOP = BIENLAI.MALOP
 	JOIN dbo.NGUOIDUNG ON NGUOIDUNG.MANHANVIEN = BIENLAI.MANHANVIEN
+	JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI
 	WHERE MABIENLAI LIKE LTRIM(RTRIM(@mabienlai))
 END
 GO
+DROP PROCEDURE dbo.tim_kiem_bien_laiCu
+EXEC dbo.tim_kiem_bien_laiCu @mabienlai = 4 -- int
+
 ------------------------------------------------------kết thúc truy vấn biên lai--------------------------------------------------
 -----------------------------------------------------------------------------
 ---------------------------------------------------------------------------
