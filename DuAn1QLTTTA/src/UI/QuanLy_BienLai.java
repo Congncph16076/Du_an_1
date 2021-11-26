@@ -32,6 +32,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         initComponents();
         conn = TienIchHoTro.ConnectToSQL.getConnect();
         fillTableHVCu();
+        fillTableHVMoi();
     }
 
     void fillTableHVCu() {
@@ -40,7 +41,22 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         list = blDAO.listHVCu(conn);
         for (BienLai bl : list) {
             Object obj[] = new Object[]{
-                bl.getMaBienLai(), bl.getMaDangKi(), bl.getMaHocVien(), bl.getTenHocVien(), bl.getHocPhi(), bl.getHocPhiNo(),
+                bl.getMaBienLai(), bl.getMaDangKi(), bl.getMaHocVien()
+               , bl.getTenHocVien(), bl.getHocPhi(), bl.getHocPhiNo(),
+                bl.getThanhTien(), bl.getNgayThuTien(), bl.getMaNhanVien(), bl.getTenNhanVien()
+            };
+            dtm.addRow(obj);
+        }
+    }
+    
+    void fillTableHVMoi(){
+        dtm = (DefaultTableModel) tbl_HVMoi.getModel();
+        dtm.setRowCount(0);
+        list = blDAO.listHVMoi(conn);
+        for (BienLai bl : list) {
+            Object obj[] = new Object[]{
+                  bl.getMaBienLai(), bl.getMaDangKi()
+               , bl.getTenHocVien(), bl.getHocPhi(), bl.getHocPhiNo(),
                 bl.getThanhTien(), bl.getNgayThuTien(), bl.getMaNhanVien(), bl.getTenNhanVien()
             };
             dtm.addRow(obj);
@@ -110,6 +126,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         btn_themHVCu = new javax.swing.JButton();
         btn_suaHVCu = new javax.swing.JButton();
         btn_ClearHVCu = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -497,6 +514,19 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Học viên cũ", jPanel3);
 
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1150, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 457, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Điểm thi", jPanel8);
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Quản lý biên lai");
 
@@ -656,6 +686,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
