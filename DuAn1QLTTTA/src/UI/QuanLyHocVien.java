@@ -12,7 +12,6 @@ import Entity.HocVien;
 import Entity.Lop;
 import Entity.NguoiDung;
 import TienIchHoTro.Dialog;
-import com.sun.org.apache.xerces.internal.impl.dv.xs.DateDV;
 import java.awt.Color;
 import java.sql.Connection;
 import java.text.ParseException;
@@ -607,7 +606,7 @@ public class QuanLyHocVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btn_TrangChu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TrangChu1ActionPerformed
-        ManHinhLamViecNVQL manHinh = new ManHinhLamViecNVQL();
+        ManHinh  manHinh = new ManHinh();
         manHinh.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_TrangChu1ActionPerformed
