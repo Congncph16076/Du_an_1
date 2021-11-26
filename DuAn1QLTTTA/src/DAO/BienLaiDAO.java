@@ -17,34 +17,63 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
  *
  * @author congc
  */
 public class BienLaiDAO {
-    public  List<BienLai> listHVCu(BienLai bienLai, Connection  conn){
-       List<BienLai> list = new ArrayList<>();
+
+    public List<BienLai> listHVCu(Connection conn) {
+        List<BienLai> list = new ArrayList<>();
         try {
-            CallableStatement  call = conn.prepareCall("{call thong_tin_bien_lai_hvcu}");
+            CallableStatement call = conn.prepareCall("{call thong_tin_bien_lai_hvcu}");
             ResultSet rs = call.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 BienLai bl = new BienLai();
                 bl.setMaBienLai(rs.getInt("MABIENLAI"));
-                bl.setMaHocVien(rs.getInt("BIENLAI.MAHOCVIEN"));
-                bl.setTenHocVien(rs.getString("HOCVIEN.TENHOCVIEN"));
-                bl.setHocPhi(rs.getFloat("DANGKI.HOCPHI"));
-                bl.setHocPhiNo(rs.getFloat("DANGKI.HOCPHINO"));
+                bl.setMaHocVien(rs.getInt("MAHOCVIEN"));
+                bl.setTenHocVien(rs.getString("TENHOCVIEN"));
+                bl.setHocPhi(rs.getFloat("HOCPHI"));
+                bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
                 bl.setThanhTien(rs.getFloat("THANHTIEN"));
-                bl.setMaLop(rs.getInt("dbo.HOCVIEN.MALOP"));
-                bl.setTenLop(rs.getString("dbo.lop.TENLOP"));
-                bl.setMaNhanVien(rs.getInt("dbo.NGUOIDUNG.MANHANVIEN"));
-                bl.setTenNhanVien(rs.getString("dbo.NGUOIDUNG.TENNHANVIEN"));
+                bl.setMaLop(rs.getInt("MALOP"));
+                bl.setTenLop(rs.getString("TENLOP"));
+                bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
+                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
                 bl.setNgayThuTien(rs.getString("ngaythutien"));
-               list.add(bl);
+                list.add(bl);
             }
         } catch (SQLException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         }
-        return  list;
+        return list;
     }
+
+    public BienLai clickTableHVCu(int ID, Connection conn) {
+        try {
+            CallableStatement call = conn.prepareCall("{call tim_kiem_bien_laiCu(?)}");
+            call.setInt(1, ID);
+            ResultSet rs = call.executeQuery();
+            while (rs.next()) {
+                BienLai bl = new BienLai();
+                bl.setMaBienLai(rs.getInt("MABIENLAI"));
+                bl.setMaHocVien(rs.getInt("MAHOCVIEN"));
+                bl.setTenHocVien(rs.getString("TENHOCVIEN"));
+                bl.setHocPhi(rs.getFloat("HOCPHI"));
+                bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
+                bl.setThanhTien(rs.getFloat("THANHTIEN"));
+                bl.setMaLop(rs.getInt("MALOP"));
+                bl.setTenLop(rs.getString("TENLOP"));
+                bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
+                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
+                bl.setNgayThuTien(rs.getString("ngaythutien"));
+                return bl;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
 }

@@ -186,7 +186,6 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
 //        }
 //        return true;
 //    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -344,6 +343,11 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Mã lớp");
 
+        txt_maLop.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_maLopFocusLost(evt);
+            }
+        });
         txt_maLop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_maLopActionPerformed(evt);
@@ -505,23 +509,23 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
     private void btn_timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timKiemActionPerformed
         if (checkTimKiem()) {
             //if (chekTrungTK()) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                String date = sdf.format(date_timKiem.getDate());
-                fillTable();
-                listDAO = dtDAO.search(date, conn);
-                dtm.setRowCount(0);
-                dtm = (DefaultTableModel) tbl_dotThi.getModel();
-                for (DotThi dt : listDAO) {
-                    Vector<Object> vec = new Vector<>();
-                    vec.add(dt.getMaDotThi());
-                    vec.add(dt.getMaLop());
-                    vec.add(dt.getTenLop());
-                    vec.add(dt.getNgayThi());
-                    vec.add(dt.getCaThi());
-                    vec.add(dt.getSiso());
-                    vec.add(dt.getVang());
-                    dtm.addRow(vec);
-                }
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String date = sdf.format(date_timKiem.getDate());
+            fillTable();
+            listDAO = dtDAO.search(date, conn);
+            dtm.setRowCount(0);
+            dtm = (DefaultTableModel) tbl_dotThi.getModel();
+            for (DotThi dt : listDAO) {
+                Vector<Object> vec = new Vector<>();
+                vec.add(dt.getMaDotThi());
+                vec.add(dt.getMaLop());
+                vec.add(dt.getTenLop());
+                vec.add(dt.getNgayThi());
+                vec.add(dt.getCaThi());
+                vec.add(dt.getSiso());
+                vec.add(dt.getVang());
+                dtm.addRow(vec);
+            }
             //}
         }
     }//GEN-LAST:event_btn_timKiemActionPerformed
@@ -571,11 +575,17 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void txt_maLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_maLopActionPerformed
-//        if (!txt_maLop.getText().equals("")) {
-//            DotThi dt = dtDAO.hienThiLop(Integer.parseInt(txt_maLop.getText()), conn);
-//            txt_tenLop.setText(dt.getTenLop());
-//        }
+
     }//GEN-LAST:event_txt_maLopActionPerformed
+
+    private void txt_maLopFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_maLopFocusLost
+        if (!txt_maLop.getText().equals("")) {
+            DotThi dt = dtDAO.hienThiLop(Integer.parseInt(txt_maLop.getText()), conn);
+            txt_tenLop.setText(dt.getTenLop());
+            System.out.println(dt.getTenLop());
+        }
+        
+    }//GEN-LAST:event_txt_maLopFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
