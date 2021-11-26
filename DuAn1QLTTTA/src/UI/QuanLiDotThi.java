@@ -186,7 +186,6 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
 //        }
 //        return true;
 //    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -228,6 +227,7 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Quản lý đợt thi");
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -324,7 +324,7 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
                     .addComponent(btn_timKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_loiTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_themDotThi, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                     .addComponent(btn_clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -343,6 +343,11 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Mã lớp");
 
+        txt_maLop.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_maLopFocusLost(evt);
+            }
+        });
         txt_maLop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_maLopActionPerformed(evt);
@@ -457,12 +462,12 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -504,23 +509,23 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
     private void btn_timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timKiemActionPerformed
         if (checkTimKiem()) {
             //if (chekTrungTK()) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                String date = sdf.format(date_timKiem.getDate());
-                fillTable();
-                listDAO = dtDAO.search(date, conn);
-                dtm.setRowCount(0);
-                dtm = (DefaultTableModel) tbl_dotThi.getModel();
-                for (DotThi dt : listDAO) {
-                    Vector<Object> vec = new Vector<>();
-                    vec.add(dt.getMaDotThi());
-                    vec.add(dt.getMaLop());
-                    vec.add(dt.getTenLop());
-                    vec.add(dt.getNgayThi());
-                    vec.add(dt.getCaThi());
-                    vec.add(dt.getSiso());
-                    vec.add(dt.getVang());
-                    dtm.addRow(vec);
-                }
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String date = sdf.format(date_timKiem.getDate());
+            fillTable();
+            listDAO = dtDAO.search(date, conn);
+            dtm.setRowCount(0);
+            dtm = (DefaultTableModel) tbl_dotThi.getModel();
+            for (DotThi dt : listDAO) {
+                Vector<Object> vec = new Vector<>();
+                vec.add(dt.getMaDotThi());
+                vec.add(dt.getMaLop());
+                vec.add(dt.getTenLop());
+                vec.add(dt.getNgayThi());
+                vec.add(dt.getCaThi());
+                vec.add(dt.getSiso());
+                vec.add(dt.getVang());
+                dtm.addRow(vec);
+            }
             //}
         }
     }//GEN-LAST:event_btn_timKiemActionPerformed
@@ -570,11 +575,17 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void txt_maLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_maLopActionPerformed
-//        if (!txt_maLop.getText().equals("")) {
-//            DotThi dt = dtDAO.hienThiLop(Integer.parseInt(txt_maLop.getText()), conn);
-//            txt_tenLop.setText(dt.getTenLop());
-//        }
+
     }//GEN-LAST:event_txt_maLopActionPerformed
+
+    private void txt_maLopFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_maLopFocusLost
+        if (!txt_maLop.getText().equals("")) {
+            DotThi dt = dtDAO.hienThiLop(Integer.parseInt(txt_maLop.getText()), conn);
+            txt_tenLop.setText(dt.getTenLop());
+            System.out.println(dt.getTenLop());
+        }
+        
+    }//GEN-LAST:event_txt_maLopFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
