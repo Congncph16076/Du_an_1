@@ -14,33 +14,34 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 public class QuanLy_BienLai extends javax.swing.JInternalFrame {
-    
+
     private DefaultTableModel dtm = new DefaultTableModel();
     Connection conn = null;
     Border boder = BorderFactory.createLineBorder(Color.red);
     Border boder1 = BorderFactory.createLineBorder(Color.black);
     List<BienLai> list = new ArrayList<>();
     BienLaiDAO blDAO = new BienLaiDAO();
-    
+
     public QuanLy_BienLai() {
         initComponents();
         conn = TienIchHoTro.ConnectToSQL.getConnect();
         fillTableHVCu();
     }
-    
+
     void fillTableHVCu() {
         dtm = (DefaultTableModel) tbl_HVCu.getModel();
         dtm.setRowCount(0);
         list = blDAO.listHVCu(conn);
         for (BienLai bl : list) {
             Object obj[] = new Object[]{
-                bl.getMaBienLai(), bl.getMaHocVien(), bl.getTenHocVien(), bl.getHocPhi(), bl.getHocPhiNo(),
-                 bl.getThanhTien(), bl.getMaLop(), bl.getTenLop(), bl.getNgayThuTien(), bl.getMaNhanVien(), bl.getTenNhanVien()
+                bl.getMaBienLai(), bl.getMaDangKi(), bl.getMaHocVien(), bl.getTenHocVien(), bl.getHocPhi(), bl.getHocPhiNo(),
+                bl.getThanhTien(), bl.getNgayThuTien(), bl.getMaNhanVien(), bl.getTenNhanVien()
             };
             dtm.addRow(obj);
         }
@@ -289,13 +290,13 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
 
         tbl_HVCu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã biên lai", "Mã Học Viên", "Tên người đăng kí", "Học phí", "Học phí nợ", "Thành tiền", "Mã Lớp", "Tên Lớp", "Ngày thu tiền", "Mã nhân viên", "Tên Nhân viên"
+                "Mã biên lai", "Mã đăng kí", "Mã Học Viên", "Tên người đăng kí", "Học phí", "Học phí nợ", "Thành tiền", "Ngày thu tiền", "Mã nhân viên", "Tên nhân viên"
             }
         ));
         tbl_HVCu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -304,9 +305,19 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane3.setViewportView(tbl_HVCu);
+        if (tbl_HVCu.getColumnModel().getColumnCount() > 0) {
+            tbl_HVCu.getColumnModel().getColumn(1).setResizable(false);
+            tbl_HVCu.getColumnModel().getColumn(9).setResizable(false);
+        }
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Mã Học Viên");
+
+        txt_maHocVien.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_maHocVienFocusLost(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Ngày thu tiền");
@@ -391,15 +402,35 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         jLabel6.setText("Tìm kiếm");
 
         btn_timHVCu.setText("Tìm Kiếm");
+        btn_timHVCu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timHVCuActionPerformed(evt);
+            }
+        });
 
         btn_themHVCu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Create.png"))); // NOI18N
         btn_themHVCu.setText("Thêm");
+        btn_themHVCu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themHVCuActionPerformed(evt);
+            }
+        });
 
         btn_suaHVCu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Edit.png"))); // NOI18N
         btn_suaHVCu.setText("Sửa");
+        btn_suaHVCu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suaHVCuActionPerformed(evt);
+            }
+        });
 
         btn_ClearHVCu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Refresh.png"))); // NOI18N
         btn_ClearHVCu.setText("Clear");
+        btn_ClearHVCu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ClearHVCuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -478,7 +509,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
                 .addComponent(jTabbedPane1)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(426, 426, 426)
+                .addGap(434, 434, 434)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -508,7 +539,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
 
     private void tbl_HVCuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_HVCuMouseClicked
         int vitri = tbl_HVCu.getSelectedRow();
-        if (vitri >= 0) {
+        if (vitri > -1) {
             int row = (int) tbl_HVCu.getValueAt(vitri, 0);
             BienLai bl = blDAO.clickTableHVCu(row, conn);
             if (bl != null) {
@@ -516,7 +547,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
                 txt_maDangKiHVCu.setText(String.valueOf(bl.getMaDangKi()));
                 txt_thanhTienHVCu.setText(String.valueOf(bl.getThanhTien()));
                 try {
-                    Date date = new SimpleDateFormat("dd/MM/yyyy").parse((String) tbl_HVCu.getValueAt(vitri, 8));
+                    Date date = new SimpleDateFormat("dd/MM/yyyy").parse((String) tbl_HVCu.getValueAt(vitri, 7));
                     date_ngayThuTienHVCu.setDate(date);
                 } catch (ParseException ex) {
                     ex.printStackTrace();
@@ -525,6 +556,72 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_tbl_HVCuMouseClicked
+
+    private void txt_maHocVienFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_maHocVienFocusLost
+
+    }//GEN-LAST:event_txt_maHocVienFocusLost
+
+    private void btn_themHVCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themHVCuActionPerformed
+
+        BienLai bl = new BienLai();
+        bl.setMaHocVien(Integer.parseInt(txt_maHocVien.getText()));
+        bl.setMaDangKi(Integer.parseInt(txt_maDangKiHVCu.getText()));
+        bl.setThanhTien(Float.parseFloat(txt_thanhTienHVCu.getText()));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String date = sdf.format(date_ngayThuTienHVCu.getDate());
+        bl.setNgayThuTien(date);
+        bl.setMaNhanVien(Integer.parseInt(txt_maNhanVienHVCu.getText()));
+
+        boolean them = blDAO.themHVCu(bl, conn);
+        fillTableHVCu();
+    }//GEN-LAST:event_btn_themHVCuActionPerformed
+
+    private void btn_suaHVCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaHVCuActionPerformed
+        BienLai bl = new BienLai();
+        bl.setMaHocVien(Integer.parseInt(txt_maHocVien.getText()));
+        bl.setMaDangKi(Integer.parseInt(txt_maDangKiHVCu.getText()));
+        bl.setThanhTien(Float.parseFloat(txt_thanhTienHVCu.getText()));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String date = sdf.format(date_ngayThuTienHVCu.getDate());
+        bl.setNgayThuTien(date);
+        bl.setMaNhanVien(Integer.parseInt(txt_maNhanVienHVCu.getText()));
+        int row = (int) tbl_HVCu.getValueAt(tbl_HVCu.getSelectedRow(), 0);
+        bl.setMaBienLai(row);
+        blDAO.suaHVCu(bl, conn);
+        fillTableHVCu();
+    }//GEN-LAST:event_btn_suaHVCuActionPerformed
+
+    private void btn_ClearHVCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClearHVCuActionPerformed
+        fillTableHVCu();
+        txt_maHocVien.setText("");
+        txt_maDangKiHVCu.setText("");
+        txt_maNhanVienHVCu.setText("");
+        txt_thanhTienHVCu.setText("");
+        date_ngayThuTienHVCu.setDateFormatString("");
+    }//GEN-LAST:event_btn_ClearHVCuActionPerformed
+
+    private void btn_timHVCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timHVCuActionPerformed
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String date = sdf.format(date_HVCu.getDate());
+        fillTableHVCu();
+        list = blDAO.timBienLaiCu(date, conn);
+        dtm.setRowCount(0);
+        dtm = (DefaultTableModel) tbl_HVCu.getModel();
+        for (BienLai bl : list) {
+            Vector<Object> vec = new Vector<>();
+            vec.add(bl.getMaBienLai());
+            vec.add(bl.getMaDangKi());
+            vec.add(bl.getMaHocVien());
+            vec.add(bl.getTenHocVien());
+            vec.add(bl.getHocPhi());
+            vec.add(bl.getHocPhiNo());
+            vec.add(bl.getThanhTien());
+            vec.add(bl.getNgayThuTien());
+            vec.add(bl.getMaNhanVien());
+            vec.add(bl.getTenNhanVien());
+            dtm.addRow(vec);
+        }
+    }//GEN-LAST:event_btn_timHVCuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

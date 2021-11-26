@@ -30,9 +30,9 @@ public class HocVienDao {
                 hocVien.setMaHocVien(rs.getInt("MAHOCVIEN"));
                 hocVien.setTenHocVien(rs.getString("TENHOCVIEN"));
                 hocVien.setMaLop(rs.getInt("MALOP"));
-                hocVien.setTenLop(rs.getString("TENlOP"));
+                hocVien.setTenLop(rs.getString("TENLOP"));
                 hocVien.setGioiTinh(rs.getInt("GIOITINH"));
-                hocVien.setNgaySinh(rs.getString("Ngaysinh"));
+                hocVien.setNgaySinh(rs.getString("ngaysinh"));
                 hocVien.setSdt(rs.getString("Sdt"));
                 hocVien.setEmail(rs.getString("email"));
                 hocVien.setDiaChi(rs.getString("diachi"));
@@ -49,7 +49,7 @@ public class HocVienDao {
     public HocVien clickTable(String ID, Connection conn) {
         CallableStatement call;
         try {
-            call = conn.prepareCall("{call tim_kiem_hoc_vien_theo_ten_va_ten_lop(?)}");
+            call = conn.prepareCall("{call tim_kiem_hoc_vien_theo_ten(?)}");
             call.setString(1, ID);
             ResultSet rs = call.executeQuery();
             while (rs.next()) {
@@ -59,7 +59,7 @@ public class HocVienDao {
                 hocVien.setMaLop(rs.getInt("MALOP"));
                 hocVien.setTenLop(rs.getString("TENlOP"));
                 hocVien.setGioiTinh(rs.getInt("GIOITINH"));
-                hocVien.setNgaySinh(rs.getString("Ngaysinh"));
+                hocVien.setNgaySinh(rs.getString("ngaysinh"));
                 hocVien.setSdt(rs.getString("Sdt"));
                 hocVien.setEmail(rs.getString("email"));
                 hocVien.setDiaChi(rs.getString("diachi"));

@@ -51,7 +51,7 @@
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="426" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="434" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="294" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -476,18 +476,17 @@
                     <Component class="javax.swing.JTable" name="tbl_HVCu">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="11" rowCount="4">
+                          <Table columnCount="10" rowCount="4">
                             <Column editable="true" title="M&#xe3; bi&#xea;n lai" type="java.lang.Object"/>
+                            <Column editable="true" title="M&#xe3; &#x111;&#x103;ng k&#xed;" type="java.lang.Object"/>
                             <Column editable="true" title="M&#xe3; H&#x1ecd;c Vi&#xea;n" type="java.lang.Object"/>
                             <Column editable="true" title="T&#xea;n ng&#x1b0;&#x1edd;i &#x111;&#x103;ng k&#xed;" type="java.lang.Object"/>
                             <Column editable="true" title="H&#x1ecd;c ph&#xed;" type="java.lang.Object"/>
                             <Column editable="true" title="H&#x1ecd;c ph&#xed; n&#x1ee3;" type="java.lang.Object"/>
                             <Column editable="true" title="Th&#xe0;nh ti&#x1ec1;n" type="java.lang.Object"/>
-                            <Column editable="true" title="M&#xe3; L&#x1edb;p" type="java.lang.Object"/>
-                            <Column editable="true" title="T&#xea;n L&#x1edb;p" type="java.lang.Object"/>
                             <Column editable="true" title="Ng&#xe0;y thu ti&#x1ec1;n" type="java.lang.Object"/>
                             <Column editable="true" title="M&#xe3; nh&#xe2;n vi&#xea;n" type="java.lang.Object"/>
-                            <Column editable="true" title="T&#xea;n Nh&#xe2;n vi&#xea;n" type="java.lang.Object"/>
+                            <Column editable="true" title="T&#xea;n nh&#xe2;n vi&#xea;n" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -497,7 +496,7 @@
                               <Editor/>
                               <Renderer/>
                             </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                               <Title/>
                               <Editor/>
                               <Renderer/>
@@ -537,12 +536,7 @@
                               <Editor/>
                               <Renderer/>
                             </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                               <Title/>
                               <Editor/>
                               <Renderer/>
@@ -644,6 +638,9 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txt_maHocVien">
+                          <Events>
+                            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_maHocVienFocusLost"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lbl_loiMaHocVien">
                         </Component>
@@ -768,6 +765,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_timHVCuActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_themHVCu">
                       <Properties>
@@ -776,6 +776,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themHVCuActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_suaHVCu">
                       <Properties>
@@ -784,6 +787,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_suaHVCuActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_ClearHVCu">
                       <Properties>
@@ -792,6 +798,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Clear"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ClearHVCuActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
