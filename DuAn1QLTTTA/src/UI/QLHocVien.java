@@ -65,13 +65,13 @@ public class QLHocVien extends javax.swing.JInternalFrame {
     boolean checkNull() {
         //SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Border border = BorderFactory.createLineBorder(Color.red);
-        if (txtTenHV.getText().equals("") && txtMaLop.getText().equals("") && txtTenLop.getText().equals("")
-                && txtDiaChi.getText().equals("") && txtSDT.getText().equals("") && txtEmail.getText().equals("")
-                && dateNgaySinh.getDate().equals("")) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa nhập thông tin nào mời nhập lại");
-            txtTenHV.requestFocus();
-            return false;
-        }
+//        if (txtTenHV.getText().equals("") && txtMaLop.getText().equals("") && txtTenLop.getText().equals("")
+//                && txtDiaChi.getText().equals("") && txtSDT.getText().equals("") && txtEmail.getText().equals("")
+//                && dateNgaySinh.getDate().equals("")) {
+//            JOptionPane.showMessageDialog(this, "Bạn chưa nhập thông tin nào mời nhập lại");
+//            txtTenHV.requestFocus();
+//            return false;
+//        }
 
         if (txtTenHV.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên học viên");
@@ -91,12 +91,8 @@ public class QLHocVien extends javax.swing.JInternalFrame {
             return false;
         }
 
-        if (txtDiaChi.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa nhập địa chỉ");
-            txtDiaChi.requestFocus();
-            return false;
-        }
-        if (txtSDT.getText().equals("")) {
+        
+         if (txtSDT.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập sdt");
             txtSDT.requestFocus();
             return false;
@@ -110,6 +106,13 @@ public class QLHocVien extends javax.swing.JInternalFrame {
             }
 
         }
+        
+        if (txtDiaChi.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập địa chỉ");
+            txtDiaChi.requestFocus();
+            return false;
+        }
+       
 
         if (txtEmail.equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập email");
