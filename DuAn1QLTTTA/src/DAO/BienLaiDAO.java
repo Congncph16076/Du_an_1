@@ -32,13 +32,12 @@ public class BienLaiDAO {
             while (rs.next()) {
                 BienLai bl = new BienLai();
                 bl.setMaBienLai(rs.getInt("MABIENLAI"));
+                bl.setMaDangKi(rs.getInt("MADANGKI"));
                 bl.setMaHocVien(rs.getInt("MAHOCVIEN"));
                 bl.setTenHocVien(rs.getString("TENHOCVIEN"));
                 bl.setHocPhi(rs.getFloat("HOCPHI"));
                 bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
                 bl.setThanhTien(rs.getFloat("THANHTIEN"));
-                bl.setMaLop(rs.getInt("MALOP"));
-                bl.setTenLop(rs.getString("TENLOP"));
                 bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
                 bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
                 bl.setNgayThuTien(rs.getString("ngaythutien"));
@@ -58,13 +57,12 @@ public class BienLaiDAO {
             while (rs.next()) {
                 BienLai bl = new BienLai();
                 bl.setMaBienLai(rs.getInt("MABIENLAI"));
+                bl.setMaDangKi(rs.getInt("MADANGKI"));
                 bl.setMaHocVien(rs.getInt("MAHOCVIEN"));
                 bl.setTenHocVien(rs.getString("TENHOCVIEN"));
                 bl.setHocPhi(rs.getFloat("HOCPHI"));
                 bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
                 bl.setThanhTien(rs.getFloat("THANHTIEN"));
-                bl.setMaLop(rs.getInt("MALOP"));
-                bl.setTenLop(rs.getString("TENLOP"));
                 bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
                 bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
                 bl.setNgayThuTien(rs.getString("ngaythutien"));
@@ -74,6 +72,71 @@ public class BienLaiDAO {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public boolean themHVCu(BienLai bl, Connection conn) {
+        String sql = "INSERT INTO dbo.BIENLAI(THANHTIEN,MAHOCVIEN,MANHANVIEN,MADANGKI,NGAYTHUTIEN)\n"
+                + "VALUES(?,?,?,?,?)";
+        try {
+            PreparedStatement ptmt = conn.prepareStatement(sql);
+            ptmt.setFloat(1, bl.getThanhTien());
+            ptmt.setInt(2, bl.getMaHocVien());
+            ptmt.setInt(3, bl.getMaNhanVien());
+            ptmt.setInt(4, bl.getMaDangKi());
+            ptmt.setString(5, bl.getNgayThuTien());
+            int kq = ptmt.executeUpdate();
+            if (kq > 0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public void suaHVCu(BienLai bl, Connection conn) {
+        String sql = "UPDATE dbo.BIENLAI SET THANHTIEN =? ,MAHOCVIEN =?,MANHANVIEN =?,MADANGKI =?,NGAYTHUTIEN =?\n"
+                + "WHERE MABIENLAI = ?";
+        try {
+            PreparedStatement  ptmt = conn.prepareStatement(sql);
+             ptmt.setFloat(1, bl.getThanhTien());
+            ptmt.setInt(2, bl.getMaHocVien());
+            ptmt.setInt(3, bl.getMaNhanVien());
+            ptmt.setInt(4, bl.getMaDangKi());
+            ptmt.setString(5, bl.getNgayThuTien());
+            ptmt.setInt(6, bl.getMaBienLai());
+            int kq = ptmt.executeUpdate();
+        } catch (SQLException ex) {
+          ex.printStackTrace();
+        }
+    }
+    
+    
+    public  List<BienLai> timBienLaiCu(String ID, Connection  conn){
+        List<BienLai> list = new ArrayList<>();
+        try {
+            CallableStatement  call = conn.prepareCall("{call tim_kiem_bien_laiCu_theo_Ngay(?)}");
+            call.setString(1, ID);
+            ResultSet rs = call.executeQuery();
+            while (rs.next()) {                
+                BienLai  bl = new BienLai();
+                bl.setMaBienLai(rs.getInt("MABIENLAI"));
+                bl.setMaDangKi(rs.getInt("MADANGKI"));
+                bl.setMaHocVien(rs.getInt("MAHOCVIEN"));
+                bl.setTenHocVien(rs.getString("TENHOCVIEN"));
+                bl.setHocPhi(rs.getFloat("HOCPHI"));
+                bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
+                bl.setThanhTien(rs.getFloat("THANHTIEN"));
+                bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
+                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
+                bl.setNgayThuTien(rs.getString("ngaythutien"));
+                list.add(bl);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return list;
     }
 
 }

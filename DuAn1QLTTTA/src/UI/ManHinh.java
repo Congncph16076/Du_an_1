@@ -127,6 +127,11 @@ public class ManHinh extends javax.swing.JFrame {
 
         btn_hocVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/hocVien.png"))); // NOI18N
         btn_hocVien.setText("Quản lý học viên");
+        btn_hocVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hocVienActionPerformed(evt);
+            }
+        });
 
         btn_DangKiHocVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/diemthi.png"))); // NOI18N
         btn_DangKiHocVien.setText("Quản lý đăng kí học viên");
@@ -342,6 +347,15 @@ public class ManHinh extends javax.swing.JFrame {
                 (desktopMain.getHeight() - ql.getHeight()) / 2);
         ql.setVisible(true);
     }//GEN-LAST:event_btn_bienLaiActionPerformed
+
+    private void btn_hocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hocVienActionPerformed
+        close();
+       QLHocVien ql = new QLHocVien();
+        desktopMain.add(ql);
+        ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
+                (desktopMain.getHeight() - ql.getHeight()) / 2);
+        ql.setVisible(true);
+    }//GEN-LAST:event_btn_hocVienActionPerformed
 
     /**
      * @param args the command line arguments
