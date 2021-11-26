@@ -530,6 +530,11 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
 
         btn_ClearKT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Refresh.png"))); // NOI18N
         btn_ClearKT.setText("Clear ");
+        btn_ClearKT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ClearKTActionPerformed(evt);
+            }
+        });
 
         txt_timKiemNV.setText("Nhập mã nhân viên");
 
@@ -801,6 +806,10 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     private void rbn_namNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbn_namNVActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbn_namNVActionPerformed
+
+    private void btn_ClearKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClearKTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_ClearKTActionPerformed
 
     /**
      * @param args the command line arguments

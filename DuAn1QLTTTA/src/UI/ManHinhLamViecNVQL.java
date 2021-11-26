@@ -105,12 +105,22 @@ public class ManHinhLamViecNVQL extends javax.swing.JFrame {
 
         btn_hocVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/hocVien.png"))); // NOI18N
         btn_hocVien.setText("Quản lý học viên");
+        btn_hocVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hocVienActionPerformed(evt);
+            }
+        });
 
         btn_dotThi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/lịch thi.png"))); // NOI18N
         btn_dotThi.setText("Quản lý đợt thi");
 
         btn_DangKiHocVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/diemthi.png"))); // NOI18N
         btn_DangKiHocVien.setText("Quản lý đăng kí học viên");
+        btn_DangKiHocVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DangKiHocVienActionPerformed(evt);
+            }
+        });
 
         btn_bienLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/biên lai.png"))); // NOI18N
         btn_bienLai.setText("Quản lý biên lai");
@@ -252,6 +262,16 @@ public class ManHinhLamViecNVQL extends javax.swing.JFrame {
     private void btn_DDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DDActionPerformed
 
     }//GEN-LAST:event_btn_DDActionPerformed
+
+    private void btn_hocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hocVienActionPerformed
+        QuanLyHocVien ql = new QuanLyHocVien();
+        ql.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_hocVienActionPerformed
+
+    private void btn_DangKiHocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangKiHocVienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_DangKiHocVienActionPerformed
 
     /**
      * @param args the command line arguments

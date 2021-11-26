@@ -87,7 +87,7 @@ CREATE TABLE HOCVIEN(
 	MAHOCVIEN INT IDENTITY(1,1) NOT NULL,
 	TENHOCVIEN NVARCHAR(80) NOT NULL,
 	MALOP INT , 
-	GIOITINH INT,
+	GIOITINH bit,
 	NGAYSINH DATE,
 	DIACHI NVARCHAR(80),
 	SDT NCHAR(13),
@@ -445,14 +445,14 @@ VALUES(1,N'Đủ',1,4),
 
 -----------------------------------------------------------------------bắt đầu truy vấn  học viên ----------------------------------------------
 --Thủ tục lưu quản lý học viên
-ALTER PROC thong_tin_sv
+CREATE PROC thong_tin_sv
 AS
 BEGIN
-    SELECT MAHOCVIEN,TENHOCVIEN,lop.MALOP,dbo.LOP.TENLOP,GIOITINH,NGAYSINH,SDT,EMAIL,DIACHI,HOCPHINO FROM  dbo.HOCVIEN
+    SELECT MAHOCVIEN,TENHOCVIEN,lop.MALOP,dbo.LOP.TENLOP,GIOITINH,CONVERT(nvarchar(30),NGAYSINH,103) [ngaysinh],SDT,EMAIL,DIACHI,HOCPHINO FROM  dbo.HOCVIEN
 	JOIN dbo.LOP ON LOP.MALOP = HOCVIEN.MALOP
 	ORDER BY MAHOCVIEN DESC
 END
-
+drop proc thong_tin_sv
 --thêm học viên
 INSERT dbo.HOCVIEN(TENHOCVIEN,MALOP,GIOITINH,NGAYSINH,SDT,DIACHI,EMAIL,HOCPHINO,SOBUOINGHI)
 VALUES(?,?,?,?,?,?,?,?,?)
@@ -464,17 +464,17 @@ GO
 --xóa thông tin học viên
 
 --tìm kiếm học viên theo tên và lớp
-CREATE PROCEDURE tim_kiem_hoc_vien_theo_ten_va_ten_lop(@tensinhvien nvarchar(100),@tenlop nvarchar(50))
+CREATE PROCEDURE tim_kiem_hoc_vien_theo_ten_va_ten_lop(@tensinhvien nvarchar(100))
 AS
 BEGIN
     SELECT MAHOCVIEN,TENHOCVIEN,dbo.LOP.malop,dbo.LOP.TENLOP,GIOITINH,CONVERT(nvarchar(50),ngaysinh,103) [ngaysinh],SDT,EMAIL,DIACHI,HOCPHINO,SOBUOINGHI FROM  dbo.HOCVIEN
 	JOIN dbo.LOP ON LOP.MALOP = HOCVIEN.MALOP
-	WHERE TENHOCVIEN like LTRIM(RTRIM(@tensinhvien)) AND TENLOP LIKE LTRIM(RTRIM(@tenlop))
+	WHERE TENHOCVIEN like LTRIM(RTRIM(@tensinhvien)) 
 	ORDER BY MAHOCVIEN DESC
 END
-
-EXEC dbo.tim_kiem_hoc_vien_theo_ten_va_ten_lop @tensinhvien = N'    %văn%      ', -- nvarchar(100)
-                                               @tenlop = N' %anh văn%   '       -- nvarchar(50)
+drop proc tim_kiem_hoc_vien_theo_ten_va_ten_lop
+EXEC dbo.tim_kiem_hoc_vien_theo_ten_va_ten_lop @tensinhvien = N'    %văn%      ' -- nvarchar(100)
+                                              
 
 
 --lấy thông tin sinh viên từ bảng đăng kí
@@ -703,7 +703,7 @@ go
 ---------------------------------------------------------------------------------------
 -------------------------------------------------------------------bắt đầu truy vấn quản lý tài khoản nhân viên --------------------------------
 --thông tin tài khoản
-ALTER PROCEDURE thong_tin_tai_khoan
+create PROCEDURE thong_tin_tai_khoan
 AS
 BEGIN
     SELECT MANHANVIEN,TENNHANVIEN,GIOITINH,CONVERT(NVARCHAR(30),NGAYSINH,103) [ngaysinh],DIACHI,SDT,EMAIL,TENVAITRO,TENDANGNHAP,MATKHAU FROM dbo.NGUOIDUNG
@@ -745,7 +745,7 @@ END
 go
 --tìm kiếm tài khoản nhân viên theo mã nhân viên
 
-ALTER  PROCEDURE tim_kiem_tk_nhan_vien(@MATKNV INT)
+create  PROCEDURE tim_kiem_tk_nhan_vien(@MATKNV INT)
 AS
 BEGIN
     SELECT MANHANVIEN,TENNHANVIEN,GIOITINH,CONVERT(NVARCHAR(30),NGAYSINH,103) [ngaysinh],DIACHI,SDT,EMAIL,TENVAITRO,TENDANGNHAP,MATKHAU FROM dbo.NGUOIDUNG
