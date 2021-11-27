@@ -326,6 +326,7 @@ public class QLNV extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setTitle("Quản lý nhân viên");
         setPreferredSize(new java.awt.Dimension(1189, 637));
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 153));
