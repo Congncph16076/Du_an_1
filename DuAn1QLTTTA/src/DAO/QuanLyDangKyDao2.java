@@ -159,8 +159,8 @@ public class QuanLyDangKyDao2 implements EntityDAO<DangKi, String>{
     public List<DangKi> search(String ID, Connection conn) {
         List<DangKi> listDK = new ArrayList<>();
         try {
-            CallableStatement call = conn.prepareCall("{call tim_kiem_ban_dang_ki_theo_sdt(?)}");
-            call.setString(1, ID);
+            CallableStatement call = conn.prepareCall("{call tim_kiem_ban_dang_ki_theo_tendangki(?)}");
+            call.setString(1, "%"+ID+"%");
             ResultSet rs = call.executeQuery();
 
             while (rs.next()) {
