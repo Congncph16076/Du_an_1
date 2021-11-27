@@ -929,3 +929,103 @@ BEGIN
 	SELECT MAHOCVIEN,TENHOCVIEN,SDT,MALOP FROM dbo.HOCVIEN
 	WHERE TENHOCVIEN = N'nguyễn văn C'
 END
+<<<<<<< Updated upstream
+=======
+-- truy vấn xếp lớp by mr vinh
+create procedure xep_lop(@madangki int)
+as
+begin
+	declare @malop int,@b int,@c int, @ngaydki date, @ngaynhaphoc date
+
+	select @malop= MALOP from LOP
+	where MALOAILOP=(select MALOAILOP from LOAILOP where TENLOAILOP =( select  TENLOAILOP	from DANGKI	where madangki =  @madangki ))
+		 and MACAPLOP=(select MACAPLOP	from CAPLOP	where TENCAPLOP = (select   TENCAPLOP	from DANGKI	where madangki =  @madangki) )
+		 and CAHOC=(select CAHOC from DANGKI	where madangki =  @madangki )
+
+		select @c=siso, @ngaynhaphoc=NGAYNHAPHOC from LOP
+		where MALOP=@malop
+
+		select @ngaydki=NGAYDANGKI from DANGKI
+		where madangki=@madangki
+
+		SELECT @b =COUNT(MAHOCVIEN)
+		FROM HOCVIEN
+		where MALOP=@malop
+
+		if @b<@c and @malop is not null and @ngaydki<@ngaynhaphoc
+		print 'ok'
+		update BIENLAI set MALOP= @malop where MADANGKI = @madangki
+		else
+		print 'ngu'
+		
+END
+------
+CREATE PROCEDURE xoa_ban_dang_ki(@madangki INT)
+AS
+BEGIN
+	delete from BIENLAI
+	where madangki = @madangki
+    DELETE FROM dbo.DANGKI
+	WHERE madangki = @madangki
+	declare @max int
+	select @max=max(@madangki)from dbo.DANGKI
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (dangki, RESEED,@max)
+END
+GO
+exec xoa_ban_dang_ki 1
+drop proc xoa_ban_dang_ki
+--thông tin đăng kí
+create PROCEDURE thong_tin_dang_ki
+AS
+BEGIN
+    SELECT madangki,TENHOCVIEN,CONVERT(NVARCHAR(30),NGAYSINH,103) [ngaysinh]
+	,GIOITINH,SDT,EMAIL,DIACHI
+	,TENCAPLOP,TENLOAILOP,HOCPHI,CAHOC
+	,CONVERT(NVARCHAR(30),NGAYNHAPHOC,103) [ngaynhaphoc]
+	,CONVERT(NVARCHAR(30),NGAYDANGKI,103) [ngaydangki], MAHOCVIEN 
+	FROM DANGKI
+	order by madangki desc
+END
+go
+exec dbo.thong_tin_dang_ki
+drop proc thong_tin_dang_ki
+-- tìm đăng kí
+CREATE PROCEDURE tim_kiem_ban_dang_ki_theo_tendangki(@tendangki NVARCHAR(50))
+AS
+BEGIN
+    SELECT madangki,TENHOCVIEN
+	,CONVERT(NVARCHAR(30),NGAYSINH,103) [ngaysinh]
+	,GIOITINH,SDT,EMAIL
+	,DIACHI,TENCAPLOP,TENLOAILOP
+	,HOCPHI,CAHOC,CONVERT(NVARCHAR(30)
+	,NGAYNHAPHOC,103) [ngaynhaphoc]
+	,CONVERT(NVARCHAR(30),NGAYDANGKI,103) [ngaydangki]
+	, MAHOCVIEN FROM dbo.DANGKI
+	WHERE TENHOCVIEN like LTRIM(RTRIM(@tendangki))
+	ORDER BY madangki DESC
+END
+go
+drop proc tim_kiem_ban_dang_ki_theo_tendangki
+CREATE PROCEDURE tim_kiem_ban_dang_ki_theo_mdk(@mdk int)
+AS
+BEGIN
+    SELECT madangki,TENHOCVIEN
+	,CONVERT(NVARCHAR(30),NGAYSINH,103) [ngaysinh]
+	,GIOITINH,SDT,EMAIL,DIACHI
+	,TENCAPLOP,TENLOAILOP
+	,HOCPHI,CAHOC
+	,CONVERT(NVARCHAR(30),NGAYNHAPHOC,103) [ngaynhaphoc]
+	,CONVERT(NVARCHAR(30),NGAYDANGKI,103) [ngaydangki]
+	, MAHOCVIEN FROM dbo.DANGKI
+	WHERE madangki = @mdk
+	ORDER BY madangki DESC
+END
+SELECT * FROM dbo.DANGKI
+SELECT malop, COUNT(MALOP) [soluong] FROM dbo.HOCVIEN
+GROUP BY MALOP
+SELECT * FROM dbo.HOCVIEN
+SELECT * FROM dbo.LOP
+SELECT * FROM dbo.BIENLAI
+>>>>>>> Stashed changes
