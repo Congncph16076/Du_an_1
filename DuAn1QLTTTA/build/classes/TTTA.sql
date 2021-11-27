@@ -87,7 +87,7 @@ CREATE TABLE HOCVIEN(
 	MAHOCVIEN INT IDENTITY(1,1) NOT NULL,
 	TENHOCVIEN NVARCHAR(80) NOT NULL,
 	MALOP INT , 
-	GIOITINH bit,
+	GIOITINH INT,
 	NGAYSINH DATE,
 	DIACHI NVARCHAR(80),
 	SDT NCHAR(13),
@@ -134,6 +134,7 @@ CREATE TABLE DANGKI(
 	TENCAPLOP NVARCHAR(80),
 	TENLOAILOP NVARCHAR(80),
 	HOCPHI FLOAT,
+	HOCPHINO FLOAT,
 	CAHOC NVARCHAR(10),
 	NGAYNHAPHOC DATE,
 	NGAYDANGKI DATE,
@@ -171,7 +172,7 @@ CREATE TABLE BIENLAI(
 	CONSTRAINT FK_MABIENLAIDANGKI FOREIGN KEY(MADANGKI) REFERENCES dbo.DANGKI
 )
 GO
-
+SELECT * FROM dbo.BIENLAI
 
 IF OBJECT_ID('BUOIHOC') IS NOT NULL
 	DROP TABLE BUOIHOC
@@ -212,6 +213,7 @@ SELECT * FROM dbo.NGUOIDUNG
 DELETE FROM dbo.NGUOIDUNG
 DBCC CHECKIDENT (NGUOIDUNG, RESEED,0)
 SELECT* FROM dbo.NGUOIDUNG
+
 INSERT INTO dbo.NGUOIDUNG(TENNHANVIEN,GIOITINH,NGAYSINH,DIACHI,SDT,EMAIL,TENVAITRO,TENDANGNHAP,MATKHAU)
 VALUES(N'Nguyễn Đức Vinh',1,'1997/11/21',N'Ninh Bình','0345401309',N'Vinh123@gmail.com',2,N'vinh11',N'123456'),
 	  (N'Nguyễn Thu Hà',0,'1987/02/27',N'Hà Nam','0814575843',N'Ha221@gmail.com',2,N'ha12',N'270206'),
@@ -396,26 +398,32 @@ DELETE FROM dbo.DANGKI
 DBCC CHECKIDENT (DANGKI, RESEED,0)
 SELECT* FROM dbo.DANGKI
 
-INSERT INTO dbo.DANGKI(TENHOCVIEN,NGAYSINH,GIOITINH,SDT,EMAIL,DIACHI,TENCAPLOP,TENLOAILOP,HOCPHI,CAHOC,NGAYNHAPHOC,NGAYDANGKI,MAHOCVIEN)
+INSERT INTO dbo.DANGKI(TENHOCVIEN,NGAYSINH,GIOITINH,SDT,EMAIL,DIACHI,TENCAPLOP,TENLOAILOP,HOCPHI,HOCPHINO,CAHOC,NGAYNHAPHOC,NGAYDANGKI,MAHOCVIEN)
 VALUES
-(N'Nguyễn Thị A','1999/01/01',0,'0324513946',N'A1@gmail.com',N'Đạo Lý- Lý NhâN-Hà Nam',N'A',N'Toeic',1000000.0,N'Ca 3','2012/03/10','2012/02/28',NULL),
-(N'Nguyễn Thị B','1998/01/10',0,'0324213926',N'B1@gmail.com',N'Đạo Lý- Lý NhâN-Hà Nam',N'A',N'Toeic',1000000.0,N'Ca 2','2012/03/10','2012/02/28',NULL),
-(N'Nguyễn Thị C','1997/01/01',1,'0324321126',N'C1@gmail.com',N'Đạo Lý- Lý NhâN-Hà Nam',N'A',N'Toeic',1000000.0,N'Ca 2','2012/03/10','2012/02/28',NULL),
-(N'Nguyễn Văn A','1999/01/01',1,'0324553646',N'A@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam',N'A',N'Toeic',1000000.0,N'Ca 3','2010/10/10','2010/09/30',1),
-(N'Nguyễn Văn B','1999/02/01',1,'0324523956',N'B@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam',N'A',N'Toeic',1000000.0,N'Ca 3','2010/10/10','2010/09/30',2),
-(N'Nguyễn Văn C','1999/04/01',1,'0324553916',N'C@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam',N'A',N'Toeic',1000000.0,N'Ca 3','2010/10/10','2010/09/30',3)
+(N'Nguyễn Thị A','1999/01/01',0,'0324513946',N'A1@gmail.com',N'Đạo Lý- Lý NhâN-Hà Nam',N'A',N'Toeic',1000000.0,0,N'Ca 3','2012/03/10','2012/02/28',NULL),
+(N'Nguyễn Thị B','1998/01/10',0,'0324213926',N'B1@gmail.com',N'Đạo Lý- Lý NhâN-Hà Nam',N'A',N'Toeic',1000000.0,0,N'Ca 2','2012/03/10','2012/02/28',NULL),
+(N'Nguyễn Thị C','1997/01/01',1,'0324321126',N'C1@gmail.com',N'Đạo Lý- Lý NhâN-Hà Nam',N'A',N'Toeic',1000000.0,0,N'Ca 2','2012/03/10','2012/02/28',NULL),
+(N'Nguyễn Văn A','1999/01/01',1,'0324553646',N'A@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam',N'B',N'Toeic',2000000.0,500000,N'Ca 3','2010/10/10','2010/09/30',1),
+(N'Nguyễn Văn B','1999/02/01',1,'0324523956',N'B@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam',N'B',N'Toeic',2000000.0,1000000,N'Ca 3','2010/10/10','2010/09/30',2),
+(N'Nguyễn Văn C','1999/04/01',1,'0324553916',N'C@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam',N'B',N'Toeic',2000000.0,500000,N'Ca 3','2010/10/10','2010/09/30',3)
+
+SELECT * FROM dbo.DANGKI
+INSERT INTO dbo.DANGKI(TENHOCVIEN,NGAYSINH,GIOITINH,SDT,EMAIL,DIACHI,TENCAPLOP,TENLOAILOP,HOCPHI,HOCPHINO,CAHOC,NGAYNHAPHOC,NGAYDANGKI,MAHOCVIEN)
+VALUES(N'Nguyễn Văn D','1999/02/01',1,'0841509943','D@gmail.com',N'Hà Tây','B','Anh văn giao tiếp',2000000,500000,'3','2012/01/10','2011/12/20',4)
+INSERT INTO dbo.DANGKI(TENHOCVIEN,NGAYSINH,GIOITINH,SDT,EMAIL,DIACHI,TENCAPLOP,TENLOAILOP,HOCPHI,HOCPHINO,CAHOC,NGAYNHAPHOC,NGAYDANGKI,MAHOCVIEN)
+VALUES(N'Nguyễn Văn Công','1998/02/01',1,'0841632243','congcc@gmail.com',N'Hà Tây','B','Anh văn giao tiếp',2000000,500000,'3','2012/01/10','2012/01/01',NULL)
 
 DELETE FROM dbo.BIENLAI
 DBCC CHECKIDENT (BIENLAI, RESEED,0)
 SELECT* FROM dbo.BIENLAI
 
 INSERT INTO dbo.BIENLAI(THANHTIEN,MAHOCVIEN,MALOP,MANHANVIEN,MADANGKI,MADOTTHI,DIEMTHI,DIEMTHANHPHAN,DIEMTONG,NGAYTHUTIEN)
-VALUES(1000000,null,null,10,1,NULL,NULL,NULL,NULL,'2012/02/28'),
-	  (1000000,null,null,10,2,NULL,NULL,NULL,NULL,'2012/02/28'),
-	  (1000000,null,null,11,3,NULL,NULL,NULL,NULL,'2012/02/28'),
-	  (1000000,1,1,12,4,1,9,0,9,'2010/09/30'),
+VALUES(100000,null,null,10,1,NULL,NULL,NULL,NULL,'2012/02/28'),
+	  (100000,null,null,10,2,NULL,NULL,NULL,NULL,'2012/02/28'),
+	  (100000,null,null,11,3,NULL,NULL,NULL,NULL,'2012/02/28'),
+	  (1500000,1,1,12,4,1,9,0,9,'2010/09/30'),
 	  (1000000,2,1,13,5,1,7,0,7,'2010/09/30'),
-	  (1000000,3,1,11,6,1,6,0,6,'2010/09/30')
+	  (1500000,3,1,11,6,1,6,0,6,'2010/09/30')
 
 DELETE FROM dbo.BUOIHOC
 DBCC CHECKIDENT (BUOIHOC, RESEED,0)
@@ -440,9 +448,10 @@ SELECT* FROM dbo.DIEMDANH
 INSERT INTO dbo.DIEMDANH
 (TRANGTHAI,GHICHU,MABUOIHOC,MABIENLAI)
 VALUES(1,N'Đủ',1,4),
-	(1,N'Đủ',1,5),
-	(1,N'Đủ',1,6)
-
+	  (1,N'Đủ',1,5),
+	  (1,N'Đủ',1,6)
+insert into dbo.DIEMDANH(TRANGTHAI,GHICHU,MABUOIHOC,MABIENLAI)
+VALUES(1,N'Đủ',1,4)
 -----------------------------------------------------------------------bắt đầu truy vấn  học viên ----------------------------------------------
 --Thủ tục lưu quản lý học viên
 CREATE PROC thong_tin_sv
@@ -452,7 +461,7 @@ BEGIN
 	JOIN dbo.LOP ON LOP.MALOP = HOCVIEN.MALOP
 	ORDER BY MAHOCVIEN DESC
 END
-drop proc thong_tin_sv
+DROP PROC dbo.thong_tin_sv
 --thêm học viên
 INSERT dbo.HOCVIEN(TENHOCVIEN,MALOP,GIOITINH,NGAYSINH,SDT,DIACHI,EMAIL,HOCPHINO,SOBUOINGHI)
 VALUES(?,?,?,?,?,?,?,?,?)
@@ -464,17 +473,17 @@ GO
 --xóa thông tin học viên
 
 --tìm kiếm học viên theo tên và lớp
-CREATE PROCEDURE tim_kiem_hoc_vien_theo_ten_va_ten_lop(@tensinhvien nvarchar(100))
+CREATE PROCEDURE tim_kiem_hoc_vien_theo_ten(@tensinhvien nvarchar(100))
 AS
 BEGIN
     SELECT MAHOCVIEN,TENHOCVIEN,dbo.LOP.malop,dbo.LOP.TENLOP,GIOITINH,CONVERT(nvarchar(50),ngaysinh,103) [ngaysinh],SDT,EMAIL,DIACHI,HOCPHINO,SOBUOINGHI FROM  dbo.HOCVIEN
 	JOIN dbo.LOP ON LOP.MALOP = HOCVIEN.MALOP
-	WHERE TENHOCVIEN like LTRIM(RTRIM(@tensinhvien)) 
+	WHERE TENHOCVIEN like LTRIM(RTRIM(@tensinhvien))
 	ORDER BY MAHOCVIEN DESC
 END
 drop proc tim_kiem_hoc_vien_theo_ten_va_ten_lop
-EXEC dbo.tim_kiem_hoc_vien_theo_ten_va_ten_lop @tensinhvien = N'    %văn%      ' -- nvarchar(100)
-                                              
+EXEC dbo.tim_kiem_hoc_vien_theo_ten @tensinhvien = N'    %văn%      '
+go
 
 
 --lấy thông tin sinh viên từ bảng đăng kí
@@ -534,27 +543,61 @@ BEGIN
 	DBCC CHECKIDENT (LOP, RESEED,@max)
 END
 GO
-EXEC dbo.xoa_update_nguoi_dung @manhanvien = 17 -- int
--- int
+DROP PROC dbo.xoa_update_lop
+EXEC dbo.xoa_update_lop  @malop = 11 -- int
+GO
 
-SELECT * FROM dbo.LOAILOP
-SELECT* FROM dbo.CAPLOP
-SELECT * FROM dbo.LOP
--- tìm lớp
-CREATE PROCEDURE tim_kiem_lop_theo_ma_lop(@tenlop NVARCHAR(50))
+CREATE PROC xoa_update_loai_lop(@maloailop int)
 AS
 BEGIN
-    SELECT MALOP,TENLOP,LOP.MANHANVIEN,TENNHANVIEN,HOCPHI,CAHOC,SISO,dbo.CAPLOP.MACAPLOP,TENCAPLOP,dbo.LOAILOP.MALOAILOP,TENLOAILOP,NGAYNHAPHOC,NGAYKETTHUC FROM dbo.LOP
+    DELETE FROM dbo.LOAILOP
+	WHERE MALOAILOP = @maloailop
+	declare @max int
+	select @max=max(MALOAILOP)from dbo.LOAILOP
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (LOAILOP, RESEED,@max)
+END
+EXEC dbo.xoa_update_loai_lop @maloailop = 4 -- int
+GO
+
+CREATE PROC xoa_update_cap_lop(@macaplop INT)
+AS
+BEGIN
+    DELETE FROM dbo.CAPLOP
+	WHERE MACAPLOP = @macaplop
+	declare @max int
+	select @max=max(MACAPLOP)from dbo.CAPLOP
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (CAPLOP, RESEED,@max)
+END
+
+EXEC dbo.xoa_update_cap_lop @macaplop = 4 -- int
+
+SELECT * FROM dbo.LOAILOP
+WHERE MALOAILOP = ?
+SELECT* FROM dbo.CAPLOP
+WHERE MACAPLOP = ?
+SELECT * FROM dbo.LOP
+
+-- tìm lớp
+CREATE PROCEDURE tim_kiem_lop_theo_ten_lop(@tenlop NVARCHAR(50))
+AS
+BEGIN
+    SELECT MALOP,TENLOP,LOP.MANHANVIEN,TENNHANVIEN,HOCPHI,CAHOC
+	,SISO,TENLOAILOP,TENCAPLOP,CONVERT(NVARCHAR(10),NGAYNHAPHOC,103) [ngaynhaphoc],CONVERT(NVARCHAR(10),NGAYKETTHUC,103) [ngayketthuc] FROM dbo.LOP
 	JOIN dbo.CAPLOP ON CAPLOP.MACAPLOP = LOP.MACAPLOP
 	JOIN dbo.LOAILOP ON LOAILOP.MALOAILOP = LOP.MALOAILOP
 	JOIN dbo.NGUOIDUNG ON NGUOIDUNG.MANHANVIEN = LOP.MANHANVIEN
 	WHERE TENLOP LIKE LTRIM(RTRIM(@tenlop))
 	ORDER BY MALOP DESC
 END
-
-EXEC dbo.tim_kiem_lop_theo_ma_lop @tenlop = N'%toeic%' -- nvarchar(50)
+DROP PROC dbo.tim_kiem_lop_theo_ten_lop
+EXEC dbo.tim_kiem_lop_theo_ten_lop @tenlop = N'  %toeic%   '
 GO
-SELECT TENCAPLOP FROM dbo.CAPLOP
+
+
 
 ------------------------------------------------------------------------ kết thúc truy vấn lớp----------------------------------------------------
 --------------------------------------------------------------------------------------------
@@ -572,6 +615,7 @@ SELECT * FROM dbo.DOTTHI
 --thêm đợt thi
 INSERT INTO dbo.DOTTHI(NGAYTHI,cathi,SISO,VANG,MALOP)
 VALUES(?,?,?,?,?)
+
 GO
 -- sửa thông tin đợt thi
 UPDATE dbo.DOTTHI SET NGAYTHI=?,cathi= ?,SISO=?,VANG=?,MALOP=?
@@ -591,19 +635,38 @@ BEGIN
 	  SET @max = 0
 	DBCC CHECKIDENT (DOTTHI, RESEED,@max)
 END
-go
+GO
+SELECT * FROM dbo.DOTTHI
+EXEC dbo.xoa_update_dot_thi @madotthi = 21 -- int
+
 
 --tìm kiếm đợt thi
-CREATE PROCEDURE tim_kiem_dot_thi(@malop int)
+CREATE PROCEDURE tim_kiem_dot_thi(@ngaythi NVARCHAR(20))
 AS
 BEGIN
    SELECT MADOTTHI,LOP.MALOP,TENLOP,CONVERT(NVARCHAR(20),NGAYTHI,103) [ngaythi],cathi,dbo.LOP.SISO,VANG FROM dbo.DOTTHI
 	join dbo.LOP on LOP.MALOP = DOTTHI.MALOP
-	WHERE LOP.MALOP LIKE LTRIM(RTRIM(@malop)) 
+	WHERE CONVERT(NVARCHAR(20),NGAYTHI,103) LIKE LTRIM(RTRIM(@ngaythi)) 
 	ORDER BY MADOTTHI desc
 END
+go
+DROP PROC dbo.tim_kiem_dot_thi
+EXEC dbo.tim_kiem_dot_thi @ngaythi ='10/01/2011'
+GO
+SELECT * FROM dbo.DOTTHI
+GO
 
-EXEC dbo.tim_kiem_dot_thi @malop =  1 
+
+CREATE PROCEDURE click_ngay(@madothi int)
+AS
+BEGIN
+     SELECT MADOTTHI,LOP.MALOP,TENLOP,CONVERT(NVARCHAR(20),NGAYTHI,103) [ngaythi],cathi,dbo.LOP.SISO,VANG FROM dbo.DOTTHI
+	join dbo.LOP on LOP.MALOP = DOTTHI.MALOP
+	WHERE MADOTTHI = @madothi
+	ORDER BY MADOTTHI desc
+END
+EXEC dbo.click_ngay @madothi = 1 -- int
+
 go
 ------------------------------------------------------------ kết thúc truy vấn đợt thi----------------------------------------------------
 ------------------------------------------------------------------------------------
@@ -613,97 +676,169 @@ go
 CREATE PROCEDURE thong_tin_bien_lai_hvcu
 AS
 BEGIN
-    SELECT MABIENLAI,TENHOCVIEN,TENLOP,HOCPHI,HOCPHINO,THANHTIEN = (HOCPHI-HOCPHINO),NGUOIDUNG.MANHANVIEN,TENNHANVIEN,DIEMTHI,DIEMTHANHPHAN,DIEMTONG=(DIEMTHI+DIEMTHANHPHAN) FROM dbo.BIENLAI
+    SELECT MABIENLAI,BIENLAI.MADANGKI,BIENLAI.MAHOCVIEN,dbo.DANGKI.TENHOCVIEN
+	,DANGKI.HOCPHI,DANGKI.HOCPHINO,THANHTIEN= (DANGKI.HOCPHI-DANGKI.HOCPHINO) 
+	,dbo.NGUOIDUNG.MANHANVIEN,dbo.NGUOIDUNG.TENNHANVIEN
+	,CONVERT(NVARCHAR(20),NGAYTHUTIEN,103) [ngaythutien]
+	FROM dbo.BIENLAI
 	JOIN dbo.HOCVIEN ON HOCVIEN.MAHOCVIEN = BIENLAI.MAHOCVIEN
-	JOIN dbo.LOP ON LOP.MALOP = BIENLAI.MALOP
 	JOIN dbo.NGUOIDUNG ON NGUOIDUNG.MANHANVIEN = BIENLAI.MANHANVIEN
+	JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI
+	
 END
 EXEC dbo.thong_tin_bien_lai_hvcu
+SELECT * FROM dbo.BIENLAI
+DROP PROC dbo.thong_tin_bien_lai_hvcu
+SELECT * FROM dbo.HOCVIEN
+SELECT * FROM dbo.NGUOIDUNG
+SELECT * FROM dbo.DANGKI
 
+
+INSERT INTO dbo.BIENLAI(THANHTIEN,MAHOCVIEN,MADANGKI,NGAYTHUTIEN)
+SELECT (HOCPHI-hocphino) [thanh tien],MAHOCVIEN,madangki,NGAYDANGKI  FROM dbo.DANGKI
+WHERE madangki NOT IN(SELECT madangki FROM dbo.BIENLAI)
+
+GO
+DROP PROCEDURE xoa_update_bien_lai
+CREATE PROCEDURE xoa_update_bien_lai(@mabienlai int)
+AS
+BEGIN
+	DELETE  FROM dbo.BIENLAI
+	WHERE MABIENLAI = @mabienlai
+	declare @max int
+	select @max=max(MABIENLAI)from dbo.BIENLAI
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (BIENLAI, RESEED,@max)
+END
+GO
+EXEC xoa_update_bien_lai @mabienlai = 7
+
+
+
+
+DROP PROC thong_tin_bien_lai_moi
 CREATE PROCEDURE thong_tin_bien_lai_moi
 AS
 BEGIN
-    SELECT TENHOCVIEN,CONVERT(NVARCHAR(30),NGAYSINH,103), [ngaysinh] FROM dbo.BIENLAI
+    SELECT MABIENLAI,TENHOCVIEN,HOCPHI,HOCPHINO,THANHTIEN=(HOCPHI-HOCPHINO)
+	,CONVERT(NVARCHAR(20),NGAYTHUTIEN,103) [ngaythutien]
+	,NGUOIDUNG.MANHANVIEN,TENNHANVIEN
+	FROM dbo.BIENLAI
 	JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI
+	JOIN dbo.NGUOIDUNG ON NGUOIDUNG.MANHANVIEN = BIENLAI.MANHANVIEN
+	WHERE BIENLAI.MAHOCVIEN IS NULL
 END
--- thêm hóa đơn
-INSERT INTO dbo.BIENLAI(THANHTIEN,MAHOCPHI,MAHOCVIEN,MALOP,MAKETOAN,MADANGKI)
-VALUES(?,?,?,?,?,?)
--- sửa hóa đơn
-UPDATE dbo.BIENLAI SET THANHTIEN=?,MAHOCPHI=?,MAHOCVIEN=?,MALOP=?,MAKETOAN=?,MADANGKI=?
-WHERE MADANGKI =?
 GO
+EXEC thong_tin_bien_lai_moi
+
+INSERT INTO dbo.BIENLAI(THANHTIEN,MANHANVIEN,MADANGKI,NGAYTHUTIEN)
+VALUES(1400000,12,8,'2011/01/12')
+GO
+
+INSERT INTO dbo.BIENLAI(THANHTIEN,MANHANVIEN,MADANGKI,NGAYTHUTIEN)
+VALUES(?,?,?,?)
+GO
+
+SELECT * FROM dbo.BIENLAI
+
+UPDATE dbo.BIENLAI SET THANHTIEN = ?,MANHANVIEN = ?,MADANGKI = ?,NGAYTHUTIEN =?
+WHERE MABIENLAI =?
+go
+CREATE PROC click_table_HV_moi(@maBienLai INT)
+AS
+BEGIN
+     SELECT MABIENLAI,TENHOCVIEN,HOCPHI,HOCPHINO,THANHTIEN=(HOCPHI-HOCPHINO)
+	,CONVERT(NVARCHAR(20),NGAYTHUTIEN,103) [ngaythutien]
+	,NGUOIDUNG.MANHANVIEN,TENNHANVIEN
+	FROM dbo.BIENLAI
+	JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI
+	JOIN dbo.NGUOIDUNG ON NGUOIDUNG.MANHANVIEN = BIENLAI.MANHANVIEN
+	WHERE BIENLAI.MAHOCVIEN IS NULL AND MABIENLAI = @maBienLai
+END
+
+EXEC dbo.click_table_HV_moi @maBienLai =1
+GO
+
+CREATE PROC tim_Kiem_HV_Moi(@ngaythu NVARCHAR(20))
+AS
+BEGIN
+    SELECT MABIENLAI,TENHOCVIEN,HOCPHI,HOCPHINO,THANHTIEN=(HOCPHI-HOCPHINO)
+	,CONVERT(NVARCHAR(20),NGAYTHUTIEN,103) [ngaythutien]
+	,NGUOIDUNG.MANHANVIEN,TENNHANVIEN
+	FROM dbo.BIENLAI
+	JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI
+	JOIN dbo.NGUOIDUNG ON NGUOIDUNG.MANHANVIEN = BIENLAI.MANHANVIEN
+	WHERE BIENLAI.MAHOCVIEN IS NULL AND CONVERT(NVARCHAR(20),NGAYTHUTIEN,103) = @ngaythu
+END
+
+EXEC dbo.tim_Kiem_HV_Moi @ngaythu = '28/02/2012'
+
+
+SELECT dbo.BIENLAI.MAHOCVIEN,TENHOCVIEN,BIENLAI.MALOP,DIEMTHI , DIEMTHANHPHAN , DIEMTONG= (DIEMTHI+DIEMTHANHPHAN) FROM dbo.BIENLAI
+JOIN dbo.DOTTHI ON DOTTHI.MADOTTHI = BIENLAI.MADOTTHI
+JOIN dbo.HOCVIEN ON HOCVIEN.MAHOCVIEN = BIENLAI.MAHOCVIEN
+ JOIN lop ON LOP.MALOP = BIENLAI.MALOP
+ WHERE TENLOP = N'Toeic cấp A'
+
+ SELECT * FROM dbo.BIENLAI
+ SELECT * FROM dbo.HOCVIEN
+-- thêm hóa đơn
+INSERT INTO dbo.BIENLAI(THANHTIEN,MAHOCVIEN,MANHANVIEN,MADANGKI,NGAYTHUTIEN)
+VALUES(?,?,?,?,?)
+-- sửa hóa đơn
+UPDATE dbo.BIENLAI SET THANHTIEN =? ,MAHOCVIEN =?,MANHANVIEN =?,MADANGKI =?,NGAYTHUTIEN =?
+WHERE MABIENLAI = ?
 --xóa biên lai
 DELETE FROM dbo.BIENLAI
 WHERE MADANGKI =?
 GO
 
 --tìm kiếm biên lai
-CREATE PROCEDURE tim_kiem_bien_lai(@mabienlai INT)
+CREATE PROCEDURE tim_kiem_bien_laiCu(@mabienlai INT)
 AS
 BEGIN
-    SELECT MABIENLAI,TENHOCVIEN,TENLOP,HOCPHI,HOCPHINO,THANHTIEN = (HOCPHI-HOCPHINO),TENKETOAN FROM dbo.BIENLAI
+   SELECT MABIENLAI,BIENLAI.MADANGKI,BIENLAI.MAHOCVIEN,dbo.DANGKI.TENHOCVIEN
+	,DANGKI.HOCPHI,DANGKI.HOCPHINO,THANHTIEN= (DANGKI.HOCPHI-DANGKI.HOCPHINO) 
+	,dbo.NGUOIDUNG.MANHANVIEN,dbo.NGUOIDUNG.TENNHANVIEN
+	,CONVERT(NVARCHAR(20),NGAYTHUTIEN,103) [ngaythutien]
+	FROM dbo.BIENLAI
 	JOIN dbo.HOCVIEN ON HOCVIEN.MAHOCVIEN = BIENLAI.MAHOCVIEN
-	JOIN dbo.LOP ON LOP.MALOP = BIENLAI.MALOP
-	JOIN dbo.KETOAN ON KETOAN.MAKETOAN = BIENLAI.MAKETOAN
+	JOIN dbo.NGUOIDUNG ON NGUOIDUNG.MANHANVIEN = BIENLAI.MANHANVIEN
+	JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI
 	WHERE MABIENLAI LIKE LTRIM(RTRIM(@mabienlai))
 END
 GO
-------------------------------------------------------kết thúc truy vấn biên lai--------------------------------------------------
------------------------------------------------------------------------------
----------------------------------------------------------------------------
-------------------------------------------------------bắt đầu truy vấn điểm thi---------------------------------------------------
--------------------------------------------------------------------------
------------------------------------------------------------------------
---thông tin điểm thi
-CREATE PROCEDURE thong_tin_diem_thi
+DROP PROCEDURE dbo.tim_kiem_bien_laiCu
+EXEC dbo.tim_kiem_bien_laiCu @mabienlai = 6 -- int
+
+--------------------------------------------------------
+CREATE PROCEDURE tim_kiem_bien_laiCu_theo_Ngay(@ngaythu NVARCHAR(20))
 AS
 BEGIN
-    SELECT DIEMTHI.MAHOCVIEN,TENHOCVIEN,DIEMTHI.MADOTTHI,DIEMTHI,CONVERT(NVARCHAR(20),NGAYTHI,103) [NGAYTHI],CONVERT(NVARCHAR(30),GIOTHI,114)[GIOTHI] FROM dbo.DIEMTHI
-	JOIN dbo.DOTTHI ON DOTTHI.MADOTTHI = DIEMTHI.MADOTTHI
-	JOIN dbo.HOCVIEN ON HOCVIEN.MAHOCVIEN = DIEMTHI.MAHOCVIEN
-
+   SELECT MABIENLAI,BIENLAI.MADANGKI,BIENLAI.MAHOCVIEN,dbo.DANGKI.TENHOCVIEN
+	,DANGKI.HOCPHI,DANGKI.HOCPHINO,THANHTIEN= (DANGKI.HOCPHI-DANGKI.HOCPHINO) 
+	,dbo.NGUOIDUNG.MANHANVIEN,dbo.NGUOIDUNG.TENNHANVIEN
+	,CONVERT(NVARCHAR(20),NGAYTHUTIEN,103) [ngaythutien]
+	FROM dbo.BIENLAI
+	JOIN dbo.HOCVIEN ON HOCVIEN.MAHOCVIEN = BIENLAI.MAHOCVIEN
+	JOIN dbo.NGUOIDUNG ON NGUOIDUNG.MANHANVIEN = BIENLAI.MANHANVIEN
+	JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI
+	WHERE CONVERT(NVARCHAR(20),NGAYTHUTIEN,103) =  @ngaythu
 END
---THÊM ĐIỂM THI
-INSERT INTO dbo.DIEMTHI(MAHOCVIEN,MADOTTHI,DIEMTHI)
-VALUES(?,?,?)
---sửa điểm thi
-UPDATE dbo.DIEMTHI SET DIEMTHI= ?
-WHERE MAHOCVIEN=?,MADOTTHI=?
 GO
 
-CREATE PROCEDURE xoa_update_diem_thi(@mahocvien INT,@madotthi INT )
-AS
-BEGIN
-	DELETE  FROM dbo.DIEMTHI
-	WHERE MADOTTHI =@madotthi AND MAHOCVIEN =@mahocvien
-	declare @max int
-	select @max=max(MADOTTHI)from dbo.DOTTHI
-	if @max IS NULL   
-	  SET @max = 0
-	DBCC CHECKIDENT (DOTTHI, RESEED,@max)
-END
-go
---xóa điểm thi
+EXEC tim_kiem_bien_laiCu_theo_Ngay @ngaythu = '20/12/2011'
 
---tìm kiếm điểm thi
-CREATE PROCEDURE tim_kiem_diem_thi(@tenhocvien NVARCHAR(100))
-AS
-BEGIN
-    SELECT DIEMTHI.MAHOCVIEN,TENHOCVIEN,DIEMTHI.MADOTTHI,DIEMTHI,CONVERT(NVARCHAR(20),NGAYTHI,103) [NGAYTHI],CONVERT(NVARCHAR(30),GIOTHI,114)[GIOTHI] FROM dbo.DIEMTHI
-	JOIN dbo.DOTTHI ON DOTTHI.MADOTTHI = DIEMTHI.MADOTTHI
-	JOIN dbo.HOCVIEN ON HOCVIEN.MAHOCVIEN = DIEMTHI.MAHOCVIEN
-	WHERE TENHOCVIEN LIKE LTRIM(RTRIM(@tenhocvien))
-END
 
-EXEC dbo.tim_kiem_diem_thi @tenhocvien = N'  %văn%  ' -- nvarchar(100)
-go
--------------------------------------------------------------------kết thúc truy vấn điểm thi-----------------------------
-------------------------------------------------------------------------------------------
+
+------------------------------------------------------kết thúc truy vấn biên lai--------------------------------------------------
+-----------------------------------------------------------------------------
+
 ---------------------------------------------------------------------------------------
 -------------------------------------------------------------------bắt đầu truy vấn quản lý tài khoản nhân viên --------------------------------
 --thông tin tài khoản
-create PROCEDURE thong_tin_tai_khoan
+ALTER PROCEDURE thong_tin_tai_khoan
 AS
 BEGIN
     SELECT MANHANVIEN,TENNHANVIEN,GIOITINH,CONVERT(NVARCHAR(30),NGAYSINH,103) [ngaysinh],DIACHI,SDT,EMAIL,TENVAITRO,TENDANGNHAP,MATKHAU FROM dbo.NGUOIDUNG
@@ -745,7 +880,7 @@ END
 go
 --tìm kiếm tài khoản nhân viên theo mã nhân viên
 
-create  PROCEDURE tim_kiem_tk_nhan_vien(@MATKNV INT)
+CREATE  PROCEDURE tim_kiem_tk_nhan_vien(@MATKNV INT)
 AS
 BEGIN
     SELECT MANHANVIEN,TENNHANVIEN,GIOITINH,CONVERT(NVARCHAR(30),NGAYSINH,103) [ngaysinh],DIACHI,SDT,EMAIL,TENVAITRO,TENDANGNHAP,MATKHAU FROM dbo.NGUOIDUNG
@@ -767,3 +902,30 @@ VALUES(?,?,?,?,?,?,?,?,?,?)
 UPDATE dbo.NGUOIDUNG SET TENNHANVIEN = ?,GIOITINH = ?,NGAYSINH = ?,DIACHI = ?,SDT = ?,EMAIL = ?,TENVAITRO = ?,TENDANGNHAP = ?,MATKHAU = ?
 WHERE MANHANVIEN = ?
 
+GO
+SELECT TENLOP,COUNT(dbo.LOP.MALOP),CAHOC FROM dbo.HOCVIEN
+JOIN lop ON LOP.MALOP = HOCVIEN.MALOP
+GROUP BY LOP.MALOP,HOCVIEN.MALOP,TENLOP,CAHOC
+HAVING LOP.MALOP = HOCVIEN.MALOP
+GO
+---- truy vấn đăng kí
+CREATE PROC hoc_vien_moi
+AS
+BEGIN
+    SELECT madangki,TENHOCVIEN,CONVERT(NVARCHAR(20),GIOITINH,103) [ngaysinh],GIOITINH,sdt,EMAIL,DIACHI,
+	TENLOAILOP,TENCAPLOP,HOCPHI,CAHOC,CONVERT(NVARCHAR(20),NGAYNHAPHOC,103)[ngaynhaphoc]
+	,CONVERT(NVARCHAR(20),NGAYDANGKI,103) [ngaydangki],MAHOCVIEN FROM dbo.DANGKI
+	WHERE MAHOCVIEN is NULL
+END
+go
+
+CREATE PROCEDURE hoc_vien_cu
+AS
+BEGIN
+    SELECT madangki,TENHOCVIEN,CONVERT(NVARCHAR(20),GIOITINH,103) [ngaysinh],GIOITINH,sdt,EMAIL,DIACHI,
+	TENLOAILOP,TENCAPLOP,HOCPHI,CAHOC,CONVERT(NVARCHAR(20),NGAYNHAPHOC,103)[ngaynhaphoc]
+	,CONVERT(NVARCHAR(20),NGAYDANGKI,103) [ngaydangki],MAHOCVIEN FROM dbo.DANGKI
+	WHERE MAHOCVIEN IS NOT NULL
+	SELECT MAHOCVIEN,TENHOCVIEN,SDT,MALOP FROM dbo.HOCVIEN
+	WHERE TENHOCVIEN = N'nguyễn văn C'
+END

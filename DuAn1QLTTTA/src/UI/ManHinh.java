@@ -127,14 +127,14 @@ public class ManHinh extends javax.swing.JFrame {
 
         btn_hocVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/hocVien.png"))); // NOI18N
         btn_hocVien.setText("Quản lý học viên");
+        btn_hocVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hocVienActionPerformed(evt);
+            }
+        });
 
         btn_DangKiHocVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/diemthi.png"))); // NOI18N
         btn_DangKiHocVien.setText("Quản lý đăng kí học viên");
-        btn_DangKiHocVien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_DangKiHocVienActionPerformed(evt);
-            }
-        });
 
         btn_bienLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/biên lai.png"))); // NOI18N
         btn_bienLai.setText("Quản lý biên lai");
@@ -348,15 +348,14 @@ public class ManHinh extends javax.swing.JFrame {
         ql.setVisible(true);
     }//GEN-LAST:event_btn_bienLaiActionPerformed
 
-    private void btn_DangKiHocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangKiHocVienActionPerformed
-        // TODO add your handling code here:
+    private void btn_hocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hocVienActionPerformed
         close();
-        QuanLyDangKi ql = new QuanLyDangKi();
+       QLHocVien ql = new QLHocVien();
         desktopMain.add(ql);
         ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
                 (desktopMain.getHeight() - ql.getHeight()) / 2);
         ql.setVisible(true);
-    }//GEN-LAST:event_btn_DangKiHocVienActionPerformed
+    }//GEN-LAST:event_btn_hocVienActionPerformed
 
     /**
      * @param args the command line arguments

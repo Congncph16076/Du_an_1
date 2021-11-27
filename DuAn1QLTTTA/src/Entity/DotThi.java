@@ -5,26 +5,30 @@
  */
 package Entity;
 
-import java.util.Date;
-
 /**
  *
  * @author vinhn
  */
 public class DotThi {
-    private int maDotThi, caThi, SiSo, Vang, maLop;
-    private Date ngayThi;
+    private int maDotThi;
+    private  int maLop;
+    private  String tenLop;
+    private  String ngayThi;
+    private int caThi;
+    private int  siso;
+    private int vang;
 
     public DotThi() {
     }
 
-    public DotThi(int maDotThi, int caThi, int SiSo, int Vang, int maLop, Date ngayThi) {
+    public DotThi(int maDotThi, int maLop, String tenLop, String ngayThi, int caThi, int siso, int vang) {
         this.maDotThi = maDotThi;
-        this.caThi = caThi;
-        this.SiSo = SiSo;
-        this.Vang = Vang;
         this.maLop = maLop;
+        this.tenLop = tenLop;
         this.ngayThi = ngayThi;
+        this.caThi = caThi;
+        this.siso = siso;
+        this.vang = vang;
     }
 
     public int getMaDotThi() {
@@ -35,30 +39,6 @@ public class DotThi {
         this.maDotThi = maDotThi;
     }
 
-    public int getCaThi() {
-        return caThi;
-    }
-
-    public void setCaThi(int caThi) {
-        this.caThi = caThi;
-    }
-
-    public int getSiSo() {
-        return SiSo;
-    }
-
-    public void setSiSo(int SiSo) {
-        this.SiSo = SiSo;
-    }
-
-    public int getVang() {
-        return Vang;
-    }
-
-    public void setVang(int Vang) {
-        this.Vang = Vang;
-    }
-
     public int getMaLop() {
         return maLop;
     }
@@ -67,18 +47,46 @@ public class DotThi {
         this.maLop = maLop;
     }
 
-    public Date getNgayThi() {
+    public String getTenLop() {
+        return tenLop;
+    }
+
+    public void setTenLop(String tenLop) {
+        this.tenLop = tenLop;
+    }
+
+    public String getNgayThi() {
         return ngayThi;
     }
 
-    public void setNgayThi(Date ngayThi) {
+    public void setNgayThi(String ngayThi) {
         this.ngayThi = ngayThi;
     }
 
-    @Override
-    public String toString() {
-        return "DotThi{" + "maDotThi=" + maDotThi + ", caThi=" + caThi + ", SiSo=" + SiSo + ", Vang=" + Vang + ", maLop=" + maLop + ", ngayThi=" + ngayThi + '}';
+    public int getCaThi() {
+        return caThi;
     }
+
+    public void setCaThi(int caThi) {
+        this.caThi = caThi;
+    }
+
+    public int getSiso() {
+        return siso;
+    }
+
+    public void setSiso(int siso) {
+        this.siso = siso;
+    }
+
+    public int getVang() {
+        return vang;
+    }
+
+    public void setVang(int vang) {
+        this.vang = vang;
+    }
+    
     
     
 }

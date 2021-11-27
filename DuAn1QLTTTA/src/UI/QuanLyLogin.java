@@ -247,7 +247,7 @@ public class QuanLyLogin extends javax.swing.JFrame {
             int vaiTro =0;
             listND = dnDAO.dangNhapQuanLy(nd, conn);
             if (listND.size() > 0) {
-                ManHinhLamViecNVQL manHinh = new ManHinhLamViecNVQL(tk,0);
+               ManHinh manHinh = new ManHinh(txt_TaiKhoanQuanLy.getText(), vaiTro);
                 manHinh.setVisible(true);
                 this.dispose();
                 

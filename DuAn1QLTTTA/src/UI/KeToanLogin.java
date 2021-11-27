@@ -246,7 +246,7 @@ public class KeToanLogin extends javax.swing.JFrame {
             listND = dnDAO.dangNhapKeToan(nd, conn);
             if (listND.size() >0) {
                 int vaiTro =1;
-                ManHinhLamViecNVQL manHinh = new ManHinhLamViecNVQL(txt_LoginKeToan.getText(), vaiTro);
+                ManHinh manHinh = new ManHinh(txt_LoginKeToan.getText(), vaiTro);
                 manHinh.setVisible(true);
                 this.dispose();
                 System.out.println("tài khoản: " + nd.getTenDangNhap() + "\n" + "mật khẩu: " + nd.getMatKhau());

@@ -251,39 +251,38 @@ public class GiangVienLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ExitGiangVienActionPerformed
 
     private void btn_LoginGiangVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginGiangVienActionPerformed
-        System.out.println("abc:" + this.txt_Tai_Khoan_Giang_Vien.getText());
-        
-     
-        
-            if (checkNull()) {
-                txt_Tai_Khoan_Giang_Vien.setBorder(border1);
-                txt_PassGiangVien.setBorder(border1);
-                lbl_loiGV.setText("");
-                lbl_loiTKGV.setText("");
-                lbl_loiPassGV.setText("");
-                NguoiDung nd = new NguoiDung();
-                nd.setTenDangNhap(txt_Tai_Khoan_Giang_Vien.getText());
-                nd.setMatKhau(txt_PassGiangVien.getText());
-                listND = dnDAO.dangNhapGiangVien(nd, conn);
-                if (listND.size() > 0) {
-                    int vaitro =2;
-                    ManHinhLamViecNVQL manHinh = new ManHinhLamViecNVQL(txt_Tai_Khoan_Giang_Vien.getText(), vaitro);
-                    manHinh.setVisible(true);
-                    this.dispose();
-                    
-                System.out.println("tài khoản: " + nd.getTenDangNhap() + "\n" + "mật khẩu: " + nd.getMatKhau());
+
+        if (checkNull()) {
+            txt_Tai_Khoan_Giang_Vien.setBorder(border1);
+            txt_PassGiangVien.setBorder(border1);
+            lbl_loiGV.setText("");
+            lbl_loiTKGV.setText("");
+            lbl_loiPassGV.setText("");
+            NguoiDung nd = new NguoiDung();
+            nd.setTenDangNhap(txt_Tai_Khoan_Giang_Vien.getText());
+            nd.setMatKhau(txt_PassGiangVien.getText());
+            nd.setVaiTro(2);
+            listND = dnDAO.dangNhapGiangVien(nd, conn);
+            if (listND.size() > 0) {
+                int vaitro = nd.getVaiTro();
+//                    ManHinhLamViecNVQL manHinh = new ManHinhLamViecNVQL(txt_Tai_Khoan_Giang_Vien.getText(),vaitro);
+//                    manHinh.setVisible(true);
+                ManHinh ok = new ManHinh(txt_Tai_Khoan_Giang_Vien.getText(), vaitro);
+                ok.setVisible(true);
+                this.dispose();
+                //QuanLyLopHoc lop = new QuanLyLopHoc(vaitro);
+                System.out.println("tài khoản: " + nd.getTenDangNhap() + "\n" + "mật khẩu: " + nd.getMatKhau() + "\n" + nd.getVaiTro());
                 System.out.println(listND);
-                }else{
-                     lbl_loiGV.setText("Tên đăng nhập hoặc mật khẩu không đúng");
+            } else {
+                lbl_loiGV.setText("Tên đăng nhập hoặc mật khẩu không đúng");
                 txt_Tai_Khoan_Giang_Vien.setBorder(border);
                 txt_PassGiangVien.setBorder(border);
                 lbl_loiGV.setForeground(Color.red);
                 lbl_loiTKGV.setText("");
-//                .setText("");
                 txt_Tai_Khoan_Giang_Vien.requestFocus();
-                }
             }
-        
+        }
+
     }//GEN-LAST:event_btn_LoginGiangVienActionPerformed
 
     private void lbl_doimkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_doimkMouseClicked
@@ -329,7 +328,7 @@ public class GiangVienLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ExitGiangVien;
-    private javax.swing.JButton btn_LoginGiangVien;
+    public javax.swing.JButton btn_LoginGiangVien;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

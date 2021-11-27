@@ -18,9 +18,9 @@ public class ConnectToSQL {
     public static  Connection getConnect(){
          try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url ="jdbc:sqlserver://DESKTOP-DV97AJR\\SQLEXPRESS:1433;databaseName=QLTRUNGTAMTIENGANH1";
+            String url ="jdbc:sqlserver://CONGHEHE\\SQLEXPRESS:1433;databaseName=QLTRUNGTAMTIENGANH1";
             String user ="sa";
-            String password = "11";
+            String password = "123";
             conn= DriverManager.getConnection(url,user,password);
             
         } catch (Exception e) {

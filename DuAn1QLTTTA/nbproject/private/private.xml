@@ -12,24 +12,11 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QuanLyNhanVien.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/TienIchHoTro/ConnectToSQL.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QuanLyHocVien.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QuenMkQuanLy.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/Entity/DangKi.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/LopDAO.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/Entity/BuoiHoc.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/Entity/DiemDanh.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/EntityDAO.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/HocVienDao.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/QuanlyHocVienDao.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/DangNhapDAO.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/Entity/DotThi.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/Entity/HocVien.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/Entity/BienLai.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/Entity/NguoiDung.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/QuanLyNVDAO.java</file>
-            <file>file:/C:/Users/vinhn/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QuanLyLopHoc.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QLLop.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/ManHinh.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QLHocVien.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/BienLaiDAO.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QuanLy_BienLai.java</file>
         </group>
     </open-files>
 </project-private>

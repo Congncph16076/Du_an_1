@@ -7,10 +7,10 @@ package Entity;
 
 /**
  *
- * @author congc
+ * @author Admin
  */
 public class NguoiDung {
-    private  int maNhanVien;
+   private  int maNhanVien;
     private  String tenNhanVien;
     private  boolean gioiTinh;
     private  String ngaySinh;
@@ -132,5 +132,5 @@ public class NguoiDung {
     public NguoiDung() {
     }
 
-   
+    
 }
