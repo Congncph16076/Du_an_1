@@ -162,6 +162,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; h&#x1ecd;c vi&#xea;n"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_hocVienActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_DangKiHocVien">
           <Properties>
@@ -170,6 +173,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; &#x111;&#x103;ng k&#xed; h&#x1ecd;c vi&#xea;n"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_DangKiHocVienActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_bienLai">
           <Properties>
