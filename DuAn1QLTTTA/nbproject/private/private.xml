@@ -14,8 +14,10 @@
         <group>
             <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QLLop.java</file>
             <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/ManHinh.java</file>
-            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QLHocVien.java</file>
-            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/BienLaiDAO.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/DiemThiDAO.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QLBuoiHoc_DiemDanh.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QLNV.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/BuoiHocDAO.java</file>
             <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QuanLy_BienLai.java</file>
         </group>
     </open-files>

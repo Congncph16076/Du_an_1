@@ -13,18 +13,19 @@ import java.util.Date;
  */
 public class BuoiHoc {
     private int maBuoiHoc, maLopHoc;
-    private Date ngayHoc;
-    private String caHoc, ghiChu;
+    private String ngayHoc;
+    private String caHoc, ghiChu,tenLopHoc;
 
     public BuoiHoc() {
     }
 
-    public BuoiHoc(int maBuoiHoc, int maLopHoc, Date ngayHoc, String caHoc, String ghiChu) {
+    public BuoiHoc(int maBuoiHoc, int maLopHoc, String ngayHoc, String caHoc, String ghiChu, String tenLopHoc) {
         this.maBuoiHoc = maBuoiHoc;
         this.maLopHoc = maLopHoc;
         this.ngayHoc = ngayHoc;
         this.caHoc = caHoc;
         this.ghiChu = ghiChu;
+        this.tenLopHoc = tenLopHoc;
     }
 
     public int getMaBuoiHoc() {
@@ -43,11 +44,11 @@ public class BuoiHoc {
         this.maLopHoc = maLopHoc;
     }
 
-    public Date getNgayHoc() {
+    public String getNgayHoc() {
         return ngayHoc;
     }
 
-    public void setNgayHoc(Date ngayHoc) {
+    public void setNgayHoc(String ngayHoc) {
         this.ngayHoc = ngayHoc;
     }
 
@@ -67,10 +68,13 @@ public class BuoiHoc {
         this.ghiChu = ghiChu;
     }
 
-    @Override
-    public String toString() {
-        return "BuoiHoc{" + "maBuoiHoc=" + maBuoiHoc + ", maLopHoc=" + maLopHoc + ", ngayHoc=" + ngayHoc + ", caHoc=" + caHoc + ", ghiChu=" + ghiChu + '}';
+    public String getTenLopHoc() {
+        return tenLopHoc;
+    }
+
+    public void setTenLopHoc(String tenLopHoc) {
+        this.tenLopHoc = tenLopHoc;
     }
     
-    
+   
 }

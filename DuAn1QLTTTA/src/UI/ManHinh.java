@@ -146,6 +146,11 @@ public class ManHinh extends javax.swing.JFrame {
 
         btn_DD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/lịch thi.png"))); // NOI18N
         btn_DD.setText("Quản lý điểm danh");
+        btn_DD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DDActionPerformed(evt);
+            }
+        });
 
         btn_QLNV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/nhânvien.png"))); // NOI18N
         btn_QLNV.setText("Quản lý Nhân viên");
@@ -356,6 +361,15 @@ public class ManHinh extends javax.swing.JFrame {
                 (desktopMain.getHeight() - ql.getHeight()) / 2);
         ql.setVisible(true);
     }//GEN-LAST:event_btn_hocVienActionPerformed
+
+    private void btn_DDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DDActionPerformed
+        close();
+       QLBuoiHoc_DiemDanh ql = new QLBuoiHoc_DiemDanh();
+        desktopMain.add(ql);
+        ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
+                (desktopMain.getHeight() - ql.getHeight()) / 2);
+        ql.setVisible(true);
+    }//GEN-LAST:event_btn_DDActionPerformed
 
     /**
      * @param args the command line arguments

@@ -75,11 +75,11 @@ public class LopDAO {
         return listLoaiL;
     }
 
-    public Lop clickTable(String ID, Connection conn) {
+    public Lop clickTable(int ID, Connection conn) {
         CallableStatement call;
         try {
-            call = conn.prepareCall("{call tim_kiem_lop_theo_ten_lop(?)}");
-            call.setString(1, ID);
+            call = conn.prepareCall("{call click_table_lop(?)}");
+            call.setInt(1, ID);
             ResultSet rs = call.executeQuery();
             while (rs.next()) {
                 Lop lop = new Lop();

@@ -71,7 +71,6 @@ public class QLNV extends javax.swing.JInternalFrame {
     }
 
     boolean checkNullNV() {
-        
 
 //        if (txt_tenNhanVien.getText().equals("") && txt_dangNhapNV.getText().equals("") && txt_matKhauNV.getText().equals("")
 //                && txt_diaChiNV.getText().equals("") && txt_SDTNV.getText().equals("") && txt_EmailNV.getText().equals("")
@@ -112,21 +111,20 @@ public class QLNV extends javax.swing.JInternalFrame {
         } else {
             lbl_loiTenNV.setText("");
             txt_tenNhanVien.setBorder(border1);
-            lbl_loiTenNV.setForeground(Color.black);
         }
-        
+
         if (rbn_namNV.isSelected() == false && rbn_NuNV.isSelected() == false) {
             lbl_loiGioiTinh.setText("Bạn chưa chọn giới tính!");
             lbl_loiGioiTinh.setForeground(Color.red);
             pan_gioiTinh.setBorder(border);
-           
+
             return false;
-        }else{
+        } else {
             lbl_loiGioiTinh.setText("");
             pan_gioiTinh.setBorder(border1);
-       
+
         }
-        
+
         String date = ((JTextField) dateChooser_birthNV.getDateEditor().getUiComponent()).getText();
         if (date.equals("")) {
             lbl_loibirthNV.setText("Thiếu ngày sinh rồi chọn lại bạn nhé!");
@@ -134,13 +132,11 @@ public class QLNV extends javax.swing.JInternalFrame {
             lbl_loibirthNV.setForeground(Color.red);
             dateChooser_birthNV.requestFocus();
             return false;
-        }else{
+        } else {
             lbl_loibirthNV.setText("");
             dateChooser_birthNV.setBorder(border1);
         }
-        
-        
-        
+
         if (txt_dangNhapNV.getText().equals("")) {
             lbl_loiDangNhapNV.setText("Thiếu tên đăng nhập rồi nhập lại bạn nhé!");
             txt_dangNhapNV.setBorder(border);
@@ -150,7 +146,7 @@ public class QLNV extends javax.swing.JInternalFrame {
         } else {
             lbl_loiDangNhapNV.setText("");
             txt_dangNhapNV.setBorder(border1);
-           
+
         }
 
         if (txt_matKhauNV.getText().equals("")) {
@@ -159,10 +155,10 @@ public class QLNV extends javax.swing.JInternalFrame {
             lbl_loiMatKhauNV.setForeground(Color.red);
             txt_matKhauNV.requestFocus();
             return false;
-        }else{
+        } else {
             lbl_loiMatKhauNV.setText("");
             txt_matKhauNV.setBorder(border1);
-           
+
         }
 
         if (txt_diaChiNV.getText().equals("")) {
@@ -171,13 +167,12 @@ public class QLNV extends javax.swing.JInternalFrame {
             lbl_loiDiaChiNV.setForeground(Color.red);
             txt_diaChiNV.requestFocus();
             return false;
-        }else{
-             lbl_loiDiaChiNV.setText("");
+        } else {
+            lbl_loiDiaChiNV.setText("");
             txt_diaChiNV.setBorder(border1);
-          
+
         }
-        
-        
+
         if (txt_SDTNV.getText().equals("")) {
             lbl_loiSDTNV.setText("thiếu số điện thoại giảng viên rồi nhập lại bạn nhé!");
             txt_SDTNV.setBorder(border);
@@ -192,8 +187,8 @@ public class QLNV extends javax.swing.JInternalFrame {
                 txt_SDTNV.setBorder(border);
                 txt_SDTNV.requestFocus();
                 return false;
-            }else{
-                 lbl_loiSDTNV.setText("");
+            } else {
+                lbl_loiSDTNV.setText("");
                 txt_SDTNV.setBorder(border1);
             }
 
@@ -212,8 +207,8 @@ public class QLNV extends javax.swing.JInternalFrame {
                 txt_EmailNV.setBorder(border);
                 txt_EmailNV.requestFocus();
                 return false;
-            }else{
-                  lbl_loiEmailNV.setText("");
+            } else {
+                lbl_loiEmailNV.setText("");
                 txt_EmailNV.setBorder(border1);
             }
 
@@ -261,7 +256,7 @@ public class QLNV extends javax.swing.JInternalFrame {
             txt_timKiemNV.requestFocus();
             return false;
         } else {
-            Border border1 = BorderFactory.createLineBorder(Color.black);
+
             txt_timKiemNV.setBorder(border1);
             txt_timKiemNV.setForeground(Color.black);
         }
@@ -317,7 +312,6 @@ public class QLNV extends javax.swing.JInternalFrame {
         jPanel7 = new javax.swing.JPanel();
         btn_ThemNV = new javax.swing.JButton();
         btn_SuaNV = new javax.swing.JButton();
-        btn_XoaKT = new javax.swing.JButton();
         btn_ClearKT = new javax.swing.JButton();
         txt_timKiemNV = new javax.swing.JTextField();
         btn_TimKiemNV = new javax.swing.JButton();
@@ -560,16 +554,13 @@ public class QLNV extends javax.swing.JInternalFrame {
             }
         });
 
-        btn_XoaKT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Delete.png"))); // NOI18N
-        btn_XoaKT.setText("Xóa nhân viên");
-        btn_XoaKT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_XoaKTActionPerformed(evt);
-            }
-        });
-
         btn_ClearKT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Refresh.png"))); // NOI18N
         btn_ClearKT.setText("Clear ");
+        btn_ClearKT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ClearKTActionPerformed(evt);
+            }
+        });
 
         txt_timKiemNV.setText("Nhập mã nhân viên");
 
@@ -596,9 +587,7 @@ public class QLNV extends javax.swing.JInternalFrame {
                         .addComponent(btn_ThemNV)
                         .addGap(10, 10, 10)
                         .addComponent(btn_SuaNV)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_XoaKT)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btn_ClearKT, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -613,7 +602,6 @@ public class QLNV extends javax.swing.JInternalFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ThemNV, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_SuaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_XoaKT, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_ClearKT, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -666,29 +654,27 @@ public class QLNV extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_TimKiemNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemNVActionPerformed
-        fillTableGV();
-        listND = nvDAO.search(txt_timKiemNV.getText(), conn);
-        dtm.setRowCount(0);
-        dtm = (DefaultTableModel) tbl_tableNV.getModel();
-        for (NguoiDung nd : listND) {
-            Vector<Object> vec = new Vector<>();
-            vec.add(nd.getMaNhanVien());
-            vec.add(nd.getTenNhanVien());
-            vec.add(nd.isGioiTinh() == true ? "Nam" : "Nữ");
-            vec.add(nd.getNgaySinh());
-            vec.add(nd.getDiaChi());
-            vec.add(nd.getSDT().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3"));
-            vec.add(nd.getEmail());
-            vec.add(nd.getTenDangNhap());
-            vec.add(nd.getMatKhau());
-            vec.add(nd.getVaiTro() == 1 ? "Kế toán" : nd.getVaiTro() == 2 ? "Giảng viên" : "Quản lý");
-            dtm.addRow(vec);
+        if (checknullTKNV()) {
+            fillTableGV();
+            listND = nvDAO.search(txt_timKiemNV.getText(), conn);
+            dtm.setRowCount(0);
+            dtm = (DefaultTableModel) tbl_tableNV.getModel();
+            for (NguoiDung nd : listND) {
+                Vector<Object> vec = new Vector<>();
+                vec.add(nd.getMaNhanVien());
+                vec.add(nd.getTenNhanVien());
+                vec.add(nd.isGioiTinh() == true ? "Nam" : "Nữ");
+                vec.add(nd.getNgaySinh());
+                vec.add(nd.getDiaChi());
+                vec.add(nd.getSDT().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3"));
+                vec.add(nd.getEmail());
+                vec.add(nd.getTenDangNhap());
+                vec.add(nd.getMatKhau());
+                vec.add(nd.getVaiTro() == 1 ? "Kế toán" : nd.getVaiTro() == 2 ? "Giảngs viên" : "Quản lý");
+                dtm.addRow(vec);
+            }
         }
     }//GEN-LAST:event_btn_TimKiemNVActionPerformed
-
-    private void btn_XoaKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaKTActionPerformed
-
-    }//GEN-LAST:event_btn_XoaKTActionPerformed
 
     private void btn_SuaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaNVActionPerformed
 
@@ -729,7 +715,7 @@ public class QLNV extends javax.swing.JInternalFrame {
             String s = txt_SDTNV.getText().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3");
             txt_SDTNV.setText(s);
             fillTableGV();
-
+            Dialog.alert(null, "Sửa thành công");
         }
     }//GEN-LAST:event_btn_SuaNVActionPerformed
 
@@ -767,11 +753,9 @@ public class QLNV extends javax.swing.JInternalFrame {
                 nd.setVaiTro(vaiTro);
                 boolean them = nvDAO.insert(nd, conn);
                 fillTableGV();
-                if (them == true) {
-                    Dialog.alert(null, "ok");
-                } else {
-                    Dialog.alert(null, "k0");
-                }
+
+                Dialog.alert(null, "Thêm thành công");
+
             }
         }
     }//GEN-LAST:event_btn_ThemNVActionPerformed
@@ -827,13 +811,44 @@ public class QLNV extends javax.swing.JInternalFrame {
         txt_SDTNV.setText(s);
     }//GEN-LAST:event_txt_SDTNVMouseExited
 
+    private void btn_ClearKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClearKTActionPerformed
+        txt_EmailNV.setText("");
+        txt_SDTNV.setText("");
+        txt_dangNhapNV.setText("");
+        txt_diaChiNV.setText("");
+        txt_matKhauNV.setText("");
+        txt_tenNhanVien.setText("");
+        txt_timKiemNV.setText("");
+        ((JTextField) dateChooser_birthNV.getDateEditor().getUiComponent()).setText("");
+        chk_giangVien.setEnabled(false);
+        chk_keToan.setEnabled(false);
+        chk_quanLy.setEnabled(false);
+        lbl_loiTenNV.setText("");
+        txt_tenNhanVien.setBorder(border1);
+        lbl_loiGioiTinh.setText("");
+        pan_gioiTinh.setBorder(border1);
+        lbl_loibirthNV.setText("");
+        dateChooser_birthNV.setBorder(border1);
+        lbl_loiDangNhapNV.setText("");
+        txt_dangNhapNV.setBorder(border1);
+        lbl_loiMatKhauNV.setText("");
+        txt_matKhauNV.setBorder(border1);
+        lbl_loiDiaChiNV.setText("");
+        txt_diaChiNV.setBorder(border1);
+        lbl_loiSDTNV.setText("");
+        txt_SDTNV.setBorder(border1);
+        lbl_loiEmailNV.setText("");
+        txt_EmailNV.setBorder(border1);
+        txt_timKiemNV.setBorder(border1);
+        txt_timKiemNV.setForeground(Color.black);
+    }//GEN-LAST:event_btn_ClearKTActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ClearKT;
     private javax.swing.JButton btn_SuaNV;
     private javax.swing.JButton btn_ThemNV;
     private javax.swing.JButton btn_TimKiemNV;
-    private javax.swing.JButton btn_XoaKT;
     private javax.swing.JCheckBox chk_giangVien;
     private javax.swing.JCheckBox chk_keToan;
     private javax.swing.JCheckBox chk_quanLy;
