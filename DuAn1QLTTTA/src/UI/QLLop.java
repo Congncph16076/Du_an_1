@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package UI;
+
 import DAO.LopDAO;
 import DAO.QuanLyNVDAO;
 import Entity.Lop;
@@ -28,6 +29,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+
 public class QLLop extends javax.swing.JInternalFrame {
 
     private DefaultTableModel dtm = new DefaultTableModel();
@@ -38,7 +40,7 @@ public class QLLop extends javax.swing.JInternalFrame {
     Border boder1 = BorderFactory.createLineBorder(Color.black);
     private DefaultComboBoxModel<String> dcb = new DefaultComboBoxModel();
     NguoiDung nd = new NguoiDung();
-    
+
     public QLLop() {
         initComponents();
         conn = TienIchHoTro.ConnectToSQL.getConnect();
@@ -140,7 +142,6 @@ public class QLLop extends javax.swing.JInternalFrame {
             return false;
         } else {
             lbl_loiMaGiangVien.setText("");
-
             txt_maGiangvien.setBorder(boder1);
 
         }
@@ -240,10 +241,7 @@ public class QLLop extends javax.swing.JInternalFrame {
         }
         return true;
     }
-    
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -671,6 +669,8 @@ public class QLLop extends javax.swing.JInternalFrame {
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel43.setText("Tìm kiếm");
 
+        txt_timKiem.setText("Nhập tên lớp");
+
         btn_timKiemLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Search.png"))); // NOI18N
         btn_timKiemLop.setText("Tìm Kiếm");
         btn_timKiemLop.addActionListener(new java.awt.event.ActionListener() {
@@ -980,7 +980,7 @@ public class QLLop extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 617, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 629, Short.MAX_VALUE)
         );
 
         pack();
@@ -1045,6 +1045,8 @@ public class QLLop extends javax.swing.JInternalFrame {
     private void btn_clearLoaiLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearLoaiLopActionPerformed
         filltableLL();
         txt_tenLoaiLop.setText("");
+        txt_timKiemLoaiLop.setBorder(boder1);
+        txt_timKiemLoaiLop.setForeground(Color.black);
     }//GEN-LAST:event_btn_clearLoaiLopActionPerformed
 
     private void tbl_capLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_capLopMouseClicked
@@ -1106,6 +1108,8 @@ public class QLLop extends javax.swing.JInternalFrame {
     private void btn_clearCapLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearCapLopActionPerformed
         filltableCL();
         txt_tenCapLop.setText("");
+        txt_timKiemCapLop.setBorder(boder1);
+        txt_timKiemCapLop.setForeground(Color.black);
     }//GEN-LAST:event_btn_clearCapLopActionPerformed
 
     private void btn_timKiemLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timKiemLopActionPerformed
@@ -1153,8 +1157,6 @@ public class QLLop extends javax.swing.JInternalFrame {
             boolean them = lopDAO.insertLop(lop, conn);
             fillTable();
             Dialog.alert(null, "Thêm thành công");
-        } else {
-            JOptionPane.showMessageDialog(null, "Thêm không thành công!\nVui lòng thử lại!", "Lỗi rồi", DO_NOTHING_ON_CLOSE);
         }
     }//GEN-LAST:event_btn_themLopActionPerformed
 
@@ -1179,6 +1181,7 @@ public class QLLop extends javax.swing.JInternalFrame {
         lop.setMaLop(malop);
         lopDAO.updateLop(lop, conn);
         fillTable();
+        Dialog.alert(null, "Sửa thành công");
     }//GEN-LAST:event_btn_suaLopActionPerformed
 
     private void btn_xoaLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaLopActionPerformed
@@ -1207,12 +1210,28 @@ public class QLLop extends javax.swing.JInternalFrame {
         cbc_capLop.setSelectedIndex(0);
         ((JTextField) date_ngayBatDau.getDateEditor().getUiComponent()).setText("");
         ((JTextField) date_ngayKetThuc.getDateEditor().getUiComponent()).setText("");
+        txt_tenLop.setBorder(boder1);
+        lbl_loiTenLop.setText("");
+        lbl_loiMaGiangVien.setText("");
+        txt_maGiangvien.setBorder(boder1);
+        lbl_loiHocPhi.setText("");
+        txt_hocPhi.setBorder(boder1);
+        lbl_loiCaHoc.setText("");
+        cbc_caHoc.setBorder(boder1);
+        lbl_loiSiSo.setText("");
+        txt_siSo.setBorder(boder1);
+        lbl_loiNgayBatDau.setText("");
+        date_ngayBatDau.setBorder(boder1);
+        lbl_loiNgayKetThuc.setText("");
+        date_ngayKetThuc.setBorder(boder1);
+        txt_timKiem.setBorder(boder1);
+        txt_timKiem.setForeground(Color.black);
     }//GEN-LAST:event_btn_clearLopActionPerformed
 
     private void tbl_lopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_lopMouseClicked
         int vitri = tbl_lop.getSelectedRow();
-        if (vitri >= 0) {
-            String row = (String) tbl_lop.getValueAt(vitri, 1);
+        if (vitri > -1) {
+            int row = (int) tbl_lop.getValueAt(vitri, 0);
             Lop l = lopDAO.clickTable(row, conn);
             if (l != null) {
                 txt_tenLop.setText(l.getTenLop());

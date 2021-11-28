@@ -146,6 +146,7 @@ public class BienLaiDAO {
             while (rs.next()) {
                 BienLai bl = new BienLai();
                 bl.setMaBienLai(rs.getInt("MABIENLAI"));
+                bl.setMaDangKi(rs.getInt("MADANGKI"));
                 bl.setTenHocVien(rs.getString("TENHOCVIEN"));
                 bl.setHocPhi(rs.getFloat("HOCPHI"));
                 bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
@@ -169,6 +170,7 @@ public class BienLaiDAO {
             while (rs.next()) {
                 BienLai bl = new BienLai();
                 bl.setMaBienLai(rs.getInt("MABIENLAI"));
+                bl.setMaDangKi(rs.getInt("MADANGKI"));
                 bl.setTenHocVien(rs.getString("TENHOCVIEN"));
                 bl.setHocPhi(rs.getFloat("HOCPHI"));
                 bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
@@ -230,6 +232,7 @@ public class BienLaiDAO {
             while (rs.next()) {
                 BienLai bl = new BienLai();
                 bl.setMaBienLai(rs.getInt("MABIENLAI"));
+                bl.setMaDangKi(rs.getInt("MADANGKI"));
                 bl.setTenHocVien(rs.getString("TENHOCVIEN"));
                 bl.setHocPhi(rs.getFloat("HOCPHI"));
                 bl.setHocPhiNo(rs.getFloat("HOCPHINO"));

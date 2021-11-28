@@ -127,7 +127,7 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
                 txt_siSo.requestFocus();
                 return false;
             } else {
-                lbl_loiCaThi.setText("");
+                lbl_loiSiSo.setText("");
                 txt_siSo.setBorder(border1);
             }
         }
@@ -527,6 +527,7 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
                 dtm.addRow(vec);
             }
             //}
+
         }
     }//GEN-LAST:event_btn_timKiemActionPerformed
 
@@ -543,6 +544,7 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
             dt.setVang(Integer.parseInt(txt_vang.getText()));
             boolean them = dtDAO.insert(dt, conn);
             fillTable();
+            Dialog.alert(null, "Thêm thành công");
         }
     }//GEN-LAST:event_btn_themDotThiActionPerformed
 
@@ -561,6 +563,7 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
             dt.setMaDotThi(maDotThi);
             dtDAO.update(dt, conn);
             fillTable();
+            Dialog.alert(null, "Sửa thành  công");
         }
     }//GEN-LAST:event_btn_suaDotThiActionPerformed
 
@@ -568,10 +571,25 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
         fillTable();
         txt_maLop.setText("");
         txt_tenLop.setText("");
-        date_ngayThi.setDateFormatString("");
         cbc_caThi.setSelectedIndex(0);
         txt_siSo.setText("");
         txt_vang.setText("");
+        ((JTextField) date_ngayThi.getDateEditor().getUiComponent()).setText("");
+        ((JTextField) date_timKiem.getDateEditor().getUiComponent()).setText("");
+        lbl_loiMaLop.setText("");
+        txt_maLop.setBorder(border1);
+        lbl_loiTenLop.setText("");
+        txt_tenLop.setBorder(border1);
+        lbl_loiNgayThi.setText("");
+        date_ngayThi.setBorder(border1);
+        lbl_loiCaThi.setText("");
+        cbc_caThi.setBorder(border1);
+        lbl_loiSiSo.setText("");
+        txt_siSo.setBorder(border1);
+        lbl_loiVang.setText("");
+        txt_vang.setBorder(border1);
+        lbl_loiTimKiem.setText("");
+        date_timKiem.setBorder(border1);
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void txt_maLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_maLopActionPerformed
@@ -584,7 +602,7 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
             txt_tenLop.setText(dt.getTenLop());
             System.out.println(dt.getTenLop());
         }
-        
+
     }//GEN-LAST:event_txt_maLopFocusLost
 
 

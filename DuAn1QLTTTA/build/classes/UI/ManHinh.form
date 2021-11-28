@@ -289,6 +289,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; &#x111;i&#x1ec3;m danh"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_DDActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_QLNV">
           <Properties>

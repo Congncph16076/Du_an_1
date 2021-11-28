@@ -22,6 +22,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
@@ -621,6 +622,7 @@ public class QLHocVien extends javax.swing.JInternalFrame {
         txtTimKiem.setText("");
         rdoNam.setSelected(false);
         rdoNu.setSelected(false);
+        ((JTextField) dateNgaySinh.getDateEditor().getUiComponent()).setText("");
     }//GEN-LAST:event_jButton6ActionPerformed
 
 

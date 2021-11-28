@@ -497,9 +497,7 @@
                               <Component id="btn_ThemNV" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               <Component id="btn_SuaNV" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btn_XoaKT" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btn_ClearKT" min="-2" pref="104" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -519,7 +517,6 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_ThemNV" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           <Component id="btn_SuaNV" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                          <Component id="btn_XoaKT" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           <Component id="btn_ClearKT" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -550,17 +547,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SuaNVActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_XoaKT">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/TienIch/Icon/Delete.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="X&#xf3;a nh&#xe2;n vi&#xea;n"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_XoaKTActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="btn_ClearKT">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -568,6 +554,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Clear "/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ClearKTActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_timKiemNV">
               <Properties>

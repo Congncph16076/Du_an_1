@@ -86,7 +86,7 @@ public class QuanlyHocVienDao implements EntityDAO<HocVien, String>{
         List<HocVien> listHV = new ArrayList<>();
         try {
             CallableStatement call = conn.prepareCall("{call tim_kiem_hoc_vien_theo_ten(?)}");
-            call.setString(1, ID);
+            call.setString(1, "%"+ID+"%");
             ResultSet rs = call.executeQuery();
 
             while (rs.next()) {
