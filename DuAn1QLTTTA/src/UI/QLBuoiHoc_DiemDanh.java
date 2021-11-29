@@ -81,11 +81,12 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
 
     void initCBC() {
         this.cbc_caHoc.removeAllItems();
-        String[] caThi = new String[]{
-            "Ca học", "Ca 1", "Ca 2", "Ca 3", "Ca 4", "Ca 5", "Ca 6"
+        String[] caHoc = new String[]{
+            "Ca học", "Ca 1 (7h-9h) 246", "Ca 2 (9h-11h) 246", "Ca 3 (12h-14h) 246", "Ca 4 (14h-16h) 246"
+                , "Ca 1 (7h-9h) 357", "Ca 2 (9h-11h) 357", "Ca 3 (12h-14h) 357", "Ca 4 (14h-16h) 357"
         };
-        for (int i = 0; i < caThi.length; i++) {
-            cbc_caHoc.addItem(caThi[i]);
+        for (int i = 0; i < caHoc.length; i++) {
+            cbc_caHoc.addItem(caHoc[i]);
         }
     }
 
@@ -714,7 +715,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
                 } catch (ParseException ex) {
                     ex.printStackTrace();
                 }
-                cbc_caHoc.setSelectedIndex(Integer.parseInt(bh.getCaHoc()));
+                cbc_caHoc.setSelectedItem(bh.getCaHoc());
                 txt_GhiChu.setText(bh.getGhiChu());
                 txt_maLopHoc.setText(String.valueOf(bh.getMaLopHoc()));
 

@@ -75,7 +75,8 @@ public class QLLop extends javax.swing.JInternalFrame {
     void listCaHoc() {
         this.cbc_caHoc.removeAllItems();
         String[] caHoc = new String[]{
-            "Ca học", "Ca 1", "Ca 2", "Ca 3", "Ca 4", "Ca 5", "Ca 6"
+            "Ca học", "Ca 1 (7h-9h) 246", "Ca 2 (9h-11h) 246", "Ca 3 (12h-14h) 246", "Ca 4 (14h-16h) 246"
+                , "Ca 1 (7h-9h) 357", "Ca 2 (9h-11h) 357", "Ca 3 (12h-14h) 357", "Ca 4 (14h-16h) 357"
         };
         for (int i = 0; i < caHoc.length; i++) {
             cbc_caHoc.addItem(caHoc[i]);
@@ -1238,7 +1239,7 @@ public class QLLop extends javax.swing.JInternalFrame {
                 txt_maGiangvien.setText(String.valueOf(l.getMaNhanVien()));
                 txt_tenGiangVien.setText(l.getTenNhanVien());
                 txt_hocPhi.setText(String.valueOf(l.getHocPhi()));
-                cbc_caHoc.setSelectedIndex(Integer.parseInt(l.getCaHoc()));
+                cbc_caHoc.setSelectedItem(l.getCaHoc());
                 txt_siSo.setText(String.valueOf(l.getSiso()));
                 cbc_loaiLop.setSelectedItem(l.getTenLoaiLop());
                 cbc_capLop.setSelectedItem(l.getTenLoaiLop());
