@@ -6,7 +6,9 @@
 package UI;
 
 import DAO.BuoiHocDAO;
+import DAO.DiemDanhDAO;
 import Entity.BuoiHoc;
+import Entity.DiemDanh;
 import TienIchHoTro.Dialog;
 import java.awt.Color;
 import java.sql.Connection;
@@ -19,6 +21,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
@@ -34,13 +37,20 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
     Border boder = BorderFactory.createLineBorder(Color.red);
     Border boder1 = BorderFactory.createLineBorder(Color.black);
     BuoiHocDAO bhDAO = new BuoiHocDAO();
+    DiemDanhDAO ddDAO = new DiemDanhDAO();
     List<BuoiHoc> listBH = new ArrayList<>();
+    List<DiemDanh> listDD = new ArrayList<>();
 
     public QLBuoiHoc_DiemDanh() {
         initComponents();
         conn = TienIchHoTro.ConnectToSQL.getConnect();
         fillBH();
+        fillDD();
         initCBC();
+        ButtonGroup grp = new ButtonGroup();
+        grp.add(rbn_Co);
+        grp.add(rbn_vang);
+
     }
 
     void fillBH() {
@@ -50,6 +60,20 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
         for (BuoiHoc bh : listBH) {
             Object obj[] = new Object[]{
                 bh.getMaBuoiHoc(), bh.getMaLopHoc(), bh.getTenLopHoc(), bh.getNgayHoc(), bh.getCaHoc(), bh.getGhiChu()
+            };
+            dtm.addRow(obj);
+        }
+    }
+
+    void fillDD() {
+        dtm = (DefaultTableModel) tbl_diemDanh.getModel();
+        dtm.setRowCount(0);
+        listDD = ddDAO.listDD(conn);
+        for (DiemDanh dd : listDD) {
+            Object[] obj = new Object[]{
+                dd.getMaDiemDanh(), dd.isTrangThai() == true ? "Có mặt" : "Vắng",
+                dd.getTenHocVien(), dd.getTenLop(), dd.getNgayHoc(), dd.getCaHoc(),
+                dd.getGhiChu(), dd.getMaBuoiHoc(), dd.getMaBienLai()
             };
             dtm.addRow(obj);
         }
@@ -117,6 +141,41 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
         return true;
     }
 
+    boolean checknullDD() {
+        if (rbn_Co.isSelected() == false && rbn_vang.isSelected() == false) {
+            lbl_loiTrangThai.setText("Bạn chưa chọn trạng thái của sinh viên đó");
+            pan_TrangThai.setBorder(boder);
+            lbl_loiTrangThai.setForeground(Color.red);
+            return false;
+        } else {
+            lbl_loiTrangThai.setText("");
+            pan_TrangThai.setBorder(boder1);
+        }
+
+        if (txt_maBienLai.getText().equals("")) {
+            lbl_loiMaBienLai.setText("Bạn chưa nhập mã biên lai của học viên đó!");
+            txt_maBienLai.setBorder(boder);
+            lbl_loiMaBienLai.setForeground(Color.red);
+            txt_maBienLai.requestFocus();
+            return false;
+        } else {
+            lbl_loiMaBienLai.setText("");
+            txt_maBienLai.setBorder(boder1);
+        }
+
+        if (txt_maBuoiHoc.getText().equals("")) {
+            lbl_loiMaBuoiHoc.setText("Bạn chưa nhập mã buổi học!");
+            txt_maBuoiHoc.setBorder(boder);
+            lbl_loiMaBuoiHoc.setForeground(Color.red);
+            txt_maBuoiHoc.requestFocus();
+            return false;
+        } else {
+            lbl_loiMaBuoiHoc.setText("");
+            txt_maBuoiHoc.setBorder(boder1);
+        }
+        return true;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -166,7 +225,9 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txt_GhiChuDiemDanh = new javax.swing.JTextArea();
-        txt_trangThai = new javax.swing.JTextField();
+        pan_TrangThai = new javax.swing.JPanel();
+        rbn_vang = new javax.swing.JRadioButton();
+        rbn_Co = new javax.swing.JRadioButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbl_diemDanh = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
@@ -401,6 +462,29 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
         txt_GhiChuDiemDanh.setRows(5);
         jScrollPane3.setViewportView(txt_GhiChuDiemDanh);
 
+        rbn_vang.setText("Vắng");
+
+        rbn_Co.setText("Có");
+
+        javax.swing.GroupLayout pan_TrangThaiLayout = new javax.swing.GroupLayout(pan_TrangThai);
+        pan_TrangThai.setLayout(pan_TrangThaiLayout);
+        pan_TrangThaiLayout.setHorizontalGroup(
+            pan_TrangThaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pan_TrangThaiLayout.createSequentialGroup()
+                .addComponent(rbn_vang)
+                .addGap(18, 18, 18)
+                .addComponent(rbn_Co)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        pan_TrangThaiLayout.setVerticalGroup(
+            pan_TrangThaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_TrangThaiLayout.createSequentialGroup()
+                .addGap(0, 7, Short.MAX_VALUE)
+                .addGroup(pan_TrangThaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbn_vang)
+                    .addComponent(rbn_Co)))
+        );
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -411,8 +495,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
                     .addComponent(txt_maBienLai, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbl_loiTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbl_loiMaBienLai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                    .addComponent(txt_trangThai)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                     .addComponent(txt_maBuoiHoc, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbl_loiMaBuoiHoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -421,7 +504,8 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
                             .addComponent(jLabel11)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(pan_TrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -429,9 +513,9 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_trangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pan_TrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
                 .addComponent(lbl_loiTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
@@ -463,24 +547,49 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
                 "Mã điểm danh", "Trạng thái", "Tên Học viên", "Tên lớp", "Ngày học", "Ca học", "Ghi chú", "Mã buổi học", "Mã biên lai"
             }
         ));
+        tbl_diemDanh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_diemDanhMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tbl_diemDanh);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btn_themBuoiHoc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Create.png"))); // NOI18N
         btn_themBuoiHoc1.setText("Thêm");
+        btn_themBuoiHoc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themBuoiHoc1ActionPerformed(evt);
+            }
+        });
 
         btn_SuaBuoiHoc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Edit.png"))); // NOI18N
         btn_SuaBuoiHoc1.setText("Sửa");
+        btn_SuaBuoiHoc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SuaBuoiHoc1ActionPerformed(evt);
+            }
+        });
 
         btn_clearBuoiHoc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Refresh.png"))); // NOI18N
         btn_clearBuoiHoc1.setText("Clear");
+        btn_clearBuoiHoc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clearBuoiHoc1ActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setText("Tìm kiếm");
 
         btn_timKiemBuoiHoc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Search.png"))); // NOI18N
         btn_timKiemBuoiHoc1.setText("Tìm kiếm");
+        btn_timKiemBuoiHoc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timKiemBuoiHoc1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -503,7 +612,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
                                 .addComponent(txt_timKiemDiemDanh, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btn_timKiemBuoiHoc1)))
-                        .addContainerGap(379, Short.MAX_VALUE))
+                        .addContainerGap(371, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(lbl_loiTimKiemDiemDanh, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -538,7 +647,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -547,7 +656,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 512, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 516, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -683,6 +792,105 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btn_timKiemBuoiHocActionPerformed
 
+    private void tbl_diemDanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_diemDanhMouseClicked
+        int vitri = tbl_diemDanh.getSelectedRow();
+        if (vitri > -1) {
+            int row = (int) tbl_diemDanh.getValueAt(vitri, 0);
+            DiemDanh dd = ddDAO.clickTable(row, conn);
+            if (dd != null) {
+
+                if (dd.isTrangThai() == true) {
+                    rbn_Co.setSelected(true);
+                }
+                if (dd.isTrangThai() == false) {
+                    rbn_vang.setSelected(true);
+                }
+                txt_GhiChuDiemDanh.setText(dd.getGhiChu());
+                txt_maBuoiHoc.setText(String.valueOf(dd.getMaBuoiHoc()));
+                txt_maBienLai.setText(String.valueOf(dd.getMaBienLai()));
+            }
+        }
+    }//GEN-LAST:event_tbl_diemDanhMouseClicked
+
+    private void btn_themBuoiHoc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themBuoiHoc1ActionPerformed
+        if (checknullDD()) {
+            DiemDanh dd = new DiemDanh();
+            boolean trangThai;
+            if (rbn_Co.isSelected()) {
+                trangThai = true;
+                dd.setTrangThai(trangThai);
+            }
+            if (rbn_vang.isSelected()) {
+                trangThai = false;
+                dd.setTrangThai(trangThai);
+            }
+            dd.setGhiChu(txt_GhiChuDiemDanh.getText());
+            dd.setMaBuoiHoc(Integer.parseInt(txt_maBuoiHoc.getText()));
+            dd.setMaBienLai(Integer.parseInt(txt_maBienLai.getText()));
+            boolean them = ddDAO.themDiemDanh(dd, conn);
+            fillDD();
+            Dialog.alert(null, "Thêm thành công");
+        }
+    }//GEN-LAST:event_btn_themBuoiHoc1ActionPerformed
+
+    private void btn_SuaBuoiHoc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaBuoiHoc1ActionPerformed
+        if (checknullDD()) {
+            DiemDanh dd = new DiemDanh();
+            boolean trangThai;
+            if (rbn_Co.isSelected()) {
+                trangThai = true;
+                dd.setTrangThai(trangThai);
+            }
+            if (rbn_vang.isSelected()) {
+                trangThai = false;
+                dd.setTrangThai(trangThai);
+            }
+            dd.setGhiChu(txt_GhiChuDiemDanh.getText());
+            dd.setMaBuoiHoc(Integer.parseInt(txt_maBuoiHoc.getText()));
+            dd.setMaBienLai(Integer.parseInt(txt_maBienLai.getText()));
+            int row = (int) tbl_diemDanh.getValueAt(tbl_diemDanh.getSelectedRow(), 0);
+            dd.setMaDiemDanh(row);
+            ddDAO.suaDiemDanh(dd, conn);
+            fillDD();
+            Dialog.alert(null, "Sửa thành công");
+        }
+    }//GEN-LAST:event_btn_SuaBuoiHoc1ActionPerformed
+
+    private void btn_timKiemBuoiHoc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timKiemBuoiHoc1ActionPerformed
+        fillDD();
+        listDD = ddDAO.timKiemDD(txt_timKiemDiemDanh.getText(), conn);
+        dtm.setRowCount(0);
+        dtm = (DefaultTableModel) tbl_diemDanh.getModel();
+        for (DiemDanh dd : listDD) {
+            Vector<Object> vec = new Vector<>();
+            vec.add(dd.getMaDiemDanh());
+            vec.add(dd.isTrangThai() == true ? "Có mặt" : "Vắng");
+            vec.add(dd.getTenHocVien());
+            vec.add(dd.getTenLop());
+            vec.add(dd.getNgayHoc());
+            vec.add(dd.getCaHoc());
+            vec.add(dd.getGhiChu());
+            vec.add(dd.getMaBuoiHoc());
+            vec.add(dd.getMaBienLai());
+            dtm.addRow(vec);
+        }
+    }//GEN-LAST:event_btn_timKiemBuoiHoc1ActionPerformed
+
+    private void btn_clearBuoiHoc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearBuoiHoc1ActionPerformed
+        txt_GhiChuDiemDanh.setText("");
+        txt_maBuoiHoc.setText("");
+        txt_maBienLai.setText("");
+        fillDD();
+        lbl_loiTrangThai.setText("");
+        pan_TrangThai.setBorder(boder1);
+        lbl_loiMaBienLai.setText("");
+        txt_maBienLai.setBorder(boder1);
+        lbl_loiMaBuoiHoc.setText("");
+        txt_maBuoiHoc.setBorder(boder1);
+        rbn_Co.setSelected(false);
+        rbn_vang.setSelected(false);
+    }//GEN-LAST:event_btn_clearBuoiHoc1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_SuaBuoiHoc;
@@ -727,6 +935,9 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbl_loiTimKiemBuoiHoc;
     private javax.swing.JLabel lbl_loiTimKiemDiemDanh;
     private javax.swing.JLabel lbl_loiTrangThai;
+    private javax.swing.JPanel pan_TrangThai;
+    private javax.swing.JRadioButton rbn_Co;
+    private javax.swing.JRadioButton rbn_vang;
     private javax.swing.JTable tbl_buoiHoc;
     private javax.swing.JTable tbl_diemDanh;
     private javax.swing.JTextArea txt_GhiChu;
@@ -735,6 +946,5 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_maBuoiHoc;
     private javax.swing.JTextField txt_maLopHoc;
     private javax.swing.JTextField txt_timKiemDiemDanh;
-    private javax.swing.JTextField txt_trangThai;
     // End of variables declaration//GEN-END:variables
 }

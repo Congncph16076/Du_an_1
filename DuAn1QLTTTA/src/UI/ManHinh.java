@@ -6,8 +6,13 @@
 package UI;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -20,6 +25,7 @@ public class ManHinh extends javax.swing.JFrame {
 
     public ManHinh(String str, int vaiTro) {
         initComponents();
+        setDongHo();
         this.setLocationRelativeTo(null);
         this.str = str;
         this.vaiTro = vaiTro;
@@ -54,6 +60,7 @@ public class ManHinh extends javax.swing.JFrame {
         initComponents();
         System.out.println(desktopMain.size());
         this.setLocationRelativeTo(null);
+        setDongHo();
     }
 
     void close() {
@@ -63,6 +70,7 @@ public class ManHinh extends javax.swing.JFrame {
         }
     }
 
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,6 +90,7 @@ public class ManHinh extends javax.swing.JFrame {
         btn_bienLai = new javax.swing.JButton();
         btn_DD = new javax.swing.JButton();
         btn_QLNV = new javax.swing.JButton();
+        lbl_dongHo = new javax.swing.JLabel();
         desktopMain = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -160,24 +169,28 @@ public class ManHinh extends javax.swing.JFrame {
             }
         });
 
+        lbl_dongHo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_dongHo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Alarm.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lbl_dongHo, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_tenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_QLNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_DD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_bienLai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_DangKiHocVien, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                    .addComponent(btn_hocVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_dotThi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Lop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_QLNV, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_DD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_bienLai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_DangKiHocVien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                    .addComponent(btn_hocVien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_dotThi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Lop, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -187,7 +200,9 @@ public class ManHinh extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_tenDangNhap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_dongHo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_Lop, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_dotThi, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
@@ -353,15 +368,6 @@ public class ManHinh extends javax.swing.JFrame {
         ql.setVisible(true);
     }//GEN-LAST:event_btn_bienLaiActionPerformed
 
-    private void btn_hocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hocVienActionPerformed
-        close();
-       QLHocVien ql = new QLHocVien();
-        desktopMain.add(ql);
-        ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
-                (desktopMain.getHeight() - ql.getHeight()) / 2);
-        ql.setVisible(true);
-    }//GEN-LAST:event_btn_hocVienActionPerformed
-
     private void btn_DDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DDActionPerformed
         close();
        QLBuoiHoc_DiemDanh ql = new QLBuoiHoc_DiemDanh();
@@ -370,6 +376,15 @@ public class ManHinh extends javax.swing.JFrame {
                 (desktopMain.getHeight() - ql.getHeight()) / 2);
         ql.setVisible(true);
     }//GEN-LAST:event_btn_DDActionPerformed
+
+    private void btn_hocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hocVienActionPerformed
+      close();
+       QLHocVien ql = new QLHocVien();
+        desktopMain.add(ql);
+        ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
+                (desktopMain.getHeight() - ql.getHeight()) / 2);
+        ql.setVisible(true);
+    }//GEN-LAST:event_btn_hocVienActionPerformed
 
     /**
      * @param args the command line arguments
@@ -405,6 +420,17 @@ public class ManHinh extends javax.swing.JFrame {
             }
         });
     }
+     private void setDongHo() {
+        new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                Date tg = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+                String date = sdf.format(tg);
+                lbl_dongHo.setText(date);
+            }
+        }).start();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Mnu_Thoat;
@@ -432,6 +458,7 @@ public class ManHinh extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_dongHo;
     private javax.swing.JLabel lbl_tenDangNhap;
     // End of variables declaration//GEN-END:variables
 }

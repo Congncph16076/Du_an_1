@@ -80,11 +80,11 @@ public class QuanLyNVDAO implements EntityDAO<NguoiDung, String> {
             ptmt.setString(4, ND.getDiaChi());
             ptmt.setString(5, ND.getSDT());
             ptmt.setString(6, ND.getEmail());
-            ptmt.setString(7,ND.getTenDangNhap());
+            ptmt.setString(7, ND.getTenDangNhap());
             ptmt.setString(8, ND.getMatKhau());
             ptmt.setInt(9, ND.getVaiTro());
             ptmt.setInt(10, ND.getMaNhanVien());
-           ptmt.executeUpdate();
+            ptmt.executeUpdate();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -114,19 +114,19 @@ public class QuanLyNVDAO implements EntityDAO<NguoiDung, String> {
             CallableStatement call = conn.prepareCall("{call thong_tin_tai_khoan}");
             ResultSet rs = call.executeQuery();
             while (rs.next()) {
-               NguoiDung nd = new NguoiDung();
-               nd.setMaNhanVien(rs.getInt("MANHANVIEN"));
-               nd.setTenNhanVien(rs.getString("TENNHANVIEN"));
-               nd.setGioiTinh(rs.getBoolean("GIOITINH"));
-               nd.setNgaySinh(rs.getString("NGAYSINH"));
-               nd.setDiaChi(rs.getString("DIACHI"));
-               nd.setSDT(rs.getString("SDT"));
-               nd.setEmail(rs.getString("EMAIL"));
-               nd.setTenDangNhap(rs.getString("TENDANGNHAP"));
-               nd.setMatKhau(rs.getString("MATKHAU"));
+                NguoiDung nd = new NguoiDung();
+                nd.setMaNhanVien(rs.getInt("MANHANVIEN"));
+                nd.setTenNhanVien(rs.getString("TENNHANVIEN"));
+                nd.setGioiTinh(rs.getBoolean("GIOITINH"));
+                nd.setNgaySinh(rs.getString("NGAYSINH"));
+                nd.setDiaChi(rs.getString("DIACHI"));
+                nd.setSDT(rs.getString("SDT"));
+                nd.setEmail(rs.getString("EMAIL"));
+                nd.setTenDangNhap(rs.getString("TENDANGNHAP"));
+                nd.setMatKhau(rs.getString("MATKHAU"));
                 nd.setVaiTro(rs.getInt("TENVAITRO"));
                 listND.add(nd);
-               
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -143,14 +143,14 @@ public class QuanLyNVDAO implements EntityDAO<NguoiDung, String> {
             while (rs.next()) {
                 NguoiDung nd = new NguoiDung();
                 nd.setMaNhanVien(rs.getInt("MANHANVIEN"));
-               nd.setTenNhanVien(rs.getString("TENNHANVIEN"));
-               nd.setGioiTinh(rs.getBoolean("GIOITINH"));
-               nd.setNgaySinh(rs.getString("NGAYSINH"));
-               nd.setDiaChi(rs.getString("DIACHI"));
-               nd.setSDT(rs.getString("SDT"));
-               nd.setEmail(rs.getString("EMAIL"));
-               nd.setTenDangNhap(rs.getString("TENDANGNHAP"));
-               nd.setMatKhau(rs.getString("MATKHAU"));
+                nd.setTenNhanVien(rs.getString("TENNHANVIEN"));
+                nd.setGioiTinh(rs.getBoolean("GIOITINH"));
+                nd.setNgaySinh(rs.getString("NGAYSINH"));
+                nd.setDiaChi(rs.getString("DIACHI"));
+                nd.setSDT(rs.getString("SDT"));
+                nd.setEmail(rs.getString("EMAIL"));
+                nd.setTenDangNhap(rs.getString("TENDANGNHAP"));
+                nd.setMatKhau(rs.getString("MATKHAU"));
                 nd.setVaiTro(rs.getInt("TENVAITRO"));
                 return nd;
             }
@@ -166,20 +166,20 @@ public class QuanLyNVDAO implements EntityDAO<NguoiDung, String> {
         try {
             CallableStatement call = conn.prepareCall("{call tim_kiem_tk_nhan_vien(?)}");
             call.setString(1, ID);
-            
+
             ResultSet rs = call.executeQuery();
 
             while (rs.next()) {
                 NguoiDung nd = new NguoiDung();
                 nd.setMaNhanVien(rs.getInt("MANHANVIEN"));
-               nd.setTenNhanVien(rs.getString("TENNHANVIEN"));
-               nd.setGioiTinh(rs.getBoolean("GIOITINH"));
-               nd.setNgaySinh(rs.getString("NGAYSINH"));
-               nd.setDiaChi(rs.getString("DIACHI"));
-               nd.setSDT(rs.getString("SDT"));
-               nd.setEmail(rs.getString("EMAIL"));
-               nd.setTenDangNhap(rs.getString("TENDANGNHAP"));
-               nd.setMatKhau(rs.getString("MATKHAU"));
+                nd.setTenNhanVien(rs.getString("TENNHANVIEN"));
+                nd.setGioiTinh(rs.getBoolean("GIOITINH"));
+                nd.setNgaySinh(rs.getString("NGAYSINH"));
+                nd.setDiaChi(rs.getString("DIACHI"));
+                nd.setSDT(rs.getString("SDT"));
+                nd.setEmail(rs.getString("EMAIL"));
+                nd.setTenDangNhap(rs.getString("TENDANGNHAP"));
+                nd.setMatKhau(rs.getString("MATKHAU"));
                 nd.setVaiTro(rs.getInt("TENVAITRO"));
                 listND.add(nd);
             }
