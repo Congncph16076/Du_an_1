@@ -294,6 +294,9 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
         setPreferredSize(new java.awt.Dimension(1081, 650));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
