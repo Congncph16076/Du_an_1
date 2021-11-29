@@ -767,3 +767,204 @@ VALUES(?,?,?,?,?,?,?,?,?,?)
 UPDATE dbo.NGUOIDUNG SET TENNHANVIEN = ?,GIOITINH = ?,NGAYSINH = ?,DIACHI = ?,SDT = ?,EMAIL = ?,TENVAITRO = ?,TENDANGNHAP = ?,MATKHAU = ?
 WHERE MANHANVIEN = ?
 
+<<<<<<< Updated upstream
+=======
+GO
+SELECT TENLOP,COUNT(dbo.LOP.MALOP),CAHOC FROM dbo.HOCVIEN
+JOIN lop ON LOP.MALOP = HOCVIEN.MALOP
+GROUP BY LOP.MALOP,HOCVIEN.MALOP,TENLOP,CAHOC
+HAVING LOP.MALOP = HOCVIEN.MALOP
+GO
+---- truy vấn đăng kí
+CREATE PROC hoc_vien_moi
+AS
+BEGIN
+    SELECT madangki,TENHOCVIEN,CONVERT(NVARCHAR(20),GIOITINH,103) [ngaysinh],GIOITINH,sdt,EMAIL,DIACHI,
+	TENLOAILOP,TENCAPLOP,HOCPHI,CAHOC,CONVERT(NVARCHAR(20),NGAYNHAPHOC,103)[ngaynhaphoc]
+	,CONVERT(NVARCHAR(20),NGAYDANGKI,103) [ngaydangki],MAHOCVIEN FROM dbo.DANGKI
+	WHERE MAHOCVIEN is NULL
+END
+go
+
+CREATE PROCEDURE hoc_vien_cu
+AS
+BEGIN
+    SELECT madangki,TENHOCVIEN,CONVERT(NVARCHAR(20),GIOITINH,103) [ngaysinh],GIOITINH,sdt,EMAIL,DIACHI,
+	TENLOAILOP,TENCAPLOP,HOCPHI,CAHOC,CONVERT(NVARCHAR(20),NGAYNHAPHOC,103)[ngaynhaphoc]
+	,CONVERT(NVARCHAR(20),NGAYDANGKI,103) [ngaydangki],MAHOCVIEN FROM dbo.DANGKI
+	WHERE MAHOCVIEN IS NOT NULL
+	SELECT MAHOCVIEN,TENHOCVIEN,SDT,MALOP FROM dbo.HOCVIEN
+	WHERE TENHOCVIEN = N'nguyễn văn C'
+END
+-- truy vấn xếp lớp by mr vinh
+create procedure xep_lop(@madangki int)
+as
+begin
+	declare @malop int,@b int,@c int, @ngaydki date, @ngaynhaphoc date
+
+	select @malop= MALOP from LOP
+	where MALOAILOP=(select MALOAILOP from LOAILOP where TENLOAILOP =( select  TENLOAILOP	from DANGKI	where madangki =  @madangki ))
+		 and MACAPLOP=(select MACAPLOP	from CAPLOP	where TENCAPLOP = (select   TENCAPLOP	from DANGKI	where madangki =  @madangki) )
+		 and CAHOC=(select CAHOC from DANGKI	where madangki =  @madangki )
+
+		select @c=siso, @ngaynhaphoc=NGAYNHAPHOC from LOP
+		where MALOP=@malop
+
+		select @ngaydki=NGAYDANGKI from DANGKI
+		where madangki=@madangki
+
+		SELECT @b =COUNT(MAHOCVIEN)
+		FROM HOCVIEN
+		where MALOP=@malop
+
+		if @b<@c and @malop is not null and @ngaydki<@ngaynhaphoc
+		print 'ok'
+		update BIENLAI set MALOP= @malop where MADANGKI = @madangki
+		else
+		print 'ngu'
+		
+END
+------
+CREATE PROCEDURE xoa_ban_dang_ki(@madangki INT)
+AS
+BEGIN
+	delete from BIENLAI
+	where madangki = @madangki
+    DELETE FROM dbo.DANGKI
+	WHERE madangki = @madangki
+	declare @max int
+	select @max=max(@madangki)from dbo.DANGKI
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (dangki, RESEED,@max)
+END
+GO
+exec xoa_ban_dang_ki 1
+drop proc xoa_ban_dang_ki
+--thông tin đăng kí
+create PROCEDURE thong_tin_dang_ki
+AS
+BEGIN
+    SELECT madangki,TENHOCVIEN,CONVERT(NVARCHAR(30),NGAYSINH,103) [ngaysinh]
+	,GIOITINH,SDT,EMAIL,DIACHI
+	,TENCAPLOP,TENLOAILOP,HOCPHI,CAHOC
+	,CONVERT(NVARCHAR(30),NGAYNHAPHOC,103) [ngaynhaphoc]
+	,CONVERT(NVARCHAR(30),NGAYDANGKI,103) [ngaydangki], MAHOCVIEN 
+	FROM DANGKI
+	order by madangki desc
+END
+go
+exec dbo.thong_tin_dang_ki
+drop proc thong_tin_dang_ki
+-- tìm đăng kí
+CREATE PROCEDURE tim_kiem_ban_dang_ki_theo_tendangki(@tendangki NVARCHAR(50))
+AS
+BEGIN
+    SELECT madangki,TENHOCVIEN
+	,CONVERT(NVARCHAR(30),NGAYSINH,103) [ngaysinh]
+	,GIOITINH,SDT,EMAIL
+	,DIACHI,TENCAPLOP,TENLOAILOP
+	,HOCPHI,CAHOC,CONVERT(NVARCHAR(30)
+	,NGAYNHAPHOC,103) [ngaynhaphoc]
+	,CONVERT(NVARCHAR(30),NGAYDANGKI,103) [ngaydangki]
+	, MAHOCVIEN FROM dbo.DANGKI
+	WHERE TENHOCVIEN like LTRIM(RTRIM(@tendangki))
+	ORDER BY madangki DESC
+END
+go
+drop proc tim_kiem_ban_dang_ki_theo_tendangki
+CREATE PROCEDURE tim_kiem_ban_dang_ki_theo_mdk(@mdk int)
+AS
+BEGIN
+    SELECT madangki,TENHOCVIEN
+	,CONVERT(NVARCHAR(30),NGAYSINH,103) [ngaysinh]
+	,GIOITINH,SDT,EMAIL,DIACHI
+	,TENCAPLOP,TENLOAILOP
+	,HOCPHI,CAHOC
+	,CONVERT(NVARCHAR(30),NGAYNHAPHOC,103) [ngaynhaphoc]
+	,CONVERT(NVARCHAR(30),NGAYDANGKI,103) [ngaydangki]
+	, MAHOCVIEN FROM dbo.DANGKI
+	WHERE madangki = @mdk
+	ORDER BY madangki DESC
+END
+SELECT * FROM dbo.DANGKI
+SELECT malop, COUNT(MALOP) [soluong] FROM dbo.HOCVIEN
+GROUP BY MALOP
+SELECT * FROM dbo.HOCVIEN
+SELECT * FROM dbo.LOP
+SELECT * FROM dbo.BIENLAI
+GO
+-------------------------truy vấn buổi học
+CREATE PROC thong_tin_buoi_hoc
+AS
+BEGIN
+    SELECT MABUOIHOC,MALOPHOC,TENLOP,CONVERT(NVARCHAR(20),NGAYHOC,103)[ngayhoc],BUOIHOC.CAHOC,GHICHU FROM dbo.BUOIHOC
+	JOIN dbo.LOP ON LOP.MALOP = BUOIHOC.MALOPHOC
+	ORDER BY MABUOIHOC DESC
+END
+DROP PROC thong_tin_buoi_hoc
+EXEC dbo.thong_tin_buoi_hoc
+GO
+INSERT INTO dbo.BUOIHOC(NGAYHOC,CAHOC,GHICHU,MALOPHOC)
+VALUES(?,?,?,?)
+GO
+UPDATE dbo.BUOIHOC SET NGAYHOC=?,CAHOC=?,GHICHU=?,MALOPHOC=?
+WHERE MABUOIHOC =?
+GO
+
+SELECT MABUOIHOC,MALOPHOC,TENLOP,CONVERT(NVARCHAR(20),NGAYHOC,103)[ngayhoc],BUOIHOC.CAHOC,GHICHU FROM dbo.BUOIHOC
+JOIN dbo.LOP ON LOP.MALOP = BUOIHOC.MALOPHOC
+WHERE MABUOIHOC= 1
+ORDER BY MABUOIHOC DESC
+
+
+CREATE PROC tim_kiem_buoi_hoc_theo_ngay(@ngayhoc NVARCHAR(20))
+AS
+BEGIN
+    SELECT MABUOIHOC,MALOPHOC,TENLOP,CONVERT(NVARCHAR(20),NGAYHOC,103)[ngayhoc],BUOIHOC.CAHOC,GHICHU FROM dbo.BUOIHOC
+	JOIN dbo.LOP ON LOP.MALOP = BUOIHOC.MALOPHOC
+	WHERE CONVERT(NVARCHAR(20),NGAYHOC,103) =@ngayhoc
+	ORDER BY MABUOIHOC DESC
+END
+EXEC dbo.tim_kiem_buoi_hoc_theo_ngay @ngayhoc = N'10/10/2010' -- nvarchar(20)
+
+DROP PROC dbo.tim_kiem_buoi_hoc_theo_ngay
+GO
+---truy vấn điểm danh
+CREATE PROC thong_tin_diem_danh
+AS
+BEGIN
+    SELECT MADIEMDANH,TRANGTHAI,TENHOCVIEN,TENLOP
+	,CONVERT(NVARCHAR(20),NGAYHOC,103)[ngayhoc],BUOIHOC.CAHOC 
+	,dbo.DIEMDANH.GHICHU,dbo.DIEMDANH.MABUOIHOC,MADIEMDANH FROM dbo.DIEMDANH
+	 JOIN dbo.BUOIHOC ON BUOIHOC.MABUOIHOC = DIEMDANH.MABUOIHOC
+	 JOIN dbo.BIENLAI ON BIENLAI.MABIENLAI = DIEMDANH.MABIENLAI 
+	 JOIN lop ON LOP.MALOP = BUOIHOC.MALOPHOC
+	 JOIN dbo.HOCVIEN ON HOCVIEN.MAHOCVIEN = BIENLAI.MAHOCVIEN
+END
+DROP PROC dbo.thong_tin_diem_danh
+EXEC dbo.thong_tin_diem_danh
+
+INSERT INTO dbo.DIEMDANH(TRANGTHAI,GHICHU,MABUOIHOC,MABIENLAI)
+VALUES(?,?,?,?)
+
+UPDATE dbo.DIEMDANH SET TRANGTHAI=?,GHICHU=?,MABUOIHOC=?,MABIENLAI=?
+WHERE MADIEMDANH = ?
+GO
+
+CREATE PROC tim_kiem_diem_danh_theo_ten_hoc_vien(@tenhocvien NVARCHAR(20))
+AS
+BEGIN
+    SELECT MADIEMDANH,TRANGTHAI,TENHOCVIEN,TENLOP
+	,CONVERT(NVARCHAR(20),NGAYHOC,103)[ngayhoc],BUOIHOC.CAHOC 
+	,dbo.DIEMDANH.GHICHU,dbo.DIEMDANH.MABUOIHOC,MADIEMDANH FROM dbo.DIEMDANH
+	 JOIN dbo.BUOIHOC ON BUOIHOC.MABUOIHOC = DIEMDANH.MABUOIHOC
+	 JOIN dbo.BIENLAI ON BIENLAI.MABIENLAI = DIEMDANH.MABIENLAI 
+	 JOIN lop ON LOP.MALOP = BUOIHOC.MALOPHOC
+	 JOIN dbo.HOCVIEN ON HOCVIEN.MAHOCVIEN = BIENLAI.MAHOCVIEN
+	 WHERE TENHOCVIEN = @tenhocvien
+END
+DROP PROC dbo.tim_kiem_diem_danh_theo_ten_hoc_vien
+
+EXEC dbo.tim_kiem_diem_danh_theo_ten_hoc_vien @tenhocvien = N'Nguyễn văn A' -- nvarchar(20)
+>>>>>>> Stashed changes
