@@ -48,6 +48,22 @@ public class BienLaiDAO {
         }
         return list;
     }
+    
+    public boolean xepLop(int ID, Connection conn) {
+        try {
+            //Connection conn = TienIchHoTro.ConnectToSQL.getConnect();
+            CallableStatement call = conn.prepareCall("{call xep_lop(?)}");
+            call.setInt(1, ID);
+            
+            int kq = call.executeUpdate();
+            if (kq > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public BienLai clickTableHVCu(int ID, Connection conn) {
         try {

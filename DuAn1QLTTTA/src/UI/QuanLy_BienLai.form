@@ -373,14 +373,14 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="btn_themHVMoi" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="btn_SuaHVMoi" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                           <Component id="btn_ClearMoi" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="444" max="32767" attributes="0"/>
+                              <EmptySpace pref="453" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -434,7 +434,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/TienIch/Icon/Create.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+                        <Property name="text" type="java.lang.String" value="X&#x1ebf;p l&#x1edb;p"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themHVMoiActionPerformed"/>
@@ -824,7 +824,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/TienIch/Icon/Create.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+                        <Property name="text" type="java.lang.String" value="X&#x1ebf;p l&#x1edb;p"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themHVCuActionPerformed"/>

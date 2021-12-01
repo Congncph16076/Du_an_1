@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Vector;
 import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
@@ -597,7 +598,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         });
 
         btn_themHVMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Create.png"))); // NOI18N
-        btn_themHVMoi.setText("Thêm");
+        btn_themHVMoi.setText("Xếp lớp");
         btn_themHVMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_themHVMoiActionPerformed(evt);
@@ -631,11 +632,11 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
                             .addComponent(btn_HVMoi))
                         .addGroup(jPanel7Layout.createSequentialGroup()
                             .addComponent(btn_themHVMoi)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGap(18, 18, 18)
                             .addComponent(btn_SuaHVMoi)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGap(15, 15, 15)
                             .addComponent(btn_ClearMoi))))
-                .addContainerGap(444, Short.MAX_VALUE))
+                .addContainerGap(453, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -806,7 +807,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         });
 
         btn_themHVCu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Create.png"))); // NOI18N
-        btn_themHVCu.setText("Thêm");
+        btn_themHVCu.setText("Xếp lớp");
         btn_themHVCu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_themHVCuActionPerformed(evt);
@@ -1392,19 +1393,25 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
 
     private void btn_themHVCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themHVCuActionPerformed
 
-        if (checkHVCu()) {
-            BienLai bl = new BienLai();
-            bl.setMaHocVien(Integer.parseInt(txt_maHocVien.getText()));
-            bl.setMaDangKi(Integer.parseInt(txt_maDangKiHVCu.getText()));
-            bl.setThanhTien(Float.parseFloat(txt_thanhTienHVCu.getText()));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-            String date = sdf.format(date_ngayThuTienHVCu.getDate());
-            bl.setNgayThuTien(date);
-            bl.setMaNhanVien(Integer.parseInt(txt_maNhanVienHVCu.getText()));
-
-            boolean them = blDAO.themHVCu(bl, conn);
-            fillTableHVCu();
-            Dialog.alert(null, "Thêm thành công");
+        try {
+            int vitri = tbl_HVMoi.getSelectedRow();
+            if (vitri>=0) {                            
+                int row;                  
+                row = (int) tbl_HVMoi.getValueAt(vitri, 1);                    
+                boolean bl = blDAO.xepLop(row, conn);   
+                if (bl==true) {
+                    JOptionPane.showMessageDialog(this, "Xếp lớp thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hiện tại chưa có lớp phù hợp, mời tạo thêm");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Mời chọn đối tượng");
+            }
+                
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btn_themHVCuActionPerformed
 
@@ -1628,17 +1635,37 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tbl_HVMoiMouseClicked
 
     private void btn_themHVMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themHVMoiActionPerformed
-        if (checkHVMoi()) {
-            BienLai bl = new BienLai();
-            bl.setMaDangKi(Integer.parseInt(txt_maDangKiHVMoi.getText()));
-            bl.setThanhTien(Float.parseFloat(txt_thanhTienHVMoi.getText()));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-            String date = sdf.format(date_ngayThuTienHVMoi.getDate());
-            bl.setNgayThuTien(date);
-            bl.setMaNhanVien(Integer.parseInt(txt_maNhanVienHVMoi.getText()));
-            boolean them = blDAO.themHVMoi(bl, conn);
-            fillTableHVMoi();
-            Dialog.alert(null, "Thêm thành công");
+//        if (checkHVMoi()) {
+//            BienLai bl = new BienLai();
+//            bl.setMaDangKi(Integer.parseInt(txt_maDangKiHVMoi.getText()));
+//            bl.setThanhTien(Float.parseFloat(txt_thanhTienHVMoi.getText()));
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+//            String date = sdf.format(date_ngayThuTienHVMoi.getDate());
+//            bl.setNgayThuTien(date);
+//            bl.setMaNhanVien(Integer.parseInt(txt_maNhanVienHVMoi.getText()));
+//            boolean them = blDAO.themHVMoi(bl, conn);
+//            fillTableHVMoi();
+//            Dialog.alert(null, "Thêm thành công");
+//        }
+        try {
+            int vitri = tbl_HVMoi.getSelectedRow();
+            if (vitri>=0) {                            
+                int row;                  
+                row = (int) tbl_HVMoi.getValueAt(vitri, 1);                    
+                boolean bl = blDAO.xepLop(row, conn);   
+                if (bl==true) {
+                    JOptionPane.showMessageDialog(this, "Đã xếp học viên ào lớp");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hiện tại chưa có lớp phù hợp, mời tạo thêm");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Mời chọn đối tượng");
+            }
+                
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btn_themHVMoiActionPerformed
 
