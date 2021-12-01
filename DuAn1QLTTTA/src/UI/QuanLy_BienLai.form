@@ -141,7 +141,6 @@
                                               <Component id="date_ngayThuTienHVMoi" alignment="0" max="32767" attributes="0"/>
                                               <Component id="txt_thanhTienHVMoi" alignment="0" max="32767" attributes="0"/>
                                               <Component id="lbl_loiNgayThuTienHVMoi" alignment="1" max="32767" attributes="0"/>
-                                              <Component id="lbl_loiMaNhanVienHVMoi" alignment="0" max="32767" attributes="0"/>
                                               <Component id="txt_maNhanVienHVMoi" alignment="0" max="32767" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -163,6 +162,13 @@
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="lbl_loiMaNhanVienHVMoi1" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -193,9 +199,14 @@
                                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="txt_maNhanVienHVMoi" min="-2" pref="28" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lbl_loiMaNhanVienHVMoi" min="-2" pref="23" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="447" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="476" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="337" max="-2" attributes="0"/>
+                                      <Component id="lbl_loiMaNhanVienHVMoi1" min="-2" pref="23" max="-2" attributes="0"/>
+                                      <EmptySpace pref="437" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -237,8 +248,6 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="lbl_loiThanhTienHVMoi">
                         </Component>
-                        <Component class="javax.swing.JLabel" name="lbl_loiMaNhanVienHVMoi">
-                        </Component>
                         <Component class="javax.swing.JTextField" name="txt_maNhanVienHVMoi">
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel13">
@@ -250,6 +259,8 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lbl_loiMaDangKiHVMoi">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbl_loiMaNhanVienHVMoi1">
                         </Component>
                       </SubComponents>
                     </Container>
@@ -330,6 +341,9 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_HVMoiMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -347,23 +361,26 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="date_timHVMoi" min="-2" pref="186" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="btn_HVMoi" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="btn_themHVMoi" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btn_SuaHVMoi" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="btn_ClearMoi" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="lbl_loitimKiemHVMOI" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="date_timHVMoi" min="-2" pref="186" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="btn_HVMoi" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="btn_themHVMoi" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="btn_SuaHVMoi" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                          <Component id="btn_ClearMoi" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="453" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -376,13 +393,15 @@
                                   <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btn_HVMoi" alignment="0" pref="28" max="32767" attributes="0"/>
                               </Group>
+                              <EmptySpace pref="9" max="32767" attributes="0"/>
+                              <Component id="lbl_loitimKiemHVMOI" min="-2" pref="23" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btn_themHVMoi" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                                   <Component id="btn_SuaHVMoi" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                                   <Component id="btn_ClearMoi" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="54" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -395,6 +414,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Clear"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ClearMoiActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_SuaHVMoi">
                       <Properties>
@@ -403,14 +425,20 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SuaHVMoiActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_themHVMoi">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/TienIch/Icon/Create.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+                        <Property name="text" type="java.lang.String" value="X&#x1ebf;p l&#x1edb;p"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themHVMoiActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel7">
                       <Properties>
@@ -426,6 +454,11 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_HVMoiActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbl_loitimKiemHVMOI">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -722,9 +755,9 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -739,6 +772,7 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="btn_ClearHVCu" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="lbl_loitimKiemHVCu" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -753,13 +787,15 @@
                                   <Component id="jLabel6" max="32767" attributes="0"/>
                                   <Component id="btn_timHVCu" pref="28" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lbl_loitimKiemHVCu" min="-2" pref="23" max="-2" attributes="0"/>
+                              <EmptySpace pref="23" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btn_themHVCu" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                                   <Component id="btn_suaHVCu" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                                   <Component id="btn_ClearHVCu" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="54" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -788,7 +824,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/TienIch/Icon/Create.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+                        <Property name="text" type="java.lang.String" value="X&#x1ebf;p l&#x1edb;p"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themHVCuActionPerformed"/>
@@ -815,6 +851,8 @@
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ClearHVCuActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbl_loitimKiemHVCu">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1145,21 +1183,24 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txt_timKiemChuaThi" pref="265" max="32767" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="btn_TimKiemChuaThi" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="293" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
-                                      <Component id="btn_suaHVChuaThi" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                      <Component id="btn_ClearHVChuaThi" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="btn_suaHVChuaThi" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                              <Component id="btn_ClearHVChuaThi" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="txt_timKiemChuaThi" pref="287" max="32767" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="btn_TimKiemChuaThi" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="293" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1190,10 +1231,13 @@
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="1"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="T&#xea;n h&#x1ecd;c vi&#xea;n"/>
+                                <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m "/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="txt_timKiemChuaThi">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Nh&#x1ead;p t&#xea;n h&#x1ecd;c vi&#xea;n"/>
+                              </Properties>
                             </Component>
                             <Component class="javax.swing.JButton" name="btn_TimKiemChuaThi">
                               <Properties>
@@ -1459,17 +1503,20 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txt_timKiemDaThi" pref="265" max="32767" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="btn_timKiemHVDaThi" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="293" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
-                                      <Component id="btn_suaHVDaThi" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                      <Component id="btn_ClearHVDaThi" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="btn_suaHVDaThi" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="btn_ClearHVDaThi" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="txt_timKiemDaThi" pref="291" max="32767" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="btn_timKiemHVDaThi" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="293" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1500,10 +1547,13 @@
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="1"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="T&#xea;n h&#x1ecd;c vi&#xea;n"/>
+                                <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="txt_timKiemDaThi">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Nh&#x1ead;p t&#xea;n h&#x1ecd;c vi&#xea;n"/>
+                              </Properties>
                             </Component>
                             <Component class="javax.swing.JButton" name="btn_timKiemHVDaThi">
                               <Properties>

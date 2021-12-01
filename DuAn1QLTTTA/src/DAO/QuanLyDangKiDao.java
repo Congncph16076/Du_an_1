@@ -51,6 +51,27 @@ public class QuanLyDangKiDao implements EntityDAO<DangKi, String>{
         }
         return false;   
     }
+    public boolean insert2(DangKi dk, Connection conn) {
+        String themDK = "INSERT INTO dbo.bienlai(madangki)\n"
+                + "VALUES(?)";
+        
+            
+        
+        try {
+            PreparedStatement ptmt = conn.prepareStatement(themDK);
+            ptmt.setInt(1, dk.getMaDangKi());
+            
+            
+            int kq = ptmt.executeUpdate();
+            if (kq > 0) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;   
+    }
 
     @Override
     public void update(DangKi dk, Connection conn) {

@@ -71,10 +71,10 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         txtSDT.setText("");
         txtEmail.setText("");
         txtDiaChi.setText("");
-        txtTenCapLop.setText("");
-        txtTenLoaiLop.setText("");
+        cboCaHoc.setSelectedIndex(1);
+        cboLoaiLop.setSelectedIndex(1);
         txtHPhi.setText("");
-        txtCaHoc.setText("");
+        cboCapLop.setSelectedIndex(1);
         fillTable();
     }
     
@@ -93,9 +93,8 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         }
     }
     boolean checkNull() {
-        if (txtTenHV.getText().equals("") && txtMaHV.getText().equals("") && txtTenCapLop.getText().equals("")
-                && txtDiaChi.getText().equals("") && txtSDT.getText().equals("") && txtEmail.getText().equals("")
-                && dateNgaySinh.getDate().equals("")&& txtTenLoaiLop.getText().equals("")&& txtCaHoc.getText().equals("")
+        if (txtTenHV.getText().equals("") && txtMaHV.getText().equals("") && dateNgaySinh.getDate().equals("")
+                && txtDiaChi.getText().equals("") && txtSDT.getText().equals("") && txtEmail.getText().equals("")                
                 && txtHPhi.getText().equals("")&& dateNhapHoc.getDate().equals("")&& dateNgaySinh.getDate().equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập thông tin nào mời nhập lại");
             txtMaHV.requestFocus();
@@ -112,12 +111,6 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         if (dateNgaySinh.getDate().equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn ngày sinh");
             dateNgaySinh.requestFocus();
-            return false;
-        }
-
-        if (txtTenCapLop.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên cấp lớp");
-            txtTenCapLop.requestFocus();
             return false;
         }
 
@@ -140,16 +133,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
             }
 
         }
-        if (txtCaHoc.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa nhập ca học");
-            txtCaHoc.requestFocus();
-            return false;
-        }
-        if (txtTenLoaiLop.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên loại lớp");
-            txtTenLoaiLop.requestFocus();
-            return false;
-        }
+        
 
         if (txtEmail.equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập email");
@@ -276,22 +260,22 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         txtDiaChi = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtTenCapLop = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtHPhi = new javax.swing.JTextField();
-        txtTenLoaiLop = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         dateDangKi = new com.toedter.calendar.JDateChooser();
         dateNhapHoc = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        txtCaHoc = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtMaHV = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         rdoDaHoc = new javax.swing.JRadioButton();
         rdoChuaHoc = new javax.swing.JRadioButton();
         jLabel15 = new javax.swing.JLabel();
+        cboLoaiLop = new javax.swing.JComboBox<>();
+        cboCapLop = new javax.swing.JComboBox<>();
+        cboCaHoc = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1081, 650));
@@ -301,7 +285,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel43.setText("Tìm kiếm");
 
-        txtTimKiem.setText("Mời nhập số điện thoại");
+        txtTimKiem.setText("Mời nhập tên ");
         txtTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtTimKiemMouseClicked(evt);
@@ -461,23 +445,11 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Học phí ");
 
-        txtTenLoaiLop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTenLoaiLopActionPerformed(evt);
-            }
-        });
-
         jLabel11.setText("Tên loại lớp");
 
         jLabel3.setText("Ngày nhập học");
 
         jLabel12.setText("Ngày đăng kí");
-
-        txtCaHoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCaHocActionPerformed(evt);
-            }
-        });
 
         jLabel13.setText("Ca học");
 
@@ -496,6 +468,12 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         });
 
         jLabel15.setText("Tình trạng hồ sơ");
+
+        cboLoaiLop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toeic", "Anh Văn Gia Tiếp", "Anh Văn Tổng Quát" }));
+
+        cboCapLop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
+
+        cboCaHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ca 1 (7h-9h) 246", "Ca 1 (7h-9h) 357", "Ca 2 (9h-11h) 246", "Ca 2 (9h-11h) 357", "Ca 3 (12h-14h) 246", "Ca 3 (12h-14h) 357", "Ca 4 (14h-16h) 246", "Ca 4 (14h-16h) 357" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -528,32 +506,31 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtTenLoaiLop, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTenCapLop, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cboLoaiLop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cboCaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel9)
-                                    .addComponent(txtHPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(txtCaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboCapLop, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel11))
+                        .addGap(54, 54, 54)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dateDangKi, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                             .addComponent(jLabel12)
                             .addComponent(jLabel3)
-                            .addComponent(dateNhapHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dateNhapHoc, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                            .addComponent(jLabel9)
+                            .addComponent(txtHPhi))
                         .addGap(20, 20, 20))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMaHV, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(540, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -565,14 +542,15 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel11))))
                     .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTenCapLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboLoaiLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rdoDaHoc)
                         .addComponent(rdoChuaHoc))
@@ -580,30 +558,30 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel11)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtTenLoaiLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtTenHV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTenHV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboCapLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(dateDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
-                        .addComponent(jLabel7))
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel13))
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel13))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(dateNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboCaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel14))
@@ -641,7 +619,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -661,8 +639,8 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         try {
-            String s = txtTimKiem.getText().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3");
-            txtTimKiem.setText(s);
+//            String s = txtTimKiem.getText().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3");
+//            txtTimKiem.setText(s);
             fillTable();
             lstDK = dkDAO.search(txtTimKiem.getText(), conn);
             model.setRowCount(0);
@@ -677,7 +655,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 vec.add(nd.getGioiTinh() == 1 ? "Nam" : "Nữ");
                 vec.add(nd.getNgaySinh());
                 vec.add(nd.getDiaChi());
-                vec.add(nd.getSdt().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3"));
+                vec.add(nd.getSdt());
                 vec.add(nd.getEmail());
                 vec.add(nd.getCaHoc());
                 vec.add(nd.getNgayNhapHoc());
@@ -703,8 +681,8 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                     rdoDaHoc.setSelected(true);
                     nd.setMaHocVien(Integer.parseInt(txtMaHV.getText()));
                 }
-                nd.setTenCapLop(txtTenCapLop.getText());
-                nd.setTenLoaiLop(txtTenLoaiLop.getText());
+                nd.setTenCapLop((String) cboCapLop.getSelectedItem());
+                nd.setTenLoaiLop((String) cboLoaiLop.getSelectedItem());
                 int gioitinh;
                 if (rdoNam.isSelected()) {
                     gioitinh = 1;
@@ -726,7 +704,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 txtSDT.setText(s);
                 nd.setSdt(s);
                 nd.setEmail(txtEmail.getText());
-                nd.setCaHoc(txtCaHoc.getText());
+                nd.setCaHoc((String) cboCaHoc.getSelectedItem());
                 nd.setHocPhi(Float.parseFloat(txtHPhi.getText()));
                 boolean them;
                 if (Integer.parseInt(txtMaHV.getText())==0) {
@@ -737,13 +715,26 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                     them = dkDAO.insert(nd, conn);
                 }
                 fillTable();
+                
+                int row;
+                row = (int) tblDangKi.getValueAt(0, 0);
+                nd.setMaDangKi(row);
+                if (Integer.parseInt(txtMaHV.getText())==0) {
+                    
+                    boolean hv = dkDAO2.insert2(nd, conn);
+                }else{
+                    
+                    boolean hv = dkDAO.insert2(nd, conn);
+                }
+                
                 if (them == true) {
                     Dialog.alert(null, "ok");
                 } else {
                     Dialog.alert(null, "k0");
                 }
-            
             }
+            
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -755,8 +746,8 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 DangKi nd = new DangKi();
                 nd.setTenHocVien(txtTenHV.getText());
                 
-                nd.setTenCapLop(txtTenCapLop.getText());
-                nd.setTenLoaiLop(txtTenLoaiLop.getText());
+                nd.setTenCapLop((String) cboCapLop.getSelectedItem());
+                nd.setTenLoaiLop((String) cboLoaiLop.getSelectedItem());
                 int gioitinh;
                 if (rdoNam.isSelected()) {
                     gioitinh = 1;
@@ -780,7 +771,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 nd.setSdt(txtSDT.getText());
                 nd.setEmail(txtEmail.getText());
                 nd.setHocPhi(Float.parseFloat(txtHPhi.getText()));
-                nd.setCaHoc(txtCaHoc.getText());
+                nd.setCaHoc((String) cboCaHoc.getSelectedItem());
 
                 if (Integer.parseInt(txtMaHV.getText())==0) {
                     rdoChuaHoc.setSelected(true);
@@ -871,10 +862,10 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                     txtSDT.setText(hv.getSdt().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3"));
                     txtEmail.setText(String.valueOf(hv.getEmail()));
                     txtDiaChi.setText(hv.getDiaChi());
-                    txtTenCapLop.setText(hv.getTenCapLop());
-                    txtTenLoaiLop.setText(hv.getTenLoaiLop());
+                    cboCaHoc.setSelectedItem(hv.getCaHoc());
+                    cboCapLop.setSelectedItem(hv.getTenCapLop());
                     txtHPhi.setText(hv.getHocPhi()+"");
-                    txtCaHoc.setText(hv.getCaHoc());
+                    cboLoaiLop.setSelectedItem(hv.getTenLoaiLop());
 
                     try {
                         Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse((String) tblDangKi.getValueAt(vitri, 11));
@@ -906,20 +897,12 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_rdoNuActionPerformed
 
     private void txtSDTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSDTMouseExited
-        String s = txtSDT.getText().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3");
-        txtSDT.setText(s);
+        
     }//GEN-LAST:event_txtSDTMouseExited
 
-    private void txtTenLoaiLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenLoaiLopActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTenLoaiLopActionPerformed
-
-    private void txtCaHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaHocActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCaHocActionPerformed
-
     private void txtTimKiemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimKiemMouseExited
-        
+        String s = txtTimKiem.getText().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3");
+        txtTimKiem.setText(s);
     }//GEN-LAST:event_txtTimKiemMouseExited
 
     private void txtTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimKiemMouseClicked
@@ -953,6 +936,9 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnXoa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JComboBox<String> cboCaHoc;
+    private javax.swing.JComboBox<String> cboCapLop;
+    private javax.swing.JComboBox<String> cboLoaiLop;
     private com.toedter.calendar.JDateChooser dateDangKi;
     private com.toedter.calendar.JDateChooser dateNgaySinh;
     private com.toedter.calendar.JDateChooser dateNhapHoc;
@@ -980,15 +966,12 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNu;
     private javax.swing.JTable tblDangKi;
-    private javax.swing.JTextField txtCaHoc;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHPhi;
     private javax.swing.JTextField txtMaHV;
     private javax.swing.JTextField txtSDT;
-    private javax.swing.JTextField txtTenCapLop;
     private javax.swing.JTextField txtTenHV;
-    private javax.swing.JTextField txtTenLoaiLop;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
