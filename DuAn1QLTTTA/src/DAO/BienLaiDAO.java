@@ -39,7 +39,7 @@ public class BienLaiDAO {
                 bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
                 bl.setThanhTien(rs.getFloat("THANHTIEN"));
                 bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
-                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
+                //bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
                 bl.setNgayThuTien(rs.getString("ngaythutien"));
                 list.add(bl);
             }
@@ -80,7 +80,7 @@ public class BienLaiDAO {
                 bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
                 bl.setThanhTien(rs.getFloat("THANHTIEN"));
                 bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
-                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
+                //bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
                 bl.setNgayThuTien(rs.getString("ngaythutien"));
                 return bl;
             }
@@ -143,7 +143,7 @@ public class BienLaiDAO {
                 bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
                 bl.setThanhTien(rs.getFloat("THANHTIEN"));
                 bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
-                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
+//                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
                 bl.setNgayThuTien(rs.getString("ngaythutien"));
                 list.add(bl);
             }
@@ -168,8 +168,8 @@ public class BienLaiDAO {
                 bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
                 bl.setThanhTien(rs.getFloat("THANHTIEN"));
                 bl.setNgayThuTien(rs.getString("ngaythutien"));
-                bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
-                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
+               bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
+//                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
                 list.add(bl);
             }
         } catch (SQLException ex) {
@@ -193,7 +193,7 @@ public class BienLaiDAO {
                 bl.setThanhTien(rs.getFloat("THANHTIEN"));
                 bl.setNgayThuTien(rs.getString("ngaythutien"));
                 bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
-                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
+//                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
                 return bl;
             }
         } catch (SQLException ex) {
@@ -255,7 +255,7 @@ public class BienLaiDAO {
                 bl.setThanhTien(rs.getFloat("THANHTIEN"));
                 bl.setNgayThuTien(rs.getString("ngaythutien"));
                 bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
-                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
+//                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
                 list.add(bl);
             }
         } catch (SQLException ex) {

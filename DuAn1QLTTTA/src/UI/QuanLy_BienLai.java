@@ -563,13 +563,13 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
 
         tbl_HVMoi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã biên lai", "Mã đăng kí", "Tên người đăng kí", "Học phí", "Học phí nợ", "Thành tiền", "Ngày thu tiền", "Mã nhân viên", "Tên Nhân viên"
+                "Mã biên lai", "Mã đăng kí", "Tên người đăng kí", "Học phí", "Học phí nợ", "Thành tiền", "Ngày thu tiền", "Mã nhân viên"
             }
         ));
         tbl_HVMoi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -688,13 +688,13 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
 
         tbl_HVCu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã biên lai", "Mã đăng kí", "Mã Học Viên", "Tên người đăng kí", "Học phí", "Học phí nợ", "Thành tiền", "Ngày thu tiền", "Mã nhân viên", "Tên nhân viên"
+                "Mã biên lai", "Mã đăng kí", "Mã Học Viên", "Tên người đăng kí", "Học phí", "Học phí nợ", "Thành tiền", "Ngày thu tiền", "Mã nhân viên"
             }
         ));
         tbl_HVCu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -705,7 +705,6 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(tbl_HVCu);
         if (tbl_HVCu.getColumnModel().getColumnCount() > 0) {
             tbl_HVCu.getColumnModel().getColumn(1).setResizable(false);
-            tbl_HVCu.getColumnModel().getColumn(9).setResizable(false);
         }
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
