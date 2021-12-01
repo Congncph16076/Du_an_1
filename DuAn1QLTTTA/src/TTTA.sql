@@ -61,7 +61,7 @@ CREATE TABLE LOP
 	MALOP INT IDENTITY(1,1),
 	TENLOP NVARCHAR(100),
 	SISO INT,
-	CAHOC NVARCHAR(10),
+	CAHOC NVARCHAR(60),
 	HOCPHI FLOAT,
 	NGAYNHAPHOC DATE,
 	NGAYKETTHUC DATE,
@@ -136,7 +136,7 @@ CREATE TABLE DANGKI(
 	TENLOAILOP NVARCHAR(80),
 	HOCPHI FLOAT,
 	HOCPHINO FLOAT,
-	CAHOC NVARCHAR(10),
+	CAHOC NVARCHAR(60),
 	NGAYNHAPHOC DATE,
 	NGAYDANGKI DATE,
 	MAHOCVIEN INT,
@@ -182,7 +182,7 @@ GO
 CREATE TABLE BUOIHOC(
 	MABUOIHOC INT IDENTITY(1,1),
 	NGAYHOC DATE,
-	CAHOC NVARCHAR(20),
+	CAHOC NVARCHAR(60),
 	GHICHU NVARCHAR(100),
 	MALOPHOC INT,
 	CONSTRAINT PK_MABUOIHOC PRIMARY KEY(MABUOIHOC),
@@ -236,8 +236,7 @@ DBCC CHECKIDENT (LOAILOP, RESEED,0)
 SELECT* FROM dbo.LOAILOP
 
 INSERT INTO dbo.LOAILOP(TENLOAILOP)
-VALUES(null),
-	  (N'Toeic'),
+VALUES(N'Toeic'),
 	  (N'Anh Văn Gia Tiếp'),
 	  (N'Anh Văn Tổng Quát')
 
@@ -246,23 +245,22 @@ DBCC CHECKIDENT (CAPLOP, RESEED,0)
 SELECT* FROM dbo.CAPLOP
 
 INSERT INTO dbo.CAPLOP(TENCAPLOP)
-VALUES(null), (N'A'),(N'B'),(N'C')
+VALUES (N'A'),(N'B'),(N'C')
 
 DELETE FROM dbo.LOP
 DBCC CHECKIDENT (LOP, RESEED,0)
 SELECT* FROM dbo.LOP
 
 INSERT INTO dbo.LOP(TENLOP,SISO,CAHOC,HOCPHI,NGAYNHAPHOC,NGAYKETTHUC,MACAPLOP,MALOAILOP,MANHANVIEN)
-VALUES(null,0,null,0,null,null,1,1,14),
-	  (N'Toeic cấp A',10,N'Ca 3 (12h-2h) 357',1000000.0,'2010/10/10','2011/01/10',1,1,2),
+VALUES(N'Toeic cấp A',10,N'Ca 3 (12h-14h) 357',1000000.0,'2010/10/10','2011/01/10',1,1,2),
 	  (N'Toeic cấp A',10,N'Ca 1 (7h-9h) 246',1000000.0,'2011/01/11','2011/04/11',1,1,3),
 	  (N'Toeic cấp B',15,N'Ca 2 (9h-11h) 357',2500000.0,'2011/05/10','2011/09/10',2,1,4),
 	  (N'Anh Văn Tổng Quát cấp A',10,N'Ca 2 (9h-11h) 246',1500000.0,'2011/05/10','2011/09/10',1,3,3),
 	  (N'Anh Văn Tổng Quát cấp A',10,N'Ca 1 (7h-9h) 357',1500000.0,'2011/05/10','2011/09/10',1,3,2),
 	  (N'Anh Văn Tổng Quát cấp B',15,N'Ca 2 (9h-11h) 246',3000000.0,'2011/10/10','2012/01/10',2,3,9),
-	  (N'Anh Văn Tổng Quát cấp C',5,N'Ca 4 (2h-4h) 246',5000000.0,'2010/10/10','2011/01/10',3,3,7),
+	  (N'Anh Văn Tổng Quát cấp C',5,N'Ca 4 (14h-16h) 246',5000000.0,'2010/10/10','2011/01/10',3,3,7),
 	  (N'Anh văn giao tiếp cấp C',5,N'Ca 1 (7h-9h) 357',5500000.0,'2010/10/10','2011/01/10',3,3,4),
-	  (N'Anh Văn giao tiếp cấp B',15,N'Ca 3 (12h-2h) 246',3200000.0,'2011/05/10','2011/09/10',2,2,5),
+	  (N'Anh Văn giao tiếp cấp B',15,N'Ca 3 (12h-14h) 246',3200000.0,'2011/05/10','2011/09/10',2,2,5),
 	  (N'Anh Văn giao tiếp cấp A',10,N'Ca 1 (7h-9h) 246',1700000.0,'2011/05/10','2011/09/10',1,2,6)
 
 DELETE FROM dbo.HOCVIEN
@@ -386,17 +384,16 @@ DBCC CHECKIDENT (DOTTHI, RESEED,0)
 SELECT* FROM dbo.DOTTHI
 
 INSERT INTO dbo.DOTTHI(NGAYTHI,CATHI,SISO,VANG,MALOP)
-VALUES(NULL,0,0,0,1),
-	  ('2011/01/10',3,30,10,2),
-	  ('2011/04/11',2,30,5,3),
-	  ('2011/09/10',4,30,12,4),
-	  ('2011/09/10',5,30,9,5),
+VALUES('2011/01/10',3,30,10,1),
+	  ('2011/04/11',2,30,5,2),
+	  ('2011/09/10',4,30,12,3),
+	  ('2011/09/10',5,30,9,4),
 	  ('2011/09/10',6,30,9,5),
 	  ('2012/01/10',5,30,9,6),
+	  ('2011/01/10',5,30,9,8),
 	  ('2011/01/10',5,30,9,9),
-	  ('2011/01/10',5,30,9,10),
-	  ('2011/09/10',5,30,9,8),
-	  ('2011/09/10',5,30,9,11)
+	  ('2011/09/10',5,30,9,7),
+	  ('2011/09/10',5,30,9,10)
 
 DELETE FROM dbo.DANGKI
 DBCC CHECKIDENT (DANGKI, RESEED,0)
@@ -404,23 +401,23 @@ SELECT* FROM dbo.DANGKI
 
 INSERT INTO dbo.DANGKI(TENHOCVIEN,NGAYSINH,GIOITINH,SDT,EMAIL,DIACHI,TENCAPLOP,TENLOAILOP,HOCPHI,HOCPHINO,CAHOC,NGAYNHAPHOC,NGAYDANGKI,MAHOCVIEN)
 VALUES
-(N'Nguyễn Văn A','1999/01/01',1,'0324553946','A@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam','A','Toeic',1000000,0,'Ca 3 (12h-2h) 357','2010/10/10','2010/09/27',1),
-(N'Nguyễn Văn B','1998/01/01',1,'0324553922','B@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam','A','Toeic',1000000,0,'Ca 3 (12h-2h) 357','2010/10/10','2010/09/27',2),
-(N'Nguyễn Văn C','1997/01/21',1,'0324553921','C@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam','A','Toeic',1000000,0,'Ca 3 (12h-2h) 357','2010/10/10','2010/09/27',3),
-(N'Nguyễn Văn D','1999/02/01',1,'0324555922','D@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam','A','Toeic',1000000,0,'Ca 3 (12h-2h) 357','2010/10/10','2010/09/27',4),
-(N'Nguyễn Thị A','1999/01/01',0,'0324513946',N'A1@gmail.com',N'Đạo Lý- Lý NhâN-Hà Nam',N'A',N'Toeic',1000000.0,0,N'Ca 3 (12h-2h) 246','2012/03/10','2012/02/28',NULL),
+(N'Nguyễn Văn A','1999/01/01',1,'0324553946','A@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam','A','Toeic',1000000,0,'Ca 3 (12h-14h) 357','2010/10/10','2010/09/27',1),
+(N'Nguyễn Văn B','1998/01/01',1,'0324553922','B@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam','A','Toeic',1000000,0,'Ca 3 (12h-14h) 357','2010/10/10','2010/09/27',2),
+(N'Nguyễn Văn C','1997/01/21',1,'0324553921','C@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam','A','Toeic',1000000,0,'Ca 3 (12h-14h) 357','2010/10/10','2010/09/27',3),
+(N'Nguyễn Văn D','1999/02/01',1,'0324555922','D@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam','A','Toeic',1000000,0,'Ca 3 (12h-14h) 357','2010/10/10','2010/09/27',4),
+(N'Nguyễn Thị A','1999/01/01',0,'0324513946',N'A1@gmail.com',N'Đạo Lý- Lý NhâN-Hà Nam',N'A',N'Toeic',1000000.0,0,N'Ca 3 (12h-14h) 246','2012/03/10','2012/02/28',NULL),
 (N'Nguyễn Thị B','1998/01/10',0,'0324213926',N'B1@gmail.com',N'Đạo Lý- Lý NhâN-Hà Nam',N'A',N'Toeic',1000000.0,0,N'Ca 2 (9h-7h) 357','2012/03/10','2012/02/28',NULL),
 (N'Nguyễn Thị C','1997/01/01',1,'0324321126',N'C1@gmail.com',N'Đạo Lý- Lý NhâN-Hà Nam',N'A',N'Toeic',1000000.0,0,N'Ca 2 (9h-7h) 357','2012/03/10','2012/02/28',NULL),
-(N'Nguyễn Văn A','1999/01/01',1,'0324553646',N'A@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam',N'B',N'Toeic',2000000.0,500000,N'Ca 3 (12h-2h) 246','2010/10/10','2010/09/30',1),
-(N'Nguyễn Văn B','1999/02/01',1,'0324523956',N'B@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam',N'B',N'Toeic',2000000.0,1000000,N'Ca 3 (12h-2h) 246','2010/10/10','2010/09/30',2),
-(N'Nguyễn Văn C','1999/04/01',1,'0324553916',N'C@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam',N'B',N'Toeic',2000000.0,500000,N'Ca 3 (12h-2h) 246','2010/10/10','2010/09/30',3)
+(N'Nguyễn Văn A','1999/01/01',1,'0324553646',N'A@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam',N'B',N'Toeic',2000000.0,500000,N'Ca 3 (12h-14h) 246','2010/10/10','2010/09/30',1),
+(N'Nguyễn Văn B','1999/02/01',1,'0324523956',N'B@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam',N'B',N'Toeic',2000000.0,1000000,N'Ca 3 (12h-14h) 246','2010/10/10','2010/09/30',2),
+(N'Nguyễn Văn C','1999/04/01',1,'0324553916',N'C@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam',N'B',N'Toeic',2000000.0,500000,N'Ca 3 (12h-14h) 246','2010/10/10','2010/09/30',3)
 
 INSERT INTO dbo.DANGKI(TENHOCVIEN,NGAYSINH,GIOITINH,SDT,EMAIL,DIACHI,TENCAPLOP,TENLOAILOP,HOCPHI,HOCPHINO,CAHOC,NGAYNHAPHOC,NGAYDANGKI,MAHOCVIEN)
-VALUES(N'Nguyễn Văn D','1999/02/01',1,'0841509943','D@gmail.com',N'Hà Tây','B','Anh văn giao tiếp',2000000,500000,'Ca 3 (12h-2h) 246','2012/01/10','2011/12/20',4)
+VALUES(N'Nguyễn Văn D','1999/02/01',1,'0841509943','D@gmail.com',N'Hà Tây','B','Anh văn giao tiếp',2000000,500000,'Ca 3 (12h-14h) 246','2012/01/10','2011/12/20',4)
 INSERT INTO dbo.DANGKI(TENHOCVIEN,NGAYSINH,GIOITINH,SDT,EMAIL,DIACHI,TENCAPLOP,TENLOAILOP,HOCPHI,HOCPHINO,CAHOC,NGAYNHAPHOC,NGAYDANGKI,MAHOCVIEN)
-VALUES(N'Nguyễn Văn Công','1998/02/01',1,'0841632243','congcc@gmail.com',N'Hà Tây','B','Anh văn giao tiếp',2000000,500000,'Ca 3 (12h-2h) 246','2012/01/10','2012/01/01',NULL)
+VALUES(N'Nguyễn Văn Công','1998/02/01',1,'0841632243','congcc@gmail.com',N'Hà Tây','B','Anh văn giao tiếp',2000000,500000,'Ca 3 (12h-14h) 246','2012/01/10','2012/01/01',NULL)
 INSERT INTO dbo.DANGKI(TENHOCVIEN,NGAYSINH,GIOITINH,SDT,EMAIL,DIACHI,TENCAPLOP,TENLOAILOP,HOCPHI,HOCPHINO,CAHOC,NGAYNHAPHOC,NGAYDANGKI,MAHOCVIEN)
-VALUES(N'Nguyễn Văn Chiến','1997/11/01',1,'0841632343','chiencc@gmail.com',N'Hà Tây','B','Anh văn giao tiếp',2000000,500000,'Ca 3 (12h-2h) 357','2012/01/10','2012/01/01',NULL)
+VALUES(N'Nguyễn Văn Chiến','1997/11/01',1,'0841632343','chiencc@gmail.com',N'Hà Tây','B','Anh văn giao tiếp',2000000,500000,'Ca 3 (12h-14h) 357','2012/01/10','2012/01/01',NULL)
 
 DELETE FROM dbo.BIENLAI
 DBCC CHECKIDENT (BIENLAI, RESEED,0)
@@ -445,16 +442,16 @@ DBCC CHECKIDENT (BUOIHOC, RESEED,0)
 SELECT* FROM dbo.BUOIHOC
 
 INSERT INTO dbo.BUOIHOC(NGAYHOC,CAHOC,GHICHU,MALOPHOC)
-VALUES('2010/10/10',N'Ca 3 (12h-2h) 357',N'Đủ',2),
-	  ('2011/01/11',N'Ca 1 (7h-9h) 246',N'Đủ',3),
-	  ('2011/05/10',N'Ca 2 (9h-11h) 357',N'Đủ',4),
-	  ('2011/05/10',N'Ca 2 (9h-11h) 246',N'Đủ',5),
-	  ('2011/05/10',N'Ca 1 (7h-9h) 357',N'Đủ',6),
-	  ('2011/05/10',N'Ca 3 (12h-2h) 246',N'Đủ',10),
-	  ('2011/05/10',N'Ca 1 (7h-9h) 246',N'Đủ',11),
-	  ('2010/10/10',N'Ca 2 (9h-11h) 246',N'Đủ',7),
-	  ('2010/10/10',N'Ca 4 (2h-4h) 246',N'Đủ',8),
-	  ('2010/10/10',N'Ca 1 (7h-9h) 357',N'Đủ',9)
+VALUES('2010/10/10',N'Ca 3 (12h-14h) 357',N'Đủ',1),
+	  ('2011/01/11',N'Ca 1 (7h-9h) 246',N'Đủ',2),
+	  ('2011/05/10',N'Ca 2 (9h-11h) 357',N'Đủ',3),
+	  ('2011/05/10',N'Ca 2 (9h-11h) 246',N'Đủ',4),
+	  ('2011/05/10',N'Ca 1 (7h-9h) 357',N'Đủ',5),
+	  ('2011/05/10',N'Ca 3 (12h-14h) 246',N'Đủ',9),
+	  ('2011/05/10',N'Ca 1 (7h-9h) 246',N'Đủ',10),
+	  ('2010/10/10',N'Ca 2 (9h-11h) 246',N'Đủ',6),
+	  ('2010/10/10',N'Ca 4 (14h-16h) 246',N'Đủ',7),
+	  ('2010/10/10',N'Ca 1 (7h-9h) 357',N'Đủ',8)
 
 
 DELETE FROM dbo.DIEMDANH
