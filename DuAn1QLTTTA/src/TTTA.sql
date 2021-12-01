@@ -995,10 +995,8 @@ begin
 		where MALOP=@malop
 
 		if @b<@c and @malop is not null and @ngaydki<@ngaynhaphoc
-		print 'ok'
 		update BIENLAI set MALOP= @malop where MADANGKI = @madangki
-		else
-		print 'ngu'
+		
 		
 END
 ------
