@@ -20,12 +20,12 @@ import java.util.List;
  *
  * @author vinhn
  */
-public class QuanlyHocVienDao implements EntityDAO<HocVien, String>{
+public class QuanlyHocVienDao implements EntityDAO<HocVien, String> {
 
     @Override
     public boolean insert(HocVien hv, Connection conn) {
-        String themHV = "INSERT dbo.HOCVIEN(TENHOCVIEN,MALOP,GIOITINH,NGAYSINH,SDT,DIACHI,EMAIL,HOCPHINO\n" +
-                        "VALUES(?,?,?,?,?,?,?,?,?)" ;
+        String themHV = "INSERT  INTO dbo.HOCVIEN(TENHOCVIEN,MALOP,GIOITINH,NGAYSINH,DIACHI,SDT,EMAIL,HOCPHINO)\n"
+                + "VALUES(?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ptmt = conn.prepareStatement(themHV);
             ptmt.setString(1, hv.getTenHocVien());
@@ -33,7 +33,7 @@ public class QuanlyHocVienDao implements EntityDAO<HocVien, String>{
             ptmt.setInt(3, hv.getGioiTinh());
             ptmt.setString(4, hv.getNgaySinh());
             ptmt.setString(5, hv.getSdt());
-            ptmt.setString(6,  hv.getDiaChi());
+            ptmt.setString(6, hv.getDiaChi());
             ptmt.setString(7, hv.getEmail());
             ptmt.setFloat(8, hv.getHocPhiNo());
             int kq = ptmt.executeUpdate();
@@ -49,8 +49,8 @@ public class QuanlyHocVienDao implements EntityDAO<HocVien, String>{
 
     @Override
     public void update(HocVien hv, Connection conn) {
-        String UpdateHV = "UPDATE dbo.HOCVIEN SET TENHOCVIEN = ?,MALOP = ?,GIOITINH = ?,NGAYSINH = ?,SDT =?,DIACHI =?,EMAIL = ?, HOCPHINO = ?\n" +
-                            "WHERE MAHOCVIEN = ?";
+        String UpdateHV = "UPDATE dbo.HOCVIEN SET TENHOCVIEN = ?,MALOP = ?,GIOITINH = ?,NGAYSINH = ?,SDT =?,DIACHI =?,EMAIL = ?, HOCPHINO = ?\n"
+                + "WHERE MAHOCVIEN = ?";
         try {
             PreparedStatement ptmt = conn.prepareStatement(UpdateHV);
             ptmt.setString(1, hv.getTenHocVien());
@@ -58,7 +58,7 @@ public class QuanlyHocVienDao implements EntityDAO<HocVien, String>{
             ptmt.setInt(3, hv.getGioiTinh());
             ptmt.setString(4, hv.getNgaySinh());
             ptmt.setString(5, hv.getSdt());
-            ptmt.setString(6,  hv.getDiaChi());
+            ptmt.setString(6, hv.getDiaChi());
             ptmt.setString(7, hv.getEmail());
             ptmt.setFloat(8, hv.getHocPhiNo());
             ptmt.setInt(9, hv.getMaHocVien());
@@ -68,8 +68,6 @@ public class QuanlyHocVienDao implements EntityDAO<HocVien, String>{
             ex.printStackTrace();
         }
     }
-
-    
 
     @Override
     public List<HocVien> selectAll(Connection conn) {
@@ -86,7 +84,7 @@ public class QuanlyHocVienDao implements EntityDAO<HocVien, String>{
         List<HocVien> listHV = new ArrayList<>();
         try {
             CallableStatement call = conn.prepareCall("{call tim_kiem_hoc_vien_theo_ten(?)}");
-            call.setString(1, "%"+ID+"%");
+            call.setString(1, "%" + ID + "%");
             ResultSet rs = call.executeQuery();
 
             while (rs.next()) {
@@ -113,5 +111,5 @@ public class QuanlyHocVienDao implements EntityDAO<HocVien, String>{
     public HocVien delete(String key, Connection conn) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -530,7 +530,6 @@ public class QLHocVien extends javax.swing.JInternalFrame {
                 HocVien nd = new HocVien();
                 nd.setTenHocVien(txtTenHV.getText());
                 nd.setMaLop(Integer.parseInt(txtMaLop.getText()));
-               
                 int gioitinh;
                 if (rdoNam.isSelected()) {
                     gioitinh = 1;
@@ -549,7 +548,6 @@ public class QLHocVien extends javax.swing.JInternalFrame {
                 nd.setSdt(s);
                 nd.setEmail(txtEmail.getText());
                 nd.setHocPhiNo(Float.parseFloat(txtHPNo.getText()));
-
                 boolean them = qlDao.insert(nd, conn);
                 fillTable();
                 if (them == true) {

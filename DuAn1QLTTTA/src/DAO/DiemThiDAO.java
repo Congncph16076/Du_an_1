@@ -27,7 +27,8 @@ public class DiemThiDAO {
         List<BienLai> list = new ArrayList<>();
         String sql = "SELECT MABIENLAI,MALOP,TENHOCVIEN,MADOTTHI,DIEMTHI,DIEMTHANHPHAN,DIEMTONG=(DIEMTHI+DIEMTHANHPHAN) FROM dbo.BIENLAI\n"
                 + "JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI\n"
-                + "WHERE (DIEMTHI+DIEMTHANHPHAN) is NULL";
+                + "WHERE (DIEMTHI+DIEMTHANHPHAN) is NULL\n"
+                +"ORDER BY MABIENLAI desc";
         try {
             PreparedStatement ptmt = conn.prepareStatement(sql);
             ResultSet rs = ptmt.executeQuery();
@@ -77,7 +78,8 @@ public class DiemThiDAO {
         List<BienLai> list = new ArrayList<>();
         String sql = "SELECT MABIENLAI,MALOP,TENHOCVIEN,MADOTTHI,DIEMTHI,DIEMTHANHPHAN,DIEMTONG=(DIEMTHI+DIEMTHANHPHAN) FROM dbo.BIENLAI\n"
                 + "JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI\n"
-                + "WHERE (DIEMTHI+DIEMTHANHPHAN) is NOT NULL";
+                + "WHERE (DIEMTHI+DIEMTHANHPHAN) is NOT NULL\n"
+                +"ORDER BY MABIENLAI desc";
         try {
             PreparedStatement ptmt = conn.prepareStatement(sql);
             ResultSet rs = ptmt.executeQuery();
