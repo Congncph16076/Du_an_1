@@ -23,12 +23,13 @@ public class BienLai {
     private  String tenHocVien;
     private  float  hocPhi;
     private  float  hocPhiNo;
-    
+    private String tenLoaiLop;
+    private String tenCapLop;
 
     public BienLai() {
     }
 
-    public BienLai(int maBienLai, Float thanhTien, int maLop, int maNhanVien, int maDangKi, int maDotThi, int maHocVien, Float diemThi, Float diemThanhPhan, Float diemTong, String ngayThuTien, String tenNhanVien, String tenLop, String tenHocVien, float hocPhi, float hocPhiNo) {
+    public BienLai(int maBienLai, Float thanhTien, int maLop, int maNhanVien, int maDangKi, int maDotThi, int maHocVien, Float diemThi, Float diemThanhPhan, Float diemTong, String ngayThuTien, String tenNhanVien, String tenLop, String tenHocVien, float hocPhi, float hocPhiNo, String tenLoaiLop, String tenCapLop) {
         this.maBienLai = maBienLai;
         this.thanhTien = thanhTien;
         this.maLop = maLop;
@@ -45,7 +46,27 @@ public class BienLai {
         this.tenHocVien = tenHocVien;
         this.hocPhi = hocPhi;
         this.hocPhiNo = hocPhiNo;
+        this.tenLoaiLop = tenLoaiLop;
+        this.tenCapLop = tenCapLop;
     }
+
+    public String getTenLoaiLop() {
+        return tenLoaiLop;
+    }
+
+    public void setTenLoaiLop(String tenLoaiLop) {
+        this.tenLoaiLop = tenLoaiLop;
+    }
+
+    public String getTenCapLop() {
+        return tenCapLop;
+    }
+
+    public void setTenCapLop(String tenCapLop) {
+        this.tenCapLop = tenCapLop;
+    }
+
+    
 
     public String getTenHocVien() {
         return tenHocVien;

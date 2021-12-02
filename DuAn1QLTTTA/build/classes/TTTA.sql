@@ -866,9 +866,11 @@ WHERE (DIEMTHI+DIEMTHANHPHAN) IS  NULL AND MABIENLAI =12
 UPDATE dbo.BIENLAI SET MALOP=null,MADOTTHI=null,DIEMTHI=null,DIEMTHANHPHAN=null,DIEMTONG=null
 WHERE MABIENLAI = 12
 GO
-SELECT* FROM 
 
-
+SELECT MABIENLAI,BIENLAI.MADANGKI,TENHOCVIEN,BIENLAI.MAHOCVIEN,TENLOAILOP,TENCAPLOP,HOCPHI,HOCPHINO=HOCPHI-THANHTIEN,THANHTIEN
+,CONVERT(NVARCHAR(20),NGAYTHUTIEN,103) [ngaythutien] FROM dbo.BIENLAI
+JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI
+WHERE MABIENLAI =?
 
 ------------------------------------------------------kết thúc truy vấn biên lai--------------------------------------------------
 -----------------------------------------------------------------------------

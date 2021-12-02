@@ -9,13 +9,25 @@ import DAO.BienLaiDAO;
 import DAO.DiemThiDAO;
 import Entity.BienLai;
 import TienIchHoTro.Dialog;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Vector;
 import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
@@ -382,6 +394,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         date_timHVMoi = new com.toedter.calendar.JDateChooser();
         btn_HVMoi = new javax.swing.JButton();
         lbl_loitimKiemHVMOI = new javax.swing.JLabel();
+        btn_bienLaiHVMoi = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbl_HVCu = new javax.swing.JTable();
@@ -410,6 +423,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         btn_suaHVCu = new javax.swing.JButton();
         btn_ClearHVCu = new javax.swing.JButton();
         lbl_loitimKiemHVCu = new javax.swing.JLabel();
+        btn_bienLaiHVCu = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel9 = new javax.swing.JPanel();
@@ -615,28 +629,39 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
             }
         });
 
+        btn_bienLaiHVMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Print preview.png"))); // NOI18N
+        btn_bienLaiHVMoi.setText("Xuất Biên lai");
+        btn_bienLaiHVMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_bienLaiHVMoiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lbl_loitimKiemHVMOI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lbl_loitimKiemHVMOI, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel7Layout.createSequentialGroup()
                             .addComponent(jLabel7)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(date_timHVMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(btn_HVMoi))
-                        .addGroup(jPanel7Layout.createSequentialGroup()
-                            .addComponent(btn_themHVMoi)
-                            .addGap(18, 18, 18)
-                            .addComponent(btn_SuaHVMoi)
-                            .addGap(15, 15, 15)
-                            .addComponent(btn_ClearMoi))))
-                .addContainerGap(453, Short.MAX_VALUE))
+                            .addComponent(btn_HVMoi)
+                            .addGap(28, 28, 28)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(btn_themHVMoi)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_SuaHVMoi)
+                        .addGap(15, 15, 15)
+                        .addComponent(btn_ClearMoi)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_bienLaiHVMoi)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -652,7 +677,8 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_themHVMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_SuaHVMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_ClearMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_ClearMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_bienLaiHVMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
 
@@ -662,10 +688,10 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -829,26 +855,37 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
             }
         });
 
+        btn_bienLaiHVCu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Print preview.png"))); // NOI18N
+        btn_bienLaiHVCu.setText("Xuất Biên lai");
+        btn_bienLaiHVCu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_bienLaiHVCuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(date_HVCu, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_timHVCu))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(date_HVCu, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btn_timHVCu))
+                        .addComponent(lbl_loitimKiemHVCu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(btn_themHVCu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_suaHVCu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_ClearHVCu))
-                    .addComponent(lbl_loitimKiemHVCu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btn_ClearHVCu)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_bienLaiHVCu)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -865,7 +902,8 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_themHVCu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_suaHVCu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_ClearHVCu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_ClearHVCu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_bienLaiHVCu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
@@ -878,7 +916,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1728,6 +1766,201 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btn_HVMoiActionPerformed
 
+    private void btn_bienLaiHVMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bienLaiHVMoiActionPerformed
+        Document doc = new Document();
+        BienLai bl = new BienLai();
+        int viTri = tbl_HVMoi.getSelectedRow();
+         Locale localeVN = new Locale("vi", "VN");
+        NumberFormat vn = NumberFormat.getInstance(localeVN);
+        if (viTri > -1) {
+            int row = (int) tbl_HVMoi.getValueAt(viTri, 0);
+            bl = blDAO.bienLai(row, conn);
+            if (bl != null) {
+                try {
+                    FileOutputStream fos = new FileOutputStream("C:\\Users\\congc\\Desktop\\Bienlai"+bl.getMaBienLai()+".pdf");
+                    String hocPhi1= vn.format( bl.getHocPhi());
+                    String hocPhiNo1= vn.format( bl.getHocPhiNo());
+                    String thanhTien1= vn.format( bl.getThanhTien());
+                    PdfWriter writer = PdfWriter.getInstance(doc, fos);
+                    writer.setPdfVersion(PdfWriter.VERSION_1_7);
+
+                    doc.open();
+                    Font fontNgay = new Font(Font.FontFamily.TIMES_ROMAN, 24.0f, Font.NORMAL, BaseColor.BLACK);
+                    Font font = new Font(Font.FontFamily.TIMES_ROMAN, 24.0f, Font.BOLD, BaseColor.BLACK);
+                    Font fontBold = new Font(Font.FontFamily.TIMES_ROMAN, 36.0f, Font.BOLD, BaseColor.BLACK);
+                    Font fontBoldInfor = new Font(Font.FontFamily.TIMES_ROMAN, 16.0f, Font.BOLD, BaseColor.BLACK);
+                    Paragraph tenTrungTam = new Paragraph("English center", font);
+                    Paragraph tenTrungTam1 = new Paragraph("Language School", fontBoldInfor);
+                    Paragraph maDangKi = new Paragraph("ID: "+bl.getMaBienLai(), font);
+                    Paragraph tieuDe = new Paragraph("Receipt of payment", fontBold);
+                    Paragraph ngayThu = new Paragraph("Day " + bl.getNgayThuTien(), fontNgay);
+                    Paragraph hoTen = new Paragraph("Name Stundent: "+bl.getTenHocVien(), fontBoldInfor);
+                    Paragraph ID = new Paragraph("ID Student: "+bl.getMaHocVien(), fontBoldInfor);
+                    Paragraph loaiLop = new Paragraph("Class Type: "+bl.getTenLoaiLop(), fontBoldInfor);
+                    Paragraph capLop = new Paragraph("Class Level: "+bl.getTenCapLop(), fontBoldInfor);
+                    Paragraph hocPhi = new Paragraph("Tuition:          " +hocPhi1+"    "+ "VND", fontBoldInfor);
+                    Paragraph hocPhiNo = new Paragraph("Debt Tuition: " +hocPhiNo1+"                  "+ "VND", fontBoldInfor);
+                    Paragraph thanhTien = new Paragraph("Into Money:   "+thanhTien1 +"    "+ "VND", fontBoldInfor);
+
+                    Paragraph nguoiHoc = new Paragraph("Subscribers", fontBoldInfor);
+                    Paragraph nguoiThu = new Paragraph("The cashier", fontBoldInfor);
+
+                    tenTrungTam.setAlignment(Element.ALIGN_LEFT);
+                    tenTrungTam1.setAlignment(Element.ALIGN_LEFT);
+                    maDangKi.setAlignment(Element.ALIGN_RIGHT);
+                    tieuDe.setAlignment(Element.ALIGN_CENTER);
+                    ngayThu.setAlignment(Element.ALIGN_CENTER);
+                    nguoiThu.setAlignment(Element.ALIGN_RIGHT);
+
+                    tenTrungTam1.setIndentationLeft(15);
+                    maDangKi.setIndentationRight(40);
+                    hoTen.setIndentationLeft(30);
+                    ID.setIndentationLeft(hoTen.getIndentationLeft());
+                    loaiLop.setIndentationLeft(hoTen.getIndentationLeft());
+                    capLop.setIndentationLeft(hoTen.getIndentationLeft());
+                    thanhTien.setIndentationLeft(hoTen.getIndentationLeft());
+                    hocPhiNo.setIndentationLeft(hoTen.getIndentationLeft());
+                    hocPhi.setIndentationLeft(hoTen.getIndentationLeft());
+                    nguoiHoc.setIndentationLeft(hoTen.getIndentationLeft());
+                    nguoiThu.setIndentationRight(30);
+
+                    maDangKi.setSpacingBefore(-50);
+                    hoTen.setSpacingBefore(40);
+                    ID.setSpacingBefore(10);
+                    loaiLop.setSpacingBefore(10);
+                    capLop.setSpacingBefore(10);
+                    thanhTien.setSpacingBefore(10);
+                    hocPhiNo.setSpacingBefore(10);
+                    hocPhi.setSpacingBefore(10);
+                    thanhTien.setSpacingAfter(50);
+                    nguoiThu.setSpacingBefore(-21);
+
+                    doc.add(tenTrungTam);
+                    doc.add(tenTrungTam1);
+                    doc.add(maDangKi);
+                    doc.add(tieuDe);
+                    doc.add(ngayThu);
+                    doc.add(hoTen);
+                    doc.add(ID);
+                    doc.add(loaiLop);
+                    doc.add(capLop);
+                    doc.add(hocPhi);
+                    doc.add(hocPhiNo);
+                    doc.add(thanhTien);
+                    doc.add(nguoiHoc);
+                    doc.add(nguoiThu);
+
+                    doc.close();
+                } catch (DocumentException ex) {
+                    ex.printStackTrace();
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                Dialog.alert(null, "Xuất biên lai thành công");
+            }
+        }
+    }//GEN-LAST:event_btn_bienLaiHVMoiActionPerformed
+
+    private void btn_bienLaiHVCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bienLaiHVCuActionPerformed
+         Document doc = new Document();
+        BienLai bl = new BienLai();
+        int viTri = tbl_HVCu.getSelectedRow();
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat vn = NumberFormat.getInstance(localeVN);
+        if (viTri > -1) {
+            int row = (int) tbl_HVCu.getValueAt(viTri, 0);
+            bl = blDAO.bienLai(row, conn);
+            if (bl != null) {
+                try {
+                    FileOutputStream fos = new FileOutputStream("C:\\Users\\congc\\Desktop\\Bienlaihocviencu"+bl.getMaBienLai()+".pdf");
+                    String hocPhi1= vn.format( bl.getHocPhi());
+                    String hocPhiNo1= vn.format( bl.getHocPhiNo());
+                    String thanhTien1= vn.format( bl.getThanhTien());
+                    PdfWriter writer = PdfWriter.getInstance(doc, fos);
+                    writer.setPdfVersion(PdfWriter.VERSION_1_7);
+
+                    doc.open();
+                    Font fontNgay = new Font(Font.FontFamily.TIMES_ROMAN, 24.0f, Font.NORMAL, BaseColor.BLACK);
+                    Font font = new Font(Font.FontFamily.TIMES_ROMAN, 24.0f, Font.BOLD, BaseColor.BLACK);
+                    Font fontBold = new Font(Font.FontFamily.TIMES_ROMAN, 36.0f, Font.BOLD, BaseColor.BLACK);
+                    Font fontBoldInfor = new Font(Font.FontFamily.TIMES_ROMAN, 16.0f, Font.BOLD, BaseColor.BLACK);
+                    Paragraph tenTrungTam = new Paragraph("English center", font);
+                    Paragraph tenTrungTam1 = new Paragraph("Language School", fontBoldInfor);
+                    Paragraph maDangKi = new Paragraph("ID: "+bl.getMaBienLai(), font);
+                    Paragraph tieuDe = new Paragraph("Receipt of payment", fontBold);
+                    Paragraph ngayThu = new Paragraph("Day " + bl.getNgayThuTien(), fontNgay);
+                    Paragraph hoTen = new Paragraph("Name Stundent:"+bl.getTenHocVien(), fontBoldInfor);
+                    Paragraph ID = new Paragraph("ID Student: "+bl.getMaHocVien(), fontBoldInfor);
+                    Paragraph loaiLop = new Paragraph("Class Type: "+bl.getTenLoaiLop(), fontBoldInfor);
+                    Paragraph capLop = new Paragraph("Class Level: "+bl.getTenCapLop(), fontBoldInfor);
+                    Paragraph hocPhi = new Paragraph("Tuition:          " +hocPhi1+"    "+ "VND", fontBoldInfor);
+                    Paragraph hocPhiNo = new Paragraph("Debt Tuition: " +hocPhiNo1+"       "+ "VND", fontBoldInfor);
+                    Paragraph thanhTien = new Paragraph("Into Money:   "+thanhTien1 +"    "+ "VND", fontBoldInfor);
+
+                    Paragraph nguoiHoc = new Paragraph("Subscribers", fontBoldInfor);
+                    Paragraph nguoiThu = new Paragraph("The cashier", fontBoldInfor);
+
+                    tenTrungTam.setAlignment(Element.ALIGN_LEFT);
+                    tenTrungTam1.setAlignment(Element.ALIGN_LEFT);
+                    maDangKi.setAlignment(Element.ALIGN_RIGHT);
+                    tieuDe.setAlignment(Element.ALIGN_CENTER);
+                    ngayThu.setAlignment(Element.ALIGN_CENTER);
+                    nguoiThu.setAlignment(Element.ALIGN_RIGHT);
+
+                    tenTrungTam1.setIndentationLeft(15);
+                    maDangKi.setIndentationRight(40);
+                    hoTen.setIndentationLeft(30);
+                    ID.setIndentationLeft(hoTen.getIndentationLeft());
+                    loaiLop.setIndentationLeft(hoTen.getIndentationLeft());
+                    capLop.setIndentationLeft(hoTen.getIndentationLeft());
+                    thanhTien.setIndentationLeft(hoTen.getIndentationLeft());
+                    hocPhiNo.setIndentationLeft(hoTen.getIndentationLeft());
+                    hocPhi.setIndentationLeft(hoTen.getIndentationLeft());
+                    nguoiHoc.setIndentationLeft(hoTen.getIndentationLeft());
+                    nguoiThu.setIndentationRight(30);
+
+                    maDangKi.setSpacingBefore(-50);
+                    hoTen.setSpacingBefore(40);
+                    ID.setSpacingBefore(10);
+                    loaiLop.setSpacingBefore(10);
+                    capLop.setSpacingBefore(10);
+                    thanhTien.setSpacingBefore(10);
+                    hocPhiNo.setSpacingBefore(10);
+                    hocPhi.setSpacingBefore(10);
+                    thanhTien.setSpacingAfter(50);
+                    nguoiThu.setSpacingBefore(-21);
+
+                    doc.add(tenTrungTam);
+                    doc.add(tenTrungTam1);
+                    doc.add(maDangKi);
+                    doc.add(tieuDe);
+                    doc.add(ngayThu);
+                    doc.add(hoTen);
+                    doc.add(ID);
+                    doc.add(loaiLop);
+                    doc.add(capLop);
+                    doc.add(hocPhi);
+                    doc.add(hocPhiNo);
+                    doc.add(thanhTien);
+                    doc.add(nguoiHoc);
+                    doc.add(nguoiThu);
+
+                    doc.close();
+                } catch (DocumentException ex) {
+                    ex.printStackTrace();
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                Dialog.alert(null, "Xuất biên lai thành công");
+            }
+        }
+
+    }//GEN-LAST:event_btn_bienLaiHVCuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ClearHVChuaThi;
@@ -1737,6 +1970,8 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_HVMoi;
     private javax.swing.JButton btn_SuaHVMoi;
     private javax.swing.JButton btn_TimKiemChuaThi;
+    private javax.swing.JButton btn_bienLaiHVCu;
+    private javax.swing.JButton btn_bienLaiHVMoi;
     private javax.swing.JButton btn_suaHVChuaThi;
     private javax.swing.JButton btn_suaHVCu;
     private javax.swing.JButton btn_suaHVDaThi;

@@ -265,4 +265,32 @@ public class BienLaiDAO {
         
     }
 
+    public BienLai bienLai(int ID, Connection conn) {
+        String sql = "SELECT MABIENLAI,BIENLAI.MADANGKI,TENHOCVIEN,BIENLAI.MAHOCVIEN,TENLOAILOP,TENCAPLOP,HOCPHI,HOCPHINO=HOCPHI-THANHTIEN,THANHTIEN\n"
+                + ",CONVERT(NVARCHAR(20),NGAYTHUTIEN,103) [ngaythutien] FROM dbo.BIENLAI\n"
+                + "JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI\n"
+                + "WHERE MABIENLAI =?";
+        PreparedStatement ptmt;
+        try {
+            ptmt = conn.prepareStatement(sql);
+            ptmt.setInt(1, ID);
+            ResultSet rs = ptmt.executeQuery();
+            while (rs.next()) {
+                BienLai bl = new BienLai();
+                bl.setMaBienLai(rs.getInt("MABIENLAI"));
+                bl.setNgayThuTien(rs.getString("ngaythutien"));
+                bl.setTenHocVien(rs.getString("TENHOCVIEN"));
+                bl.setMaHocVien(rs.getInt("MAHOCVIEN"));
+                bl.setTenLoaiLop(rs.getString("TENLOAILOP"));
+                bl.setTenCapLop(rs.getString("TENCAPLOP"));
+                bl.setHocPhi(rs.getFloat("HOCPHI"));
+                bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
+                bl.setThanhTien(rs.getFloat("THANHTIEN"));
+                return bl;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BienLaiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }
