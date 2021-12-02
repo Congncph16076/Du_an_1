@@ -85,13 +85,6 @@ public class QLHocVien extends javax.swing.JInternalFrame {
             txtMaLop.requestFocus();
             return false;
         }
-
-        if (txtTenLop.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên lớp");
-            txtTenLop.requestFocus();
-            return false;
-        }
-
         
          if (txtSDT.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập sdt");
@@ -183,8 +176,6 @@ public class QLHocVien extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txtMaLop = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtTenLop = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         rdoNam = new javax.swing.JRadioButton();
         rdoNu = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
@@ -320,8 +311,6 @@ public class QLHocVien extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Mã lớp");
 
-        jLabel3.setText("Tên lớp");
-
         rdoNam.setSelected(true);
         rdoNam.setText("Nam");
 
@@ -358,8 +347,16 @@ public class QLHocVien extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTenHV)
+                    .addComponent(txtMaLop)
+                    .addComponent(dateNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtSDT)
+                    .addComponent(txtDiaChi)
+                    .addComponent(txtEmail)
+                    .addComponent(txtHPNo)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
                             .addComponent(jLabel9)
                             .addComponent(jLabel8)
                             .addComponent(jLabel7)
@@ -369,18 +366,8 @@ public class QLHocVien extends javax.swing.JInternalFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(rdoNam)
                                 .addGap(50, 50, 50)
-                                .addComponent(rdoNu))
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(0, 142, Short.MAX_VALUE))
-                    .addComponent(txtMaLop)
-                    .addComponent(txtTenLop)
-                    .addComponent(dateNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSDT)
-                    .addComponent(txtDiaChi)
-                    .addComponent(txtEmail)
-                    .addComponent(txtHPNo))
+                                .addComponent(rdoNu)))
+                        .addGap(0, 142, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -394,11 +381,7 @@ public class QLHocVien extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addGap(10, 10, 10)
                 .addComponent(txtMaLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -424,7 +407,7 @@ public class QLHocVien extends javax.swing.JInternalFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtHPNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(jPanel2);
@@ -480,7 +463,7 @@ public class QLHocVien extends javax.swing.JInternalFrame {
             if (hv != null) {
                 txtTenHV.setText(hv.getTenHocVien());
                 txtMaLop.setText(String.valueOf(hv.getMaLop()));
-                txtTenLop.setText(hv.getTenLop());
+                
                 if (hv.getGioiTinh() == 1) {
                     rdoNam.setSelected(true);
                 }
@@ -547,7 +530,7 @@ public class QLHocVien extends javax.swing.JInternalFrame {
                 HocVien nd = new HocVien();
                 nd.setTenHocVien(txtTenHV.getText());
                 nd.setMaLop(Integer.parseInt(txtMaLop.getText()));
-                nd.setTenLop(txtTenLop.getText());
+               
                 int gioitinh;
                 if (rdoNam.isSelected()) {
                     gioitinh = 1;
@@ -618,7 +601,7 @@ public class QLHocVien extends javax.swing.JInternalFrame {
         txtMaLop.setText("");
         txtSDT.setText("");
         txtTenHV.setText("");
-        txtTenLop.setText("");
+        
         txtTimKiem.setText("");
         rdoNam.setSelected(false);
         rdoNu.setSelected(false);
@@ -635,7 +618,6 @@ public class QLHocVien extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel5;
@@ -657,7 +639,6 @@ public class QLHocVien extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMaLop;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenHV;
-    private javax.swing.JTextField txtTenLop;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
