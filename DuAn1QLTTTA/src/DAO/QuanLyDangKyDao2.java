@@ -21,8 +21,8 @@ import java.util.List;
 public class QuanLyDangKyDao2 implements EntityDAO<DangKi, String>{
     @Override
     public boolean insert(DangKi dk, Connection conn) {
-        String themDK = "INSERT INTO dbo.Dangki(TENHOCVIEN,NGAYSINH ,GIOITINH ,SDT ,EMAIL ,DIACHI ,TENCAPLOP,TENLOAILOP ,HOCPHI,CAHOC,	NGAYNHAPHOC,NGAYDANGKI )\n"
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String themDK = "INSERT INTO dbo.Dangki(TENHOCVIEN,NGAYSINH ,GIOITINH ,SDT ,EMAIL ,DIACHI ,TENCAPLOP,TENLOAILOP ,HOCPHI,CAHOC,NGAYDANGKI )\n"
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         
             
         
@@ -38,8 +38,7 @@ public class QuanLyDangKyDao2 implements EntityDAO<DangKi, String>{
             ptmt.setString(8, dk.getTenLoaiLop());
             ptmt.setFloat(9, dk.getHocPhi());
             ptmt.setString(10, dk.getCaHoc());
-            ptmt.setString(11, dk.getNgayNhapHoc());
-            ptmt.setString(12, dk.getNgayDangKi());
+            ptmt.setString(11, dk.getNgayDangKi());
             
             int kq = ptmt.executeUpdate();
             if (kq > 0) {
@@ -75,7 +74,8 @@ public class QuanLyDangKyDao2 implements EntityDAO<DangKi, String>{
     }
     @Override
     public void update(DangKi dk, Connection conn) {
-        String updateDK = "UPDATE dbo.dangki SET TENhocvien = ?,GIOITINH = ?,NGAYSINH = ?,DIACHI = ?,SDT = ?,EMAIL = ?,TENcaplop = ?,TENLOAILOP = ?,HOCPHI = ?,cahoc=?, NGAYNHAPHOC=?, NGAYDANGKI=? \n"
+        String updateDK = "UPDATE dbo.dangki SET TENhocvien = ?,GIOITINH = ?"
+                + ",NGAYSINH = ?,DIACHI = ?,SDT = ?,EMAIL = ?,TENcaplop = ?,TENLOAILOP = ?,HOCPHI = ?,cahoc=?, NGAYDANGKI=? \n"
                 + "WHERE MADANGKI = ?";
 
         try {
@@ -90,10 +90,8 @@ public class QuanLyDangKyDao2 implements EntityDAO<DangKi, String>{
             ptmt.setString(8, dk.getTenLoaiLop());
             ptmt.setFloat(9, dk.getHocPhi());
             ptmt.setString(10, dk.getCaHoc());
-            ptmt.setString(11, dk.getNgayNhapHoc());
-            ptmt.setString(12, dk.getNgayDangKi());
-
-            ptmt.setInt(13, dk.getMaDangKi());
+            ptmt.setString(11, dk.getNgayDangKi());
+            ptmt.setInt(12, dk.getMaDangKi());
             ptmt.executeUpdate();
 
         } catch (SQLException ex) {
@@ -134,7 +132,7 @@ public class QuanLyDangKyDao2 implements EntityDAO<DangKi, String>{
                dk.setTenCapLop(rs.getString("tencaplop"));
                dk.setHocPhi(rs.getFloat("hocphi"));
                dk.setCaHoc(rs.getString("cahoc"));
-               dk.setNgayNhapHoc(rs.getString("ngaynhaphoc"));
+               //dk.setNgayNhapHoc(rs.getString("ngaynhaphoc"));
                dk.setNgayDangKi(rs.getString("ngaydangki"));
                dk.setMaHocVien(rs.getInt("mahocvien"));
                 listDK.add(dk);
@@ -165,7 +163,7 @@ public class QuanLyDangKyDao2 implements EntityDAO<DangKi, String>{
                 dk.setTenCapLop(rs.getString("tencaplop"));
                 dk.setHocPhi(rs.getFloat("hocphi"));
                 dk.setCaHoc(rs.getString("cahoc"));
-                dk.setNgayNhapHoc(rs.getString("ngaynhaphoc"));
+                //dk.setNgayNhapHoc(rs.getString("ngaynhaphoc"));
                 dk.setNgayDangKi(rs.getString("ngaydangki"));
                 dk.setMaHocVien(rs.getInt("mahocvien"));
                 return dk;
@@ -197,7 +195,7 @@ public class QuanLyDangKyDao2 implements EntityDAO<DangKi, String>{
                 dk.setTenCapLop(rs.getString("tencaplop"));
                 dk.setHocPhi(rs.getFloat("hocphi"));
                 dk.setCaHoc(rs.getString("cahoc"));
-                dk.setNgayNhapHoc(rs.getString("ngaynhaphoc"));
+                //dk.setNgayNhapHoc(rs.getString("ngaynhaphoc"));
                 dk.setNgayDangKi(rs.getString("ngaydangki"));
                 dk.setMaHocVien(rs.getInt("mahocvien"));
                 listDK.add(dk);

@@ -70,7 +70,6 @@ public class ManHinh extends javax.swing.JFrame {
         }
     }
 
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -375,7 +374,7 @@ public class ManHinh extends javax.swing.JFrame {
 
     private void btn_DDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DDActionPerformed
         close();
-       QLBuoiHoc_DiemDanh ql = new QLBuoiHoc_DiemDanh();
+        QLBuoiHoc_DiemDanh ql = new QLBuoiHoc_DiemDanh();
         desktopMain.add(ql);
         ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
                 (desktopMain.getHeight() - ql.getHeight()) / 2);
@@ -383,8 +382,8 @@ public class ManHinh extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_DDActionPerformed
 
     private void btn_hocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hocVienActionPerformed
-      close();
-       QLHocVien ql = new QLHocVien();
+        close();
+        QLHocVien ql = new QLHocVien();
         desktopMain.add(ql);
         ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
                 (desktopMain.getHeight() - ql.getHeight()) / 2);
@@ -393,7 +392,7 @@ public class ManHinh extends javax.swing.JFrame {
 
     private void btn_DangKiHocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangKiHocVienActionPerformed
         close();
-       QuanLyDangKi ql = new QuanLyDangKi();
+        QuanLyDangKi ql = new QuanLyDangKi();
         desktopMain.add(ql);
         ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
                 (desktopMain.getHeight() - ql.getHeight()) / 2);
@@ -434,7 +433,8 @@ public class ManHinh extends javax.swing.JFrame {
             }
         });
     }
-     private void setDongHo() {
+
+    private void setDongHo() {
         new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {

@@ -57,12 +57,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         } catch (ParseException ex) {
             Logger.getLogger(QuanLyDangKi.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2000");
-            dateNhapHoc.setDate(date);
-        } catch (ParseException ex) {
-            Logger.getLogger(QuanLyDangKi.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2000");
             dateDangKi.setDate(date);
@@ -86,8 +81,8 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         for (DangKi nd : lstDK) {
             Object[] obj = new Object[]{
                 nd.getMaHocVien(), nd.getTenHocVien(), nd.getNgaySinh(), nd.getGioiTinh() == 1 ? "Nam" : "Nữ",
-                nd.getSdt().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3"), nd.getEmail(), nd.getDiaChi(),
-                nd.getTenCapLop(), nd.getTenLoaiLop(), nd.getHocPhi(), nd.getCaHoc(), nd.getNgayNhapHoc(),
+                nd.getSdt().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3"), nd.getEmail(),
+                nd.getTenCapLop(), nd.getTenLoaiLop(), nd.getHocPhi(), nd.getCaHoc(),
                 nd.getNgayDangKi(), nd.getMaDangKi()
             };
             model.addRow(obj);
@@ -97,7 +92,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
     boolean checkNull() {
         if (txtTenHV.getText().equals("") && txtMaHV.getText().equals("") && dateNgaySinh.getDate().equals("")
                 && txtDiaChi.getText().equals("") && txtSDT.getText().equals("") && txtEmail.getText().equals("")
-                && txtHPhi.getText().equals("") && dateNhapHoc.getDate().equals("") && dateNgaySinh.getDate().equals("")) {
+                && txtHPhi.getText().equals("") && dateNgaySinh.getDate().equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập thông tin nào mời nhập lại");
             txtMaHV.requestFocus();
             return false;
@@ -148,11 +143,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
             }
 
         }
-        if (dateNhapHoc.getDate().equals("")) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa chọn ngày nhập học");
-            dateNhapHoc.requestFocus();
-            return false;
-        }
+        
         if (dateDangKi.getDate().equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn ngày đăng kí");
             dateDangKi.requestFocus();
@@ -265,8 +256,6 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         txtHPhi = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         dateDangKi = new com.toedter.calendar.JDateChooser();
-        dateNhapHoc = new com.toedter.calendar.JDateChooser();
-        jLabel3 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtMaHV = new javax.swing.JTextField();
@@ -397,7 +386,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Mã học viên", "Tên học viên", "Ngày sinh", "Giới tính", "SDT", "Email", "Địa chỉ", "Tên cấp lớp", "Tên loại lớp", "Học phí ", "Ca học", "Ngày nhập học", "Ngày đăng kí", "Mã đăng kí"
+                "Mã học viên", "Tên học viên", "Ngày sinh", "Giới tính", "SDT", "Email", "Tên cấp lớp", "Tên loại lớp", "Học phí ", "Ca học", "Ngày đăng kí", "Mã đăng kí"
             }
         ));
         tblDangKi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -450,8 +439,6 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         jLabel9.setText("Học phí ");
 
         jLabel11.setText("Tên loại lớp");
-
-        jLabel3.setText("Ngày nhập học");
 
         jLabel12.setText("Ngày đăng kí");
 
@@ -524,11 +511,9 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                         .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(dateDangKi, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel3)
-                            .addComponent(dateNhapHoc, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                             .addComponent(jLabel9)
-                            .addComponent(txtHPhi))
+                            .addComponent(txtHPhi)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -540,15 +525,11 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(12, 12, 12)
-                            .addComponent(jLabel3))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel11))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel11)))
                     .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -557,8 +538,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                         .addComponent(cboLoaiLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rdoDaHoc)
-                        .addComponent(rdoChuaHoc))
-                    .addComponent(dateNhapHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(rdoChuaHoc)))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -699,8 +679,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                 String date = sdf.format(dateNgaySinh.getDate());
                 nd.setNgaySinh(date);
-                String date2 = sdf.format(dateNhapHoc.getDate());
-                nd.setNgayNhapHoc(date2);
+                
                 String date3 = sdf.format(dateDangKi.getDate());
                 nd.setNgayDangKi(date3);
                 nd.setDiaChi(txtDiaChi.getText());
@@ -763,8 +742,8 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                 String date = sdf.format(dateNgaySinh.getDate());
                 nd.setNgaySinh(date);
-                String date2 = sdf.format(dateNhapHoc.getDate());
-                nd.setNgayNhapHoc(date2);
+                
+
                 String date3 = sdf.format(dateDangKi.getDate());
                 nd.setNgayDangKi(date3);
                 nd.setDiaChi(txtDiaChi.getText());
@@ -811,7 +790,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 if (a == 0) {
 
                     int row;
-                    row = (int) tblDangKi.getValueAt(vitri, 0);
+                    row = (int) tblDangKi.getValueAt(vitri, 11);
                     DangKi hv = dkDAO.delete(String.valueOf(row), conn);
                     clear();
 
@@ -831,7 +810,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
             int vitri = tblDangKi.getSelectedRow();
             if (vitri >= 0) {
                 int row;
-                row = (int) tblDangKi.getValueAt(vitri, 13);
+                row = (int) tblDangKi.getValueAt(vitri, 11);
                 DangKi hv = dkDAO.fromTableToText(String.valueOf(row), conn);
                 if (hv != null) {
                     if (hv.getMaHocVien() == 0) {
@@ -867,15 +846,9 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                     txtHPhi.setText(hv.getHocPhi() + "");
                     cboLoaiLop.setSelectedItem(hv.getTenLoaiLop());
 
-                    try {
-                        Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse((String) tblDangKi.getValueAt(vitri, 11));
-                        dateNhapHoc.setDate(date2);
-                    } catch (ParseException ex) {
-                        ex.printStackTrace();
-                    }
 
                     try {
-                        Date date3 = new SimpleDateFormat("dd/MM/yyyy").parse((String) tblDangKi.getValueAt(vitri, 12));
+                        Date date3 = new SimpleDateFormat("dd/MM/yyyy").parse((String) tblDangKi.getValueAt(vitri, 10));
                         dateDangKi.setDate(date3);
                     } catch (ParseException ex) {
                         ex.printStackTrace();
@@ -941,7 +914,6 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cboLoaiLop;
     private com.toedter.calendar.JDateChooser dateDangKi;
     private com.toedter.calendar.JDateChooser dateNgaySinh;
-    private com.toedter.calendar.JDateChooser dateNhapHoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -950,7 +922,6 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel5;
