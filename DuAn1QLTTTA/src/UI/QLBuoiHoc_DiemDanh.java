@@ -237,8 +237,8 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
         btn_clearBuoiHoc1 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         btn_timKiemBuoiHoc1 = new javax.swing.JButton();
-        txt_timKiemDiemDanh = new javax.swing.JTextField();
         lbl_loiTimKiemDiemDanh = new javax.swing.JLabel();
+        date_timKiemDD = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
         setIconifiable(true);
@@ -600,34 +600,33 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(btn_themDiemDanh)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_SuaBuoiHoc1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_clearBuoiHoc1))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_timKiemDiemDanh, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_timKiemBuoiHoc1)))
-                        .addContainerGap(371, Short.MAX_VALUE))
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(date_timKiemDD, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_timKiemBuoiHoc1))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(lbl_loiTimKiemDiemDanh, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btn_themDiemDanh)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_SuaBuoiHoc1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_clearBuoiHoc1))
+                    .addComponent(lbl_loiTimKiemDiemDanh, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_timKiemBuoiHoc1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_timKiemDiemDanh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(22, 22, 22))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(date_timKiemDD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_timKiemBuoiHoc1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(lbl_loiTimKiemDiemDanh, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -858,16 +857,16 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_SuaBuoiHoc1ActionPerformed
 
     private void btn_timKiemBuoiHoc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timKiemBuoiHoc1ActionPerformed
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String date = sdf.format(date_timKiemDD.getDate());
         fillDD();
-        listDD = ddDAO.timKiemDD(txt_timKiemDiemDanh.getText(), conn);
+        listDD = ddDAO.timKiemDD(date, conn);
         dtm.setRowCount(0);
         dtm = (DefaultTableModel) tbl_diemDanh.getModel();
         for (DiemDanh dd : listDD) {
             Vector<Object> vec = new Vector<>();
             vec.add(dd.getMaDiemDanh());
             vec.add(dd.isTrangThai() == true ? "Có mặt" : "Vắng");
-            vec.add(dd.getTenHocVien());
-            vec.add(dd.getTenLop());
             vec.add(dd.getNgayHoc());
             vec.add(dd.getCaHoc());
             vec.add(dd.getGhiChu());
@@ -905,6 +904,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cbc_caHoc;
     private com.toedter.calendar.JDateChooser date_ngayHoc;
     private com.toedter.calendar.JDateChooser date_timKiemBH;
+    private com.toedter.calendar.JDateChooser date_timKiemDD;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -946,6 +946,5 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_maBienLai;
     private javax.swing.JTextField txt_maBuoiHoc;
     private javax.swing.JTextField txt_maLopHoc;
-    private javax.swing.JTextField txt_timKiemDiemDanh;
     // End of variables declaration//GEN-END:variables
 }

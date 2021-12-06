@@ -108,14 +108,14 @@ public class DiemDanhDAO {
         List<DiemDanh> list = new ArrayList<>();
         try {
             CallableStatement call = conn.prepareCall("{call tim_kiem_diem_danh_theo_ten_hoc_vien(?)}");
-            call.setString(1, "%"+ID+"%");
+            call.setString(1, ID);
             ResultSet rs = call.executeQuery();
             while (rs.next()) {
                 DiemDanh dd = new DiemDanh();
                 dd.setMaDiemDanh(rs.getInt("MADIEMDANH"));
                 dd.setTrangThai(rs.getBoolean("TRANGTHAI"));
-                dd.setTenHocVien(rs.getString("TENHOCVIEN"));
-                dd.setTenLop(rs.getString("TENLOP"));
+                //dd.setTenHocVien(rs.getString("TENHOCVIEN"));
+                //dd.setTenLop(rs.getString("TENLOP"));
                 dd.setNgayHoc(rs.getString("ngayhoc"));
                 dd.setCaHoc(rs.getString("CAHOC"));
                 dd.setGhiChu(rs.getString("GHICHU"));
