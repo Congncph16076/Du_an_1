@@ -72,7 +72,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
         for (DiemDanh dd : listDD) {
             Object[] obj = new Object[]{
                 dd.getMaDiemDanh(), dd.isTrangThai() == true ? "Có mặt" : "Vắng",
-                dd.getTenHocVien(), dd.getTenLop(), dd.getNgayHoc(), dd.getCaHoc(),
+                 dd.getNgayHoc(), dd.getCaHoc(),
                 dd.getGhiChu(), dd.getMaBuoiHoc(), dd.getMaBienLai()
             };
             dtm.addRow(obj);
@@ -232,7 +232,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tbl_diemDanh = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
-        btn_themBuoiHoc1 = new javax.swing.JButton();
+        btn_themDiemDanh = new javax.swing.JButton();
         btn_SuaBuoiHoc1 = new javax.swing.JButton();
         btn_clearBuoiHoc1 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
@@ -493,20 +493,20 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_maBienLai, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_loiMaBuoiHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbl_loiTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbl_loiMaBienLai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
-                    .addComponent(txt_maBuoiHoc, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_loiMaBuoiHoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pan_TrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txt_maBuoiHoc)
+                    .addComponent(txt_maBienLai, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_loiMaBienLai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel11)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(pan_TrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel11))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -522,30 +522,30 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_maBuoiHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbl_loiMaBuoiHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_maBienLai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_loiMaBienLai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_maBuoiHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbl_loiMaBuoiHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         tbl_diemDanh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã điểm danh", "Trạng thái", "Tên Học viên", "Tên lớp", "Ngày học", "Ca học", "Ghi chú", "Mã buổi học", "Mã biên lai"
+                "Mã điểm danh", "Trạng thái", "Ngày học", "Ca học", "Ghi chú", "Mã buổi học", "Mã biên lai"
             }
         ));
         tbl_diemDanh.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -557,11 +557,11 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        btn_themBuoiHoc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Create.png"))); // NOI18N
-        btn_themBuoiHoc1.setText("Thêm");
-        btn_themBuoiHoc1.addActionListener(new java.awt.event.ActionListener() {
+        btn_themDiemDanh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Create.png"))); // NOI18N
+        btn_themDiemDanh.setText("Thêm");
+        btn_themDiemDanh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_themBuoiHoc1ActionPerformed(evt);
+                btn_themDiemDanhActionPerformed(evt);
             }
         });
 
@@ -602,7 +602,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(btn_themBuoiHoc1)
+                                .addComponent(btn_themDiemDanh)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_SuaBuoiHoc1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -632,7 +632,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
                 .addGap(2, 2, 2)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(btn_themBuoiHoc1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_themDiemDanh, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(btn_SuaBuoiHoc1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_clearBuoiHoc1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -657,7 +657,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 516, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -729,7 +729,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             String date = sdf.format(date_ngayHoc.getDate());
             bh.setNgayHoc(date);
-            bh.setCaHoc(String.valueOf(cbc_caHoc.getSelectedIndex()));
+            bh.setCaHoc(String.valueOf(cbc_caHoc.getSelectedItem()));
             bh.setGhiChu(txt_GhiChu.getText());
             bh.setMaLopHoc(Integer.parseInt(txt_maLopHoc.getText()));
             boolean them = bhDAO.themBH(bh, conn);
@@ -744,7 +744,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             String date = sdf.format(date_ngayHoc.getDate());
             bh.setNgayHoc(date);
-            bh.setCaHoc(String.valueOf(cbc_caHoc.getSelectedIndex()));
+            bh.setCaHoc(String.valueOf(cbc_caHoc.getSelectedItem()));
             bh.setGhiChu(txt_GhiChu.getText());
             bh.setMaLopHoc(Integer.parseInt(txt_maLopHoc.getText()));
             int row = (int) tbl_buoiHoc.getValueAt(tbl_buoiHoc.getSelectedRow(), 0);
@@ -813,7 +813,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tbl_diemDanhMouseClicked
 
-    private void btn_themBuoiHoc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themBuoiHoc1ActionPerformed
+    private void btn_themDiemDanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themDiemDanhActionPerformed
         if (checknullDD()) {
             DiemDanh dd = new DiemDanh();
             boolean trangThai;
@@ -832,7 +832,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
             fillDD();
             Dialog.alert(null, "Thêm thành công");
         }
-    }//GEN-LAST:event_btn_themBuoiHoc1ActionPerformed
+    }//GEN-LAST:event_btn_themDiemDanhActionPerformed
 
     private void btn_SuaBuoiHoc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaBuoiHoc1ActionPerformed
         if (checknullDD()) {
@@ -899,7 +899,7 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_clearBuoiHoc;
     private javax.swing.JButton btn_clearBuoiHoc1;
     private javax.swing.JButton btn_themBuoiHoc;
-    private javax.swing.JButton btn_themBuoiHoc1;
+    private javax.swing.JButton btn_themDiemDanh;
     private javax.swing.JButton btn_timKiemBuoiHoc;
     private javax.swing.JButton btn_timKiemBuoiHoc1;
     private javax.swing.JComboBox<String> cbc_caHoc;

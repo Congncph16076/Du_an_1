@@ -700,10 +700,10 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 fillTable();
 
                 int row;
-                row = (int) tblDangKi.getValueAt(0, 0);
+                row = (int) tblDangKi.getValueAt(0, 11);
                 nd.setMaDangKi(row);
                 if (Integer.parseInt(txtMaHV.getText()) == 0) {
-
+                    
                     boolean hv = dkDAO2.insert2(nd, conn);
                 } else {
 

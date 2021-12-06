@@ -1691,7 +1691,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
                 row = (int) tbl_HVMoi.getValueAt(vitri, 1);                    
                 boolean bl = blDAO.xepLop(row, conn);   
                 if (bl==true) {
-                    JOptionPane.showMessageDialog(this, "Đã xếp học viên ào lớp");
+                    JOptionPane.showMessageDialog(this, "Đã xếp học viên vào lớp");
                 } else {
                     JOptionPane.showMessageDialog(this, "Hiện tại chưa có lớp phù hợp, mời tạo thêm");
                 }

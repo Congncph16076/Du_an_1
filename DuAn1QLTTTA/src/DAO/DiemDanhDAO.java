@@ -23,14 +23,15 @@ public class DiemDanhDAO {
     public List<DiemDanh> listDD(Connection conn) {
         List<DiemDanh> list = new ArrayList<>();
         try {
+//            MADIEMDANH,TRANGTHAI
+//	,CONVERT(NVARCHAR(20),BUOIHOC.NGAYHOC,103)[ngayhoc],BUOIHOC.CAHOC 
+//	,dbo.DIEMDANH.GHICHU,dbo.DIEMDANH.MABUOIHOC,BIENLAI.MABIENLAI
             CallableStatement call = conn.prepareCall("{call thong_tin_diem_danh}");
             ResultSet rs = call.executeQuery();
             while (rs.next()) {
                 DiemDanh dd = new DiemDanh();
                 dd.setMaDiemDanh(rs.getInt("MADIEMDANH"));
                 dd.setTrangThai(rs.getBoolean("TRANGTHAI"));
-                dd.setTenHocVien(rs.getString("TENHOCVIEN"));
-                dd.setTenLop(rs.getString("TENLOP"));
                 dd.setNgayHoc(rs.getString("ngayhoc"));
                 dd.setCaHoc(rs.getString("CAHOC"));
                 dd.setGhiChu(rs.getString("GHICHU"));
@@ -54,8 +55,6 @@ public class DiemDanhDAO {
                 DiemDanh dd = new DiemDanh();
                 dd.setMaDiemDanh(rs.getInt("MADIEMDANH"));
                 dd.setTrangThai(rs.getBoolean("TRANGTHAI"));
-                dd.setTenHocVien(rs.getString("TENHOCVIEN"));
-                dd.setTenLop(rs.getString("TENLOP"));
                 dd.setNgayHoc(rs.getString("ngayhoc"));
                 dd.setCaHoc(rs.getString("CAHOC"));
                 dd.setGhiChu(rs.getString("GHICHU"));

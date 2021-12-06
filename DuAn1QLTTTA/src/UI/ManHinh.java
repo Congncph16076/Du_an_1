@@ -5,7 +5,6 @@
  */
 package UI;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -338,8 +337,18 @@ public class ManHinh extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         Mnu_thongKe.setText("Thống kê");
+        Mnu_thongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mnu_thongKeActionPerformed(evt);
+            }
+        });
 
-        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.setText("tổng hợp");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         Mnu_thongKe.add(jMenuItem1);
 
         jMenuBar1.add(Mnu_thongKe);
@@ -493,6 +502,19 @@ public class ManHinh extends javax.swing.JFrame {
         desktopMain.add(gt);
         gt.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void Mnu_thongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mnu_thongKeActionPerformed
+
+    }//GEN-LAST:event_Mnu_thongKeActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        close();
+        thongKeLop ql = new thongKeLop();
+        desktopMain.add(ql);
+        ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
+                (desktopMain.getHeight() - ql.getHeight()) / 2);
+        ql.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments

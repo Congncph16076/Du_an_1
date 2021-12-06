@@ -21,11 +21,8 @@ import java.util.List;
 public class QuanLyDangKiDao implements EntityDAO<DangKi, String>{
     @Override
     public boolean insert(DangKi dk, Connection conn) {
-        String themDK = "INSERT INTO dbo.Dangki(TENHOCVIEN,NGAYSINH ,GIOITINH ,SDT ,EMAIL ,DIACHI ,TENCAPLOP,TENLOAILOP ,HOCPHI,CAHOC,NGAYDANGKI,	MAHOCVIEN )\n"
+        String themDK = "INSERT INTO dbo.Dangki(TENHOCVIEN,NGAYSINH ,GIOITINH ,SDT ,EMAIL ,DIACHI ,TENCAPLOP,TENLOAILOP ,HOCPHI,CAHOC,NGAYDANGKI,MAHOCVIEN )\n"
                 + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-        
-            
-        
         try {
             PreparedStatement ptmt = conn.prepareStatement(themDK);
             ptmt.setString(1, dk.getTenHocVien());
@@ -52,14 +49,13 @@ public class QuanLyDangKiDao implements EntityDAO<DangKi, String>{
         return false;   
     }
     public boolean insert2(DangKi dk, Connection conn) {
-        String themDK = "INSERT INTO dbo.bienlai(madangki)\n"
-                + "VALUES(?)";
-        
-            
+        String themDK = "INSERT INTO dbo.bienlai(MAHOCVIEN,madangki)\n"
+                + "VALUES(?,?)";
         
         try {
             PreparedStatement ptmt = conn.prepareStatement(themDK);
-            ptmt.setInt(1, dk.getMaDangKi());
+            ptmt.setInt(1, dk.getMaHocVien());
+            ptmt.setInt(2, dk.getMaDangKi());
             
             
             int kq = ptmt.executeUpdate();

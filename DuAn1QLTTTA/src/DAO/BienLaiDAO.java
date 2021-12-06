@@ -54,7 +54,7 @@ public class BienLaiDAO {
             //Connection conn = TienIchHoTro.ConnectToSQL.getConnect();
             CallableStatement call = conn.prepareCall("{call xep_lop(?)}");
             call.setInt(1, ID);
-            
+
             int kq = call.executeUpdate();
             if (kq > 0) {
                 return true;

@@ -1144,10 +1144,10 @@ public class QLLop extends javax.swing.JInternalFrame {
             lop.setTenLop(txt_tenLop.getText());
             lop.setMaNhanVien(Integer.parseInt(txt_maGiangvien.getText()));
             lop.setHocPhi(Float.parseFloat(txt_hocPhi.getText()));
-            lop.setCaHoc(String.valueOf(cbc_caHoc.getSelectedIndex()));
+            lop.setCaHoc(String.valueOf(cbc_caHoc.getSelectedItem()));
             lop.setSiso(Integer.parseInt(txt_siSo.getText()));
-            String caHoc = String.valueOf(cbc_caHoc.getSelectedIndex());
-            lop.setCaHoc(caHoc);
+//            String caHoc = String.valueOf(cbc_caHoc.getSelectedIndex());
+//            lop.setCaHoc(caHoc);
             lop.setMaLoaiLop(cbc_loaiLop.getSelectedIndex());
             lop.setMaCapLop(cbc_capLop.getSelectedIndex());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -1166,10 +1166,10 @@ public class QLLop extends javax.swing.JInternalFrame {
         lop.setTenLop(txt_tenLop.getText());
         lop.setMaNhanVien(Integer.parseInt(txt_maGiangvien.getText()));
         lop.setHocPhi(Float.parseFloat(txt_hocPhi.getText()));
-        lop.setCaHoc(String.valueOf(cbc_caHoc.getSelectedIndex()));
+        lop.setCaHoc(String.valueOf(cbc_caHoc.getSelectedItem()));
         lop.setSiso(Integer.parseInt(txt_siSo.getText()));
-        String caHoc = String.valueOf(cbc_caHoc.getSelectedIndex());
-        lop.setCaHoc(caHoc);
+//        String caHoc = String.valueOf(cbc_caHoc.getSelectedIndex());
+//        lop.setCaHoc(caHoc);
         lop.setMaLoaiLop(cbc_loaiLop.getSelectedIndex());
         lop.setMaCapLop(cbc_capLop.getSelectedIndex());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -1242,7 +1242,7 @@ public class QLLop extends javax.swing.JInternalFrame {
                 cbc_caHoc.setSelectedItem(l.getCaHoc());
                 txt_siSo.setText(String.valueOf(l.getSiso()));
                 cbc_loaiLop.setSelectedItem(l.getTenLoaiLop());
-                cbc_capLop.setSelectedItem(l.getTenLoaiLop());
+                cbc_capLop.setSelectedItem(l.getTenCapLop());
                 try {
                     Date date = new SimpleDateFormat("dd/MM/yyyy").parse((String) tbl_lop.getValueAt(vitri, 9));
                     date_ngayBatDau.setDate(date);
