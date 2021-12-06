@@ -79,6 +79,7 @@ public class ManHinh extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem2 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         lbl_tenDangNhap = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -106,6 +107,10 @@ public class ManHinh extends javax.swing.JFrame {
         Mnu_nhanVien = new javax.swing.JMenuItem();
         Mnu_thongKe = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+
+        jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -260,32 +265,74 @@ public class ManHinh extends javax.swing.JFrame {
 
         jMenu2.setText("Quản lý");
 
+        Mnu_lop.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         Mnu_lop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/giaoduccongdan.png"))); // NOI18N
         Mnu_lop.setText("Quản lý  lớp");
+        Mnu_lop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mnu_lopActionPerformed(evt);
+            }
+        });
         jMenu2.add(Mnu_lop);
 
+        Mnu_dotThi.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         Mnu_dotThi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/tk_dethi.png"))); // NOI18N
         Mnu_dotThi.setText("Quản lý đợt thi");
+        Mnu_dotThi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mnu_dotThiActionPerformed(evt);
+            }
+        });
         jMenu2.add(Mnu_dotThi);
 
+        Mnu_dangKi.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         Mnu_dangKi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/dangKy.png"))); // NOI18N
         Mnu_dangKi.setText("Quản lý đăng kí ");
+        Mnu_dangKi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mnu_dangKiActionPerformed(evt);
+            }
+        });
         jMenu2.add(Mnu_dangKi);
 
+        Mnu_bienLai.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         Mnu_bienLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/List.png"))); // NOI18N
         Mnu_bienLai.setText("Quản lý biên lai");
+        Mnu_bienLai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mnu_bienLaiActionPerformed(evt);
+            }
+        });
         jMenu2.add(Mnu_bienLai);
 
+        Mnu_hocVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         Mnu_hocVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Users.png"))); // NOI18N
         Mnu_hocVien.setText("Quản lý học viên");
+        Mnu_hocVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mnu_hocVienActionPerformed(evt);
+            }
+        });
         jMenu2.add(Mnu_hocVien);
 
+        Mnu_diemDanh.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         Mnu_diemDanh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Notes.png"))); // NOI18N
         Mnu_diemDanh.setText("Quản lý điểm danh");
+        Mnu_diemDanh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mnu_diemDanhActionPerformed(evt);
+            }
+        });
         jMenu2.add(Mnu_diemDanh);
 
+        Mnu_nhanVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         Mnu_nhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/User.png"))); // NOI18N
         Mnu_nhanVien.setText("Quản lý nhân viên");
+        Mnu_nhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mnu_nhanVienActionPerformed(evt);
+            }
+        });
         jMenu2.add(Mnu_nhanVien);
 
         jMenuBar1.add(jMenu2);
@@ -296,6 +343,18 @@ public class ManHinh extends javax.swing.JFrame {
         Mnu_thongKe.add(jMenuItem1);
 
         jMenuBar1.add(Mnu_thongKe);
+
+        jMenu3.setText("Trợ giúp");
+
+        jMenuItem3.setText("Giới thiệu");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -318,7 +377,7 @@ public class ManHinh extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_LopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LopActionPerformed
-        close();
+        //close();
         QLLop ql = new QLLop();
         //ql.setPreferredSize(new Dimension(150, 100));
         desktopMain.add(ql);
@@ -328,7 +387,7 @@ public class ManHinh extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_LopActionPerformed
 
     private void btn_QLNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QLNVActionPerformed
-        close();
+        //close();
         QLNV ql = new QLNV();
         desktopMain.add(ql);
         ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
@@ -337,7 +396,7 @@ public class ManHinh extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_QLNVActionPerformed
 
     private void btn_dotThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dotThiActionPerformed
-        close();
+        //close();
         QuanLiDotThi ql = new QuanLiDotThi();
         desktopMain.add(ql);
         ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
@@ -364,7 +423,7 @@ public class ManHinh extends javax.swing.JFrame {
     }//GEN-LAST:event_Mnu_dangXuatActionPerformed
 
     private void btn_bienLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bienLaiActionPerformed
-        close();
+        //close();
         QuanLy_BienLai ql = new QuanLy_BienLai();
         desktopMain.add(ql);
         ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
@@ -373,7 +432,7 @@ public class ManHinh extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_bienLaiActionPerformed
 
     private void btn_DDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DDActionPerformed
-        close();
+        //close();
         QLBuoiHoc_DiemDanh ql = new QLBuoiHoc_DiemDanh();
         desktopMain.add(ql);
         ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
@@ -382,7 +441,7 @@ public class ManHinh extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_DDActionPerformed
 
     private void btn_hocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hocVienActionPerformed
-        close();
+        //close();
         QLHocVien ql = new QLHocVien();
         desktopMain.add(ql);
         ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
@@ -391,13 +450,49 @@ public class ManHinh extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_hocVienActionPerformed
 
     private void btn_DangKiHocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangKiHocVienActionPerformed
-        close();
+        //close();
         QuanLyDangKi ql = new QuanLyDangKi();
         desktopMain.add(ql);
         ql.setLocation((desktopMain.getWidth() - ql.getWidth()) / 2,
                 (desktopMain.getHeight() - ql.getHeight()) / 2);
         ql.setVisible(true);
     }//GEN-LAST:event_btn_DangKiHocVienActionPerformed
+
+    private void Mnu_lopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mnu_lopActionPerformed
+        btn_LopActionPerformed(evt);
+    }//GEN-LAST:event_Mnu_lopActionPerformed
+
+    private void Mnu_dotThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mnu_dotThiActionPerformed
+        btn_dotThiActionPerformed(evt);
+    }//GEN-LAST:event_Mnu_dotThiActionPerformed
+
+    private void Mnu_dangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mnu_dangKiActionPerformed
+        btn_DangKiHocVienActionPerformed(evt);
+    }//GEN-LAST:event_Mnu_dangKiActionPerformed
+
+    private void Mnu_bienLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mnu_bienLaiActionPerformed
+        btn_bienLaiActionPerformed(evt);
+    }//GEN-LAST:event_Mnu_bienLaiActionPerformed
+
+    private void Mnu_hocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mnu_hocVienActionPerformed
+        btn_hocVienActionPerformed(evt);
+    }//GEN-LAST:event_Mnu_hocVienActionPerformed
+
+    private void Mnu_diemDanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mnu_diemDanhActionPerformed
+        btn_DDActionPerformed(evt);
+    }//GEN-LAST:event_Mnu_diemDanhActionPerformed
+
+    private void Mnu_nhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mnu_nhanVienActionPerformed
+        btn_QLNVActionPerformed(evt);
+    }//GEN-LAST:event_Mnu_nhanVienActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        gioiThieu gt = new gioiThieu();
+        gt.setLocation((desktopMain.getWidth() - gt.getWidth()) / 2,
+                (desktopMain.getHeight() - gt.getHeight()) / 2);
+        desktopMain.add(gt);
+        gt.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -468,8 +563,11 @@ public class ManHinh extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_dongHo;

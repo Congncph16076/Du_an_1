@@ -8,6 +8,7 @@ package UI;
 import DAO.DangNhapDAO;
 import Entity.NguoiDung;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,11 +131,22 @@ public class GiangVienLogin extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Mật Khẩu:");
 
+        txt_PassGiangVien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_PassGiangVienKeyPressed(evt);
+            }
+        });
+
         btn_LoginGiangVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/dangnhap.png"))); // NOI18N
         btn_LoginGiangVien.setText("Đăng Nhập");
         btn_LoginGiangVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_LoginGiangVienActionPerformed(evt);
+            }
+        });
+        btn_LoginGiangVien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btn_LoginGiangVienKeyPressed(evt);
             }
         });
 
@@ -290,6 +302,20 @@ public class GiangVienLogin extends javax.swing.JFrame {
         quen.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbl_doimkMouseClicked
+
+    private void txt_PassGiangVienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PassGiangVienKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            java.awt.event.ActionEvent evt1 = null;
+            btn_LoginGiangVienActionPerformed(evt1);
+        }
+    }//GEN-LAST:event_txt_PassGiangVienKeyPressed
+
+    private void btn_LoginGiangVienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_LoginGiangVienKeyPressed
+      if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            java.awt.event.ActionEvent evt1 = null;
+            btn_LoginGiangVienActionPerformed(evt1);
+        }
+    }//GEN-LAST:event_btn_LoginGiangVienKeyPressed
 
     /**
      * @param args the command line arguments

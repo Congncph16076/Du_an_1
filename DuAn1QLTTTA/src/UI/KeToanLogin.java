@@ -9,6 +9,7 @@ import DAO.DangNhapDAO;
 import Entity.NguoiDung;
 import TienIchHoTro.Dialog;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,11 +108,22 @@ public class KeToanLogin extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Mật Khẩu:");
 
+        txt_PassKeToan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_PassKeToanKeyPressed(evt);
+            }
+        });
+
         btn_DangNhapKeToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/dangnhap.png"))); // NOI18N
         btn_DangNhapKeToan.setText("Đăng Nhập");
         btn_DangNhapKeToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_DangNhapKeToanActionPerformed(evt);
+            }
+        });
+        btn_DangNhapKeToan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btn_DangNhapKeToanKeyPressed(evt);
             }
         });
 
@@ -271,6 +283,20 @@ public class KeToanLogin extends javax.swing.JFrame {
         quen.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbl_doiMKMouseClicked
+
+    private void txt_PassKeToanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PassKeToanKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            java.awt.event.ActionEvent evt1 = null;
+            btn_DangNhapKeToanActionPerformed(evt1);
+        }
+    }//GEN-LAST:event_txt_PassKeToanKeyPressed
+
+    private void btn_DangNhapKeToanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_DangNhapKeToanKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            java.awt.event.ActionEvent evt1 = null;
+            btn_DangNhapKeToanActionPerformed(evt1);
+        }
+    }//GEN-LAST:event_btn_DangNhapKeToanKeyPressed
 
     /**
      * @param args the command line arguments

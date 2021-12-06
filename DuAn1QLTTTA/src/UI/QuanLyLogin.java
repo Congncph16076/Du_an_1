@@ -9,6 +9,7 @@ import DAO.DangNhapDAO;
 import Entity.NguoiDung;
 import TienIchHoTro.Dialog;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -113,11 +114,22 @@ public class QuanLyLogin extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Mật Khẩu:");
 
+        txt_PassQuanLy.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_PassQuanLyKeyPressed(evt);
+            }
+        });
+
         btn_LoginQuanLy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/dangnhap.png"))); // NOI18N
         btn_LoginQuanLy.setText("Đăng Nhập");
         btn_LoginQuanLy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_LoginQuanLyActionPerformed(evt);
+            }
+        });
+        btn_LoginQuanLy.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btn_LoginQuanLyKeyPressed(evt);
             }
         });
 
@@ -274,6 +286,20 @@ public class QuanLyLogin extends javax.swing.JFrame {
         quenmk.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void txt_PassQuanLyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PassQuanLyKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            java.awt.event.ActionEvent evt1 = null;
+            btn_LoginQuanLyActionPerformed(evt1);
+        }
+    }//GEN-LAST:event_txt_PassQuanLyKeyPressed
+
+    private void btn_LoginQuanLyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_LoginQuanLyKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            java.awt.event.ActionEvent evt1 = null;
+            btn_LoginQuanLyActionPerformed(evt1);
+        }
+    }//GEN-LAST:event_btn_LoginQuanLyKeyPressed
 
     /**
      * @param args the command line arguments

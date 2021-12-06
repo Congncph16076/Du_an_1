@@ -12,13 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QuenMKGV.java</file>
             <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/ManHinh.java</file>
-            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/DiemThiDAO.java</file>
-            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QLHocVien.java</file>
-            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/QuanlyHocVienDao.java</file>
-            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/BienLaiDAO.java</file>
-            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QuanLy_BienLai.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/QuanLyDangKyDao2.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QuanLyDangKi.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/QuanLyDangKiDao.java</file>
         </group>
     </open-files>
 </project-private>
