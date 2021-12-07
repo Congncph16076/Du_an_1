@@ -861,6 +861,9 @@ DROP PROC tim_kiem_bien_laiCu_theo_Ngay
 EXEC tim_kiem_bien_laiCu_theo_Ngay @ngaythu = '30/09/2010'
 GO
 
+
+
+
 SELECT MABIENLAI,MALOP,TENHOCVIEN,MADOTTHI,DIEMTHI,DIEMTHANHPHAN,DIEMTONG=(DIEMTHI+DIEMTHANHPHAN) FROM dbo.BIENLAI
 JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI
 WHERE (DIEMTHI+DIEMTHANHPHAN) IS  NULL AND MABIENLAI =12
@@ -1127,7 +1130,7 @@ CREATE PROC tim_kiem_diem_danh_theo_ten_hoc_vien(@ngayhoc NVARCHAR(20))
 AS
 BEGIN
     SELECT MADIEMDANH,TRANGTHAI
-	,CONVERT(NVARCHAR(20),NGAYHOC,103)[ngayhoc],BUOIHOC.CAHOC,MAHOCVIEN 
+	,CONVERT(NVARCHAR(20),NGAYHOC,103)[ngayhoc],BUOIHOC.CAHOC
 	,dbo.DIEMDANH.GHICHU,dbo.DIEMDANH.MABUOIHOC,BIENLAI.MABIENLAI FROM dbo.DIEMDANH
 	 JOIN dbo.BUOIHOC ON BUOIHOC.MABUOIHOC = DIEMDANH.MABUOIHOC
 	 JOIN dbo.BIENLAI ON BIENLAI.MABIENLAI = DIEMDANH.MABIENLAI 
@@ -1136,7 +1139,7 @@ BEGIN
 END
 DROP PROC dbo.tim_kiem_diem_danh_theo_ten_hoc_vien
 
-EXEC dbo.tim_kiem_diem_danh_theo_ten_hoc_vien @tenhocvien = N'%A% ' -- nvarchar(20)
+EXEC dbo.tim_kiem_diem_danh_theo_ten_hoc_vien @ngayhoc ='17/12/2021' -- nvarchar(20)
 
 ---click table
 CREATE PROC clickTableDiemDanh(@maDiemDanh int)

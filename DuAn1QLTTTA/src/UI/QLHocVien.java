@@ -205,6 +205,7 @@ public class QLHocVien extends javax.swing.JInternalFrame {
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel43.setText("Tìm kiếm");
 
+        txtTimKiem.setText("Nhập tên học viên");
         txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimKiemActionPerformed(evt);
@@ -600,7 +601,7 @@ public class QLHocVien extends javax.swing.JInternalFrame {
         txtSDT.setText("");
         txtTenHV.setText("");
         
-        txtTimKiem.setText("");
+        txtTimKiem.setText("Nhập tên học viên");
         rdoNam.setSelected(false);
         rdoNu.setSelected(false);
         ((JTextField) dateNgaySinh.getDateEditor().getUiComponent()).setText("");

@@ -839,8 +839,11 @@ public class QLNV extends javax.swing.JInternalFrame {
         txt_SDTNV.setBorder(border1);
         lbl_loiEmailNV.setText("");
         txt_EmailNV.setBorder(border1);
+        txt_timKiemNV.setText("Nhập mã nhân viên");
         txt_timKiemNV.setBorder(border1);
         txt_timKiemNV.setForeground(Color.black);
+       fillTableGV();
+       
     }//GEN-LAST:event_btn_ClearKTActionPerformed
 
 

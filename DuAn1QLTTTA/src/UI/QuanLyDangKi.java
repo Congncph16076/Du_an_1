@@ -631,20 +631,20 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
             model = (DefaultTableModel) tblDangKi.getModel();
             for (DangKi nd : lstDK) {
                 Vector<Object> vec = new Vector<>();
-                vec.add(nd.getMaDangKi());
+                 vec.add(nd.getMaHocVien());
                 vec.add(nd.getTenHocVien());
-                vec.add(nd.getMaHocVien());
+               vec.add(nd.getNgaySinh());
+               vec.add(nd.getGioiTinh() == 1 ? "Nam" : "Nữ");
+               vec.add(nd.getSdt());
+               vec.add(nd.getEmail());
                 vec.add(nd.getTenCapLop());
                 vec.add(nd.getTenLoaiLop());
-                vec.add(nd.getGioiTinh() == 1 ? "Nam" : "Nữ");
-                vec.add(nd.getNgaySinh());
-                vec.add(nd.getDiaChi());
-                vec.add(nd.getSdt());
-                vec.add(nd.getEmail());
-                vec.add(nd.getCaHoc());
-                vec.add(nd.getNgayNhapHoc());
-                vec.add(nd.getNgayDangKi());
                 vec.add(nd.getHocPhi());
+                vec.add(nd.getCaHoc());
+                vec.add(nd.getNgayDangKi());
+                vec.add(nd.getMaDangKi());
+                vec.add(nd.getDiaChi());
+                //vec.add(nd.getNgayNhapHoc());
                 model.addRow(vec);
             }
         } catch (Exception e) {

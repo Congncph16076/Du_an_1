@@ -335,7 +335,6 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
             txt_timKiemChuaThi.requestFocus();
             return false;
         } else {
-            txt_timKiemChuaThi.setText("");
             txt_timKiemChuaThi.setBorder(boder1);
         }
 
@@ -350,7 +349,6 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
             txt_timKiemDaThi.requestFocus();
             return false;
         } else {
-            txt_timKiemDaThi.setText("");
             txt_timKiemDaThi.setBorder(boder1);
         }
 
@@ -1586,7 +1584,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         txt_diemThanhPhan.setText("");
         txt_diemTong.setText("");
         fillTableChuaThi();
-        txt_timKiemChuaThi.setText("");
+        txt_timKiemChuaThi.setText("Nhập tên học viên");
         txt_timKiemChuaThi.setBorder(boder1);
     }//GEN-LAST:event_btn_ClearHVChuaThiActionPerformed
 
@@ -1610,7 +1608,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         txt_diemThanhPhan1.setBorder(boder1);
         lbl_loiDiemTong1.setText("");
         txt_diemTong1.setBorder(boder1);
-        txt_timKiemDaThi.setText("");
+        txt_timKiemDaThi.setText("Nhập tên học viên");
         txt_timKiemDaThi.setBorder(boder1);
     }//GEN-LAST:event_btn_ClearHVDaThiActionPerformed
 
