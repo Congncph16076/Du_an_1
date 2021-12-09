@@ -406,6 +406,13 @@ VALUES
 (N'Nguyễn Văn B','1998/01/01',1,'0324553922','B@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam','A','Toeic',1000000,0,'Ca 3 (12h-14h) 357','2010/10/10','2010/09/27',2),
 (N'Nguyễn Văn C','1997/01/21',1,'0324553921','C@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam','A','Toeic',1000000,0,'Ca 3 (12h-14h) 357','2010/10/10','2010/09/27',3),
 (N'Nguyễn Văn D','1999/02/01',1,'0324555922','D@gmail.com',N'Đạo Lý- Lý Nhân-Hà Nam','A','Toeic',1000000,0,'Ca 3 (12h-14h) 357','2010/10/10','2010/09/27',4),
+(N'Nguyễn Thị E','2001/11/01',0,'0324553932','E@gmail.com',N'Ninh Bình','A','Toeic',1000000,0,'Ca 3 (12h-14h) 357','2010/10/10','2010/09/27',5),
+(N'Nguyễn Thị F','2001/11/01',0,'0324553945','E@gmail.com',N'Ninh Bình','A','Toeic',1000000,0,'Ca 3 (12h-14h) 357','2010/10/10','2010/09/27',6),
+(N'Nguyễn Thu H','2001/11/01',0,'0812354781','E@gmail.com',N'Ninh Bình','A','Toeic',1000000,0,'Ca 3 (12h-14h) 357','2010/10/10','2010/09/27',7),
+(N'Nguyễn Thu B','2001/11/01',0,'0812352281','E@gmail.com',N'Ninh Bình','A','Toeic',1000000,0,'Ca 3 (12h-14h) 357','2010/10/10','2010/09/27',8),
+(N'Nguyễn Thu A','2001/11/01',0,'0812324781','E@gmail.com',N'Ninh Bình','A','Toeic',1000000,0,'Ca 3 (12h-14h) 357','2010/10/10','2010/09/27',9),
+(N'Nguyễn Quỳnh','2001/11/01',0,'0822354781','E@gmail.com',N'Ninh Bình','A','Toeic',1000000,0,'Ca 3 (12h-14h) 357','2010/10/10','2010/09/27',10),
+
 (N'Nguyễn Thị A','1999/01/01',0,'0324513946',N'A1@gmail.com',N'Đạo Lý- Lý NhâN-Hà Nam',N'A',N'Toeic',1000000.0,0,N'Ca 3 (12h-14h) 246','2012/03/10','2012/02/28',NULL),
 (N'Nguyễn Thị B','1998/01/10',0,'0324213926',N'B1@gmail.com',N'Đạo Lý- Lý NhâN-Hà Nam',N'A',N'Toeic',1000000.0,0,N'Ca 2 (9h-7h) 357','2012/03/10','2012/02/28',NULL),
 (N'Nguyễn Thị C','1997/01/01',1,'0324321126',N'C1@gmail.com',N'Đạo Lý- Lý NhâN-Hà Nam',N'A',N'Toeic',1000000.0,0,N'Ca 2 (9h-7h) 357','2012/03/10','2012/02/28',NULL),
@@ -429,6 +436,12 @@ VALUES(100000,1,1,10,1,1,8,0,8,'2010/09/27'),
 	  (100000,2,1,10,2,1,8,0,8,'2010/09/27'),
 	  (100000,3,1,10,3,1,3,2,5,'2010/09/27'),
 	  (100000,4,1,10,4,1,4,0,4,'2010/09/27'),
+	  (100000,5,1,10,5,1,4,0,4,'2010/09/27'),
+	  (100000,6,1,10,6,1,4,0,4,'2010/09/27'),
+	  (100000,7,1,10,7,1,4,0,4,'2010/09/27'),
+	  (100000,8,1,10,8,1,4,0,4,'2010/09/27'),
+	  (100000,9,1,10,9,1,4,0,4,'2010/09/27'),
+	  (100000,10,1,10,10,1,4,0,4,'2010/09/27'),
 	  (100000,NULL,null,10,5,NULL,NULL,NULL,NULL,'2012/02/28'),
 	  (100000,null,null,10,6,NULL,NULL,NULL,NULL,'2012/02/28'),
 	  (100000,null,null,10,7,NULL,NULL,NULL,NULL,'2012/02/28'),
@@ -1190,3 +1203,39 @@ GO
 
 	SELECT TENNHANVIEN FROM dbo.NGUOIDUNG
 	WHERE TENVAITRO = 2 AND MANHANVIEN = ?
+
+	CREATE PROC themdd(@trangThai BIT,@maBuoiHoc INT,@maHocVien INT,@malop INT)
+AS 
+BEGIN
+	
+	DECLARE @mabienlai INT,@maDiemDanh INT 
+	SELECT @mabienlai=MABIENLAI FROM dbo.BIENLAI
+	WHERE MAHOCVIEN =@maHocVien AND MALOP =@malop
+	SELECT  @maDiemDanh = MADIEMDANH FROM dbo.DIEMDANH
+	WHERE MABUOIHOC =@maBuoiHoc AND MABIENLAI =@mabienlai 
+	IF @maDiemDanh IS null
+    BEGIN
+        INSERT INTO dbo.DIEMDANH(TRANGTHAI,MABUOIHOC,MABIENLAI) VALUES(@trangThai,@maBuoiHoc,@mabienlai)
+    END
+	
+END
+DROP PROC dbo.themdd
+SELECT * FROM dbo.DIEMDANH
+SELECT* FROM dbo.BIENLAI
+WHERE MAHOCVIEN = 105
+GO
+CREATE PROC suadd(@trangThai BIT,@maBuoiHoc INT,@maHocVien INT,@malop INT )
+AS 
+BEGIN
+	
+	DECLARE @mabienlai INT
+	SELECT @mabienlai=MABIENLAI FROM dbo.BIENLAI
+	WHERE MAHOCVIEN =@maHocVien  AND MALOP =@malop
+	UPDATE dbo.DIEMDANH SET TRANGTHAI =@trangThai
+	WHERE  MABUOIHOC =@maBuoiHoc  AND MABIENLAI =@mabienlai
+END
+DROP PROC dbo.suadd
+EXEC dbo.suadd @trangThai = 1, -- bit
+               @maBuoiHoc = 1,    -- int
+               @maHocVien = 1,    -- int
+               @malop = 1         -- int

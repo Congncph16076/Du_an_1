@@ -128,4 +128,88 @@ public class DiemDanhDAO {
         }
         return list;
     }
+    
+       public List<DiemDanh> HVDD(int ID, int BH, Connection conn) {
+        List<DiemDanh> list = new ArrayList<>();
+
+        String sql = "SELECT TRANGTHAI,dbo.BIENLAI.MAHOCVIEN,tenHOCVIEN FROM dbo.DIEMDANH\n"
+                + "	JOIN dbo.BIENLAI ON BIENLAI.MABIENLAI = DIEMDANH.MABIENLAI\n"
+                + "	JOIN dbo.HOCVIEN ON HOCVIEN.MAHOCVIEN = BIENLAI.MAHOCVIEN\n"
+                + "	WHERE MABUOIHOC =? AND dbo.HOCVIEN.MALOP =?";
+        try {
+            PreparedStatement ptmt = conn.prepareStatement(sql);
+            ptmt.setInt(1, ID);
+            ptmt.setInt(2, BH);
+            ResultSet rs = ptmt.executeQuery();
+            while (rs.next()) {
+                DiemDanh dd = new DiemDanh();
+                dd.setMaHocVien(rs.getInt("MAHOCVIEN"));
+                dd.setTenHocVien(rs.getString("TENHOCVIEN"));
+                dd.setTrangThai(rs.getBoolean("TRANGTHAI"));
+                list.add(dd);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<DiemDanh> HVDD1(int ID, Connection conn) {
+        List<DiemDanh> list = new ArrayList<>();
+
+        String sql = "SELECT MAHOCVIEN,TENHOCVIEN FROM dbo.HOCVIEN\n"
+                + "WHERE MALOP = ?";
+        try {
+            PreparedStatement ptmt = conn.prepareStatement(sql);
+            ptmt.setInt(1, ID);
+
+            ResultSet rs = ptmt.executeQuery();
+            while (rs.next()) {
+                DiemDanh dd = new DiemDanh();
+                dd.setMaHocVien(rs.getInt("MAHOCVIEN"));
+                dd.setTenHocVien(rs.getString("TENHOCVIEN"));
+                dd.setTrangThai(false);
+                list.add(dd);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public boolean themDiemDanh1(DiemDanh dd, Connection conn) {
+
+        try {
+            CallableStatement call = conn.prepareCall("{call themdd(?,?,?,?)}");
+            call.setBoolean(1, dd.isTrangThai());
+            call.setInt(2, dd.getMaBuoiHoc());
+            call.setInt(3, dd.getMaHocVien());
+            call.setInt(4, dd.getMaLop());
+            int rs = call.executeUpdate();
+            if (rs >0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean suaDiemDanh1(DiemDanh dd, Connection conn) {
+
+        try {
+            CallableStatement call = conn.prepareCall("{call suadd(?,?,?,?)}");
+            call.setBoolean(1, dd.isTrangThai());
+            call.setInt(2, dd.getMaBuoiHoc());
+            call.setInt(3, dd.getMaHocVien());
+            call.setInt(4, dd.getMaLop());
+            int rs = call.executeUpdate();
+            if (rs > 0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }

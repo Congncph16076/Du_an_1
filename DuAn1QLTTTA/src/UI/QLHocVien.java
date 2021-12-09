@@ -189,6 +189,8 @@ public class QLHocVien extends javax.swing.JInternalFrame {
         txtEmail = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtHPNo = new javax.swing.JTextField();
+        txtTenLop = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -340,6 +342,19 @@ public class QLHocVien extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Học phí còn nợ");
 
+        txtTenLop.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTenLopFocusLost(evt);
+            }
+        });
+        txtTenLop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTenLopMouseClicked(evt);
+            }
+        });
+
+        jLabel11.setText("Tên lớp");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -347,8 +362,9 @@ public class QLHocVien extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTenHV)
+                    .addComponent(txtTenLop)
                     .addComponent(txtMaLop)
+                    .addComponent(txtTenHV)
                     .addComponent(dateNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtSDT)
                     .addComponent(txtDiaChi)
@@ -356,6 +372,7 @@ public class QLHocVien extends javax.swing.JInternalFrame {
                     .addComponent(txtHPNo)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(jLabel9)
@@ -368,7 +385,7 @@ public class QLHocVien extends javax.swing.JInternalFrame {
                                 .addComponent(rdoNam)
                                 .addGap(50, 50, 50)
                                 .addComponent(rdoNu)))
-                        .addGap(0, 142, Short.MAX_VALUE)))
+                        .addGap(0, 168, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -378,11 +395,15 @@ public class QLHocVien extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTenHV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel11)
+                .addGap(10, 10, 10)
+                .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(10, 10, 10)
                 .addComponent(txtMaLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -408,7 +429,7 @@ public class QLHocVien extends javax.swing.JInternalFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtHPNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addGap(46, 46, 46))
         );
 
         jScrollPane2.setViewportView(jPanel2);
@@ -607,6 +628,14 @@ public class QLHocVien extends javax.swing.JInternalFrame {
         ((JTextField) dateNgaySinh.getDateEditor().getUiComponent()).setText("");
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void txtTenLopFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenLopFocusLost
+        
+    }//GEN-LAST:event_txtTenLopFocusLost
+
+    private void txtTenLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTenLopMouseClicked
+      
+    }//GEN-LAST:event_txtTenLopMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Thêm;
@@ -616,6 +645,7 @@ public class QLHocVien extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel43;
@@ -638,6 +668,7 @@ public class QLHocVien extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMaLop;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenHV;
+    private javax.swing.JTextField txtTenLop;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

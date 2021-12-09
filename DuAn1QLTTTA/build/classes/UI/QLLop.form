@@ -714,10 +714,8 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel43" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="txt_timKiem" alignment="3" max="32767" attributes="0"/>
-                                      <Component id="btn_timKiemLop" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="btn_timKiemLop" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_timKiem" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">

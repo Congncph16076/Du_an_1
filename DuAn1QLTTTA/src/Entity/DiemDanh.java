@@ -10,16 +10,17 @@ package Entity;
  * @author vinhn
  */
 public class DiemDanh {
-    private  int maDiemDanh;
+    private  int maDiemDanh,maHocVien;
     private  boolean  trangThai;
     private String tenHocVien,tenLop,ngayHoc,caHoc,ghiChu;
-    private int maBuoiHoc,maBienLai;
+    private int maBuoiHoc,maBienLai,maLop;
 
     public DiemDanh() {
     }
 
-    public DiemDanh(int maDiemDanh, boolean trangThai, String tenHocVien, String tenLop, String ngayHoc, String caHoc, String ghiChu, int maBuoiHoc, int maBienLai) {
+    public DiemDanh(int maDiemDanh, int maHocVien, boolean trangThai, String tenHocVien, String tenLop, String ngayHoc, String caHoc, String ghiChu, int maBuoiHoc, int maBienLai, int maLop) {
         this.maDiemDanh = maDiemDanh;
+        this.maHocVien = maHocVien;
         this.trangThai = trangThai;
         this.tenHocVien = tenHocVien;
         this.tenLop = tenLop;
@@ -28,7 +29,28 @@ public class DiemDanh {
         this.ghiChu = ghiChu;
         this.maBuoiHoc = maBuoiHoc;
         this.maBienLai = maBienLai;
+        this.maLop = maLop;
     }
+
+    public int getMaHocVien() {
+        return maHocVien;
+    }
+
+    public void setMaHocVien(int maHocVien) {
+        this.maHocVien = maHocVien;
+    }
+
+    
+
+    public int getMaLop() {
+        return maLop;
+    }
+
+    public void setMaLop(int maLop) {
+        this.maLop = maLop;
+    }
+
+   
 
     public int getMaDiemDanh() {
         return maDiemDanh;
