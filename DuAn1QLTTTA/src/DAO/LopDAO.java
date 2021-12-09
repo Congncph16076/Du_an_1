@@ -67,6 +67,7 @@ public class LopDAO {
                 lop.setTenCapLop(rs.getString("TENCAPLOP"));
                 lop.setNgayNhapHoc(rs.getString("NGAYNHAPHOC"));
                 lop.setNgayKeThuc(rs.getString("NGAYKETTHUC"));
+                lop.setTrangThai(rs.getBoolean("TrangThai"));
                 listLoaiL.add(lop);
             }
         } catch (SQLException ex) {
@@ -96,6 +97,7 @@ public class LopDAO {
                 lop.setTenCapLop(rs.getString("TENCAPLOP"));
                 lop.setNgayNhapHoc(rs.getString("NGAYNHAPHOC"));
                 lop.setNgayKeThuc(rs.getString("NGAYKETTHUC"));
+                lop.setTrangThai(rs.getBoolean("TrangThai"));
                 return lop;
             }
         } catch (SQLException ex) {
@@ -107,7 +109,10 @@ public class LopDAO {
 
     public List<Lop> tblLoaiLop(Connection conn) {
         List<Lop> list = new ArrayList<>();
-        String sql = "SELECT * FROM dbo.LOAILOP";
+        String sql = "SELECT LOAILOP.MALOAILOP,TENLOAILOP,COUNT(lop.MALOAILOP) [LL] FROM dbo.LOAILOP\n"
+                + "	JOIN dbo.LOP ON LOP.MALOAILOP = LOAILOP.MALOAILOP\n"
+                + "	GROUP BY LOAILOP.MALOAILOP,TENLOAILOP\n"
+                + "	HAVING LOAILOP.MALOAILOP IN  (SELECT MALOAILOP FROM dbo.LOP)";
         try {
             PreparedStatement ptmt = conn.prepareStatement(sql);
             ResultSet rs = ptmt.executeQuery();
@@ -115,6 +120,7 @@ public class LopDAO {
                 Lop l = new Lop();
                 l.setMaLoaiLop(rs.getInt("MALOAILOP"));
                 l.setTenLoaiLop(rs.getString("TENLOAILOP"));
+                l.setSoLuong(rs.getInt("LL"));
                 list.add(l);
             }
         } catch (SQLException ex) {
@@ -125,7 +131,10 @@ public class LopDAO {
 
     public List<Lop> tblCapLop(Connection conn) {
         List<Lop> list = new ArrayList<>();
-        String sql = "SELECT* FROM dbo.CAPLOP";
+        String sql = "SELECT CAPLOP.MACAPLOP,TENCAPLOP,COUNT(LOP.MACAPLOP)[CL] FROM dbo.CAPLOP \n"
+                + "	JOIN dbo.LOP ON LOP.MACAPLOP = CAPLOP.MACAPLOP\n"
+                + "	GROUP BY CAPLOP.MACAPLOP,TENCAPLOP\n"
+                + "	HAVING CAPLOP.MACAPLOP IN(SELECT MACAPLOP FROM dbo.LOP)";
         try {
             PreparedStatement ptmt = conn.prepareStatement(sql);
             ResultSet rs = ptmt.executeQuery();
@@ -133,6 +142,7 @@ public class LopDAO {
                 Lop l = new Lop();
                 l.setMaCapLop(rs.getInt("MACAPLOP"));
                 l.setTenCapLop(rs.getString("TENCAPLOP"));
+                l.setSoLuong(rs.getInt("CL"));
                 list.add(l);
             }
         } catch (SQLException ex) {
@@ -178,8 +188,8 @@ public class LopDAO {
     }
 
     public boolean insertLop(Lop lop, Connection conn) {
-        String sql = "INSERT INTO dbo.LOP(TENLOP,SISO,CAHOC,HOCPHI,NGAYNHAPHOC,NGAYKETTHUC,MALOAILOP,MACAPLOP,MANHANVIEN)\n"
-                + "VALUES(?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO dbo.LOP(TENLOP,SISO,CAHOC,HOCPHI,NGAYNHAPHOC,NGAYKETTHUC,MALOAILOP,MACAPLOP,MANHANVIEN,TrangThai)\n"
+                + "VALUES(?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ptmt = conn.prepareStatement(sql);
             ptmt.setString(1, lop.getTenLop());
@@ -191,6 +201,7 @@ public class LopDAO {
             ptmt.setInt(7, lop.getMaLoaiLop());
             ptmt.setInt(8, lop.getMaCapLop());
             ptmt.setInt(9, lop.getMaNhanVien());
+            ptmt.setBoolean(10, lop.isTrangThai());
             int kq = ptmt.executeUpdate();
             if (kq > 0) {
                 return true;
@@ -235,7 +246,7 @@ public class LopDAO {
 
     public void updateLop(Lop lop, Connection conn) {
         String sql = "UPDATE dbo.LOP SET TENLOP=?,SISO=?,CAHOC=?,HOCPHI=?"
-                + ",NGAYNHAPHOC=?,NGAYKETTHUC=?,MALOAILOP=?,MACAPLOP=?,MANHANVIEN=? \n"
+                + ",NGAYNHAPHOC=?,NGAYKETTHUC=?,MALOAILOP=?,MACAPLOP=?,MANHANVIEN=?,TrangThai=? \n"
                 + "WHERE MALOP =?";
         try {
             PreparedStatement ptmt = conn.prepareStatement(sql);
@@ -248,7 +259,8 @@ public class LopDAO {
             ptmt.setInt(7, lop.getMaLoaiLop());
             ptmt.setInt(8, lop.getMaCapLop());
             ptmt.setInt(9, lop.getMaNhanVien());
-            ptmt.setInt(10, lop.getMaLop());
+            ptmt.setBoolean(10, lop.isTrangThai());
+            ptmt.setInt(11, lop.getMaLop());
             int kq = ptmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -319,7 +331,7 @@ public class LopDAO {
 
     public List<Lop> timKiemLop(String ID, Connection conn) {
         List<Lop> list = new ArrayList<>();
- 
+
         try {
             //PreparedStatement ptmt = conn.prepareStatement(ID)
             CallableStatement call = conn.prepareCall("{call  tim_kiem_lop_theo_ten_lop(?)}");
@@ -386,5 +398,23 @@ public class LopDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public NguoiDung GV(int ID,Connection conn,NguoiDung nd) {
+        String sql = "SELECT TENNHANVIEN FROM dbo.NGUOIDUNG\n"
+                + "	WHERE TENVAITRO = 2 AND MANHANVIEN = ?";
+        try {
+            PreparedStatement ptmt = conn.prepareStatement(sql);
+            ptmt.setInt(1, ID);
+            ResultSet rs = ptmt.executeQuery();
+            while (rs.next()) {                
+                 
+                nd.setTenNhanVien(rs.getString("TENNHANVIEN"));
+                return  nd;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return nd;
     }
 }

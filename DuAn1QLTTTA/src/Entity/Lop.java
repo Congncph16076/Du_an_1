@@ -23,11 +23,12 @@ public class Lop {
     private String tenCapLop;
     private String ngayNhapHoc;
     private String ngayKeThuc;
-
+    private  int soLuong;
+    private  boolean  trangThai;
     public Lop() {
     }
 
-    public Lop(int maLop, String tenLop, int maNhanVien, String tenNhanVien, int siso, String caHoc, float hocPhi, int maLoaiLop, String tenLoaiLop, int maCapLop, String tenCapLop, String ngayNhapHoc, String ngayKeThuc) {
+    public Lop(int maLop, String tenLop, int maNhanVien, String tenNhanVien, int siso, String caHoc, float hocPhi, int maLoaiLop, String tenLoaiLop, int maCapLop, String tenCapLop, String ngayNhapHoc, String ngayKeThuc, int soLuong, boolean trangThai) {
         this.maLop = maLop;
         this.tenLop = tenLop;
         this.maNhanVien = maNhanVien;
@@ -41,7 +42,27 @@ public class Lop {
         this.tenCapLop = tenCapLop;
         this.ngayNhapHoc = ngayNhapHoc;
         this.ngayKeThuc = ngayKeThuc;
+        this.soLuong = soLuong;
+        this.trangThai = trangThai;
     }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+
+   
 
     public int getMaLop() {
         return maLop;

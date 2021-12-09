@@ -1429,10 +1429,10 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
     private void btn_themHVCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themHVCuActionPerformed
 
         try {
-            int vitri = tbl_HVMoi.getSelectedRow();
+            int vitri = tbl_HVCu.getSelectedRow();
             if (vitri>=0) {                            
                 int row;                  
-                row = (int) tbl_HVMoi.getValueAt(vitri, 1);                    
+                row = (int) tbl_HVCu.getValueAt(vitri, 1);                    
                 boolean bl = blDAO.xepLop(row, conn);   
                 if (bl==true) {
                     JOptionPane.showMessageDialog(this, "Xếp lớp thành công");

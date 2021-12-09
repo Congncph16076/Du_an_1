@@ -764,7 +764,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 }
 
                 int vitri = tblDangKi.getSelectedRow();
-                int row = (int) tblDangKi.getValueAt(vitri, 0);
+                int row = (int) tblDangKi.getValueAt(vitri, 11);
                 nd.setMaDangKi(row);
                 if (Integer.parseInt(txtMaHV.getText()) == 0) {
                     dkDAO2.update(nd, conn);
