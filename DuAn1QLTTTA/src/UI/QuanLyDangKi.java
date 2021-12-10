@@ -69,7 +69,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         txtDiaChi.setText("");
         cboCaHoc.setSelectedIndex(1);
         cboLoaiLop.setSelectedIndex(1);
-        txtHPhi.setText("");
+        
         cboCapLop.setSelectedIndex(1);
         fillTable();
     }
@@ -82,7 +82,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
             Object[] obj = new Object[]{
                 nd.getMaHocVien(), nd.getTenHocVien(), nd.getNgaySinh(), nd.getGioiTinh() == 1 ? "Nam" : "Nữ",
                 nd.getSdt().replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3"), nd.getEmail(),
-                nd.getTenCapLop(), nd.getTenLoaiLop(), nd.getHocPhi(), nd.getCaHoc(),
+                nd.getTenCapLop(), nd.getTenLoaiLop(), nd.getCaHoc(),
                 nd.getNgayDangKi(), nd.getMaDangKi()
             };
             model.addRow(obj);
@@ -92,7 +92,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
     boolean checkNull() {
         if (txtTenHV.getText().equals("") && txtMaHV.getText().equals("") && dateNgaySinh.getDate().equals("")
                 && txtDiaChi.getText().equals("") && txtSDT.getText().equals("") && txtEmail.getText().equals("")
-                && txtHPhi.getText().equals("") && dateNgaySinh.getDate().equals("")) {
+                && dateNgaySinh.getDate().equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập thông tin nào mời nhập lại");
             txtMaHV.requestFocus();
             return false;
@@ -150,11 +150,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
             return false;
         }
 
-        if (txtHPhi.equals("")) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa nhập học phí");
-            txtHPhi.requestFocus();
-            return false;
-        }
+        
 
         if (rdoChuaHoc.isSelected() && Integer.parseInt(txtMaHV.getText()) != 0 || rdoDaHoc.isSelected() && Integer.parseInt(txtMaHV.getText()) == 0) {
             JOptionPane.showMessageDialog(this, "Mã học viên chưa đúng");
@@ -202,7 +198,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 dk.setEmail(rs.getString("EMAIL"));
                 dk.setTenLoaiLop(rs.getString("TENloailop"));
                 dk.setTenCapLop(rs.getString("tencaplop"));
-                dk.setHocPhi(rs.getFloat("hocphi"));
+                //dk.setHocPhi(rs.getFloat("hocphi"));
                 dk.setCaHoc(rs.getString("cahoc"));
                 dk.setNgayNhapHoc(rs.getString("ngaynhaphoc"));
                 dk.setMaHocVien(rs.getInt("mahocvien"));
@@ -227,14 +223,6 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel43 = new javax.swing.JLabel();
-        txtTimKiem = new javax.swing.JTextField();
-        btnTimKiem = new javax.swing.JButton();
-        btnThem = new javax.swing.JButton();
-        btnSua = new javax.swing.JButton();
-        btnClear = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDangKi = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
@@ -252,8 +240,6 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         txtDiaChi = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        txtHPhi = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         dateDangKi = new com.toedter.calendar.JDateChooser();
         jLabel12 = new javax.swing.JLabel();
@@ -266,12 +252,103 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         cboLoaiLop = new javax.swing.JComboBox<>();
         cboCapLop = new javax.swing.JComboBox<>();
         cboCaHoc = new javax.swing.JComboBox<>();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel43 = new javax.swing.JLabel();
+        txtTimKiem = new javax.swing.JTextField();
+        btnTimKiem = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setPreferredSize(new java.awt.Dimension(1081, 650));
+
+        tblDangKi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã học viên", "Tên học viên", "Ngày sinh", "Giới tính", "SDT", "Email", "Tên cấp lớp", "Tên loại lớp", "Ca học", "Ngày đăng kí", "Mã đăng kí"
+            }
+        ));
+        tblDangKi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDangKiMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblDangKi);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txtTenHV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTenHVActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Tên học viên");
+
+        jLabel2.setText("Email");
+
+        buttonGroup1.add(rdoNam);
+        rdoNam.setSelected(true);
+        rdoNam.setText("Nam");
+
+        buttonGroup1.add(rdoNu);
+        rdoNu.setText("Nữ");
+        rdoNu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNuActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Giới tính");
+
+        jLabel5.setText("Ngày sinh");
+
+        jLabel6.setText("Số điện thoại");
+
+        txtSDT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtSDTMouseExited(evt);
+            }
+        });
+
+        jLabel7.setText("Địa chỉ");
+
+        jLabel8.setText("Tên cấp lớp");
+
+        jLabel11.setText("Tên loại lớp");
+
+        jLabel12.setText("Ngày đăng kí");
+
+        jLabel13.setText("Ca học");
+
+        jLabel14.setText("Mã học viên");
+
+        buttonGroup2.add(rdoDaHoc);
+        rdoDaHoc.setText("Đã học");
+
+        buttonGroup2.add(rdoChuaHoc);
+        rdoChuaHoc.setSelected(true);
+        rdoChuaHoc.setText("Đăng kí mới");
+        rdoChuaHoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoChuaHocActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("Tình trạng hồ sơ");
+
+        cboLoaiLop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toeic", "Anh Văn Gia Tiếp", "Anh Văn Tổng Quát" }));
+
+        cboCapLop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
+
+        cboCaHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ca 1 (7h-9h) 246", "Ca 1 (7h-9h) 357", "Ca 2 (9h-11h) 246", "Ca 2 (9h-11h) 357", "Ca 3 (12h-14h) 246", "Ca 3 (12h-14h) 357", "Ca 4 (14h-16h) 246", "Ca 4 (14h-16h) 357" }));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -370,7 +447,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTimKiem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
                     .addComponent(btnSua))
@@ -380,91 +457,6 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                     .addComponent(btnClear))
                 .addGap(18, 18, 18))
         );
-
-        tblDangKi.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mã học viên", "Tên học viên", "Ngày sinh", "Giới tính", "SDT", "Email", "Tên cấp lớp", "Tên loại lớp", "Học phí ", "Ca học", "Ngày đăng kí", "Mã đăng kí"
-            }
-        ));
-        tblDangKi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDangKiMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblDangKi);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        txtTenHV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTenHVActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Tên học viên");
-
-        jLabel2.setText("Email");
-
-        buttonGroup1.add(rdoNam);
-        rdoNam.setSelected(true);
-        rdoNam.setText("Nam");
-
-        buttonGroup1.add(rdoNu);
-        rdoNu.setText("Nữ");
-        rdoNu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNuActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Giới tính");
-
-        jLabel5.setText("Ngày sinh");
-
-        jLabel6.setText("Số điện thoại");
-
-        txtSDT.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                txtSDTMouseExited(evt);
-            }
-        });
-
-        jLabel7.setText("Địa chỉ");
-
-        jLabel8.setText("Tên cấp lớp");
-
-        jLabel9.setText("Học phí ");
-
-        jLabel11.setText("Tên loại lớp");
-
-        jLabel12.setText("Ngày đăng kí");
-
-        jLabel13.setText("Ca học");
-
-        jLabel14.setText("Mã học viên");
-
-        buttonGroup2.add(rdoDaHoc);
-        rdoDaHoc.setText("Đã học");
-
-        buttonGroup2.add(rdoChuaHoc);
-        rdoChuaHoc.setSelected(true);
-        rdoChuaHoc.setText("Đăng kí mới");
-        rdoChuaHoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoChuaHocActionPerformed(evt);
-            }
-        });
-
-        jLabel15.setText("Tình trạng hồ sơ");
-
-        cboLoaiLop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toeic", "Anh Văn Gia Tiếp", "Anh Văn Tổng Quát" }));
-
-        cboCapLop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
-
-        cboCaHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ca 1 (7h-9h) 246", "Ca 1 (7h-9h) 357", "Ca 2 (9h-11h) 246", "Ca 2 (9h-11h) 357", "Ca 3 (12h-14h) 246", "Ca 3 (12h-14h) 357", "Ca 4 (14h-16h) 246", "Ca 4 (14h-16h) 357" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -491,13 +483,13 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
                             .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(cboLoaiLop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -507,19 +499,20 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
                                     .addComponent(cboCapLop, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel11))
-                        .addGap(54, 54, 54)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dateDangKi, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                            .addComponent(jLabel9)
-                            .addComponent(txtHPhi)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20))
+                            .addComponent(jLabel11)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dateDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(25, 25, 25))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMaHV, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14))
-                        .addContainerGap(540, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -542,39 +535,41 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel12)
                     .addComponent(jLabel1)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtTenHV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cboCapLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(dateDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenHV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboCapLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel13))
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtHPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboCaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboCaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel14))
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdoNam)
-                    .addComponent(rdoNu)
-                    .addComponent(txtMaHV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rdoNam)
+                        .addComponent(rdoNu)
+                        .addComponent(txtMaHV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -584,14 +579,8 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 783, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -599,6 +588,10 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -608,9 +601,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
 
@@ -631,20 +622,20 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
             model = (DefaultTableModel) tblDangKi.getModel();
             for (DangKi nd : lstDK) {
                 Vector<Object> vec = new Vector<>();
-                 vec.add(nd.getMaHocVien());
+                vec.add(nd.getMaDangKi());
                 vec.add(nd.getTenHocVien());
-               vec.add(nd.getNgaySinh());
-               vec.add(nd.getGioiTinh() == 1 ? "Nam" : "Nữ");
-               vec.add(nd.getSdt());
-               vec.add(nd.getEmail());
+                vec.add(nd.getMaHocVien());
                 vec.add(nd.getTenCapLop());
                 vec.add(nd.getTenLoaiLop());
-                vec.add(nd.getHocPhi());
-                vec.add(nd.getCaHoc());
-                vec.add(nd.getNgayDangKi());
-                vec.add(nd.getMaDangKi());
+                vec.add(nd.getGioiTinh() == 1 ? "Nam" : "Nữ");
+                vec.add(nd.getNgaySinh());
                 vec.add(nd.getDiaChi());
-                //vec.add(nd.getNgayNhapHoc());
+                vec.add(nd.getSdt());
+                vec.add(nd.getEmail());
+                vec.add(nd.getCaHoc());
+                vec.add(nd.getNgayNhapHoc());
+                vec.add(nd.getNgayDangKi());
+                vec.add(nd.getHocPhi());
                 model.addRow(vec);
             }
         } catch (Exception e) {
@@ -688,7 +679,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 nd.setSdt(s);
                 nd.setEmail(txtEmail.getText());
                 nd.setCaHoc((String) cboCaHoc.getSelectedItem());
-                nd.setHocPhi(Float.parseFloat(txtHPhi.getText()));
+                
                 boolean them;
                 if (Integer.parseInt(txtMaHV.getText()) == 0) {
 
@@ -699,11 +690,15 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 }
                 fillTable();
 
-                int row;
-                row = (int) tblDangKi.getValueAt(0, 11);
+                int row,mahv;
+                String ngaydki;
+                row = (int) tblDangKi.getValueAt(0, 10);
                 nd.setMaDangKi(row);
+                mahv = (int) tblDangKi.getValueAt(0, 0);
+                nd.setMaHocVien(mahv);
+                ngaydki = (String) tblDangKi.getValueAt(0, 9);
                 if (Integer.parseInt(txtMaHV.getText()) == 0) {
-                    
+
                     boolean hv = dkDAO2.insert2(nd, conn);
                 } else {
 
@@ -752,7 +747,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
 //                nd.setSdt(s);
                 nd.setSdt(txtSDT.getText());
                 nd.setEmail(txtEmail.getText());
-                nd.setHocPhi(Float.parseFloat(txtHPhi.getText()));
+                
                 nd.setCaHoc((String) cboCaHoc.getSelectedItem());
 
                 if (Integer.parseInt(txtMaHV.getText()) == 0) {
@@ -764,7 +759,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 }
 
                 int vitri = tblDangKi.getSelectedRow();
-                int row = (int) tblDangKi.getValueAt(vitri, 11);
+                int row = (int) tblDangKi.getValueAt(vitri, 10);
                 nd.setMaDangKi(row);
                 if (Integer.parseInt(txtMaHV.getText()) == 0) {
                     dkDAO2.update(nd, conn);
@@ -790,7 +785,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                 if (a == 0) {
 
                     int row;
-                    row = (int) tblDangKi.getValueAt(vitri, 11);
+                    row = (int) tblDangKi.getValueAt(vitri, 10);
                     DangKi hv = dkDAO.delete(String.valueOf(row), conn);
                     clear();
 
@@ -810,7 +805,7 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
             int vitri = tblDangKi.getSelectedRow();
             if (vitri >= 0) {
                 int row;
-                row = (int) tblDangKi.getValueAt(vitri, 11);
+                row = (int) tblDangKi.getValueAt(vitri, 10);
                 DangKi hv = dkDAO.fromTableToText(String.valueOf(row), conn);
                 if (hv != null) {
                     if (hv.getMaHocVien() == 0) {
@@ -843,12 +838,12 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
                     txtDiaChi.setText(hv.getDiaChi());
                     cboCaHoc.setSelectedItem(hv.getCaHoc());
                     cboCapLop.setSelectedItem(hv.getTenCapLop());
-                    txtHPhi.setText(hv.getHocPhi() + "");
+                   
                     cboLoaiLop.setSelectedItem(hv.getTenLoaiLop());
 
 
                     try {
-                        Date date3 = new SimpleDateFormat("dd/MM/yyyy").parse((String) tblDangKi.getValueAt(vitri, 10));
+                        Date date3 = new SimpleDateFormat("dd/MM/yyyy").parse((String) tblDangKi.getValueAt(vitri, 9));
                         dateDangKi.setDate(date3);
                     } catch (ParseException ex) {
                         ex.printStackTrace();
@@ -928,7 +923,6 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
@@ -939,7 +933,6 @@ public class QuanLyDangKi extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblDangKi;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtHPhi;
     private javax.swing.JTextField txtMaHV;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenHV;

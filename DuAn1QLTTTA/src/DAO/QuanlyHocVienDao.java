@@ -7,6 +7,7 @@ package DAO;
 
 import Entity.DangKi;
 import Entity.HocVien;
+import Entity.Lop;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -105,6 +106,28 @@ public class QuanlyHocVienDao implements EntityDAO<HocVien, String> {
             e.printStackTrace();
         }
         return listHV;
+    }
+    
+    public boolean chuyenLop(int malopmoi,int malopcu,int mahv , Connection conn) {
+        
+        try {
+            
+            CallableStatement call = conn.prepareCall("{call chuyen_lop(?,?,?)}");
+            call.setInt(1,  malopmoi);
+            call.setInt(2,  malopcu);
+            call.setInt(3,  mahv);
+            
+            
+           int rs =call.executeUpdate();
+            if (rs>0) {
+                return true;
+                
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

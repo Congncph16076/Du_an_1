@@ -352,6 +352,7 @@ public class LopDAO {
                 lop.setTenCapLop(rs.getString("TENCAPLOP"));
                 lop.setNgayNhapHoc(rs.getString("ngaynhaphoc"));
                 lop.setNgayKeThuc(rs.getString("ngayketthuc"));
+                lop.setTrangThai(rs.getBoolean("TrangThai"));
                 list.add(lop);
             }
         } catch (Exception e) {
@@ -399,22 +400,7 @@ public class LopDAO {
         }
         return list;
     }
-
-    public NguoiDung GV(int ID,Connection conn,NguoiDung nd) {
-        String sql = "SELECT TENNHANVIEN FROM dbo.NGUOIDUNG\n"
-                + "	WHERE TENVAITRO = 2 AND MANHANVIEN = ?";
-        try {
-            PreparedStatement ptmt = conn.prepareStatement(sql);
-            ptmt.setInt(1, ID);
-            ResultSet rs = ptmt.executeQuery();
-            while (rs.next()) {                
-                 
-                nd.setTenNhanVien(rs.getString("TENNHANVIEN"));
-                return  nd;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return nd;
-    }
+    
+    
+   
 }

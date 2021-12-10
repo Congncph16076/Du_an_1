@@ -34,6 +34,7 @@ public class BienLaiDAO {
                 bl.setMaBienLai(rs.getInt("MABIENLAI"));
                 bl.setMaDangKi(rs.getInt("MADANGKI"));
                 bl.setMaHocVien(rs.getInt("MAHOCVIEN"));
+                bl.setTenLop(rs.getString("tenlop"));
                 bl.setTenHocVien(rs.getString("TENHOCVIEN"));
                 bl.setHocPhi(rs.getFloat("HOCPHI"));
                 bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
@@ -54,7 +55,23 @@ public class BienLaiDAO {
             //Connection conn = TienIchHoTro.ConnectToSQL.getConnect();
             CallableStatement call = conn.prepareCall("{call xep_lop(?)}");
             call.setInt(1, ID);
-
+            
+            int kq = call.executeUpdate();
+            if (kq > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean themHV(int ID, Connection conn) {
+        try {
+            //Connection conn = TienIchHoTro.ConnectToSQL.getConnect();
+            CallableStatement call = conn.prepareCall("{call themHVDK(?)}");
+            call.setInt(1, ID);
+            
             int kq = call.executeUpdate();
             if (kq > 0) {
                 return true;
@@ -136,13 +153,14 @@ public class BienLaiDAO {
             while (rs.next()) {
                 BienLai bl = new BienLai();
                 bl.setMaBienLai(rs.getInt("MABIENLAI"));
-                bl.setMaDangKi(rs.getInt("MADANGKI"));
+//                bl.setMaDangKi(rs.getInt("MADANGKI"));
                 bl.setMaHocVien(rs.getInt("MAHOCVIEN"));
                 bl.setTenHocVien(rs.getString("TENHOCVIEN"));
                 bl.setHocPhi(rs.getFloat("HOCPHI"));
                 bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
                 bl.setThanhTien(rs.getFloat("THANHTIEN"));
                 bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
+                bl.setTenLop(rs.getString("tenlop"));
 //                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
                 bl.setNgayThuTien(rs.getString("ngaythutien"));
                 list.add(bl);
@@ -163,9 +181,10 @@ public class BienLaiDAO {
                 BienLai bl = new BienLai();
                 bl.setMaBienLai(rs.getInt("MABIENLAI"));
                 bl.setMaDangKi(rs.getInt("MADANGKI"));
+                bl.setMaHocVien(rs.getInt("mahocvien"));
                 bl.setTenHocVien(rs.getString("TENHOCVIEN"));
-                bl.setHocPhi(rs.getFloat("HOCPHI"));
-                bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
+//                bl.setHocPhi(rs.getFloat("HOCPHI"));
+//                bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
                 bl.setThanhTien(rs.getFloat("THANHTIEN"));
                 bl.setNgayThuTien(rs.getString("ngaythutien"));
                bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
@@ -180,20 +199,37 @@ public class BienLaiDAO {
 
     public BienLai clickTableMoi(int ID, Connection conn) {
         try {
-            CallableStatement call = conn.prepareCall("{call click_table_HV_moi(?)}");
-            call.setInt(1, ID);
-            ResultSet rs = call.executeQuery();
-            while (rs.next()) {
+//            CallableStatement call = conn.prepareCall("{call click_table_HV_moi(?)}");
+//            call.setInt(1, ID);
+//            ResultSet rs = call.executeQuery();
+//            while (rs.next()) {
+//                BienLai bl = new BienLai();
+//                bl.setMaBienLai(rs.getInt("MABIENLAI"));
+//                bl.setMaDangKi(rs.getInt("MADANGKI"));
+//                bl.setTenHocVien(rs.getString("TENHOCVIEN"));
+////                bl.setHocPhi(rs.getFloat("HOCPHI"));
+////                bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
+//                bl.setThanhTien(rs.getFloat("THANHTIEN"));
+//                bl.setNgayThuTien(rs.getString("ngaythutien"));
+//                bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
+//                bl.setMaHocVien(rs.getInt("mahocvien"));
+////                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
+//                return bl;
+                CallableStatement call = conn.prepareCall("{call tim_kiem_bien_laiCu(?)}");
+                call.setInt(1, ID);
+                ResultSet rs = call.executeQuery();
+                while (rs.next()) {
                 BienLai bl = new BienLai();
                 bl.setMaBienLai(rs.getInt("MABIENLAI"));
                 bl.setMaDangKi(rs.getInt("MADANGKI"));
+                bl.setMaHocVien(rs.getInt("MAHOCVIEN"));
                 bl.setTenHocVien(rs.getString("TENHOCVIEN"));
-                bl.setHocPhi(rs.getFloat("HOCPHI"));
-                bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
+//                bl.setHocPhi(rs.getFloat("HOCPHI"));
+//                bl.setHocPhiNo(rs.getFloat("HOCPHINO"));
                 bl.setThanhTien(rs.getFloat("THANHTIEN"));
-                bl.setNgayThuTien(rs.getString("ngaythutien"));
                 bl.setMaNhanVien(rs.getInt("MANHANVIEN"));
-//                bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
+                //bl.setTenNhanVien(rs.getString("TENNHANVIEN"));
+                bl.setNgayThuTien(rs.getString("ngaythutien"));
                 return bl;
             }
         } catch (SQLException ex) {

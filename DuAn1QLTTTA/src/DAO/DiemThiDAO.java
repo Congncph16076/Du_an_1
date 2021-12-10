@@ -76,7 +76,7 @@ public class DiemThiDAO {
 
     public List<BienLai> listDaThi(Connection conn) {
         List<BienLai> list = new ArrayList<>();
-        String sql = "SELECT MABIENLAI,MALOP,TENHOCVIEN,MADOTTHI,DIEMTHI,DIEMTHANHPHAN,DIEMTONG=(DIEMTHI+DIEMTHANHPHAN) FROM dbo.BIENLAI\n"
+        String sql = "SELECT MABIENLAI,MALOP,TENHOCVIEN,MADOTTHI,DIEMTHI,DIEMTHANHPHAN,DIEMTONG=(DIEMTHI*0.7)+(DIEMTHANHPHAN*0.3) FROM dbo.BIENLAI\n"
                 + "JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI\n"
                 + "WHERE (DIEMTHI+DIEMTHANHPHAN) is NOT NULL\n"
                 +"ORDER BY MABIENLAI desc";
@@ -126,7 +126,7 @@ public class DiemThiDAO {
     }
 
     public void suaChuaThi(Connection conn, BienLai bl) {
-        String sql = "UPDATE dbo.BIENLAI SET MALOP=?,MADOTTHI=?,DIEMTHI=?,DIEMTHANHPHAN=?,DIEMTONG=?\n"
+        String sql = "UPDATE dbo.BIENLAI SET MALOP=?,MADOTTHI=?,DIEMTHI=?,DIEMTHANHPHAN=?,DIEMTONG=(diemthanhphan*0.3)+(diemthi*0.7)\n"
                 + "WHERE MABIENLAI = ?";
         try {
             PreparedStatement ptmt = conn.prepareStatement(sql);
@@ -134,7 +134,7 @@ public class DiemThiDAO {
             ptmt.setString(2, String.valueOf(bl.getMaDotThi()));
             ptmt.setFloat(3, bl.getDiemThi());
             ptmt.setFloat(4, bl.getDiemThanhPhan());
-            ptmt.setFloat(5, bl.getDiemTong());
+
             ptmt.setInt(6, bl.getMaBienLai());
             int kq = ptmt.executeUpdate();
         } catch (SQLException ex) {

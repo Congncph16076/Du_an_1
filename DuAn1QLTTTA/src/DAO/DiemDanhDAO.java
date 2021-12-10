@@ -23,15 +23,14 @@ public class DiemDanhDAO {
     public List<DiemDanh> listDD(Connection conn) {
         List<DiemDanh> list = new ArrayList<>();
         try {
-//            MADIEMDANH,TRANGTHAI
-//	,CONVERT(NVARCHAR(20),BUOIHOC.NGAYHOC,103)[ngayhoc],BUOIHOC.CAHOC 
-//	,dbo.DIEMDANH.GHICHU,dbo.DIEMDANH.MABUOIHOC,BIENLAI.MABIENLAI
             CallableStatement call = conn.prepareCall("{call thong_tin_diem_danh}");
             ResultSet rs = call.executeQuery();
             while (rs.next()) {
                 DiemDanh dd = new DiemDanh();
                 dd.setMaDiemDanh(rs.getInt("MADIEMDANH"));
                 dd.setTrangThai(rs.getBoolean("TRANGTHAI"));
+                //dd.setTenHocVien(rs.getString("TENHOCVIEN"));
+                //dd.setTenLop(rs.getString("TENLOP"));
                 dd.setNgayHoc(rs.getString("ngayhoc"));
                 dd.setCaHoc(rs.getString("CAHOC"));
                 dd.setGhiChu(rs.getString("GHICHU"));
@@ -55,6 +54,8 @@ public class DiemDanhDAO {
                 DiemDanh dd = new DiemDanh();
                 dd.setMaDiemDanh(rs.getInt("MADIEMDANH"));
                 dd.setTrangThai(rs.getBoolean("TRANGTHAI"));
+//                dd.setTenHocVien(rs.getString("TENHOCVIEN"));
+//                dd.setTenLop(rs.getString("TENLOP"));
                 dd.setNgayHoc(rs.getString("ngayhoc"));
                 dd.setCaHoc(rs.getString("CAHOC"));
                 dd.setGhiChu(rs.getString("GHICHU"));
@@ -98,24 +99,24 @@ public class DiemDanhDAO {
             ptmt.setInt(4, dd.getMaBienLai());
             ptmt.setInt(5, dd.getMaDiemDanh());
             int kq = ptmt.executeUpdate();
-           
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-    public List<DiemDanh> timKiemDD(String ID,Connection conn) {
+    public List<DiemDanh> timKiemDD(String ID, Connection conn) {
         List<DiemDanh> list = new ArrayList<>();
         try {
             CallableStatement call = conn.prepareCall("{call tim_kiem_diem_danh_theo_ten_hoc_vien(?)}");
-            call.setString(1, ID);
+            call.setString(1, "%" + ID + "%");
             ResultSet rs = call.executeQuery();
             while (rs.next()) {
                 DiemDanh dd = new DiemDanh();
                 dd.setMaDiemDanh(rs.getInt("MADIEMDANH"));
                 dd.setTrangThai(rs.getBoolean("TRANGTHAI"));
-                //dd.setTenHocVien(rs.getString("TENHOCVIEN"));
-                //dd.setTenLop(rs.getString("TENLOP"));
+                dd.setTenHocVien(rs.getString("TENHOCVIEN"));
+                dd.setTenLop(rs.getString("TENLOP"));
                 dd.setNgayHoc(rs.getString("ngayhoc"));
                 dd.setCaHoc(rs.getString("CAHOC"));
                 dd.setGhiChu(rs.getString("GHICHU"));
@@ -128,8 +129,8 @@ public class DiemDanhDAO {
         }
         return list;
     }
-    
-       public List<DiemDanh> HVDD(int ID, int BH, Connection conn) {
+
+    public List<DiemDanh> HVDD(int ID, int BH, Connection conn) {
         List<DiemDanh> list = new ArrayList<>();
 
         String sql = "SELECT TRANGTHAI,dbo.BIENLAI.MAHOCVIEN,tenHOCVIEN FROM dbo.DIEMDANH\n"
@@ -195,6 +196,8 @@ public class DiemDanhDAO {
         return false;
     }
 
+   
+    
     public boolean suaDiemDanh1(DiemDanh dd, Connection conn) {
 
         try {
@@ -212,4 +215,5 @@ public class DiemDanhDAO {
         }
         return false;
     }
+
 }

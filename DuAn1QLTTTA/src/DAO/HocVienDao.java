@@ -37,6 +37,7 @@ public class HocVienDao {
                 hocVien.setEmail(rs.getString("email"));
                 hocVien.setDiaChi(rs.getString("diachi"));
                 hocVien.setHocPhiNo(rs.getFloat("hocphino"));
+                hocVien.setSoBuoiNghi(rs.getInt("sobuoinghi"));
                 
                 lstHocVien.add(hocVien);
             }

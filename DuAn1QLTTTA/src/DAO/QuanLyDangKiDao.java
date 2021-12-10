@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DAO;
 
 import Entity.DangKi;
@@ -21,8 +17,11 @@ import java.util.List;
 public class QuanLyDangKiDao implements EntityDAO<DangKi, String>{
     @Override
     public boolean insert(DangKi dk, Connection conn) {
-        String themDK = "INSERT INTO dbo.Dangki(TENHOCVIEN,NGAYSINH ,GIOITINH ,SDT ,EMAIL ,DIACHI ,TENCAPLOP,TENLOAILOP ,HOCPHI,CAHOC,NGAYDANGKI,MAHOCVIEN )\n"
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String themDK = "INSERT INTO dbo.Dangki(TENHOCVIEN,NGAYSINH ,GIOITINH ,SDT ,EMAIL ,DIACHI ,TENCAPLOP,TENLOAILOP ,CAHOC,NGAYDANGKI,	MAHOCVIEN )\n"
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        
+            
+        
         try {
             PreparedStatement ptmt = conn.prepareStatement(themDK);
             ptmt.setString(1, dk.getTenHocVien());
@@ -33,11 +32,11 @@ public class QuanLyDangKiDao implements EntityDAO<DangKi, String>{
             ptmt.setString(6, dk.getDiaChi());            
             ptmt.setString(7, dk.getTenCapLop());
             ptmt.setString(8, dk.getTenLoaiLop());
-            ptmt.setFloat(9, dk.getHocPhi());
-            ptmt.setString(10, dk.getCaHoc());
+            //ptmt.setFloat(9, dk.getHocPhi());
+            ptmt.setString(9, dk.getCaHoc());
             //ptmt.setString(11, dk.getNgayNhapHoc());
-            ptmt.setString(11, dk.getNgayDangKi());
-            ptmt.setInt(12, dk.getMaHocVien());
+            ptmt.setString(10, dk.getNgayDangKi());
+            ptmt.setInt(11, dk.getMaHocVien());
             int kq = ptmt.executeUpdate();
             if (kq > 0) {
                 return true;
@@ -49,13 +48,16 @@ public class QuanLyDangKiDao implements EntityDAO<DangKi, String>{
         return false;   
     }
     public boolean insert2(DangKi dk, Connection conn) {
-        String themDK = "INSERT INTO dbo.bienlai(MAHOCVIEN,madangki)\n"
-                + "VALUES(?,?)";
+        String themDK = "INSERT INTO dbo.bienlai(mahocvien,madangki,ngaythutien)\n"
+                + "VALUES(?,?,?)";
+        
+            
         
         try {
             PreparedStatement ptmt = conn.prepareStatement(themDK);
             ptmt.setInt(1, dk.getMaHocVien());
             ptmt.setInt(2, dk.getMaDangKi());
+            ptmt.setString(3, dk.getNgayDangKi());
             
             
             int kq = ptmt.executeUpdate();
@@ -71,7 +73,7 @@ public class QuanLyDangKiDao implements EntityDAO<DangKi, String>{
 
     @Override
     public void update(DangKi dk, Connection conn) {
-        String updateDK = "UPDATE dbo.dangki SET TENhocvien = ?,GIOITINH = ?,NGAYSINH = ?,DIACHI = ?,SDT = ?,EMAIL = ?,TENcaplop = ?,TENLOAILOP = ?,HOCPHI = ?,cahoc=?, NGAYDANGKI=?,MAHOCVIEN=? \n"
+        String updateDK = "UPDATE dbo.dangki SET TENhocvien = ?,GIOITINH = ?,NGAYSINH = ?,DIACHI = ?,SDT = ?,EMAIL = ?,TENcaplop = ?,TENLOAILOP = ?,cahoc=?, NGAYDANGKI=?,MAHOCVIEN=? \n"
                 + "WHERE MADANGKI = ?";
 
         try {
@@ -84,7 +86,7 @@ public class QuanLyDangKiDao implements EntityDAO<DangKi, String>{
             ptmt.setString(6, dk.getEmail());
             ptmt.setString(7, dk.getTenCapLop());
             ptmt.setString(8, dk.getTenLoaiLop());
-            ptmt.setFloat(9, dk.getHocPhi());
+            //ptmt.setFloat(9, dk.getHocPhi());
             ptmt.setString(10, dk.getCaHoc());
             //ptmt.setString(11, dk.getNgayNhapHoc());
             ptmt.setString(11, dk.getNgayDangKi());
@@ -128,7 +130,7 @@ public class QuanLyDangKiDao implements EntityDAO<DangKi, String>{
                dk.setEmail(rs.getString("EMAIL"));
                dk.setTenLoaiLop(rs.getString("TENloailop"));
                dk.setTenCapLop(rs.getString("tencaplop"));
-               dk.setHocPhi(rs.getFloat("hocphi"));
+               //dk.setHocPhi(rs.getFloat("hocphi"));
                dk.setCaHoc(rs.getString("cahoc"));
                //dk.setNgayNhapHoc(rs.getString("ngaynhaphoc"));
                dk.setNgayDangKi(rs.getString("ngaydangki"));
@@ -159,7 +161,7 @@ public class QuanLyDangKiDao implements EntityDAO<DangKi, String>{
                 dk.setEmail(rs.getString("EMAIL"));
                 dk.setTenLoaiLop(rs.getString("TENloailop"));
                 dk.setTenCapLop(rs.getString("tencaplop"));
-                dk.setHocPhi(rs.getFloat("hocphi"));
+                //dk.setHocPhi(rs.getFloat("hocphi"));
                 dk.setCaHoc(rs.getString("cahoc"));
                 //dk.setNgayNhapHoc(rs.getString("ngaynhaphoc"));
                 dk.setNgayDangKi(rs.getString("ngaydangki"));
@@ -191,7 +193,7 @@ public class QuanLyDangKiDao implements EntityDAO<DangKi, String>{
                 dk.setEmail(rs.getString("EMAIL"));
                 dk.setTenLoaiLop(rs.getString("TENloailop"));
                 dk.setTenCapLop(rs.getString("tencaplop"));
-                dk.setHocPhi(rs.getFloat("hocphi"));
+                //dk.setHocPhi(rs.getFloat("hocphi"));
                 dk.setCaHoc(rs.getString("cahoc"));
                 //dk.setNgayNhapHoc(rs.getString("ngaynhaphoc"));
                 dk.setNgayDangKi(rs.getString("ngaydangki"));

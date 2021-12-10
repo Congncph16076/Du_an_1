@@ -13,7 +13,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/LopDAO.java</file>
-            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QLLop.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/ManHinh.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/DiemThiDAO.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QLHocVien.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/HocVienDao.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/DiemDanhDAO.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QLBuoiHoc_DiemDanh.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/DAO/BuoiHocDAO.java</file>
+            <file>file:/C:/Users/congc/Documents/GitHub/Du_an_1/DuAn1QLTTTA/src/UI/QuanLy_BienLai.java</file>
         </group>
     </open-files>
 </project-private>
