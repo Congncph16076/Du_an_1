@@ -1520,6 +1520,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
         fillTableHVCu();
+        fillTableHVMoi();
         
     }//GEN-LAST:event_btn_themHVMoiActionPerformed
 
