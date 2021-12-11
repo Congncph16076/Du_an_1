@@ -156,16 +156,29 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         }
 
         if (txt_maNhanVienHVMoi.getText().equals("")) {
-            lbl_loitimKiemHVMOI.setText("Bạn chưa nhập mã nhân viên");
+            lbl_loiMaNhanVienHVMoi1.setText("Bạn chưa nhập mã nhân viên");
             txt_maNhanVienHVMoi.setBorder(boder);
-            lbl_loitimKiemHVMOI.setForeground(Color.red);
+            lbl_loiMaNhanVienHVMoi1.setForeground(Color.red);
             txt_maNhanVienHVMoi.requestFocus();
             return false;
         } else {
-            lbl_loitimKiemHVMOI.setText("");
+            lbl_loiMaNhanVienHVMoi1.setText("");
             txt_maNhanVienHVMoi.setBorder(boder1);
+            
         }
-
+        
+         if (txt_maNhanVienHVMoi.getText().equals("0")) {
+            lbl_loiMaNhanVienHVMoi1.setText("Bạn chưa nhập mã nhân viên");
+            txt_maNhanVienHVMoi.setBorder(boder);
+            lbl_loiMaNhanVienHVMoi1.setForeground(Color.red);
+            txt_maNhanVienHVMoi.requestFocus();
+            return false;
+        } else {
+            lbl_loiMaNhanVienHVMoi1.setText("");
+            txt_maNhanVienHVMoi.setBorder(boder1);
+            
+        }
+        
         return true;
     }
 
@@ -276,6 +289,31 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
 
         return true;
     }
+    
+    boolean checknullTT(){
+        int row = tbl_HVMoi.getSelectedRow();
+        float vitri = (float) tbl_HVMoi.getValueAt(row, 3);
+        int vitriNV = (int) tbl_HVMoi.getValueAt(row, 5);
+        
+        if (vitri==0) {
+            Dialog.alert(null, "Bạn chưa nhập tiền thu\n Mời nhập lại");
+            txt_thanhTienHVMoi.requestFocus();
+            txt_thanhTienHVMoi.setBorder(boder);
+            return false;
+        }else{
+            txt_thanhTienHVMoi.setBorder(null);
+        }
+        
+        if (vitriNV==0) {
+            Dialog.alert(null, "Bạn chưa nhập mã nhân viên\n Mời nhập lại");
+            txt_maNhanVienHVMoi.requestFocus();
+            txt_maNhanVienHVMoi.setBorder(boder);
+            return false;
+        }else{
+            txt_maNhanVienHVMoi.setBorder(null);
+        }
+        return  true;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -324,6 +362,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         txtTenhv = new javax.swing.JTextField();
         jLabel76 = new javax.swing.JLabel();
         btnTimKiem = new javax.swing.JButton();
+        btn_bienLaiHVMoi1 = new javax.swing.JButton();
         jPanel39 = new javax.swing.JPanel();
         jTabbedPane10 = new javax.swing.JTabbedPane();
         jPanel38 = new javax.swing.JPanel();
@@ -662,6 +701,14 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
             }
         });
 
+        btn_bienLaiHVMoi1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TienIch/Icon/Print preview.png"))); // NOI18N
+        btn_bienLaiHVMoi1.setText("Xuất Biên lai");
+        btn_bienLaiHVMoi1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_bienLaiHVMoi1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -676,8 +723,10 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(txtTenhv, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(31, 31, 31)
-                                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 688, Short.MAX_VALUE)))
+                                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_bienLaiHVMoi1)))
+                        .addGap(0, 551, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -688,10 +737,11 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTenhv, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiem))
-                .addGap(18, 18, Short.MAX_VALUE)
+                    .addComponent(btnTimKiem)
+                    .addComponent(btn_bienLaiHVMoi1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Đã có lớp", jPanel3);
@@ -1264,6 +1314,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         bl.setMaBienLai(row);
         dtDAO.suaChuaThi(conn, bl);
         fillTableChuaThi();
+        fillTableDaThi();
     }//GEN-LAST:event_btn_suaHVChuaThiActionPerformed
 
     private void btn_TimKiemChuaThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemChuaThiActionPerformed
@@ -1445,7 +1496,8 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
             //            fillTableHVMoi();
             //            Dialog.alert(null, "Thêm thành công");
             //        }
-        try {
+        if (checknullTT()) {
+            try {
             int vitri = tbl_HVMoi.getSelectedRow();
             if (vitri>=0) {
                 int row;
@@ -1465,6 +1517,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
         fillTableHVCu();
+        }
     }//GEN-LAST:event_btn_themHVMoiActionPerformed
 
     private void btn_SuaHVMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaHVMoiActionPerformed
@@ -1562,6 +1615,103 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
+    private void btn_bienLaiHVMoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bienLaiHVMoi1ActionPerformed
+             Document doc = new Document();
+        BienLai bl = new BienLai();
+        int viTri = tbl_HVCu.getSelectedRow();
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat vn = NumberFormat.getInstance(localeVN);
+        if (viTri > -1) {
+            int row = (int) tbl_HVCu.getValueAt(viTri, 0);
+            bl = blDAO.bienLai(row, conn);
+            if (bl != null) {
+                try {
+                    FileOutputStream fos = new FileOutputStream("C:\\Users\\congc\\Desktop\\Bienlai"+bl.getMaBienLai()+".pdf");
+                    String hocPhi1= vn.format( bl.getHocPhi());
+                    String hocPhiNo1= vn.format( bl.getHocPhiNo());
+                    String thanhTien1= vn.format( bl.getThanhTien());
+                    PdfWriter writer = PdfWriter.getInstance(doc, fos);
+                    writer.setPdfVersion(PdfWriter.VERSION_1_7);
+
+                    doc.open();
+                    Font fontNgay = new Font(Font.FontFamily.TIMES_ROMAN, 24.0f, Font.NORMAL, BaseColor.BLACK);
+                    Font font = new Font(Font.FontFamily.TIMES_ROMAN, 24.0f, Font.BOLD, BaseColor.BLACK);
+                    Font fontBold = new Font(Font.FontFamily.TIMES_ROMAN, 36.0f, Font.BOLD, BaseColor.BLACK);
+                    Font fontBoldInfor = new Font(Font.FontFamily.TIMES_ROMAN, 16.0f, Font.BOLD, BaseColor.BLACK);
+                    Paragraph tenTrungTam = new Paragraph("English center", font);
+                    Paragraph tenTrungTam1 = new Paragraph("Language School", fontBoldInfor);
+                    Paragraph maDangKi = new Paragraph("ID: "+bl.getMaBienLai(), font);
+                    Paragraph tieuDe = new Paragraph("Receipt of payment", fontBold);
+                    Paragraph ngayThu = new Paragraph("Day " + bl.getNgayThuTien(), fontNgay);
+                    Paragraph hoTen = new Paragraph("Name Stundent: "+bl.getTenHocVien(), fontBoldInfor);
+                    Paragraph ID = new Paragraph("ID Student: "+bl.getMaHocVien(), fontBoldInfor);
+                    Paragraph loaiLop = new Paragraph("Class Type: "+bl.getTenLoaiLop(), fontBoldInfor);
+                    Paragraph capLop = new Paragraph("Class Level: "+bl.getTenCapLop(), fontBoldInfor);
+                    Paragraph hocPhi = new Paragraph("Tuition:          " +hocPhi1+"    "+ "VND", fontBoldInfor);
+                    Paragraph hocPhiNo = new Paragraph("Debt Tuition: " +hocPhiNo1+"                  "+ "VND", fontBoldInfor);
+                    Paragraph thanhTien = new Paragraph("Into Money:   "+thanhTien1 +"    "+ "VND", fontBoldInfor);
+
+                    Paragraph nguoiHoc = new Paragraph("Subscribers", fontBoldInfor);
+                    Paragraph nguoiThu = new Paragraph("The cashier", fontBoldInfor);
+
+                    tenTrungTam.setAlignment(Element.ALIGN_LEFT);
+                    tenTrungTam1.setAlignment(Element.ALIGN_LEFT);
+                    maDangKi.setAlignment(Element.ALIGN_RIGHT);
+                    tieuDe.setAlignment(Element.ALIGN_CENTER);
+                    ngayThu.setAlignment(Element.ALIGN_CENTER);
+                    nguoiThu.setAlignment(Element.ALIGN_RIGHT);
+
+                    tenTrungTam1.setIndentationLeft(15);
+                    maDangKi.setIndentationRight(40);
+                    hoTen.setIndentationLeft(30);
+                    ID.setIndentationLeft(hoTen.getIndentationLeft());
+                    loaiLop.setIndentationLeft(hoTen.getIndentationLeft());
+                    capLop.setIndentationLeft(hoTen.getIndentationLeft());
+                    thanhTien.setIndentationLeft(hoTen.getIndentationLeft());
+                    hocPhiNo.setIndentationLeft(hoTen.getIndentationLeft());
+                    hocPhi.setIndentationLeft(hoTen.getIndentationLeft());
+                    nguoiHoc.setIndentationLeft(hoTen.getIndentationLeft());
+                    nguoiThu.setIndentationRight(30);
+
+                    maDangKi.setSpacingBefore(-50);
+                    hoTen.setSpacingBefore(40);
+                    ID.setSpacingBefore(10);
+                    loaiLop.setSpacingBefore(10);
+                    capLop.setSpacingBefore(10);
+                    thanhTien.setSpacingBefore(10);
+                    hocPhiNo.setSpacingBefore(10);
+                    hocPhi.setSpacingBefore(10);
+                    thanhTien.setSpacingAfter(50);
+                    nguoiThu.setSpacingBefore(-21);
+
+                    doc.add(tenTrungTam);
+                    doc.add(tenTrungTam1);
+                    doc.add(maDangKi);
+                    doc.add(tieuDe);
+                    doc.add(ngayThu);
+                    doc.add(hoTen);
+                    doc.add(ID);
+                    doc.add(loaiLop);
+                    doc.add(capLop);
+                    doc.add(hocPhi);
+                    doc.add(hocPhiNo);
+                    doc.add(thanhTien);
+                    doc.add(nguoiHoc);
+                    doc.add(nguoiThu);
+
+                    doc.close();
+                } catch (DocumentException ex) {
+                    ex.printStackTrace();
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                Dialog.alert(null, "Xuất biên lai thành công");
+            }
+        }
+    }//GEN-LAST:event_btn_bienLaiHVMoi1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTimKiem;
@@ -1572,6 +1722,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_SuaHVMoi;
     private javax.swing.JButton btn_TimKiemChuaThi;
     private javax.swing.JButton btn_bienLaiHVMoi;
+    private javax.swing.JButton btn_bienLaiHVMoi1;
     private javax.swing.JButton btn_suaHVChuaThi;
     private javax.swing.JButton btn_suaHVDaThi;
     private javax.swing.JButton btn_themHVMoi;

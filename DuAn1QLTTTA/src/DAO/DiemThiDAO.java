@@ -134,8 +134,7 @@ public class DiemThiDAO {
             ptmt.setString(2, String.valueOf(bl.getMaDotThi()));
             ptmt.setFloat(3, bl.getDiemThi());
             ptmt.setFloat(4, bl.getDiemThanhPhan());
-
-            ptmt.setInt(6, bl.getMaBienLai());
+            ptmt.setInt(5, bl.getMaBienLai());
             int kq = ptmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();

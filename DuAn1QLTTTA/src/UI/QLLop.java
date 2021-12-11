@@ -17,6 +17,8 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -1381,7 +1383,24 @@ public class QLLop extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbc_loaiLopActionPerformed
 
     private void txt_maGiangvienFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_maGiangvienFocusLost
-        // TODO add your handling code here:
+       String sql = "SELECT TENNHANVIEN FROM dbo.NGUOIDUNG\n"
+                + "WHERE MANHANVIEN = ? AND TENVAITRO =2";
+        try {
+            PreparedStatement ptmt = conn.prepareStatement(sql);
+            ptmt.setInt(1, Integer.parseInt(txt_maGiangvien.getText()));
+            ResultSet rs = ptmt.executeQuery();
+            if (rs.next()) {
+               nd.setTenNhanVien(rs.getString("TENNHANVIEN"));
+                nd.setVaiTro(2);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        txt_tenGiangVien.setText(nd.getTenNhanVien());
+        if (nd.getVaiTro() != 2) {
+            Dialog.alert(null, "Đây không phải giảng viên của trung tâm");
+        }
+        System.out.println(nd.getVaiTro());
     }//GEN-LAST:event_txt_maGiangvienFocusLost
 
     private void btnChotDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChotDiemActionPerformed

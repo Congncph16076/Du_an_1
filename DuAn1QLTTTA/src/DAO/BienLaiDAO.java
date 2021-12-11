@@ -302,10 +302,15 @@ public class BienLaiDAO {
     }
 
     public BienLai bienLai(int ID, Connection conn) {
-        String sql = "SELECT MABIENLAI,BIENLAI.MADANGKI,TENHOCVIEN,BIENLAI.MAHOCVIEN,TENLOAILOP,TENCAPLOP,HOCPHI,HOCPHINO=HOCPHI-THANHTIEN,THANHTIEN\n"
-                + ",CONVERT(NVARCHAR(20),NGAYTHUTIEN,103) [ngaythutien] FROM dbo.BIENLAI\n"
-                + "JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI\n"
-                + "WHERE MABIENLAI =?";
+        String sql = "SELECT MABIENLAI,BIENLAI.MADANGKI,BIENLAI.MAHOCVIEN,dbo.DANGKI.TENHOCVIEN\n" +
+"	,THANHTIEN,TENLOP,LOP.HOCPHI,TENLOAILOP,TENCAPLOP,LOP.HOCPHI-THANHTIEN AS hocphino\n" +
+"	,BIENLAI.MANHANVIEN\n" +
+"	,CONVERT(NVARCHAR(20),NGAYTHUTIEN,103) [ngaythutien]\n" +
+"	FROM dbo.BIENLAI\n" +
+"	JOIN dbo.DANGKI ON DANGKI.madangki = BIENLAI.MADANGKI\n" +
+"	JOIN lop ON lop.MALOP=bienlai.MALOP\n" +
+"	WHERE BIENLAI.MALOP IS NOT NULL AND MABIENLAI =?\n" +
+"	ORDER BY MABIENLAI desc" ;
         PreparedStatement ptmt;
         try {
             ptmt = conn.prepareStatement(sql);
