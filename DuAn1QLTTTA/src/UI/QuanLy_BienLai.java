@@ -290,7 +290,7 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
         return true;
     }
     
-    boolean checknullTT(){
+    private boolean  checknullTT(){
         int row = tbl_HVMoi.getSelectedRow();
         float vitri = (float) tbl_HVMoi.getValueAt(row, 3);
         int vitriNV = (int) tbl_HVMoi.getValueAt(row, 5);
@@ -1496,28 +1496,31 @@ public class QuanLy_BienLai extends javax.swing.JInternalFrame {
             //            fillTableHVMoi();
             //            Dialog.alert(null, "Thêm thành công");
             //        }
-        if (checknullTT()) {
-            try {
-            int vitri = tbl_HVMoi.getSelectedRow();
-            if (vitri>=0) {
-                int row;
-                row = (int) tbl_HVMoi.getValueAt(vitri, 0);
-                boolean bl = blDAO.xepLop(row, conn);
-                if (bl==true) {
-                    JOptionPane.showMessageDialog(this, "Đã xếp học viên vào lớp");
-                    boolean hv = blDAO.themHV(row,conn);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Hiện tại chưa có lớp phù hợp, mời tạo thêm");
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Mời chọn đối tượng");
-            }
+        
+          try {
+                  
+                    int vitri = tbl_HVMoi.getSelectedRow();
+                    if (vitri>=0) {
+                        if (checknullTT()) {           
+                                int row;
+                                row = (int) tbl_HVMoi.getValueAt(vitri, 0);
+                                boolean bl = blDAO.xepLop(row, conn);
+                                if (bl==true) {
+                                            JOptionPane.showMessageDialog(this, "Đã xếp học viên vào lớp");
+                                            boolean hv = blDAO.themHV(row,conn);
+                                 } else {
+                                            JOptionPane.showMessageDialog(this, "Hiện tại chưa có lớp phù hợp, mời tạo thêm");
+                                }
+                         }
+                    } else {
+                                JOptionPane.showMessageDialog(this, "Mời chọn đối tượng");
+                     }
 
-        } catch (Exception e) {
+           } catch (Exception e) {
             e.printStackTrace();
         }
         fillTableHVCu();
-        }
+        
     }//GEN-LAST:event_btn_themHVMoiActionPerformed
 
     private void btn_SuaHVMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaHVMoiActionPerformed
