@@ -7,6 +7,7 @@ package UI;
 
 import DAO.DotThiDAO;
 import Entity.DotThi;
+import Entity.Lop;
 import TienIchHoTro.Dialog;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,6 +47,7 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
         fillTable();
         initCBC();
         //txt_tenLop.setEnabled(false);
+        
     }
 
     void fillTable() {
@@ -57,6 +61,7 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
             dtm.addRow(obj);
         }
     }
+    
 
     void initCBC() {
         this.cbc_caThi.removeAllItems();
@@ -190,6 +195,17 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Frame_lop = new javax.swing.JFrame();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblChuyenLop = new javax.swing.JTable();
+        btn_tim = new javax.swing.JButton();
+        cboCH = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        cboCL = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        cboLL = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -222,6 +238,100 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
         lbl_loiVang = new javax.swing.JLabel();
         txt_vang = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+
+        tblChuyenLop.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Mã lớp", "Tên lớp"
+            }
+        ));
+        tblChuyenLop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblChuyenLopMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tblChuyenLop);
+
+        btn_tim.setText("Tìm");
+        btn_tim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timActionPerformed(evt);
+            }
+        });
+
+        cboCH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ca 1 (7h-9h) 246", "Ca 1 (7h-9h) 357", "Ca 2 (9h-11h) 246", "Ca 2 (9h-11h) 357", "Ca 3 (12h-14h) 246", "Ca 3 (12h-14h) 357", "Ca 4 (14h-16h) 246", "Ca 4 (14h-16h) 357" }));
+
+        jLabel14.setText("Ca học");
+
+        cboCL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
+
+        jLabel12.setText("Cấp lớp");
+
+        cboLL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toeic", "Anh Văn Gia Tiếp", "Anh Văn Tổng Quát" }));
+
+        jLabel15.setText("Loại lớp");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_tim, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboLL, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cboCL, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cboCH, 0, 209, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboLL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboCL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_tim)
+                        .addGap(29, 29, 29))))
+        );
+
+        javax.swing.GroupLayout Frame_lopLayout = new javax.swing.GroupLayout(Frame_lop.getContentPane());
+        Frame_lop.getContentPane().setLayout(Frame_lopLayout);
+        Frame_lopLayout.setHorizontalGroup(
+            Frame_lopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        Frame_lopLayout.setVerticalGroup(
+            Frame_lopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Frame_lopLayout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
+        );
 
         setClosable(true);
         setIconifiable(true);
@@ -348,9 +458,9 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
                 txt_maLopFocusLost(evt);
             }
         });
-        txt_maLop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_maLopActionPerformed(evt);
+        txt_maLop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_maLopMouseClicked(evt);
             }
         });
 
@@ -592,10 +702,6 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
         date_timKiem.setBorder(border1);
     }//GEN-LAST:event_btn_clearActionPerformed
 
-    private void txt_maLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_maLopActionPerformed
-
-    }//GEN-LAST:event_txt_maLopActionPerformed
-
     private void txt_maLopFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_maLopFocusLost
         if (!txt_maLop.getText().equals("")) {
             DotThi dt = dtDAO.hienThiLop(Integer.parseInt(txt_maLop.getText()), conn);
@@ -605,18 +711,68 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_txt_maLopFocusLost
 
+    private void btn_timActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timActionPerformed
+       
+        try {
+            String ll = (String) cboLL.getSelectedItem();
+            String cl = (String) cboCL.getSelectedItem();
+            String ch = (String) cboCH.getSelectedItem();
+           CallableStatement  call = conn.prepareCall("{call tim_lop_thi(?,?,?)}");
+            call.setString(1, ll);
+            call.setString(2, cl);
+            call.setString(3, ch);
+            ResultSet rs = call.executeQuery();
+            dtm = (DefaultTableModel) tblChuyenLop.getModel();
+            dtm.setRowCount(0);
+            while (rs.next()) {
+                Lop lop = new Lop();
+                int maLop = rs.getInt("MALOP");
+                String tenLop = rs.getString("TENLOP");
+
+                dtm.addRow(new Object[]{
+                    maLop, tenLop
+                });
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_timActionPerformed
+
+    private void txt_maLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_maLopMouseClicked
+        Frame_lop.setVisible(true);
+        Frame_lop.setSize(560, 300);
+        Frame_lop.setLocationRelativeTo(null);
+        Frame_lop.setTitle("Lớp thi");
+    }//GEN-LAST:event_txt_maLopMouseClicked
+
+    private void tblChuyenLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChuyenLopMouseClicked
+        int viTri =  tblChuyenLop.getSelectedRow();
+        int maLop = (int) tblChuyenLop.getValueAt(viTri, 0);
+        txt_maLop.setText(String.valueOf(maLop));
+        txt_tenLop.setText((String) tblChuyenLop.getValueAt(viTri, 1));
+        Frame_lop.dispose();
+    }//GEN-LAST:event_tblChuyenLopMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame Frame_lop;
     private javax.swing.JButton btn_clear;
     private javax.swing.JButton btn_suaDotThi;
     private javax.swing.JButton btn_themDotThi;
+    private javax.swing.JButton btn_tim;
     private javax.swing.JButton btn_timKiem;
     private javax.swing.JComboBox<String> cbc_caThi;
+    private javax.swing.JComboBox<String> cboCH;
+    private javax.swing.JComboBox<String> cboCL;
+    private javax.swing.JComboBox<String> cboLL;
     private com.toedter.calendar.JDateChooser date_ngayThi;
     private com.toedter.calendar.JDateChooser date_timKiem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -625,8 +781,10 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lbl_loiCaThi;
     private javax.swing.JLabel lbl_loiMaLop;
     private javax.swing.JLabel lbl_loiNgayThi;
@@ -634,6 +792,7 @@ public class QuanLiDotThi extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbl_loiTenLop;
     private javax.swing.JLabel lbl_loiTimKiem;
     private javax.swing.JLabel lbl_loiVang;
+    private javax.swing.JTable tblChuyenLop;
     private javax.swing.JTable tbl_dotThi;
     private javax.swing.JTextField txt_maLop;
     private javax.swing.JTextField txt_siSo;
