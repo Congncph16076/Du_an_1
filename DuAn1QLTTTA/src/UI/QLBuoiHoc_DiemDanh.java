@@ -10,9 +10,12 @@ import DAO.BuoiHocDAO;
 import DAO.DiemDanhDAO;
 import Entity.BuoiHoc;
 import Entity.DiemDanh;
+import Entity.Lop;
 import TienIchHoTro.Dialog;
 import java.awt.Color;
 import java.sql.Connection;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -135,6 +138,16 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Frame_Lop = new javax.swing.JFrame();
+        cboLL = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        cboCL = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        cboCH = new javax.swing.JComboBox<>();
+        btn_tim = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblChuyenLop = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tab_all = new javax.swing.JTabbedPane();
@@ -170,6 +183,85 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
         btn_diemdanh = new javax.swing.JButton();
         btn_suadiemdanh = new javax.swing.JButton();
 
+        cboLL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toeic", "Anh Văn Gia Tiếp", "Anh Văn Tổng Quát" }));
+
+        jLabel15.setText("Loại lớp");
+
+        jLabel12.setText("Cấp lớp");
+
+        cboCL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
+
+        jLabel14.setText("Ca học");
+
+        cboCH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ca 1 (7h-9h) 246", "Ca 1 (7h-9h) 357", "Ca 2 (9h-11h) 246", "Ca 2 (9h-11h) 357", "Ca 3 (12h-14h) 246", "Ca 3 (12h-14h) 357", "Ca 4 (14h-16h) 246", "Ca 4 (14h-16h) 357" }));
+
+        btn_tim.setText("Tìm");
+        btn_tim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timActionPerformed(evt);
+            }
+        });
+
+        tblChuyenLop.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Mã lớp", "Tên lớp"
+            }
+        ));
+        tblChuyenLop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblChuyenLopMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tblChuyenLop);
+
+        javax.swing.GroupLayout Frame_LopLayout = new javax.swing.GroupLayout(Frame_Lop.getContentPane());
+        Frame_Lop.getContentPane().setLayout(Frame_LopLayout);
+        Frame_LopLayout.setHorizontalGroup(
+            Frame_LopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Frame_LopLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(Frame_LopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_tim, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(Frame_LopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboLL, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cboCL, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cboCH, 0, 209, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        Frame_LopLayout.setVerticalGroup(
+            Frame_LopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Frame_LopLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Frame_LopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Frame_LopLayout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboLL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboCL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(btn_tim))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -186,6 +278,12 @@ public class QLBuoiHoc_DiemDanh extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Ca học");
+
+        txt_maLopHoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_maLopHocMouseClicked(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Ghi chú");
@@ -724,9 +822,51 @@ void fill() {
         }
     }//GEN-LAST:event_tbl_buoiHocMouseClicked
 
+    private void btn_timActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timActionPerformed
+
+        try {
+            String ll = (String) cboLL.getSelectedItem();
+            String cl = (String) cboCL.getSelectedItem();
+            String ch = (String) cboCH.getSelectedItem();
+            CallableStatement  call = conn.prepareCall("{call tim_lop_thi(?,?,?)}");
+            call.setString(1, ll);
+            call.setString(2, cl);
+            call.setString(3, ch);
+            ResultSet rs = call.executeQuery();
+            dtm = (DefaultTableModel) tblChuyenLop.getModel();
+            dtm.setRowCount(0);
+            while (rs.next()) {
+                Lop lop = new Lop();
+                int maLop = rs.getInt("MALOP");
+                String tenLop = rs.getString("TENLOP");
+
+                dtm.addRow(new Object[]{
+                    maLop, tenLop
+                });
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_timActionPerformed
+
+    private void tblChuyenLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChuyenLopMouseClicked
+        int viTri =  tblChuyenLop.getSelectedRow();
+        int maLop = (int) tblChuyenLop.getValueAt(viTri, 0);
+        txt_maLopHoc.setText(String.valueOf(maLop));
+        Frame_Lop.dispose();
+    }//GEN-LAST:event_tblChuyenLopMouseClicked
+
+    private void txt_maLopHocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_maLopHocMouseClicked
+       Frame_Lop.setVisible(true);
+        Frame_Lop.setSize(560, 300);
+        Frame_Lop.setLocationRelativeTo(null);
+        Frame_Lop.setTitle("Lớp");
+    }//GEN-LAST:event_txt_maLopHocMouseClicked
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame Frame_Lop;
     private javax.swing.JButton btn_DDHV;
     private javax.swing.JButton btn_SuaBuoiHoc;
     private javax.swing.JButton btn_clearBuoiHoc;
@@ -734,12 +874,19 @@ void fill() {
     private javax.swing.JButton btn_suadiemdanh;
     private javax.swing.JButton btn_themBHDD;
     private javax.swing.JButton btn_themBuoiHoc;
+    private javax.swing.JButton btn_tim;
     private javax.swing.JButton btn_timKiemBuoiHoc;
     private javax.swing.JComboBox<String> cbc_caHoc;
+    private javax.swing.JComboBox<String> cboCH;
+    private javax.swing.JComboBox<String> cboCL;
+    private javax.swing.JComboBox<String> cboLL;
     private com.toedter.calendar.JDateChooser date_ngayHoc;
     private com.toedter.calendar.JDateChooser date_timKiemBH;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
@@ -750,6 +897,7 @@ void fill() {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lbl_loiCaHoc;
     private javax.swing.JLabel lbl_loiMaLopHoc;
@@ -757,6 +905,7 @@ void fill() {
     private javax.swing.JLabel lbl_loiTimKiemBuoiHoc;
     private javax.swing.JTabbedPane tab_all;
     private javax.swing.JPanel tab_dd;
+    private javax.swing.JTable tblChuyenLop;
     private javax.swing.JTable tbl_buoiHoc;
     private javax.swing.JTable tbl_diemDanh1;
     private javax.swing.JTextArea txt_GhiChu;

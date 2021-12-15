@@ -1074,14 +1074,22 @@ BEGIN
 	where madangki = @madangki
     DELETE FROM dbo.DANGKI
 	WHERE madangki = @madangki
-	declare @max int
-	select @max=max(@madangki)from dbo.DANGKI
+
+	declare @max INT
+
+    select @max=max(MABIENLAI)from dbo.BIENLAI
+	if @max IS NULL   
+	  SET @max = 0
+	DBCC CHECKIDENT (BIENLAI, RESEED,@max)
+
+	select @max=max(madangki)from dbo.DANGKI
 	if @max IS NULL   
 	  SET @max = 0
 	DBCC CHECKIDENT (dangki, RESEED,@max)
 END
 GO
-exec xoa_ban_dang_ki 1
+exec xoa_ban_dang_ki 20
+SELECT * FROM dbo.BIENLAI
 drop proc xoa_ban_dang_ki
 --thông tin đăng kí
 create PROCEDURE thong_tin_dang_ki
@@ -1363,6 +1371,24 @@ END
 	  EXEC dbo.tim_lop_chuyen @ll = N'Anh Văn Tổng Quát', -- nvarchar(50)
                         @cl = N'C', -- nvarchar(50)
                         @ch = N'Ca 4 (14h-16h) 246'  -- nvarchar(50)
+
+CREATE PROC tim_lop_thi(@ll NVARCHAR(50),@cl NVARCHAR(50),@ch NVARCHAR(50))
+AS
+BEGIN
+
+	DECLARE @tenlop VARCHAR(100)
+	SELECT @tenlop = TENLOP FROM dbo.LOP
+
+	SELECT Lop.MALOP,TENLOP FROM dbo.LOP
+	WHERE maloailop=(select maloailop from loailop where tenloailop=@ll) 
+	AND macaplop=(select macaplop from caplop where tencaplop=@cl) 
+	AND cahoc=@ch 
+	AND trangthai=1
+	
+END
+DROP PROC tim_lop_thi
+
+
 
 CREATE PROC chuyen_lop(@malop INT,@malop2 INT,@mahv int)
 AS
