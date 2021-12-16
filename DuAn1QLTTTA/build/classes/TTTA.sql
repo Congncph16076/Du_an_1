@@ -1451,13 +1451,18 @@ BEGIN
 		UPDATE dbo.BIENLAI SET DIEMTHANHPHAN=0, DIEMTONG=0 where mabienlai= (SELECT mabienlai FROM bienlai where malop=@malop AND MAHOCVIEN=@mahv)
 		
 		set @x=@x+1
+		UPDATE dbo.LOP SET TrangThai = 0
+		WHERE MALOP = @malop
     END
 END
 EXEC diem_thanh_phan 13
 Drop PROC diem_thanh_phan
-
+s
 	UPDATE dbo.BIENLAI SET DIEMTHANHPHAN=10 
 	WHERE mabienlai= (SELECT mabienlai FROM bienlai where malop=11 AND MAHOCVIEN=111)
 
 	SELECT*FROM dbo.bienlai
 		SELECT*FROM dbo.HOCVIEN
+		SELECT * FROM dbo.LOP
+		UPDATE dbo.LOP SET TrangThai = 1
+		WHERE MALOP = 11

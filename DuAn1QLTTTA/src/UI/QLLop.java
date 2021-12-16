@@ -35,7 +35,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-
 public class QLLop extends javax.swing.JInternalFrame {
 
     private DefaultTableModel dtm = new DefaultTableModel();
@@ -57,14 +56,14 @@ public class QLLop extends javax.swing.JInternalFrame {
         filltableLL();
         filltableCL();
         for (int i = 0; i < tbl_lop.getRowCount(); i++) {
-            
+
         }
         txt_tenGiangVien.setEditable(false);
         txt_tenGiangVien.setEnabled(false);
         ButtonGroup btnGr = new ButtonGroup();
         btnGr.add(rbn_HoatDong);
         btnGr.add(rbn_KetThuc);
-        
+
     }
 
     void listCBCLoaiLop() {
@@ -89,7 +88,7 @@ public class QLLop extends javax.swing.JInternalFrame {
         this.cbc_caHoc.removeAllItems();
         String[] caHoc = new String[]{
             "Ca học", "Ca 1 (7h-9h) 246", "Ca 2 (9h-11h) 246", "Ca 3 (12h-14h) 246", "Ca 4 (14h-16h) 246",
-             "Ca 1 (7h-9h) 357", "Ca 2 (9h-11h) 357", "Ca 3 (12h-14h) 357", "Ca 4 (14h-16h) 357"
+            "Ca 1 (7h-9h) 357", "Ca 2 (9h-11h) 357", "Ca 3 (12h-14h) 357", "Ca 4 (14h-16h) 357"
         };
         for (int i = 0; i < caHoc.length; i++) {
             cbc_caHoc.addItem(caHoc[i]);
@@ -105,7 +104,7 @@ public class QLLop extends javax.swing.JInternalFrame {
                 l.getMaLop(), l.getTenLop(), l.getMaNhanVien(), l.getTenNhanVien(),
                 l.getHocPhi(),
                 l.getCaHoc(), l.getSiso(), l.getTenLoaiLop(), l.getTenCapLop(), l.getNgayNhapHoc(), l.getNgayKeThuc(),
-                 l.isTrangThai() == true ? "Hoạt động" : "Đã kết thúc"
+                l.isTrangThai() == true ? "Hoạt động" : "Đã kết thúc"
             };
             dtm.addRow(obj);
         }
@@ -1260,7 +1259,7 @@ public class QLLop extends javax.swing.JInternalFrame {
 //        String caHoc = String.valueOf(cbc_caHoc.getSelectedItem());
 //        lop.setCaHoc(caHoc);
         lop.setMaLoaiLop(cbc_loaiLop.getSelectedIndex());
-            lop.setMaCapLop(cbc_capLop.getSelectedIndex());
+        lop.setMaCapLop(cbc_capLop.getSelectedIndex());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         String date = sdf.format(date_ngayBatDau.getDate());
         String date1 = sdf.format(date_ngayKetThuc.getDate());
@@ -1383,14 +1382,14 @@ public class QLLop extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbc_loaiLopActionPerformed
 
     private void txt_maGiangvienFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_maGiangvienFocusLost
-       String sql = "SELECT TENNHANVIEN FROM dbo.NGUOIDUNG\n"
+        String sql = "SELECT TENNHANVIEN FROM dbo.NGUOIDUNG\n"
                 + "WHERE MANHANVIEN = ? AND TENVAITRO =2";
         try {
             PreparedStatement ptmt = conn.prepareStatement(sql);
             ptmt.setInt(1, Integer.parseInt(txt_maGiangvien.getText()));
             ResultSet rs = ptmt.executeQuery();
             if (rs.next()) {
-               nd.setTenNhanVien(rs.getString("TENNHANVIEN"));
+                nd.setTenNhanVien(rs.getString("TENNHANVIEN"));
                 nd.setVaiTro(2);
             }
         } catch (SQLException ex) {
@@ -1404,18 +1403,18 @@ public class QLLop extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txt_maGiangvienFocusLost
 
     private void btnChotDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChotDiemActionPerformed
-            
-                      
-            
-                try {
-                    CallableStatement call = conn.prepareCall("{call diem_thanh_phan(?)}");
-                    call.setInt(1, (int) tbl_lop.getValueAt(tbl_lop.getSelectedRow(), 0));
-                    int kq = call.executeUpdate();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            
-        
+
+        try {
+            CallableStatement call = conn.prepareCall("{call diem_thanh_phan(?)}");
+            call.setInt(1, (int) tbl_lop.getValueAt(tbl_lop.getSelectedRow(), 0));
+            int kq = call.executeUpdate();
+            Dialog.alert(null, "chốt điểm thành phần thành công");
+            fillTable();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Dialog.alert(null, "Có lỗi\n" + ex.getMessage());
+        }
+
     }//GEN-LAST:event_btnChotDiemActionPerformed
 
 
